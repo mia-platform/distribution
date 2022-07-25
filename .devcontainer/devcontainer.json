@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/debian
+{
+  "name": "Mia-Platform Distribution",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "bullseye"
+    }
+  },
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+  "settings": {
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": false,
+    "editor.formatOnSave": true
+  },
+  "extensions": [
+    "editorconfig.editorconfig",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "davidanson.vscode-markdownlint"
+  ]
+}
