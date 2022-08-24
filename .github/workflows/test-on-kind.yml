@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: 'Kustomize Build'
+      - name: Kustomize Build
         uses: karancode/kustomize-github-action@master
         with:
           kustomize_version: '4.5.7'
@@ -27,6 +27,7 @@ jobs:
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
 
-      - uses: actions-hub/kubectl@master
-        with:
-          args: apply -f ci/rendered.yaml
+      - name: Install
+        run: |
+          kubectl cluster-info
+          kubectl apply -f ci/rendered.yaml
