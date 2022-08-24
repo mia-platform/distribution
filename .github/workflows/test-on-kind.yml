@@ -66,6 +66,6 @@ jobs:
 
       - name: Test - deployments rollout success
         run: |
-          for dep ${{ steps.deployments_name.outputs.result }} ; do
+          for dep in ${{ steps.deployments_name.outputs.result }} ; do
             kubectl -n ${{ steps.namespace.outputs.result }} rollout status deploy --timeout 60s $dep
           done
