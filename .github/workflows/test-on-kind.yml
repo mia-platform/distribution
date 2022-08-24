@@ -36,4 +36,6 @@ jobs:
       - name: Install
         run: |
           kubectl cluster-info
-          kubectl apply -f - <<< ${{ steps.custom_resource_definitions.outputs.result }}
+          kubectl apply -f - << EOF
+          ${{ steps.custom_resource_definitions.outputs.result }}
+          EOF
