@@ -26,7 +26,6 @@ jobs:
           kustomize_build_dir: 'modules/ingress-0.1.0/traefik-base'
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
-          kustomize_build_options: "--load_restrictor none"
 
       - uses: actions-hub/kubectl@master
         with:
