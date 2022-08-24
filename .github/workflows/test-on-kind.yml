@@ -27,7 +27,7 @@ jobs:
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
 
-      - name: Get an entry with a variable that might contain dots or spaces
+      - name: Get CRDs
         id: custom_resource_definitions
         uses: mikefarah/yq@master
         with:
@@ -36,4 +36,4 @@ jobs:
       - name: Install
         run: |
           kubectl cluster-info
-          echo ${{ steps.custom_resource_definitions.outputs.result }} | kubectl apply -f -
+          kubectl apply -f - <<< ${{ steps.custom_resource_definitions.outputs.result }}
