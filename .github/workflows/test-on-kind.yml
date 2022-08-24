@@ -27,7 +27,6 @@ jobs:
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
           kustomize_build_options: "--load_restrictor none"
-          enable_alpha_plugins: true
 
       - uses: actions-hub/kubectl@master
         with:
