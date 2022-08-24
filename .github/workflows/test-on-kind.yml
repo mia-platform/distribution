@@ -46,7 +46,7 @@ jobs:
           ${{ steps.custom_resource_definitions.outputs.result }}
           EOF
           # Wait until all CRDs are available
-          kubectl wait --for condition=established crd $(yq 'select(.kind == "CustomResourceDefinition") ci/rendered.yaml | .metadata.name ' | grep -v -- --- | tr '\n' ' ')
+          kubectl wait --for condition=established crd $(yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' ci/rendered.yaml | grep -v -- --- | tr '\n' ' ')
           # Apply other resources
           kubectl apply -f - << EOF
           ${{ steps.resources.outputs.result }}
