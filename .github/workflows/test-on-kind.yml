@@ -31,23 +31,41 @@ jobs:
         id: custom_resource_definitions
         uses: mikefarah/yq@master
         with:
-          cmd: yq 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml
+          cmd: yq ea 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml
 
       - name: Get Others Resources
         id: resources
         uses: mikefarah/yq@master
         with:
-          cmd: yq 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml
+          cmd: yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml
 
-      - name: Install
+      - name: Get Deployments Name
+        id: deployments_name
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq ea 'select(.kind == "Deployment") | [ .metadata.name ] | join(" ")' ci/rendered.yaml
+
+      - name: Get Namespace
+        id: namespace
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.namespace' modules/ingress-0.1.0/traefik-base/kustomization.yaml
+
+      - name: Install module
         run: |
           kubectl cluster-info
           kubectl apply -f - << EOF
           ${{ steps.custom_resource_definitions.outputs.result }}
           EOF
           # Wait until all CRDs are available
-          kubectl wait --for condition=established crd $(yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' ci/rendered.yaml | grep -v -- --- | tr '\n' ' ')
+          kubectl wait --for condition=established crd $(yq ea 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
           # Apply other resources
           kubectl apply -f - << EOF
           ${{ steps.resources.outputs.result }}
           EOF
+
+      - name: Test - deployments rollout success
+        run: |
+          for dep ${{ steps.deployments_name.outputs.result }} ; do
+            kubectl -n ${{ steps.namespace.outputs.result }} rollout status deploy --timeout 60s $dep
+          done
