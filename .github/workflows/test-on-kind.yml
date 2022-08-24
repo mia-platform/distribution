@@ -31,11 +31,23 @@ jobs:
         id: custom_resource_definitions
         uses: mikefarah/yq@master
         with:
-          cmd: yq '. | select(.kind == "CustomResourceDefinition")' ci/rendered.yaml
+          cmd: yq 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml
+
+      - name: Get Others Resources
+        id: resources
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml
 
       - name: Install
         run: |
           kubectl cluster-info
           kubectl apply -f - << EOF
           ${{ steps.custom_resource_definitions.outputs.result }}
+          EOF
+          # Wait until all CRDs are available
+          kubectl wait --for condition=established crd $(yq 'select(.kind == "CustomResourceDefinition") ci/rendered.yaml | .metadata.name ' | grep -v -- --- | tr '\n' ' ')
+          # Apply other resources
+          kubectl apply -f - << EOF
+          ${{ steps.resources.outputs.result }}
           EOF
