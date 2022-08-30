@@ -10,6 +10,7 @@ jobs:
   test-modules:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         kind_version: [1.24.0]
         module: [ modules/cni/cilium-base ]
@@ -35,23 +36,21 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
-      - name: Helm version
-        run: |
-          helm version
-          type helm
-
       - name: Install yq
         id: yq
         uses: mikefarah/yq@master
 
-      - name: Kustomize Build
+      - name: Kustomize Install
         uses: karancode/kustomize-github-action@master
         with:
           kustomize_version: '4.5.7'
-          kustomize_build_dir: '${{ matrix.module }}'
-          kustomize_comment: false # Whether or not to comment on GitHub pull requests.
-          kustomize_output_file: "ci/rendered.yaml"
-          kustomize_build_options: "--enable-helm"
+
+      - name: Kustomize exec
+        run: |
+          helm version
+          type helm
+          mkdir ci
+          kustomize build --enable-helm ${{ matrix.module }}' > ci/rendered.yaml
 
       - name: Install module
         run: |
