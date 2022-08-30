@@ -12,7 +12,8 @@ jobs:
     strategy:
       matrix:
         kind_version: [1.24.0, 1.23.0]
-        module: [ modules/ingress-0.1.0/traefik-base ]
+        module: [ modules/ingress/traefik-base, modules/ingress/cert-manager-base ]
+
     steps:
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1.3.0
