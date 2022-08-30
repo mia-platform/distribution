@@ -29,6 +29,11 @@ jobs:
           node_image: kindest/node:v${{ matrix.kind_version }}
           config: ${{ matrix.kind_config }}
 
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.9.2
+
       - name: Install yq
         id: yq
         uses: mikefarah/yq@master
