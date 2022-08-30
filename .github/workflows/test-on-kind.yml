@@ -15,8 +15,10 @@ jobs:
         module: [ modules/ingress/traefik-base, modules/ingress/cert-manager-base, modules/cni/cilium-base ]
         include:
           - kind_config: .github/workflows/kind-configs/default.yaml
+            kind_wait: 60s
           - module: modules/cni/cilium-base
             kind_config: .github/workflows/kind-configs/no-ci.yaml
+            kind_wait: 10s
 
     steps:
       - name: Checkout
@@ -28,9 +30,14 @@ jobs:
           version: v0.14.0
           node_image: kindest/node:v${{ matrix.kind_version }}
           config: ${{ matrix.kind_config }}
+          wait: ${{ matrix.kind_wait }}
 
       - name: Install Helm
         uses: azure/setup-helm@v3
+
+      - name: Helm version
+        run: |
+          helm version
 
       - name: Install yq
         id: yq
