@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        kind_version: [1.24.0, 1.23.0]
-        module: [ modules/ingress/traefik-base, modules/ingress/cert-manager-base, modules/cni/cilium-base ]
+        kind_version: [1.24.0]
+        module: [ modules/cni/cilium-base ]
         include:
           - kind_config: .github/workflows/kind-configs/default.yaml
             kind_wait: 60s
