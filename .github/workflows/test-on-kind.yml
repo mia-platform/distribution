@@ -40,6 +40,7 @@ jobs:
           kustomize_build_dir: '${{ matrix.module }}'
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
+          kustomize_build_options: "--enable-helm"
 
       - name: Install module
         run: |
@@ -61,6 +62,6 @@ jobs:
           for KIND in $AWAITABLES ; do
             NAMES=$(yq ea "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
             for NAME in $NAMES ; do
-              kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 60s $NAME
+              kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
             done
           done
