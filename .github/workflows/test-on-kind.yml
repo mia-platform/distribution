@@ -38,6 +38,7 @@ jobs:
       - name: Helm version
         run: |
           helm version
+          type helm
 
       - name: Install yq
         id: yq
