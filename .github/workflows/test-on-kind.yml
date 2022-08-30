@@ -45,7 +45,7 @@ jobs:
           kustomize_build_dir: '${{ matrix.module }}'
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
-          kustomize_build_options: "--enable-helm"
+          kustomize_build_options: "--enable-helm --helm-command /opt/hostedtoolcache/helm/3.9.2/x64/linux-amd64/helm"
 
       - name: Install module
         run: |
