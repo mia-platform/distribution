@@ -46,7 +46,7 @@ jobs:
           kubectl cluster-info
           CRDS=$(yq ea 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
           NON_CRDS=$(yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
-          if [ -n $CRDS ] ; then
+          if [ -n "$CRDS" ] ; then
             echo "Apply CRDs.."
             kubectl apply -f - <<< $CRDS
             echo "Wait until all CRDs are available.."
