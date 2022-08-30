@@ -46,11 +46,11 @@ jobs:
           # Apply other resources
           kubectl apply -f - <<< $NON_CRDS
 
-      - name: Test - deployments rollout success
+      - name: Test - Rollout success
         run: |
           AWAITABLES="Deployment StatefulSet DaemonSet"
           for obj in $AWAITABLES ; do
-            DEPLOIMENTS_NAME=$(yq ea 'select(.kind == "$obj") | [ .metadata.name ] | join(" ")' ci/rendered.yaml)
+            DEPLOIMENTS_NAME=$(yq ea "select(.kind == \"$obj\") | [ .metadata.name ] | join(\" \")" /tmp/rendered.yaml)
             for dep in $DEPLOIMENTS_NAME ; do
               kubectl -n $(yq '.namespace' ${{ matrix.module }}/kustomization.yaml) rollout status $obj --timeout 60s $dep
             done
