@@ -30,9 +30,7 @@ jobs:
           config: ${{ matrix.kind_config }}
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.9.2
+        uses: azure/setup-helm@v3
 
       - name: Install yq
         id: yq
@@ -45,7 +43,7 @@ jobs:
           kustomize_build_dir: '${{ matrix.module }}'
           kustomize_comment: false # Whether or not to comment on GitHub pull requests.
           kustomize_output_file: "ci/rendered.yaml"
-          kustomize_build_options: "--enable-helm --helm-command /opt/hostedtoolcache/helm/3.9.2/x64/linux-amd64/helm"
+          kustomize_build_options: "--enable-helm"
 
       - name: Install module
         run: |
