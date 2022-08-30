@@ -41,9 +41,7 @@ jobs:
         uses: mikefarah/yq@master
 
       - name: Kustomize Install
-        uses: karancode/kustomize-github-action@master
-        with:
-          kustomize_version: '4.5.7'
+        uses: imranismail/setup-kustomize@v1
 
       - name: Kustomize exec
         run: |
