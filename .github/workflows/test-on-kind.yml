@@ -19,6 +19,9 @@ jobs:
             kind_config: .github/workflows/kind-configs/no-ci.yaml
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1.3.0
         with:
@@ -29,9 +32,6 @@ jobs:
       - name: Install yq
         id: yq
         uses: mikefarah/yq@master
-
-      - name: Checkout
-        uses: actions/checkout@v3
 
       - name: Kustomize Build
         uses: karancode/kustomize-github-action@master
