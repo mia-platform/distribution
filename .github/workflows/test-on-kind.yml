@@ -48,7 +48,7 @@ jobs:
 
       - name: Test - deployments rollout success
         run: |
-          AWAITABLES="deployment statefulset daemonset"
+          AWAITABLES="Deployment StatefulSet DaemonSet"
           for obj in $AWAITABLES ; do
             DEPLOIMENTS_NAME=$(yq ea 'select(.kind == "$obj") | [ .metadata.name ] | join(" ")' ci/rendered.yaml)
             for dep in $DEPLOIMENTS_NAME ; do
