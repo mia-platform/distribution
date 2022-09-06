@@ -1,24 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ClusterRole--helm:monitoring:kube-state-metrics.yaml
-  - ClusterRole--helm:monitoring:prometheus-operator-tls-job.yaml
-  - ClusterRole--helm:monitoring:prometheus-operator.yaml
-  - ClusterRole--helm:monitoring:prometheus.yaml
-  - ClusterRoleBinding--helm:monitoring:kube-state-metrics.yaml
-  - ClusterRoleBinding--helm:monitoring:prometheus-operator-tls-job.yaml
-  - ClusterRoleBinding--helm:monitoring:prometheus-operator.yaml
-  - ClusterRoleBinding--helm:monitoring:prometheus.yaml
-  - DaemonSet--monitoring-node-exporter.yaml
-  - Deployment--monitoring-kube-state-metrics.yaml
-  - Deployment--monitoring-prometheus-operator.yaml
-  - MutatingWebhookConfiguration--monitoring-prometheus-operator-webhooks.yaml
-  - Secret--monitoring-prometheus-scrape.yaml
-  - Service--monitoring-alertmanager.yaml
-  - Service--monitoring-prometheus-operator.yaml
-  - ServiceAccount--monitoring-alertmanager.yaml
-  - ServiceAccount--monitoring-kube-state-metrics.yaml
-  - ServiceAccount--monitoring-node-exporter.yaml
-  - ServiceAccount--monitoring-prometheus-operator-tls-job.yaml
-  - ServiceAccount--monitoring-prometheus-operator.yaml
-  - ServiceAccount--monitoring-prometheus.yaml
+- ClusterRole--helm:monitoring:kube-state-metrics.yaml
+- ClusterRole--helm:monitoring:prometheus-operator-tls-job.yaml
+- ClusterRole--helm:monitoring:prometheus-operator.yaml
+- ClusterRole--helm:monitoring:prometheus.yaml
+- ClusterRoleBinding--helm:monitoring:kube-state-metrics.yaml
+- ClusterRoleBinding--helm:monitoring:prometheus-operator-tls-job.yaml
+- ClusterRoleBinding--helm:monitoring:prometheus-operator.yaml
+- ClusterRoleBinding--helm:monitoring:prometheus.yaml
+- DaemonSet--monitoring-node-exporter.yaml
+- Deployment--monitoring-kube-state-metrics.yaml
+- Deployment--monitoring-prometheus-operator.yaml
+- MutatingWebhookConfiguration--monitoring-prometheus-operator-webhooks.yaml
+- Secret--monitoring-prometheus-scrape.yaml
+- Service--monitoring-alertmanager.yaml
+- Service--monitoring-prometheus-operator.yaml
+- ServiceAccount--monitoring-alertmanager.yaml
+- ServiceAccount--monitoring-kube-state-metrics.yaml
+- ServiceAccount--monitoring-node-exporter.yaml
+- ServiceAccount--monitoring-prometheus-operator-tls-job.yaml
+- ServiceAccount--monitoring-prometheus-operator.yaml
+- ServiceAccount--monitoring-prometheus.yaml
+- Namespace--monitoring.yaml
