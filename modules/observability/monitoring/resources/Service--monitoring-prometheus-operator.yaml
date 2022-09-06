@@ -1,0 +1,21 @@
+---
+# Source: monitoring/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "monitoring-prometheus-operator"
+  labels:
+    app.kubernetes.io/name: "prometheus-operator"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v0.56.2"
+    app.kubernetes.io/component: "monitoring"
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: "prometheus-operator"
+    app.kubernetes.io/instance: "monitoring"
+  ports:
+    - port: 443
+      targetPort: websecure
+      protocol: TCP
+      name: websecure

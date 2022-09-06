@@ -1,0 +1,67 @@
+---
+# Source: monitoring/templates/kube-state-metrics/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "monitoring-kube-state-metrics"
+  labels:
+    app.kubernetes.io/name: "kube-state-metrics"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v2.4.2"
+    app.kubernetes.io/component: "monitoring"
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &Labels
+      app.kubernetes.io/name: "kube-state-metrics"
+      app.kubernetes.io/instance: "monitoring"
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: "50%"
+      maxUnavailable: "25%"
+  template:
+    metadata:
+      labels: *Labels
+    spec:
+      serviceAccountName: "monitoring-kube-state-metrics"
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: "monitoring-kube-state-metrics"
+          image: "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.4.2"
+          args:
+            - "--port=8080"
+            - "--telemetry-port=8081"
+            - "--resources=certificatesigningrequests,configmaps,cronjobs,daemonsets,deployments,endpoints,horizontalpodautoscalers,ingresses,jobs,limitranges,mutatingwebhookconfigurations,namespaces,networkpolicies,nodes,persistentvolumeclaims,persistentvolumes,poddisruptionbudgets,pods,replicasets,replicationcontrollers,resourcequotas,secrets,services,statefulsets,storageclasses,validatingwebhookconfigurations,volumeattachments"
+          ports:
+            - name: "web"
+              containerPort: 8080
+              protocol: "TCP"
+            - name: "metrics"
+              containerPort: 8081
+              protocol: "TCP"
+          livenessProbe:
+            httpGet:
+              path: "/healthz"
+              port: "web"
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: "web"
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities:
+              drop:
+                - "all"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10000
+        runAsGroup: 11000
+        fsGroup: 12000

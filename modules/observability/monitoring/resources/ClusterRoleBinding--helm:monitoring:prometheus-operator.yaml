@@ -1,0 +1,19 @@
+---
+# Source: monitoring/templates/rbac/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "helm:monitoring:prometheus-operator"
+  labels:
+    app.kubernetes.io/name: "prometheus-operator"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v0.56.2"
+    app.kubernetes.io/component: "monitoring"
+roleRef:
+  apiGroup: "rbac.authorization.k8s.io"
+  kind: "ClusterRole"
+  name: "helm:monitoring:prometheus-operator"
+subjects:
+  - kind: "ServiceAccount"
+    name: "monitoring-prometheus-operator"
+    namespace: "mia-platform"

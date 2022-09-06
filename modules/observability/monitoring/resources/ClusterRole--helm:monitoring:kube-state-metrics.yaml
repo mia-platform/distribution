@@ -1,0 +1,107 @@
+---
+# Source: monitoring/templates/kube-state-metrics/rbac/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "helm:monitoring:kube-state-metrics"
+  labels:
+    app.kubernetes.io/name: "kube-state-metrics"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v2.4.2"
+    app.kubernetes.io/component: "monitoring"
+rules:
+  - apiGroups:
+      - "certificates.k8s.io"
+    resources:
+      - "certificatesigningrequests"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - ""
+    resources:
+      - "nodes"
+      - "namespaces"
+      - "resourcequotas"
+      - "limitranges"
+      - "configmaps"
+      - "secrets"
+      - "services"
+      - "endpoints"
+      - "replicationcontrollers"
+      - "pods"
+      - "persistentvolumeclaims"
+      - "persistentvolumes"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "batch"
+    resources:
+      - "cronjobs"
+      - "jobs"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "apps"
+    resources:
+      - "daemonsets"
+      - "deployments"
+      - "replicasets"
+      - "statefulsets"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "autoscaling"
+    resources:
+      - "horizontalpodautoscalers"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "autoscaling.k8s.io"
+    resources:
+      - "verticalpodautoscalers"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "extensions"
+      - "networking.k8s.io"
+    resources:
+      - "ingresses"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "admissionregistration.k8s.io"
+    resources:
+      - "validatingwebhookconfigurations"
+      - "mutatingwebhookconfigurations"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "networking.k8s.io"
+    resources:
+      - "networkpolicies"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "policy"
+    resources:
+      - "poddisruptionbudgets"
+    verbs:
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "storage.k8s.io"
+    resources:
+      - "storageclasses"
+      - "volumeattachments"
+    verbs:
+      - "list"
+      - "watch"

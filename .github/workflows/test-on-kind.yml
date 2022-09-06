@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         kind_version: [1.24.0, 1.23.0]
-        module: [ modules/ingress/traefik-base, modules/security/cert-manager-base, modules/cni/cilium-base ]
+        module: [ modules/ingress/traefik-base, modules/security/cert-manager-base, modules/cni/cilium-base, modules/observability/monitoring ]
         include:
           - kind_config: .github/workflows/kind-configs/default.yaml
             kind_wait: 60s

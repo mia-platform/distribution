@@ -1,0 +1,102 @@
+---
+# Source: monitoring/templates/node-exporter/daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: "monitoring-node-exporter"
+  labels:
+    app.kubernetes.io/name: "node-exporter"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v1.3.1"
+    app.kubernetes.io/component: "monitoring"
+spec:
+  selector:
+    matchLabels: &Labels
+      app.kubernetes.io/name: "node-exporter"
+      app.kubernetes.io/instance: "monitoring"
+  updateStrategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxUnavailable: "25%"
+  template:
+    metadata:
+      labels: *Labels
+    spec:
+      serviceAccountName: "monitoring-node-exporter"
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: "node-exporter"
+          image: "quay.io/prometheus/node-exporter:v1.3.1"
+          args:
+            - "--log.level=warn"
+            - "--log.format=json"
+            - "--path.procfs=/host/proc"
+            - "--path.sysfs=/host/sys"
+            - "--path.rootfs=/host/root"
+            - "--web.listen-address=0.0.0.0:9100"
+            - "--collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)"
+            - "--collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$"
+          ports:
+            - name: "metrics"
+              containerPort: 9100
+              protocol: "TCP"
+          volumeMounts:
+            - name: "proc"
+              mountPath: "/host/proc"
+              readOnly: true
+            - name: "sys"
+              mountPath: "/host/sys"
+              readOnly: true
+            - name: "root"
+              mountPath: "/host/root"
+              mountPropagation: "HostToContainer"
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: "/"
+              port: "metrics"
+            failureThreshold: 3
+            initialDelaySeconds: 11
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: "metrics"
+            failureThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities:
+              drop:
+                - "all"
+      hostNetwork: true
+      hostPID: true
+      volumes:
+        - name: "proc"
+          hostPath:
+            path: "/proc"
+            type: "Directory"
+        - name: "sys"
+          hostPath:
+            path: "/sys"
+            type: "Directory"
+        - name: "root"
+          hostPath:
+            path: "/"
+            type: "Directory"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10000
+        runAsGroup: 11000
+        fsGroup: 12000
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
