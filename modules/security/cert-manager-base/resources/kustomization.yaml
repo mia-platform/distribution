@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - clusterrole-edit.yaml
+  - clusterrole-view.yaml
+  - clusterrolebinding-approve.yaml
+  - clusterrolebinding-controller-certificates.yaml
+  - clusterrolebinding-controller-certificatesigningrequests.yaml
+  - clusterrolebinding-controller-challenges.yaml
+  - clusterrolebinding-controller-clusterissuers.yaml
+  - clusterrolebinding-controller-ingress-shim.yaml
+  - clusterrolebinding-controller-issuers.yaml
+  - clusterrolebinding-controller-orders.yaml
+  - clusterrolebinding-webhook-subjectaccessreviews.yaml
+  - deployment-cainjector.yaml
+  - deployment-cert-manager.yaml
+  - rolebinding-leaderelection.yaml
+  - rolebinding-webhook-dynamic-serving.yaml
+  - rolebinnding-cainjector-leaderelection.yaml
+  - webhook.yaml
