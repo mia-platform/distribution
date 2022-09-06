@@ -54,12 +54,12 @@ jobs:
           NON_CRDS=$(yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
           if [ -n "$CRDS" ] ; then
             echo "Apply CRDs.."
-            kubectl apply -f - <<< $CRDS
+            kubectl create -f - <<< $CRDS
             echo "Wait until all CRDs are available.."
             kubectl wait --for condition=established crd $(yq ea 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
           fi
           echo "Apply other resources.."
-          kubectl apply -f - <<< $NON_CRDS
+          kubectl create -f - <<< $NON_CRDS
 
       - name: Test - Rollout success
         run: |
