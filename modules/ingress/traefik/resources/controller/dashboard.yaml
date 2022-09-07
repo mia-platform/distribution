@@ -4,7 +4,7 @@ metadata:
   name: traefik-dashboard
 spec:
   entryPoints:
-    - traefik
+  - traefik
   routes:
   - match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
     kind: Rule

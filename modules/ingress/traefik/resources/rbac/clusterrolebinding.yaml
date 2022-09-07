@@ -7,5 +7,5 @@ roleRef:
   kind: ClusterRole
   name: traefik
 subjects:
-  - kind: ServiceAccount
-    name: traefik
+- kind: ServiceAccount
+  name: traefik

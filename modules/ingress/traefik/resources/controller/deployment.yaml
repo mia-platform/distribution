@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: traefik
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: traefik
+        image: traefik
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        ports:
+        - name: traefik
+          containerPort: 9000
+          protocol: TCP
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+        - name: websecure
+          containerPort: 8443
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        args:
+        - --global.checknewversion=false
+        - --global.sendanonymoususage=false
+        - --api.dashboard=true
+        - --ping=true
+        - --log.format=json
+        - --log.level=WARN
+        - --accesslog.format=json
+        - --metrics.prometheus.entrypoint=traefik
+        - --entryPoints.traefik.address=:9000/tcp
+        - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
+        - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
+        - --entryPoints.web.address=:8080/tcp
+        - --entryPoints.web.transport.lifecycle.gracetimeout=30
+        - --entrypoints.web.transport.lifecycle.requestacceptgracetimeout=29
+        - --entrypoints.web.http.redirections.entryPoint.to=:443
+        - --entrypoints.web.http.redirections.entryPoint.scheme=https
+        - --entrypoints.web.http.redirections.entrypoint.priority=0
+        - --entryPoints.websecure.address=:8443/tcp
+        - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
+        - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
+        - --entrypoints.websecure.http.tls=true
+        - --providers.providersthrottleduration=60s
+        - --providers.kubernetesingress.ingressclass=traefik
+        - --providers.kubernetesingress.allowexternalnameservices=false
+        - --providers.kubernetescrd.allowcrossnamespace=true
+        - --providers.kubernetescrd.allowexternalnameservices=false
+      volumes:
+      - name: tmp
+        emptyDir:
+          medium: Memory
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65000
+        runAsGroup: 65000
+        fsGroup: 65000

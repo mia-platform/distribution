@@ -1,15 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-traefik
+  name: allow-ingress-traefik
 spec:
   podSelector:
-    matchLabels:
-      app.kubernetes.io/name: traefik
-      app.kubernetes.io/instance: traefik
+    matchLabels: {}
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - ipBlock:
@@ -17,15 +14,25 @@ spec:
       ports:
         - port: 8080
           protocol: TCP
-        - port: 8080
-          protocol: UDP
         - port: 8443
           protocol: TCP
-        - port: 8443
-          protocol: UDP
     - from:
         - namespaceSelector: {}
+      ports:
+        - port: 8080
+          protocol: TCP
+        - port: 8443
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-traefik
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
   egress:
     - to:
         - namespaceSelector: {}
----

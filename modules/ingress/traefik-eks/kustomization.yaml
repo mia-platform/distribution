@@ -1,0 +1,29 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: traefik
+resources:
+- ../traefik
+components:
+- ../traefik/load-balancers
+patches:
+# labels used for enabling nlb style load balancer, the external in this case
+# is used for using the out of tree controller
+# instance is used for targeting the cluster nodes and not the pod ips so is compatible with custom CNI
+- target:
+    labelSelector: "distribution.mia-platform.eu/service-type=ingress"
+  patch: |-
+    - op: add
+      path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-type
+      value: external
+    - op: add
+      path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-nlb-target-type
+      value: instance
+# Patch only the service named traefik for making it internet-facing, so we can support extension
+# that add private load balancers
+- target:
+    kind: Service
+    name: traefik
+  patch: |-
+    - op: add
+      path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-scheme
+      value: internet-facing
