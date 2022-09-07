@@ -1,0 +1,38 @@
+- op: add
+  path: /spec/template/spec/containers/0/args/-
+  value:
+    "--web.listen-address=:8443"
+- op: add
+  path: /spec/template/spec/containers/0/args/-
+  value:
+    "--web.enable-tls=true"
+- op: add
+  path: /spec/template/spec/containers/0/args/-
+  value:
+    "--web.cert-file=/etc/prometheus-operator/tls/tls.crt"
+- op: add
+  path: /spec/template/spec/containers/0/args/-
+  value:
+    "--web.key-file=/etc/prometheus-operator/tls/tls.key"
+
+- op: replace
+  path: /spec/template/spec/containers/0/ports/0/name
+  value: websecure
+- op: replace
+  path: /spec/template/spec/containers/0/ports/0/containerPort
+  value: 8443
+
+- op: add
+  path: /spec/template/spec/volumes/-
+  value:
+    name: "tls-certificate"
+    secret:
+      defaultMode: 420
+      secretName: "monitoring-prometheus-operator-tls"
+
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: "tls-certificate"
+    mountPath: "/etc/prometheus-operator/tls"
+    readOnly: true

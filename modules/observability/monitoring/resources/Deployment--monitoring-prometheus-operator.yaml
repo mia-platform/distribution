@@ -35,7 +35,6 @@ spec:
             - "--log-format=json"
             - "--localhost=127.0.0.1"
             - "--web.enable-tls=false"
-            - "--web.listen-address=:8080"
             - "--prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.56.2"
             - "--config-reloader-cpu-request=100m"
             - "--config-reloader-cpu-limit=100m"
@@ -49,6 +48,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          volumeMounts : []
           ports:
             - name: "web"
               containerPort: 8080
@@ -60,6 +60,7 @@ spec:
             capabilities:
               drop:
                 - "all"
+      volumes: []
       hostNetwork: false
       securityContext:
         runAsNonRoot: true

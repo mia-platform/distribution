@@ -1,0 +1,33 @@
+---
+# Source: monitoring/templates/validating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: "monitoring-prometheus-operator-webhooks"
+  labels:
+    app.kubernetes.io/name: "prometheus-operator"
+    app.kubernetes.io/instance: "monitoring"
+    app.kubernetes.io/version: "v0.56.2"
+    app.kubernetes.io/component: "monitoring"
+webhooks:
+  - name: "prometheusrulemutate.monitoring.coreos.com"
+    failurePolicy: "Fail"
+    rules:
+      - apiGroups:
+          - "monitoring.coreos.com"
+        apiVersions:
+          - "*"
+        resources:
+          - "prometheusrules"
+        operations:
+          - "CREATE"
+          - "UPDATE"
+    clientConfig:
+      service:
+        namespace: "default"
+        name: "monitoring-prometheus-operator"
+        path: "/admission-prometheusrules/validate"
+    admissionReviewVersions:
+      - "v1"
+      - "v1beta1"
+    sideEffects: "None"

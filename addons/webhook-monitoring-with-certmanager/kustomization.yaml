@@ -1,0 +1,125 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1  # <-- Component notation
+kind: Component
+
+resources:
+- resources
+
+patches:
+- path: prometheus-operator.yaml
+  target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: monitoring-prometheus-operator
+
+- path: prometheus-operator-service.yaml
+
+configurations:
+- kustomizeconfig.yaml
+
+replacements:
+# Add cert-manager annotation to ValidatingWebhookConfiguration, MutatingWebhookConfiguration and CRDs
+ - source:
+     kind: Certificate
+     group: cert-manager.io
+     version: v1
+     name: monitoring-prometheus-operator-tls
+     fieldPath: .metadata.namespace # namespace of the certificate CR
+   targets:
+     - select:
+         kind: ValidatingWebhookConfiguration
+         name: monitoring-prometheus-operator-webhooks
+       fieldPaths:
+         - .metadata.annotations.[cert-manager.io/inject-ca-from]
+       options:
+         delimiter: '/'
+         index: 0
+         create: true
+     - select:
+         kind: MutatingWebhookConfiguration
+         name: monitoring-prometheus-operator-webhooks
+       fieldPaths:
+         - .metadata.annotations.[cert-manager.io/inject-ca-from]
+       options:
+         delimiter: '/'
+         index: 0
+         create: true
+    #  - select:
+    #      kind: CustomResourceDefinition
+    #    fieldPaths:
+    #      - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    #    options:
+    #      delimiter: '/'
+    #      index: 0
+    #      create: true
+ - source:
+     kind: Certificate
+     group: cert-manager.io
+     version: v1
+     name: monitoring-prometheus-operator-tls
+     fieldPath: .metadata.name
+   targets:
+     - select:
+         kind: ValidatingWebhookConfiguration
+         name: monitoring-prometheus-operator-webhooks
+       fieldPaths:
+         - .metadata.annotations.[cert-manager.io/inject-ca-from]
+       options:
+         delimiter: '/'
+         index: 1
+         create: true
+     - select:
+         kind: MutatingWebhookConfiguration
+         name: monitoring-prometheus-operator-webhooks
+       fieldPaths:
+         - .metadata.annotations.[cert-manager.io/inject-ca-from]
+       options:
+         delimiter: '/'
+         index: 1
+         create: true
+    #  - select:
+    #      kind: CustomResourceDefinition
+    #    fieldPaths:
+    #      - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    #    options:
+    #      delimiter: '/'
+    #      index: 1
+    #      create: true
+
+# add dnsNames to certificate
+ - source:
+     kind: Service
+     version: v1
+     name: monitoring-prometheus-operator
+     fieldPath: .metadata.name
+   targets:
+     - select:
+         kind: Certificate
+         name: monitoring-prometheus-operator-tls
+         group: cert-manager.io
+         version: v1
+       fieldPaths:
+         - .spec.dnsNames.0
+         - .spec.dnsNames.1
+       options:
+         delimiter: '.'
+         index: 0
+         create: true
+ - source:
+     kind: Service
+     version: v1
+     name: monitoring-prometheus-operator
+     fieldPath: .metadata.namespace
+   targets:
+     - select:
+         kind: Certificate
+         name: monitoring-prometheus-operator-tls
+         group: cert-manager.io
+         version: v1
+       fieldPaths:
+         - .spec.dnsNames.0
+         - .spec.dnsNames.1
+       options:
+         delimiter: '.'
+         index: 1
+         create: true

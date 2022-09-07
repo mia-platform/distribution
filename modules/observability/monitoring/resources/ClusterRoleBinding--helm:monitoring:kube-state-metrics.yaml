@@ -16,4 +16,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: "monitoring-kube-state-metrics"
-    namespace: "mia-platform"
+    namespace: "monitoring"
