@@ -34,10 +34,8 @@ spec:
             - "--log-level=warn"
             - "--log-format=json"
             - "--localhost=127.0.0.1"
-            - "--web.enable-tls=true"
-            - "--web.cert-file=/etc/prometheus-operator/tls/cert"
-            - "--web.key-file=/etc/prometheus-operator/tls/key"
-            - "--web.listen-address=:8443"
+            - "--web.enable-tls=false"
+            - "--web.listen-address=:8080"
             - "--prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.56.2"
             - "--config-reloader-cpu-request=100m"
             - "--config-reloader-cpu-limit=100m"
@@ -47,13 +45,9 @@ spec:
             - "--alertmanager-instance-namespaces=mia-platform"
             - "--thanos-ruler-instance-namespaces=mia-platform"
           ports:
-            - name: "websecure"
-              containerPort: 8443
+            - name: "web"
+              containerPort: 8080
               protocol: "TCP"
-          volumeMounts:
-            - name: "tls-certificate"
-              mountPath: "/etc/prometheus-operator/tls"
-              readOnly: true
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -61,11 +55,6 @@ spec:
             capabilities:
               drop:
                 - "all"
-      volumes:
-        - name: "tls-certificate"
-          secret:
-            defaultMode: 420
-            secretName: "monitoring-prometheus-operator-tls"
       hostNetwork: false
       securityContext:
         runAsNonRoot: true

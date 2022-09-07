@@ -12,9 +12,6 @@ resources:
 - DaemonSet--monitoring-node-exporter.yaml
 - Deployment--monitoring-kube-state-metrics.yaml
 - Deployment--monitoring-prometheus-operator.yaml
-- MutatingWebhookConfiguration--monitoring-prometheus-operator-webhooks.yaml
-- Secret--monitoring-prometheus-scrape.yaml
-- Service--monitoring-alertmanager.yaml
 - Service--monitoring-prometheus-operator.yaml
 - ServiceAccount--monitoring-alertmanager.yaml
 - ServiceAccount--monitoring-kube-state-metrics.yaml

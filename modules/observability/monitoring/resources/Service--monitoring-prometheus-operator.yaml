@@ -15,7 +15,7 @@ spec:
     app.kubernetes.io/name: "prometheus-operator"
     app.kubernetes.io/instance: "monitoring"
   ports:
-    - port: 443
-      targetPort: websecure
+    - port: 80
+      targetPort: web
       protocol: TCP
-      name: websecure
+      name: web
