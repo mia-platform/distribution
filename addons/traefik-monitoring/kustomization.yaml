@@ -5,6 +5,7 @@ resources:
 replacements:
 - source:
     kind: Deployment
+    name: traefik
     fieldPath: spec.selector.matchLabels
   targets:
   - select:
@@ -14,6 +15,7 @@ replacements:
     - spec.selector.matchLabels
 - source:
     kind: Deployment
+    name: traefik
     fieldPath: metadata.labels
   targets:
   - select:
@@ -23,6 +25,7 @@ replacements:
     - metadata.labels
 - source:
     kind: Deployment
+    name: traefik
     fieldPath: metadata.namespace
   targets:
   - select:
