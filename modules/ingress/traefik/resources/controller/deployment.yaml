@@ -19,7 +19,7 @@ spec:
       hostNetwork: false
       containers:
       - name: traefik
-        image: traefik
+        image: traefik:latest
         imagePullPolicy: IfNotPresent
         resources: {}
         readinessProbe:
