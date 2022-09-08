@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   labels: {}
   name: cert-manager
-  namespace: NAMESPACE_NAME
+  namespace: NAMESPACE_NAME # Substituted with the one from the deployment
 spec:
   endpoints:
   - honorLabels: false
@@ -11,6 +11,5 @@ spec:
     path: /metrics
     scrapeTimeout: 30s
     targetPort: tcp-prometheus-servicemonitor
-  jobLabel: cert-manager
   selector:
     matchLabels: {}

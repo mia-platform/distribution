@@ -1,0 +1,8 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- ../modules/ingress/traefik
+- ../modules/security/cert-manager-base
+components:
+  - ../addons/traefik-monitoring
+  - ../addons/cert-manager-monitoring

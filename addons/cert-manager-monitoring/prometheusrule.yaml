@@ -3,7 +3,7 @@ kind: PrometheusRule
 metadata:
   labels: {}
   name: cert-manager
-  namespace: NAMESPACE_NAME
+  namespace: NAMESPACE_NAME # Substituted with the one from the deployment
 spec:
   groups:
   - name: cert-manager.rules

@@ -6,7 +6,10 @@ metadata:
   namespace: NAMESPACE_NAME # Substituted with the one from the deployment
 spec:
   endpoints:
-  - path: /metrics
+  - honorLabels: false
+    interval: 60s
+    path: /metrics
+    scrapeTimeout: 30s
     port: traefik
   selector:
     matchLabels: {}
