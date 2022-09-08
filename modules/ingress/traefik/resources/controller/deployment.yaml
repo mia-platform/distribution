@@ -15,6 +15,7 @@ spec:
   template:
     spec:
       serviceAccountName: traefik
+      automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
