@@ -1,11 +1,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  labels:
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/name: cert-manager
-  name: cert-manager-alerts
+  labels: {}
+  name: cert-manager
+  namespace: NAMESPACE_NAME
 spec:
   groups:
   - name: cert-manager.rules
