@@ -41,9 +41,14 @@ spec:
             - "--config-reloader-cpu-limit=100m"
             - "--config-reloader-memory-request=25Mi"
             - "--config-reloader-memory-limit=25Mi"
-            - "--prometheus-instance-namespaces=mia-platform"
-            - "--alertmanager-instance-namespaces=mia-platform"
-            - "--thanos-ruler-instance-namespaces=mia-platform"
+            - "--prometheus-instance-namespaces=$(POD_NAMESPACE)"
+            - "--alertmanager-instance-namespaces=$(POD_NAMESPACE)"
+            - "--thanos-ruler-instance-namespaces=$(POD_NAMESPACE)"
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           ports:
             - name: "web"
               containerPort: 8080
