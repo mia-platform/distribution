@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: logging
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: logging-operator
+        image: ghcr.io/banzaicloud/logging-operator:latest
+        resources: {}
+        args:
+        - "--metrics-addr=:8080"
+        - "--enable-leader-election=true"
+        - "--verbose=false"
+        - "--output-format=json"
+        - "--klogLevel=0"
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 64000
+        runAsGroup: 64000
+        fsGroup: 64000

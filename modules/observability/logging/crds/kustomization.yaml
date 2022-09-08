@@ -1,0 +1,10 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- clusterflows.yaml
+- clusteroutputs.yaml
+- eventtailers.yaml
+- flows.yaml
+- hosttailers.yaml
+- loggings.yaml
+- outputs.yaml

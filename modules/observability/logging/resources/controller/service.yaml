@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "logging"
+spec:
+  type: ClusterIP
+  selector: {}
+  ports:
+    - port: 8080
+      targetPort: web
+      protocol: TCP
+      name: web
