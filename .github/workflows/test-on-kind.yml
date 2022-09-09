@@ -4,9 +4,8 @@ on:
   push:
     branches:
       - main
-      - feat/better-CI
-    # paths:
-    #   - modules/**
+    paths:
+      - modules/**
   pull_request:
 
 concurrency:
