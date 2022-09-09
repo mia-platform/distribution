@@ -4,22 +4,65 @@ on:
   push:
     branches:
       - main
+      - feat/better-CI
+    # paths:
+    #   - modules/**
   pull_request:
 
+concurrency:
+  group: ci-tests-${{ github.ref }}-1
+  cancel-in-progress: true # cancels obsolete running jobs
+
 jobs:
-  test-modules:
+  get-changed-modules:
+    name: "Build Changed Modules List"
+    runs-on: ubuntu-latest
+    outputs:
+      module_paths: ${{ steps.changed.outputs.module_paths }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          list-files: shell
+          filters: |
+            modules:
+              - 'modules/**'
+
+      - name: Clean Changed Filter
+        id: changed
+        run: |
+          FILES="${{ steps.filter.outputs.modules_files }}"
+          FINAL_LIST="["
+          for file in $FILES; do
+            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??3g')"
+          done
+          for directory in $(echo $DIR_LIST | sort -u | tr '\n' ' ') ; do
+            [ ! -d $directory ] && continue
+            FINAL_LIST+=\"$directory\",
+          done
+          FINAL_LIST+="]"
+          echo $(sed 's/,]/]/' <<< $FINAL_LIST)
+          echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
+
+  test-module:
+    if: needs.get-changed-modules.outputs.module_paths != '[]'
+    name: "Test Module"
+    needs: get-changed-modules
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
         kind_version: [1.24.0, 1.23.0]
-        module: [ modules/ingress/traefik-base, modules/security/cert-manager-base, modules/cni/cilium-base, modules/observability/monitoring ]
-        include:
-          - kind_config: .github/workflows/kind-configs/default.yaml
-            kind_wait: 60s
-          - module: modules/cni/cilium-base
-            kind_config: .github/workflows/kind-configs/no-ci.yaml
-            kind_wait: 10s
+        module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
+        exclude:
+          - module: modules/ingress/traefik-aks
+          - module: modules/ingress/traefik-eks
+          - module: modules/ingress/traefik-gke
+          - module: modules/cni/cilium-gke
+          - module: modules/observability/monitoring-eks
+          - module: modules/security/cert-manager-eks
 
     steps:
       - name: Checkout
@@ -39,13 +82,23 @@ jobs:
           mkdir ci
           kustomize build --enable-helm ${{ matrix.module }} > ci/rendered.yaml
 
-      - name: Create k8s Kind Cluster
+      - name: Create k8s Kind Cluster for Cilium
+        if: matrix.module == 'modules/cni/cilium-base'
         uses: helm/kind-action@v1.3.0
         with:
           version: v0.14.0
           node_image: kindest/node:v${{ matrix.kind_version }}
-          config: ${{ matrix.kind_config }}
-          wait: ${{ matrix.kind_wait }}
+          config: .github/workflows/kind-configs/no-cni.yaml
+          wait: 10s
+
+      - name: Create k8s Kind Cluster
+        if: matrix.module != 'modules/cni/cilium-base'
+        uses: helm/kind-action@v1.3.0
+        with:
+          version: v0.14.0
+          node_image: kindest/node:v${{ matrix.kind_version }}
+          config: .github/workflows/kind-configs/default.yaml
+          wait: 60s
 
       - name: Install module
         run: |
@@ -70,3 +123,4 @@ jobs:
               kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
             done
           done
+

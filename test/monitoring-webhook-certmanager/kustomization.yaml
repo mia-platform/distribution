@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../modules/security/cert-manager-base
+  - ../../modules/security/cert-manager
   - ../../modules/observability/monitoring
 
 components:
