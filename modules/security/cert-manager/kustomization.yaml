@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - crds
   - resources
-  - resources-in-kube-system

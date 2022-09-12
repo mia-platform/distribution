@@ -30,8 +30,12 @@ resources:
 - Deployment--cert-manager.yaml
 - MutatingWebhookConfiguration--cert-manager-webhook.yaml
 - Namespace--cert-manager.yaml
+- Role--cert-manager-cainjector:leaderelection.yaml
 - Role--cert-manager-webhook:dynamic-serving.yaml
+- Role--cert-manager:leaderelection.yaml
+- RoleBinding--cert-manager-cainjector:leaderelection.yaml
 - RoleBinding--cert-manager-webhook:dynamic-serving.yaml
+- RoleBinding--cert-manager:leaderelection.yaml
 - Service--cert-manager-webhook.yaml
 - Service--cert-manager.yaml
 - ServiceAccount--cert-manager-cainjector.yaml

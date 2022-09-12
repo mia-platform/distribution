@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - modules/**
+      - test/**
   pull_request:
 
 concurrency:
@@ -29,16 +30,22 @@ jobs:
           filters: |
             modules:
               - 'modules/**'
+            test:
+              - 'test/**'
 
       - name: Clean Changed Filter
         id: changed
         run: |
-          FILES="${{ steps.filter.outputs.modules_files }}"
+          MODULES="${{ steps.filter.outputs.modules_files }}"
+          TESTS="${{ steps.filter.outputs.test_files }}"
           FINAL_LIST="["
-          for file in $FILES; do
+          for file in $MODULES; do
             DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??3g')"
           done
-          for directory in $(echo $DIR_LIST | sort -u | tr '\n' ' ') ; do
+          for file in $TESTS; do
+            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
+          done
+          for directory in $(tr ' ' '\n' <<< "${DIR_LIST[@]}" | sort -u | tr '\n' ' ') ; do
             [ ! -d $directory ] && continue
             FINAL_LIST+=\"$directory\",
           done
@@ -47,8 +54,8 @@ jobs:
           echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
 
   test-module:
+    name: "Test"
     if: needs.get-changed-modules.outputs.module_paths != '[]'
-    name: "Test Module"
     needs: get-changed-modules
     runs-on: ubuntu-latest
     strategy:
