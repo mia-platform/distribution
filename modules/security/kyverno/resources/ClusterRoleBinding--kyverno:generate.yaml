@@ -1,0 +1,19 @@
+---
+# Source: kyverno/charts/kyverno/templates/clusterrolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kyverno:generate
+  labels:
+    app.kubernetes.io/name: kyverno
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/version: "v1.7.1"
+    app: kyverno
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kyverno:generate
+subjects:
+  - kind: ServiceAccount
+    name: kyverno
+    namespace: kyverno

@@ -1,0 +1,22 @@
+---
+# Source: kyverno/templates/network-policies/allow-webhook-ingress-and-egress.yml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-webhook-ingress-and-egress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: kyverno
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from: []
+      ports:
+        - port: 9443
+          protocol: TCP
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
