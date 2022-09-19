@@ -1,0 +1,18 @@
+---
+# Source: velero/charts/velero/templates/backupstoragelocation.yaml
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  labels:
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/instance: velero
+spec:
+  provider: velero.io/aws
+  objectStorage:
+    bucket: "velero"
+  config:
+    region: us-east-1
+    insecureSkipTLSVerify: "true"
+    s3ForcePathStyle: "true"
+    s3Url: "http://minio.velero:9000"
