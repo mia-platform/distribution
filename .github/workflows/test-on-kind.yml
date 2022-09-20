@@ -5,8 +5,9 @@ on:
     branches:
       - main
     paths:
-      - modules/**
-      - test/**
+      - "modules/*/*/base/**"
+      - "!modules/security/oidc-proxy/**"
+      - "test/**"
   pull_request:
 
 concurrency:
@@ -29,7 +30,7 @@ jobs:
           list-files: shell
           filters: |
             modules:
-              - 'modules/**'
+              - 'modules/*/!(oidc-proxy)/base/**'
             test:
               - 'test/**'
 
@@ -40,7 +41,7 @@ jobs:
           TESTS="${{ steps.filter.outputs.test_files }}"
           FINAL_LIST="["
           for file in $MODULES; do
-            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??3g')"
+            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??4g')"
           done
           for file in $TESTS; do
             DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
@@ -62,14 +63,6 @@ jobs:
       matrix:
         kind_version: [1.24.0, 1.23.0]
         module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
-        exclude:
-          - module: modules/ingress/traefik-aks
-          - module: modules/ingress/traefik-eks
-          - module: modules/ingress/traefik-gke
-          - module: modules/cni/cilium-gke
-          - module: modules/observability/monitoring-eks
-          - module: modules/security/cert-manager-eks
-          - module: modules/security/oidc-proxy
 
     steps:
       - name: Checkout
@@ -130,4 +123,3 @@ jobs:
               kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
             done
           done
-

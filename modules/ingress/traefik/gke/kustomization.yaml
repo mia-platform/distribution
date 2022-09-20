@@ -1,0 +1,12 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- ../base/crds
+- ../base/resources
+patches:
+- target:
+    labelSelector: "distribution.mia-platform.eu/service-type=ingress"
+  patch: |-
+    - op: replace
+      path: /spec.type
+      value: LoadBalancer

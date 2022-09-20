@@ -1,11 +1,15 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
-namespace: traefik
 resources:
-- ../traefik
-components:
-- ../traefik/load-balancers
+- ../base/crds
+- ../base/resources
 patches:
+- target:
+    labelSelector: "distribution.mia-platform.eu/service-type=ingress"
+  patch: |-
+    - op: replace
+      path: /spec.type
+      value: LoadBalancer
 # labels used for enabling nlb style load balancer, the external in this case
 # is used for using the out of tree controller
 # instance is used for targeting the cluster nodes and not the pod ips so is compatible with custom CNI
