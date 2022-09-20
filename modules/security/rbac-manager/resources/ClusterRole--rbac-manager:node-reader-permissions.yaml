@@ -1,0 +1,32 @@
+---
+# Source: permissions/templates/clusterroles.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rbac-manager:node-reader-permissions
+  labels:
+    app.kubernetes.io/name: "permissions"
+    app.kubernetes.io/instance: "rbac-manager"
+    app.kubernetes.io/component: "permissions"
+rules:
+  - apiGroups: [""]
+    resources:
+      - "nodes"
+      - "persistentvolumes"
+    verbs:
+      - "top"
+      - "list"
+      - "get"
+      - "watch"
+  - apiGroups: [""]
+    resources:
+      - "namespaces"
+    verbs:
+      - "list"
+  - apiGroups: ["metrics.k8s.io"]
+    resources:
+      - "nodes"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"

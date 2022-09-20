@@ -1,0 +1,62 @@
+---
+# Source: permissions/charts/rbacmanger/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rbac-manager-rbacmanger
+  labels:
+    app: rbacmanger
+    release: rbac-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rbacmanger
+      release: rbac-manager
+  template:
+    metadata:
+      labels:
+        app: rbacmanger
+        release: rbac-manager
+    spec:
+      serviceAccountName: rbac-manager-rbacmanger
+      containers:
+        - name: rbacmanger
+          image: "quay.io/reactiveops/rbac-manager:v1.1.2"
+          imagePullPolicy: Always
+          command:
+            - /rbac-manager
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /metrics
+              port: 8042
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+            periodSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /metrics
+              port: 8042
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            # metrics port
+            - name: http-metrics
+              containerPort: 8042
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 20m
+              memory: 48Mi
+            requests:
+              cpu: 10m
+              memory: 24Mi

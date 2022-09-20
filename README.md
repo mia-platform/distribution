@@ -10,7 +10,7 @@ capabilities to your Kubernetes clusters.
 ```
 yq -i '.splitHere = ( .kind + "--" + .metadata.name + ".yaml") ' all.yml
 yq -s '.splitHere' all.yml
-for file in $(ls directory-with-yamls) ; do yq -i 'del(.splitHere)' $file  ; done
+for file in $(ls crds/* resources/*) ; do yq -i 'del(.splitHere)' $file  ; done
 ```
 ## Remove helm labels
 ```

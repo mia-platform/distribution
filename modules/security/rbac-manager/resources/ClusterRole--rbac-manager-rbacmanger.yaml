@@ -1,0 +1,39 @@
+---
+# Source: permissions/charts/rbacmanger/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: rbac-manager-rbacmanger
+  labels:
+    app: rbacmanger
+    release: rbac-manager
+rules:
+  - apiGroups:
+      - rbacmanager.reactiveops.io
+    resources:
+      - rbacdefinitions
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - rbac.authorization.k8s.io
+      - authorization.k8s.io
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - apiGroups:
+      - "" # core
+    resources:
+      - serviceaccounts
+    verbs:
+      - '*'
+  - apiGroups:
+      - "" # core
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch

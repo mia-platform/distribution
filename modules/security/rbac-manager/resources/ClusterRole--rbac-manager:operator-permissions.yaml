@@ -1,0 +1,171 @@
+---
+# Source: permissions/templates/clusterroles.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rbac-manager:operator-permissions
+  labels:
+    app.kubernetes.io/name: "permissions"
+    app.kubernetes.io/instance: "rbac-manager"
+    app.kubernetes.io/component: "permissions"
+rules:
+  - apiGroups: [""]
+    resources:
+      - "pods"
+      - "pods/proxy"
+      - "pods/log"
+      - "pods/status"
+      - "services"
+      - "secrets"
+      - "services/proxy"
+      - "configmaps"
+      - "events"
+      - "namespaces/status"
+      - "namespaces"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: [""]
+    resources:
+      - "pods/exec"
+      - "pods/portforward"
+    verbs:
+      - "create"
+  - apiGroups: [""]
+    resources:
+      - "persistentvolumeclaims"
+      - "resourcequotas"
+      - "resourcequotas/status"
+      - "limitranges"
+    verbs:
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["apps"]
+    resources:
+      - "daemonsets"
+      - "deployments"
+      - "deployments/scale"
+      - "deployments/rollback"
+      - "replicasets"
+      - "replicasets/scale"
+      - "statefulsets"
+      - "statefulsets/scale"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["autoscaling"]
+    resources:
+      - "horizontalpodautoscalers"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["autoscaling.k8s.io"]
+    resources:
+      - "verticalpodautoscalers"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["batch"]
+    resources:
+      - "cronjobs"
+      - "jobs"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["metrics.k8s.io"]
+    resources:
+      - "pods"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+  - apiGroups: ["traefik.containo.us"]
+    resources:
+      - "ingressroutes"
+      - "ingressroutetcps"
+      - "middlewares"
+      - "tlsoptions"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["cert-manager.io"]
+    resources:
+      - "certificates"
+    verbs:
+      - "update"
+      - "delete"
+      - "create"
+      - "deletecollection"
+      - "patch"
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["acme.cert-manager.io"]
+    resources:
+      - "challenges"
+    verbs:
+      - "get"
+      - "watch"
+      - "list"
+  - apiGroups: ["monitoring.coreos.com"]
+    resources:
+      - podmonitors
+      - prometheusrules
+      - servicemonitors
+    verbs:
+      - update
+      - delete
+      - create
+      - deletecollection
+      - patch
+      - get
+      - watch
+      - list
+  - apiGroups: ["kube-green.com"]
+    resources:
+      - "sleepinfos"
+    verbs:
+      - "get"
+      - "watch"
+      - "list"
+      - "update"
+      - "patch"
+      - "delete"
+      - "deletecollection"
