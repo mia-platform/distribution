@@ -1,10 +1,10 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-- clusterflows.yaml
-- clusteroutputs.yaml
-- eventtailers.yaml
-- flows.yaml
-- hosttailers.yaml
-- loggings.yaml
-- outputs.yaml
+- clusterflows.logging.banzaicloud.io.yaml
+- clusteroutputs.logging.banzaicloud.io.yaml
+- eventtailers.logging-extensions.banzaicloud.io.yaml
+- flows.logging.banzaicloud.io.yaml
+- hosttailers.logging-extensions.banzaicloud.io.yaml
+- loggings.logging.banzaicloud.io.yaml
+- outputs.logging.banzaicloud.io.yaml
