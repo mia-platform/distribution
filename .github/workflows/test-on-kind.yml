@@ -69,6 +69,7 @@ jobs:
           - module: modules/cni/cilium-gke
           - module: modules/observability/monitoring-eks
           - module: modules/security/cert-manager-eks
+          - module: modules/security/oidc-proxy
 
     steps:
       - name: Checkout

@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kube-oidc-proxy
+  name: kube-oidc-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-oidc-proxy
+  template:
+    metadata:
+      labels:
+        app: kube-oidc-proxy
+    spec:
+      serviceAccountName: kube-oidc-proxy
+      containers:
+        - image: quay.io/jetstack/kube-oidc-proxy:v0.3.0
+          ports:
+            - containerPort: 443
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          name: kube-oidc-proxy
+          command: ["kube-oidc-proxy"]
+          args:
+            - "--secure-port=443"
+            - "--tls-cert-file=/etc/oidc/tls/crt.pem"
+            - "--tls-private-key-file=/etc/oidc/tls/key.pem"
+            - "--oidc-client-id=$(OIDC_CLIENT_ID)"
+            - "--oidc-issuer-url=$(OIDC_ISSUER_URL)"
+            - "--oidc-username-claim=$(OIDC_USERNAME_CLAIM)"
+            - "--oidc-ca-file=/etc/oidc/oidc-ca.pem"
+          env:
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: kube-oidc-proxy-config
+                  key: oidc.client-id
+            - name: OIDC_ISSUER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: kube-oidc-proxy-config
+                  key: oidc.issuer-url
+            - name: OIDC_USERNAME_CLAIM
+              valueFrom:
+                secretKeyRef:
+                  name: kube-oidc-proxy-config
+                  key: oidc.username-claim
+          volumeMounts:
+            - name: kube-oidc-proxy-config
+              mountPath: /etc/oidc
+              readOnly: true
+            - name: kube-oidc-proxy-tls
+              mountPath: /etc/oidc/tls
+              readOnly: true
+      volumes:
+        - name: kube-oidc-proxy-config
+          secret:
+            secretName: kube-oidc-proxy-config
+            items:
+              - key: oidc.ca-pem
+                path: oidc-ca.pem
+        - name: kube-oidc-proxy-tls
+          secret:
+            secretName: kube-oidc-proxy-tls
+            items:
+              - key: tls.crt
+                path: crt.pem
+              - key: tls.key
+                path: key.pem
