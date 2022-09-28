@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/logging-operator
     paths:
       - "modules/*/*/base/**"
       - "!modules/security/oidc-proxy/**"
@@ -123,3 +124,9 @@ jobs:
               kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
             done
           done
+
+      - name: Custom test script
+        if: startsWith( 'test/', ${{matrix.module}} )
+        run: |
+          [ ! -x ${{ matrix.module }}/test.sh ] && exit 0
+          ${{ matrix.module }}/test.sh

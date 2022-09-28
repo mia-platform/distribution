@@ -1,0 +1,19 @@
+kind: Component
+apiVersion: kustomize.config.k8s.io/v1alpha1
+resources:
+- resources/logging.yaml
+
+replacements:
+- source:
+    kind: Deployment
+    group: apps
+    version: v1
+    name: logging
+    fieldPath: metadata.namespace
+  targets:
+    - select:
+        kind: Logging
+        name: logging-operator
+      fieldPaths:
+        - spec.controlNamespace
+        - metadata.namespace

@@ -1,0 +1,130 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+metadata:
+  labels:
+    app.kubernetes.io/component: logging
+    app.kubernetes.io/instance: logging
+    app.kubernetes.io/version: 3.17.6
+  name: logging-operator
+spec:
+  controlNamespace: NAMESPACE
+  enableRecreateWorkloadOnImmutableFieldChange: true
+  flowConfigCheckDisabled: false
+  flowConfigOverride: ""
+  fluentbit:
+    enableUpstream: true
+    filterKubernetes:
+      Annotations: "On"
+      Buffer_Size: "0"
+      K8S-Logging.Exclude: "On"
+      Labels: "On"
+      Merge_Log: "Off"
+    image:
+      repository: ""
+      tag: ""
+    inputTail:
+      Mem_Buf_Limit: 10MB
+      Path: /var/log/containers/*.log
+      Refresh_Interval: "30"
+      Rotate_Wait: "30"
+    labels:
+      app.kubernetes.io/instance: logging
+      app.kubernetes.io/name: logging
+    metrics:
+      interval: 30s
+      path: /api/v1/metrics/prometheus
+      port: 2020
+      prometheusAnnotations: false
+      serviceMonitor: false
+      timeout: 15s
+    network:
+      connectTimeout: 15
+      keepalive: true
+      keepaliveIdleTimeout: 10
+      keepaliveMaxRecycle: 50
+    positiondb:
+      hostPath:
+        path: /var/log/logging-operator
+    resources:
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    security:
+      podSecurityContext:
+        fsGroup: 12000
+        runAsGroup: 11000
+        runAsNonRoot: false
+        runAsUser: 0
+      podSecurityPolicyCreate: true
+      roleBasedAccessControlCreate: true
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - all
+        privileged: false
+        readOnlyRootFilesystem: true
+    tls:
+      enabled: false
+    tolerations:
+    - effect: NoSchedule
+      operator: Exists
+  fluentd:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - fluentd
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    bufferStorageVolume:
+      pvc:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+    image:
+      repository: ""
+      tag: ""
+    labels:
+      app.kubernetes.io/instance: logging
+      app.kubernetes.io/name: logging
+    livenessDefaultCheck: true
+    metrics:
+      interval: 30s
+      path: /metrics
+      port: 24231
+      prometheusAnnotations: false
+      serviceMonitor: false
+      timeout: 15s
+    nodeSelector: {}
+    readinessDefaultCheck:
+      bufferFreeSpaceThreshold: 80
+    scaling:
+      replicas: 1
+    security:
+      podSecurityContext:
+        fsGroup: 101
+        runAsGroup: 101
+        runAsNonRoot: true
+        runAsUser: 100
+      podSecurityPolicyCreate: true
+      roleBasedAccessControlCreate: true
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - all
+        privileged: false
+        readOnlyRootFilesystem: false
+    tls:
+      enabled: false
+    tolerations: []
+  loggingRef: ""
