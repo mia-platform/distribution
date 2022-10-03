@@ -1,0 +1,35 @@
+kind: Component
+apiVersion: kustomize.config.k8s.io/v1alpha1
+resources:
+- servicemonitor.yaml
+replacements:
+- source:
+    kind: Deployment
+    name: traefik
+    fieldPath: spec.selector.matchLabels
+  targets:
+  - select:
+      kind: ServiceMonitor
+      name: traefik
+    fieldPaths:
+    - spec.selector.matchLabels
+- source:
+    kind: Deployment
+    name: traefik
+    fieldPath: metadata.labels
+  targets:
+  - select:
+      kind: ServiceMonitor
+      name: traefik
+    fieldPaths:
+    - metadata.labels
+- source:
+    kind: Deployment
+    name: traefik
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: ServiceMonitor
+      name: traefik
+    fieldPaths:
+    - metadata.namespace
