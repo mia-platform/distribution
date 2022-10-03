@@ -1,7 +1,7 @@
 kind: Component
 apiVersion: kustomize.config.k8s.io/v1alpha1
 resources:
-- servicemonitor.yaml
+- resources
 replacements:
 - source:
     kind: Deployment
@@ -13,16 +13,11 @@ replacements:
       name: traefik
     fieldPaths:
     - spec.selector.matchLabels
-- source:
-    kind: Deployment
-    name: traefik
-    fieldPath: metadata.labels
-  targets:
   - select:
-      kind: ServiceMonitor
-      name: traefik
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
     fieldPaths:
-    - metadata.labels
+    - spec.podSelector.matchLabels
 - source:
     kind: Deployment
     name: traefik
@@ -33,3 +28,22 @@ replacements:
       name: traefik
     fieldPaths:
     - metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Prometheus
+    name: prometheus
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name

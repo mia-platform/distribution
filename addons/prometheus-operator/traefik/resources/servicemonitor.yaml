@@ -1,9 +1,8 @@
-sapiVersion: monitoring.coreos.com/v1
+apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: traefik
   labels: {}
-  namespace: NAMESPACE_NAME # Substituted with the one from the deployment
 spec:
   endpoints:
   - honorLabels: false

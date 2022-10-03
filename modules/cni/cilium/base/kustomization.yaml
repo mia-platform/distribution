@@ -4,6 +4,7 @@ helmCharts:
 - name: cilium
   repo: https://helm.cilium.io/
   version: v1.12.1
+  namespace: kube-system
   releaseName: cilium
   valuesInline:
     ipam:

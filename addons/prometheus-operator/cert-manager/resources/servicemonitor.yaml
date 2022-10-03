@@ -1,15 +1,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  labels: {}
   name: cert-manager
-  namespace: NAMESPACE_NAME # Substituted with the one from the deployment
 spec:
   endpoints:
   - honorLabels: false
     interval: 60s
     path: /metrics
     scrapeTimeout: 30s
-    targetPort: tcp-prometheus-servicemonitor
+    targetPort: http-metrics
   selector:
     matchLabels: {}

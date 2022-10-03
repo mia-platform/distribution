@@ -1,8 +1,7 @@
 kind: Component
 apiVersion: kustomize.config.k8s.io/v1alpha1
 resources:
-- servicemonitor.yaml
-- prometheusrule.yaml
+- resources
 replacements:
 - source:
     kind: Deployment
@@ -14,21 +13,11 @@ replacements:
       name: cert-manager
     fieldPaths:
     - spec.selector.matchLabels
-- source:
-    kind: Deployment
-    name: cert-manager
-    fieldPath: metadata.labels
-  targets:
   - select:
-      kind: ServiceMonitor
-      name: cert-manager
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
     fieldPaths:
-    - metadata.labels
-  - select:
-      kind: PrometheusRule
-      name: cert-manager
-    fieldPaths:
-    - metadata.labels
+    - spec.podSelector.matchLabels
 - source:
     kind: Deployment
     name: cert-manager
@@ -39,8 +28,22 @@ replacements:
       name: cert-manager
     fieldPaths:
     - metadata.namespace
+    options:
+      create: true
   - select:
       kind: PrometheusRule
       name: cert-manager
     fieldPaths:
     - metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Prometheus
+    name: prometheus
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
