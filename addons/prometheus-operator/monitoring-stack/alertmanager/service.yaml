@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+spec:
+  type: ClusterIP
+  selector: {}
+  ports:
+    - port: 9093
+      targetPort: web
+      protocol: TCP
+      name: web

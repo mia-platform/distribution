@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: alertmanager
+spec:
+  serviceAccountName: alertmanager
+  image: quay.io/prometheus/alertmanager:latest
+  replicas: 1
+  resources: {}
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10000
+    runAsGroup: 11000
+    fsGroup: 12000
+  logLevel: warn
+  logFormat: json
+  paused: false
+  listenLocal: false
+  portName: web
+  retention: 120h
+  routePrefix: /
+  alertmanagerConfigSelector: {}
+  alertmanagerConfigNamespaceSelector: {}
+  podMetadata:
+    labels: {}
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels: {}
+          topologyKey: topology.kubernetes.io/zone
+        weight: 100
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels: {}
+          topologyKey: kubernetes.io/hostname
+        weight: 50

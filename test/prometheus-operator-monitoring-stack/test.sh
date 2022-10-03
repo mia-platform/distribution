@@ -2,11 +2,11 @@
 
 echo "Executing custom test.sh"
 c=0
-NAMESPACE=logging-system
+NAMESPACE=monitoring
 
-for kindName in DaemonSet,logging-operator-fluentbit StatefulSet,logging-operator-fluentd; do
+for kindName in StatefulSet,alert-manager-alertmanager StatefulSet,prometheus-prometheus; do
   while [ $c -ne 30 ]; do
-    OUTPUT=$(kubectl -n ${NAMESPACE} rollout status --timeout 60s "$( tr ',' ' ' <<< ${kindName} )" 2>&1 )
+    OUTPUT=$(kubectl -n ${NAMESPACE} rollout status --timeout 60s "$( tr ',' ' ' <<< $kindName )" 2>&1 )
     rc=$?
     if [[ ${OUTPUT} == *NotFound* ]] ; then
       echo "$( tr ',' ' ' <<< ${kindName} ) Not Found"
@@ -14,7 +14,7 @@ for kindName in DaemonSet,logging-operator-fluentbit StatefulSet,logging-operato
       let c+=1
       continue
     fi
-    if [ ${rc} -ne 0 ] ; then
+    if [ $rc -ne 0 ] ; then
       echo "${OUTPUT}"
       exit 128
     fi

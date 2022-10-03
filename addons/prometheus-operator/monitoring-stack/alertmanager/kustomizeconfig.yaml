@@ -1,0 +1,17 @@
+commonLabels:
+- path: spec/affinity/podAntiAffinity/preferredDuringSchedulingIgnoredDuringExecution[]/podAffinityTerm/labelSelector/matchLabels
+  create: true
+  kind: Alertmanager
+- path: spec/podMetadata/labels
+  create: true
+  kind: Alertmanager
+
+images:
+- path: spec/image
+  kind: Alertmanager
+
+nameReference:
+- kind: ServiceAccount
+  fieldSpecs:
+  - kind: Alertmanager
+    path: spec/serviceAccountName

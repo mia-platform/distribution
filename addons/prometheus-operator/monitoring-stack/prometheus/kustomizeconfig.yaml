@@ -1,0 +1,21 @@
+commonLabels:
+- path: spec/affinity/podAntiAffinity/preferredDuringSchedulingIgnoredDuringExecution[]/podAffinityTerm/labelSelector/matchLabels
+  create: true
+  kind: Prometheus
+- path: spec/podMetadata/labels
+  create: true
+  kind: Prometheus
+
+images:
+- path: spec/image
+  kind: Prometheus
+
+nameReference:
+- kind: Service
+  fieldSpecs:
+  - kind: Prometheus
+    path: spec/alerting/alertmanagers/name
+- kind: ServiceAccount
+  fieldSpecs:
+  - kind: Prometheus
+    path: spec/serviceAccountName
