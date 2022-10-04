@@ -1,19 +1,32 @@
 kind: Component
 apiVersion: kustomize.config.k8s.io/v1alpha1
 resources:
-- resources/logging.yaml
-
+- resources
 replacements:
 - source:
     kind: Deployment
-    group: apps
-    version: v1
-    name: logging
+    name: logging-operator
     fieldPath: metadata.namespace
   targets:
-    - select:
-        kind: Logging
-        name: logging-operator
-      fieldPaths:
-        - spec.controlNamespace
-        - metadata.namespace
+  - select:
+      kind: Logging
+      name: logging
+    fieldPaths:
+    - spec.controlNamespace
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-traffic
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-fluentd-traffic
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true

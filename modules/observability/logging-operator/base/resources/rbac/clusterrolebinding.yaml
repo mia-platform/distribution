@@ -1,11 +1,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: "mia-platform:logging"
+  name: mia-platform:logging-operator
 roleRef:
-  apiGroup: "rbac.authorization.k8s.io"
-  kind: "ClusterRole"
-  name: "mia-platform:logging"
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mia-platform:logging-operator
 subjects:
-  - kind: "ServiceAccount"
-    name: "logging"
+  - kind: ServiceAccount
+    name: logging-operator

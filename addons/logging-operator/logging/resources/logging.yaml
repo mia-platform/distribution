@@ -1,11 +1,7 @@
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: Logging
 metadata:
-  labels:
-    app.kubernetes.io/component: logging
-    app.kubernetes.io/instance: logging
-    app.kubernetes.io/version: 3.17.6
-  name: logging-operator
+  name: logging
 spec:
   controlNamespace: NAMESPACE
   enableRecreateWorkloadOnImmutableFieldChange: true
@@ -28,8 +24,8 @@ spec:
       Refresh_Interval: "30"
       Rotate_Wait: "30"
     labels:
+      app.kubernetes.io/name: fluentbit
       app.kubernetes.io/instance: logging
-      app.kubernetes.io/name: logging
     metrics:
       interval: 30s
       path: /api/v1/metrics/prometheus
@@ -55,7 +51,7 @@ spec:
         runAsGroup: 11000
         runAsNonRoot: false
         runAsUser: 0
-      podSecurityPolicyCreate: true
+      podSecurityPolicyCreate: false
       roleBasedAccessControlCreate: true
       securityContext:
         allowPrivilegeEscalation: false
@@ -75,11 +71,8 @@ spec:
         preferredDuringSchedulingIgnoredDuringExecution:
         - podAffinityTerm:
             labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - fluentd
+              matchLabels:
+                app.kubernetes.io/name: fluentd
             topologyKey: kubernetes.io/hostname
           weight: 100
     bufferStorageVolume:
@@ -94,8 +87,8 @@ spec:
       repository: ""
       tag: ""
     labels:
+      app.kubernetes.io/name: fluentd
       app.kubernetes.io/instance: logging
-      app.kubernetes.io/name: logging
     livenessDefaultCheck: true
     metrics:
       interval: 30s
@@ -115,7 +108,7 @@ spec:
         runAsGroup: 101
         runAsNonRoot: true
         runAsUser: 100
-      podSecurityPolicyCreate: true
+      podSecurityPolicyCreate: false
       roleBasedAccessControlCreate: true
       securityContext:
         allowPrivilegeEscalation: false
@@ -126,5 +119,3 @@ spec:
         readOnlyRootFilesystem: false
     tls:
       enabled: false
-    tolerations: []
-  loggingRef: ""

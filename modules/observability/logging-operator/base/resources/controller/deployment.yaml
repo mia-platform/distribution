@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logging
+  name: logging-operator
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -14,7 +14,7 @@ spec:
   minReadySeconds: 0
   template:
     spec:
-      serviceAccountName: logging
+      serviceAccountName: logging-operator
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false

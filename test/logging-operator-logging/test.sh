@@ -4,7 +4,7 @@ echo "Executing custom test.sh"
 c=0
 NAMESPACE=logging-system
 
-for kindName in DaemonSet,logging-operator-fluentbit StatefulSet,logging-operator-fluentd; do
+for kindName in DaemonSet,logging-fluentbit StatefulSet,logging-fluentd; do
   while [ $c -ne 30 ]; do
     OUTPUT=$(kubectl -n ${NAMESPACE} rollout status --timeout 60s "$( tr ',' ' ' <<< ${kindName} )" 2>&1 )
     rc=$?
