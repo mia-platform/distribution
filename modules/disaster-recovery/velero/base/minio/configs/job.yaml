@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: minio-setup
+spec:
+  backoffLimit: 5
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      serviceAccountName: minio
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: mc
+        image: minio/mc:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        command:
+        - /bin/sh
+        - -c
+        - mc --config-dir=/config config host add ${POD_NAMESPACE} http://${MINIO_SERVICE_NAME}:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} && mc --config-dir=/config mb -p ${POD_NAMESPACE}/${POD_NAMESPACE}
+        envFrom:
+        - secretRef:
+            name: minio-credentials
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MINIO_SERVICE_NAME
+          value: MINIO_SERVICE_NAME
+        - name: MINIO_NAMESPACE
+          value: minio
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        emptyDir: {}

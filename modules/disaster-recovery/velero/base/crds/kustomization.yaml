@@ -1,15 +1,14 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: velero
+apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-  - CustomResourceDefinition--backups.yaml
-  - CustomResourceDefinition--backupstoragelocations.yaml
-  - CustomResourceDefinition--deletebackuprequests.yaml
-  - CustomResourceDefinition--downloadrequests.yaml
-  - CustomResourceDefinition--podvolumebackups.yaml
-  - CustomResourceDefinition--podvolumerestores.yaml
-  - CustomResourceDefinition--resticrepositories.yaml
-  - CustomResourceDefinition--restores.yaml
-  - CustomResourceDefinition--schedules.yaml
-  - CustomResourceDefinition--serverstatusrequests.yaml
-  - CustomResourceDefinition--volumesnapshotlocations.yaml
+- backups.velero.io.yaml
+- backupstoragelocations.velero.io.yaml
+- deletebackuprequests.velero.io.yaml
+- downloadrequests.velero.io.yaml
+- podvolumebackups.velero.io.yaml
+- podvolumerestores.velero.io.yaml
+- resticrepositories.velero.io.yaml
+- restores.velero.io.yaml
+- schedules.velero.io.yaml
+- serverstatusrequests.velero.io.yaml
+- volumesnapshotlocations.velero.io.yaml

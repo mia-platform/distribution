@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: aws-plugin
+        image: velero/velero-plugin-for-aws:latest
+        imagePullPolicy: Always
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: plugins
+          mountPath: /target
+      containers:
+      - name: velero
+        env:
+        - name: AWS_SHARED_CREDENTIALS_FILE
+          value: /credentials/cloud-credentials
+        volumeMounts:
+        - name: cloud-credentials
+          mountPath: /credentials
+      volumes:
+      - name: cloud-credentials
+        secret:
+          secretName: cloud-credentials

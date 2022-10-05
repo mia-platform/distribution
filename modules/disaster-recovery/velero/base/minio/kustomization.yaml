@@ -1,0 +1,38 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: dr-system
+commonLabels:
+  app.kubernetes.io/name: minio
+  app.kubernetes.io/instance: minio
+  app.kubernetes.io/component: disaster-recovery
+images:
+- name: minio/minio
+  newTag: RELEASE.2022-10-02T19-29-29Z
+- name: minio/mc
+  newTag: RELEASE.2022-10-01T07-56-14Z
+resources:
+- rbac
+- configs
+- controller
+replacements:
+- source:
+    kind: Deployment
+    name: minio
+    fieldPath: metadata.name
+  targets:
+  - select:
+      name: minio-setup
+    fieldPaths:
+    - spec.template.spec.containers.[name=mc].env.[name=MINIO_SERVICE_NAME].value
+    options:
+      create: true
+secretGenerator:
+- name: minio-credentials
+  type: Opaque
+  files:
+  - configs/MINIO_ROOT_USER
+  - configs/MINIO_ROOT_PASSWORD
+- name: cloud-credentials
+  type: Opaque
+  files:
+  - configs/cloud-credentials

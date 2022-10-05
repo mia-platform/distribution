@@ -1,0 +1,49 @@
+kind: Component
+apiVersion: kustomize.config.k8s.io/v1alpha1
+resources:
+- resources
+replacements:
+- source:
+    kind: Deployment
+    name: velero
+    fieldPath: spec.selector.matchLabels
+  targets:
+  - select:
+      kind: PodMonitor
+      name: velero
+    fieldPaths:
+    - spec.selector.matchLabels
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - spec.podSelector.matchLabels
+- source:
+    kind: Deployment
+    name: velero
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: PodMonitor
+      name: velero
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Prometheus
+    name: prometheus
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
+    fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name

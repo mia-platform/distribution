@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-minio
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+    - to:
+      - podSelector:
+          matchLabels: {}
+      ports:
+      - port: 9000
+        protocol: TCP
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {}
+      ports:
+        - port: 9000
+          protocol: TCP
+    - from:
+        - podSelector:
+            matchLabels: {}
+      ports:
+        - port: 9000
+          protocol: TCP

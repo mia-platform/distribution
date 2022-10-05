@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: velero
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: velero
+        image: velero/velero:latest
+        imagePullPolicy: IfNotPresent
+        command:
+        - /velero
+        args:
+        - server
+        - --log-level=warning
+        - --log-format=json
+        env:
+        - name: VELERO_SCRATCH_DIR
+          value: /scratch
+        - name: VELERO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: LD_LIBRARY_PATH
+          value: /plugins
+        resources: {}
+        ports:
+        - name: metrics
+          containerPort: 8085
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: plugins
+          mountPath: /plugins
+        - name: scratch
+          mountPath: /scratch
+        - name: tmpdir
+          mountPath: /tmp
+      volumes:
+      - name: plugins
+        emptyDir: {}
+      - name: scratch
+        emptyDir: {}
+      - name: tmpdir
+        emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65100
+        runAsGroup: 65100
+        fsGroup: 65100

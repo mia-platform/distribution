@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: Recreate
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: minio
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: minio
+        image: minio/minio:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+          - server
+          - --json
+          - --anonymous
+          - /storage
+        envFrom:
+          - secretRef:
+              name: minio-credentials
+        ports:
+        - name: server
+          containerPort: 9000
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        livenessProbe:
+          httpGet:
+            path: /minio/health/live
+            port: server
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /minio/health/ready
+            port: server
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+        - name: config
+          mountPath: /.minio
+      volumes:
+      - name: storage
+        emptyDir: {}
+      - name: config
+        emptyDir:
+          medium: Memory
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65110
+        runAsGroup: 65110
+        fsGroup: 65110

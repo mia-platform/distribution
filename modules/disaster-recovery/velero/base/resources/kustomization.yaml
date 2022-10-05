@@ -1,14 +1,14 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: velero
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: dr-system
+commonLabels:
+  app.kubernetes.io/name: velero
+  app.kubernetes.io/instance: velero
+  app.kubernetes.io/component: disaster-recovery
+images:
+- name: velero/velero
+  newTag: v1.9.2
 resources:
-  - namespace.yaml
-  - BackupStorageLocation--minio.yaml
-  - ClusterRoleBinding--velero-server.yaml
-  - Deployment--velero.yaml
-  - NetworkPolicy--allow-external-egress.yaml
-  - NetworkPolicy--allow-kube-dns-egress.yaml
-  - NetworkPolicy--allow-monitoring-ingress.yaml
-  - NetworkPolicy--deny-all.yaml
-  - ServiceAccount--velero-server.yaml
-  - minio-deployment.yaml
+- rbac
+- configs
+- controller
