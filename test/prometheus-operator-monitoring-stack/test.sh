@@ -6,7 +6,7 @@ NAMESPACE=monitoring
 
 for kindName in StatefulSet,alert-manager-alertmanager StatefulSet,prometheus-prometheus; do
   while [ $c -ne 30 ]; do
-    OUTPUT=$(kubectl -n ${NAMESPACE} rollout status --timeout 60s "$( tr ',' ' ' <<< $kindName )" 2>&1 )
+    OUTPUT=$(kubectl -n ${NAMESPACE} rollout status --timeout 60s $( tr ',' ' ' <<< $kindName ) 2>&1 )
     rc=$?
     if [[ ${OUTPUT} == *NotFound* ]] ; then
       echo "$( tr ',' ' ' <<< ${kindName} ) Not Found"
