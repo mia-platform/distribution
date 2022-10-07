@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-operator
+spec:
+  template:
+    spec:
+      containers:
+      - name: prometheus-operator
+        env:
+        - name: ENABLE_TLS
+          value: "true"
+        volumeMounts:
+        - name: certificate
+          mountPath: /etc/prometheus-operator/tls
+          readOnly: true
+      volumes:
+      - name: certificate
+        secret:
+          defaultMode: 420
+          secretName: prometheus-operator-tls

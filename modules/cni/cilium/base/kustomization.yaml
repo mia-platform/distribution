@@ -9,3 +9,8 @@ helmCharts:
   valuesInline:
     ipam:
       mode: kubernetes
+    hubble:
+      ui:
+        enabled: true
+      relay:
+        enabled: true

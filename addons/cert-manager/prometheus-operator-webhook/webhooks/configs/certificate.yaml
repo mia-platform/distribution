@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: prometheus-operator
+  labels:
+    app.kubernetes.io/name: prometheus-operator
+    app.kubernetes.io/instance: prometheus-operator
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: prometheus-operator
+  labels:
+    app.kubernetes.io/name: prometheus-operator
+    app.kubernetes.io/instance: prometheus-operator
+spec:
+  dnsNames:
+  - SERVICE_NAME.SERVICE_NAMESPACE.svc
+  - SERVICE_NAME.SERVICE_NAMESPACE.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: prometheus-operator
+  secretName: prometheus-operator-tls

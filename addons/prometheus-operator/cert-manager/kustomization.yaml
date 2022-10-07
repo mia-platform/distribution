@@ -31,8 +31,8 @@ replacements:
     options:
       create: true
   - select:
-      kind: PrometheusRule
-      name: cert-manager
+      kind: NetworkPolicy
+      name: allow-monitoring-ingress
     fieldPaths:
     - metadata.namespace
     options:

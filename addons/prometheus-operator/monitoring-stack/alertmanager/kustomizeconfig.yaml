@@ -15,3 +15,7 @@ nameReference:
   fieldSpecs:
   - kind: Alertmanager
     path: spec/serviceAccountName
+
+replicas:
+- kind: Alertmanager
+  path: spec/replicas

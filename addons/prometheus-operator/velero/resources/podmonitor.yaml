@@ -2,7 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: velero
-  labels: {}
+  labels:
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/instance: velero
 spec:
   podMetricsEndpoints:
   - honorLabels: false

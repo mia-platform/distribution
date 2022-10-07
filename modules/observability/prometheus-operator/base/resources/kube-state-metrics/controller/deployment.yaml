@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: kube-state-metrics
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: kube-state-metrics
+        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.6.0
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --port=8080
+        - --telemetry-port=8081
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+        - name: metrics
+          containerPort: 8081
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: web
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: web
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65220
+        runAsGroup: 65220
+        fsGroup: 65220

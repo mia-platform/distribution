@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: node-exporter
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: true
+      hostPID: true
+      containers:
+      - name: node-exporter
+        image: quay.io/prometheus/node-exporter:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --web.listen-address=0.0.0.0:9100
+        - --log.level=warn
+        - --log.format=json
+        - --path.procfs=/host/proc
+        - --path.sysfs=/host/sys
+        - --path.rootfs=/host/root
+        - --no-collector.wifi
+        - --no-collector.hwmon
+        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|run/k3s/containerd/.+|var/lib/docker/.+|var/lib/kubelet/pods/.+)($|/)
+        - "--collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$"
+        - --collector.netclass.ignored-devices=^(veth.*|[a-f0-9]{15})$
+        - --collector.netdev.device-exclude=^(veth.*|[a-f0-9]{15})$
+        ports:
+        - name: metrics
+          containerPort: 9100
+          protocol: TCP
+        volumeMounts:
+        - name: proc
+          mountPath: /host/proc
+          mountPropagation: HostToContainer
+          readOnly: true
+        - name: sys
+          mountPath: /host/sys
+          mountPropagation: HostToContainer
+          readOnly: true
+        - name: root
+          mountPath: /host/root
+          mountPropagation: HostToContainer
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          failureThreshold: 3
+          initialDelaySeconds: 11
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            add:
+            - SYS_TIME
+            drop:
+            - ALL
+      volumes:
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: root
+        hostPath:
+          path: /
+      - name: proc
+        hostPath:
+          path: /proc
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65210
+        runAsGroup: 65210
+        fsGroup: 65210
+      priorityClassName: system-cluster-critical
+      tolerations:
+      - operator: Exists

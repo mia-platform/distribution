@@ -1,9 +1,7 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
+apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-  - ../../modules/security/cert-manager/base
-  - ../../modules/observability/prometheus-operator/base
-
+- ../../modules/security/cert-manager/base
+- ../../modules/observability/prometheus-operator/base
 components:
-  - ../../addons/cert-manager/prometheus-operator-webhook
+- ../../addons/cert-manager/prometheus-operator-webhook

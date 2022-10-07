@@ -1,11 +1,11 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-- CustomResourceDefinition--alertmanagerconfigs.monitoring.coreos.com.yaml
-- CustomResourceDefinition--alertmanagers.monitoring.coreos.com.yaml
-- CustomResourceDefinition--podmonitors.monitoring.coreos.com.yaml
-- CustomResourceDefinition--probes.monitoring.coreos.com.yaml
-- CustomResourceDefinition--prometheuses.monitoring.coreos.com.yaml
-- CustomResourceDefinition--prometheusrules.monitoring.coreos.com.yaml
-- CustomResourceDefinition--servicemonitors.monitoring.coreos.com.yaml
-- CustomResourceDefinition--thanosrulers.monitoring.coreos.com.yaml
+- alertmanagerconfigs.monitoring.coreos.com.yaml
+- alertmanagers.monitoring.coreos.com.yaml
+- podmonitors.monitoring.coreos.com.yaml
+- probes.monitoring.coreos.com.yaml
+- prometheuses.monitoring.coreos.com.yaml
+- prometheusrules.monitoring.coreos.com.yaml
+- servicemonitors.monitoring.coreos.com.yaml
+- thanosrulers.monitoring.coreos.com.yaml

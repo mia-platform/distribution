@@ -1,0 +1,57 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+spec:
+  serviceAccountName: prometheus
+  image: quay.io/prometheus/prometheus:latest
+  replicas: 1
+  resources: {}
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65240
+    runAsGroup: 65240
+    fsGroup: 65240
+  logLevel: warn
+  logFormat: json
+  prometheusExternalLabelName: ""
+  replicaExternalLabelName: ""
+  paused: false
+  listenLocal: false
+  disableCompaction: false
+  portName: web
+  enableAdminAPI: false
+  retention: 2h
+  shards: 1
+  walCompression: false
+  routePrefix: /
+  serviceMonitorSelector: {}
+  serviceMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  podMonitorNamespaceSelector: {}
+  probeSelector: {}
+  probeNamespaceSelector: {}
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+  podMetadata:
+    labels: {}
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels: {}
+          topologyKey: topology.kubernetes.io/zone
+        weight: 100
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels: {}
+          topologyKey: kubernetes.io/hostname
+        weight: 50
+  alerting:
+    alertmanagers:
+    - name: alertmanager
+      namespace: ""
+      port: web
+      pathPrefix: /
+      apiVersion: v2

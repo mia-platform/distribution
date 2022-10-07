@@ -19,3 +19,7 @@ nameReference:
   fieldSpecs:
   - kind: Prometheus
     path: spec/serviceAccountName
+
+replicas:
+- kind: Prometheus
+  path: spec/replicas

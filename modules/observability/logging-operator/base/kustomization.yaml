@@ -1,12 +1,5 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
-namespace: logging-system
-commonLabels:
-  app.kubernetes.io/name: logging-operator
-  app.kubernetes.io/instance: logging-operator
-images:
-- name: ghcr.io/banzaicloud/logging-operator
-  newTag: 3.17.9
 resources:
 - crds
 - resources

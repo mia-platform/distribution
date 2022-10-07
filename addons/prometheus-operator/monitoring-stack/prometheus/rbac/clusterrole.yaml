@@ -6,8 +6,12 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - nodes
   - nodes/metrics
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
   - services
   - endpoints
   - pods

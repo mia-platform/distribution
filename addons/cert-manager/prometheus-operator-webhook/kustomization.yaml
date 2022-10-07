@@ -1,125 +1,137 @@
-apiVersion: kustomize.config.k8s.io/v1alpha1  # <-- Component notation
+apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-
 resources:
-- resources
-
+- webhooks
 patches:
-- path: prometheus-operator.yaml
-  target:
-    group: apps
-    version: v1
+- target:
     kind: Deployment
-    name: monitoring-prometheus-operator
-
-- path: prometheus-operator-service.yaml
-
-configurations:
-- kustomizeconfig.yaml
-
+    name: prometheus-operator
+  path: patches/prometheus-operator.yaml
+- target:
+    kind: Service
+    name: prometheus-operator
+  path: patches/prometheus-operator-service.yaml
+- target:
+    kind: Deployment
+    name: prometheus-operator
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/ports/0/containerPort
+      value: 8443
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: "--web.listen-address=:8443"
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: "--web.cert-file=/etc/prometheus-operator/tls/tls.crt"
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: "--web.key-file=/etc/prometheus-operator/tls/tls.key"
 replacements:
-# Add cert-manager annotation to ValidatingWebhookConfiguration, MutatingWebhookConfiguration and CRDs
- - source:
-     kind: Certificate
-     group: cert-manager.io
-     version: v1
-     name: monitoring-prometheus-operator-tls
-     fieldPath: .metadata.namespace # namespace of the certificate CR
-   targets:
-     - select:
-         kind: ValidatingWebhookConfiguration
-         name: monitoring-prometheus-operator-webhooks
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 0
-         create: true
-     - select:
-         kind: MutatingWebhookConfiguration
-         name: monitoring-prometheus-operator-webhooks
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 0
-         create: true
-    #  - select:
-    #      kind: CustomResourceDefinition
-    #    fieldPaths:
-    #      - .metadata.annotations.[cert-manager.io/inject-ca-from]
-    #    options:
-    #      delimiter: '/'
-    #      index: 0
-    #      create: true
- - source:
-     kind: Certificate
-     group: cert-manager.io
-     version: v1
-     name: monitoring-prometheus-operator-tls
-     fieldPath: .metadata.name
-   targets:
-     - select:
-         kind: ValidatingWebhookConfiguration
-         name: monitoring-prometheus-operator-webhooks
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 1
-         create: true
-     - select:
-         kind: MutatingWebhookConfiguration
-         name: monitoring-prometheus-operator-webhooks
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 1
-         create: true
-    #  - select:
-    #      kind: CustomResourceDefinition
-    #    fieldPaths:
-    #      - .metadata.annotations.[cert-manager.io/inject-ca-from]
-    #    options:
-    #      delimiter: '/'
-    #      index: 1
-    #      create: true
-
-# add dnsNames to certificate
- - source:
-     kind: Service
-     version: v1
-     name: monitoring-prometheus-operator
-     fieldPath: .metadata.name
-   targets:
-     - select:
-         kind: Certificate
-         name: monitoring-prometheus-operator-tls
-         group: cert-manager.io
-         version: v1
-       fieldPaths:
-         - .spec.dnsNames.0
-         - .spec.dnsNames.1
-       options:
-         delimiter: '.'
-         index: 0
-         create: true
- - source:
-     kind: Service
-     version: v1
-     name: monitoring-prometheus-operator
-     fieldPath: .metadata.namespace
-   targets:
-     - select:
-         kind: Certificate
-         name: monitoring-prometheus-operator-tls
-         group: cert-manager.io
-         version: v1
-       fieldPaths:
-         - .spec.dnsNames.0
-         - .spec.dnsNames.1
-       options:
-         delimiter: '.'
-         index: 1
-         create: true
+- source:
+    kind: Deployment
+    name: prometheus-operator
+    fieldPath: .spec.selector.matchLabels
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-prometheus-operator-webhook
+    fieldPaths:
+      - spec.podSelector.matchLabels
+- source:
+    kind: Deployment
+    name: prometheus-operator
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+      name: prometheus-operator
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 0
+      create: true
+  - select:
+      kind: MutatingWebhookConfiguration
+      name: prometheus-operator
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 0
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-prometheus-operator-webhook
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: Certificate
+      name: prometheus-operator
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: Issuer
+      name: prometheus-operator
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Certificate
+    name: prometheus-operator
+    fieldPath: .metadata.name
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+      name: prometheus-operator
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 1
+      create: true
+  - select:
+      kind: MutatingWebhookConfiguration
+      name: prometheus-operator
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 1
+      create: true
+- source:
+    kind: Service
+    name: prometheus-operator
+    fieldPath: .metadata.name
+  targets:
+  - select:
+      kind: Certificate
+      name: prometheus-operator
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 0
+      create: true
+- source:
+    kind: Service
+    name: prometheus-operator
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: Certificate
+      name: prometheus-operator
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 1
+      create: true

@@ -1,0 +1,12 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+commonLabels:
+  app.kubernetes.io/name: node-exporter
+  app.kubernetes.io/instance: node-exporter
+images:
+- name: quay.io/prometheus/node-exporter
+  newTag: v1.4.0
+resources:
+- controller
+- rbac
+- configs
