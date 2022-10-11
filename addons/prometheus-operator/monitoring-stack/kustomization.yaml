@@ -14,37 +14,17 @@ configurations:
 replacements:
 - source:
     kind: Deployment
-    version: v1
-    group: apps
     name: prometheus-operator
     fieldPath: metadata.namespace
   targets:
   - select:
-      kind: NetworkPolicy
+      labelSelector: app.kubernetes.io/name=alertmanager
     fieldPaths:
     - metadata.namespace
     options:
       create: true
   - select:
-      kind: Role
-    fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-  - select:
-      kind: RoleBinding
-    fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-  - select:
-      name: alertmanager
-    fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-  - select:
-      name: prometheus
+      labelSelector: app.kubernetes.io/name=prometheus
     fieldPaths:
     - metadata.namespace
     options:
