@@ -27,3 +27,24 @@ webhooks:
   - v1
   - v1beta1
   sideEffects: None
+- name: alertmanagerconfigsvalidate.monitoring.coreos.com
+  failurePolicy: Fail
+  rules:
+  - apiGroups:
+    - monitoring.coreos.com
+    apiVersions:
+    - v1alpha1
+    resources:
+    - alertmanagerconfigs
+    operations:
+    - CREATE
+    - UPDATE
+  clientConfig:
+    service:
+      name: prometheus-operator
+      namespace: default
+      path: /admission-alertmanagerconfigs/validate
+  admissionReviewVersions:
+  - v1
+  - v1beta1
+  sideEffects: None
