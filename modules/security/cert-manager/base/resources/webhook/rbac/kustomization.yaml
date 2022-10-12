@@ -1,0 +1,8 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- clusterrole.yaml
+- clusterrolebinding.yaml
+- role.yaml
+- rolebinding.yaml
+- serviceaccount.yaml

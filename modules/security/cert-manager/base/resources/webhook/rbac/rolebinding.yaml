@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mia-platform:cert-manager-webhook:dynamic-serving
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: mia-platform:cert-manager-webhook:dynamic-serving
+subjects:
+- kind: ServiceAccount
+  name: cert-manager-webhook

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: cert-manager
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: cert-manager
+        image: quay.io/jetstack/cert-manager-controller:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --v=2
+        - --leader-elect
+        - --leader-election-namespace=$(POD_NAMESPACE)
+        - --cluster-resource-namespace=$(POD_NAMESPACE)
+        - --enable-certificate-owner-ref=$(ENABLE_CERTIFICATE_REF)
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: ENABLE_CERTIFICATE_REF
+          value: "false"
+        ports:
+        - name: metrics
+          containerPort: 9402
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts: []
+      volumes: []
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65300
+        runAsGroup: 65300
+        fsGroup: 65300

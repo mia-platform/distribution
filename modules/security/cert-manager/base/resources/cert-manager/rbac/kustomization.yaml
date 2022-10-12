@@ -1,0 +1,22 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- clusterrole-approve.yaml
+- clusterrole-certificates.yaml
+- clusterrole-certificatesigningrequests.yaml
+- clusterrole-challenges.yaml
+- clusterrole-clusterissuers.yaml
+- clusterrole-ingress-shim.yaml
+- clusterrole-issuers.yaml
+- clusterrole-orders.yaml
+- clusterrolebinding-approve.yaml
+- clusterrolebinding-certificates.yaml
+- clusterrolebinding-certificatesigningrequests.yaml
+- clusterrolebinding-challenges.yaml
+- clusterrolebinding-clusterissuers.yaml
+- clusterrolebinding-ingress-shim.yaml
+- clusterrolebinding-issuers.yaml
+- clusterrolebinding-orders.yaml
+- role.yaml
+- rolebinding.yaml
+- serviceaccount.yaml

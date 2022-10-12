@@ -1,44 +1,60 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: cert-manager
+apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: cert-manager-system
+commonLabels:
+  app.kubernetes.io/component: cert-manager
+images:
+- name: quay.io/jetstack/cert-manager-cainjector
+  newTag: v1.9.1
+- name: quay.io/jetstack/cert-manager-controller
+  newTag: v1.9.1
+- name: quay.io/jetstack/cert-manager-webhook
+  newTag: v1.9.1
 resources:
-- ClusterRole--cert-manager-cainjector.yaml
-- ClusterRole--cert-manager-controller-approve:cert-manager-io.yaml
-- ClusterRole--cert-manager-controller-certificates.yaml
-- ClusterRole--cert-manager-controller-certificatesigningrequests.yaml
-- ClusterRole--cert-manager-controller-challenges.yaml
-- ClusterRole--cert-manager-controller-clusterissuers.yaml
-- ClusterRole--cert-manager-controller-ingress-shim.yaml
-- ClusterRole--cert-manager-controller-issuers.yaml
-- ClusterRole--cert-manager-controller-orders.yaml
-- ClusterRole--cert-manager-edit.yaml
-- ClusterRole--cert-manager-view.yaml
-- ClusterRole--cert-manager-webhook:subjectaccessreviews.yaml
-- ClusterRoleBinding--cert-manager-cainjector.yaml
-- ClusterRoleBinding--cert-manager-controller-approve:cert-manager-io.yaml
-- ClusterRoleBinding--cert-manager-controller-certificates.yaml
-- ClusterRoleBinding--cert-manager-controller-certificatesigningrequests.yaml
-- ClusterRoleBinding--cert-manager-controller-challenges.yaml
-- ClusterRoleBinding--cert-manager-controller-clusterissuers.yaml
-- ClusterRoleBinding--cert-manager-controller-ingress-shim.yaml
-- ClusterRoleBinding--cert-manager-controller-issuers.yaml
-- ClusterRoleBinding--cert-manager-controller-orders.yaml
-- ClusterRoleBinding--cert-manager-webhook:subjectaccessreviews.yaml
-- ConfigMap--cert-manager-webhook.yaml
-- Deployment--cert-manager-cainjector.yaml
-- Deployment--cert-manager-webhook.yaml
-- Deployment--cert-manager.yaml
-- MutatingWebhookConfiguration--cert-manager-webhook.yaml
-- Namespace--cert-manager.yaml
-- Role--cert-manager-cainjector:leaderelection.yaml
-- Role--cert-manager-webhook:dynamic-serving.yaml
-- Role--cert-manager:leaderelection.yaml
-- RoleBinding--cert-manager-cainjector:leaderelection.yaml
-- RoleBinding--cert-manager-webhook:dynamic-serving.yaml
-- RoleBinding--cert-manager:leaderelection.yaml
-- Service--cert-manager-webhook.yaml
-- Service--cert-manager.yaml
-- ServiceAccount--cert-manager-cainjector.yaml
-- ServiceAccount--cert-manager-webhook.yaml
-- ServiceAccount--cert-manager.yaml
-- ValidatingWebhookConfiguration--cert-manager-webhook.yaml
+- configs
+- cainjector
+- cert-manager
+- webhook
+replacements:
+- source:
+    kind: Deployment
+    name: cert-manager-webhook
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      delimiter: '/'
+      index: 0
+      create: true
+  - select:
+      kind: MutatingWebhookConfiguration
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      delimiter: '/'
+      index: 0
+      create: true
+- source:
+    kind: Deployment
+    name: cert-manager-webhook
+    fieldPath: .spec.template.spec.containers.[name=webhook].env.[name=SECRET_NAME].value
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      delimiter: '/'
+      index: 1
+      create: true
+  - select:
+      kind: MutatingWebhookConfiguration
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      delimiter: '/'
+      index: 1
+      create: true

@@ -1,9 +1,9 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-  - CustomResourceDefinition--certificaterequests.cert-manager.io.yaml
-  - CustomResourceDefinition--certificates.cert-manager.io.yaml
-  - CustomResourceDefinition--challenges.acme.cert-manager.io.yaml
-  - CustomResourceDefinition--clusterissuers.cert-manager.io.yaml
-  - CustomResourceDefinition--issuers.cert-manager.io.yaml
-  - CustomResourceDefinition--orders.acme.cert-manager.io.yaml
+- certificaterequests.cert-manager.io.yaml
+- certificates.cert-manager.io.yaml
+- challenges.acme.cert-manager.io.yaml
+- clusterissuers.cert-manager.io.yaml
+- issuers.cert-manager.io.yaml
+- orders.acme.cert-manager.io.yaml

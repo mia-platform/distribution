@@ -1,0 +1,28 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: cert-manager-webhook
+webhooks:
+- name: webhook.cert-manager.io
+  rules:
+  - apiGroups:
+    - cert-manager.io
+    - acme.cert-manager.io
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - "*/*"
+  admissionReviewVersions:
+  - v1
+  matchPolicy: Equivalent
+  timeoutSeconds: 10
+  failurePolicy: Fail
+  sideEffects: None
+  clientConfig:
+    service:
+      name: cert-manager-webhook
+      namespace: default
+      path: /mutate
