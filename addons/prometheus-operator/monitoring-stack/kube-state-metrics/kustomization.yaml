@@ -1,0 +1,10 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+commonLabels:
+  app.kubernetes.io/name: kube-state-metrics
+  app.kubernetes.io/instance: kube-state-metrics
+resources:
+- servicemonitor.yaml
+- networkpolicy.yaml
+configurations:
+- kustomizeconfig.yaml

@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: kube-dns
+  namespace: kube-system
+spec:
+  podMetricsEndpoints:
+  - path: /metrics
+    port: metrics
+  selector:
+    matchLabels: {}

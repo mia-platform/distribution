@@ -5,6 +5,9 @@ commonLabels:
 - path: spec/podMetadata/labels
   create: true
   kind: Prometheus
+- path: spec/selector/matchLabels
+  create: true
+  kind: PodMonitor
 
 images:
 - path: spec/image

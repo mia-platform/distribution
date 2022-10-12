@@ -8,9 +8,10 @@ images:
 resources:
 - alertmanager
 - prometheus
-configurations:
-- prometheus/kustomizeconfig.yaml
-- alertmanager/kustomizeconfig.yaml
+- prometheus-operator
+- kube-state-metrics
+- node-exporter
+- dns-service
 replacements:
 - source:
     kind: Deployment
@@ -25,6 +26,24 @@ replacements:
       create: true
   - select:
       labelSelector: app.kubernetes.io/name=prometheus
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      labelSelector: app.kubernetes.io/name=prometheus-operator
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      labelSelector: app.kubernetes.io/name=kube-state-metrics
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      labelSelector: app.kubernetes.io/name=node-exporter
     fieldPaths:
     - metadata.namespace
     options:
@@ -47,5 +66,17 @@ replacements:
   targets:
     - select:
         name: allow-alertmanager
+      fieldPaths:
+        - spec.ingress.0.from.0.podSelector.matchLabels
+    - select:
+        name: allow-prometheus-operator-monitoring
+      fieldPaths:
+        - spec.ingress.0.from.0.podSelector.matchLabels
+    - select:
+        name: allow-kube-state-metrics-monitoring
+      fieldPaths:
+        - spec.ingress.0.from.0.podSelector.matchLabels
+    - select:
+        name: allow-node-exporter-monitoring
       fieldPaths:
         - spec.ingress.0.from.0.podSelector.matchLabels

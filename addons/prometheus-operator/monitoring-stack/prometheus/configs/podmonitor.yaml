@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: prometheus
+spec:
+  podMetricsEndpoints:
+  - path: /metrics
+    port: web
+  - path: /metrics
+    port: reloader-web
+  selector:
+    matchLabels: {}
