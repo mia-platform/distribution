@@ -1,90 +1,103 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-
 resources:
-- resources
-
+- webhooks
 patches:
-- path: delete-secret-tls.yaml
-
+- target:
+    kind: Deployment
+    name: kube-green
+  patch: |-
+    - op: remove
+      path: /spec/template/spec/initContainers
+    - op: remove
+      path: /spec/template/spec/volumes/0/secret/optional
 replacements:
- - source: # Add cert-manager annotation to ValidatingWebhookConfiguration, MutatingWebhookConfiguration and CRDs
-     kind: Certificate
-     group: cert-manager.io
-     version: v1
-     name: webhook-server-cert # this name should match the one in certificate.yaml
-     fieldPath: .metadata.namespace # namespace of the certificate CR
-   targets:
-     - select:
-         kind: ValidatingWebhookConfiguration
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 0
-         create: true
-     - select:
-         kind: CustomResourceDefinition
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 0
-         create: true
- - source:
-     kind: Certificate
-     group: cert-manager.io
-     version: v1
-     name: webhook-server-cert # this name should match the one in certificate.yaml
-     fieldPath: .metadata.name
-   targets:
-     - select:
-         kind: ValidatingWebhookConfiguration
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 1
-         create: true
-     - select:
-         kind: CustomResourceDefinition
-       fieldPaths:
-         - .metadata.annotations.[cert-manager.io/inject-ca-from]
-       options:
-         delimiter: '/'
-         index: 1
-         create: true
- - source: # Add cert-manager annotation to the webhook Service
-     kind: Service
-     version: v1
-     name: webhook-service
-     fieldPath: .metadata.name # namespace of the service
-   targets:
-     - select:
-         kind: Certificate
-         group: cert-manager.io
-         version: v1
-       fieldPaths:
-         - .spec.dnsNames.0
-         - .spec.dnsNames.1
-       options:
-         delimiter: '.'
-         index: 0
-         create: true
- - source:
-     kind: Service
-     version: v1
-     name: webhook-service
-     fieldPath: .metadata.namespace # namespace of the service
-   targets:
-     - select:
-         kind: Certificate
-         group: cert-manager.io
-         version: v1
-       fieldPaths:
-         - .spec.dnsNames.0
-         - .spec.dnsNames.1
-       options:
-         delimiter: '.'
-         index: 1
-         create: true
+- source:
+    kind: Deployment
+    name: kube-green
+    fieldPath: .spec.selector.matchLabels
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-kube-green-webhook
+    fieldPaths:
+      - spec.podSelector.matchLabels
+- source:
+    kind: Deployment
+    name: kube-green
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+      name: kube-green
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 0
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-kube-green-webhook
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: Certificate
+      name: kube-green
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: Issuer
+      name: kube-green
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Certificate
+    name: kube-green
+    fieldPath: .metadata.name
+  targets:
+  - select:
+      kind: ValidatingWebhookConfiguration
+      name: kube-green
+    fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: '/'
+      index: 1
+      create: true
+- source:
+    kind: Service
+    name: kube-green
+    fieldPath: .metadata.name
+  targets:
+  - select:
+      kind: Certificate
+      name: kube-green
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 0
+      create: true
+- source:
+    kind: Service
+    name: kube-green
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: Certificate
+      name: kube-green
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 1
+      create: true

@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-green
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: kube-green
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      initContainers:
+      - name: kube-webhook-certgen
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - create
+        - --host=$(POD_NAME),$(POD_NAME).$(POD_NAMESPACE).svc
+        - --namespace=$(POD_NAMESPACE)
+        - --secret-name=kube-green-tls
+        - --cert-name=tls.crt
+        - --key-name=tls.key
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      containers:
+      - name: kube-green
+        image: docker.io/kubegreen/kube-green:0.4.0
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --health-probe-bind-address=:$(PROBES_PORT)
+        - --metrics-bind-address=:$(METRICS_PORT)
+        - --leader-elect
+        - --zap-encoder=json
+        - --zap-log-level=$(LOG_LEVEL)
+        env:
+        - name: LOG_LEVEL
+          value: error
+        - name: PROBES_PORT
+          value: VALUE
+        - name: METRICS_PORT
+          value: VALUE
+        ports:
+        - containerPort: 11381
+          name: probes
+          protocol: TCP
+        - containerPort: 11380
+          name: metrics
+          protocol: TCP
+        - containerPort: 9443
+          name: webhook
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: probes
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: probes
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: kube-green-tls
+          mountPath: /tmp/k8s-webhook-server/serving-certs
+      volumes:
+      - name: kube-green-tls
+        secret:
+          secretName: kube-green-tls
+          optional: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65400
+        runAsGroup: 65400
+        fsGroup: 65400
