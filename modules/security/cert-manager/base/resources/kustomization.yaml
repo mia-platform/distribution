@@ -1,5 +1,5 @@
-kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: cert-manager-system
 commonLabels:
   app.kubernetes.io/component: cert-manager
