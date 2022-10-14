@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/fluentbit/metrics/serviceMonitor
+  value: true
+- op: replace
+  path: /spec/fluentd/metrics/serviceMonitor
+  value: true

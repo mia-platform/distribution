@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - ../../modules/observability/logging-operator/base
 components:
-- ../../addons/logging-operator/logging
+- ../../addons/logging-operator/logging-stack
