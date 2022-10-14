@@ -47,10 +47,10 @@ spec:
         memory: 50Mi
     security:
       podSecurityContext:
-        fsGroup: 12000
-        runAsGroup: 11000
         runAsNonRoot: false
         runAsUser: 0
+        runAsGroup: 65510
+        fsGroup: 65510
       podSecurityPolicyCreate: false
       roleBasedAccessControlCreate: true
       securityContext:
@@ -104,10 +104,10 @@ spec:
       replicas: 1
     security:
       podSecurityContext:
-        fsGroup: 101
-        runAsGroup: 101
         runAsNonRoot: true
         runAsUser: 100
+        runAsGroup: 101
+        fsGroup: 101
       podSecurityPolicyCreate: false
       roleBasedAccessControlCreate: true
       securityContext:

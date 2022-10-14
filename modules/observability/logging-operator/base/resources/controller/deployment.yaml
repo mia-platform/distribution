@@ -43,6 +43,6 @@ spec:
             - ALL
       securityContext:
         runAsNonRoot: true
-        runAsUser: 64000
-        runAsGroup: 64000
-        fsGroup: 64000
+        runAsUser: 65500
+        runAsGroup: 65500
+        fsGroup: 65500
