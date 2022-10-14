@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rbac-manager
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: rbac-manager
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - name: rbac-manager
+        image: quay.io/reactiveops/rbac-manager:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --log-level=$(LOG_LEVEL)
+        env:
+        - name: LOG_LEVEL
+          value: warn
+        ports:
+        - name: metrics
+          containerPort: 8042
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /metrics
+            port: 8042
+          initialDelaySeconds: 5
+          timeoutSeconds: 3
+          periodSeconds: 3
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /metrics
+            port: 8042
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 66000
+        runAsGroup: 66000
+        fsGroup: 66000
