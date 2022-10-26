@@ -34,5 +34,4 @@ spec:
   policyTypes:
     - Egress
   egress:
-    - to:
-        - namespaceSelector: {}
+    - {}
