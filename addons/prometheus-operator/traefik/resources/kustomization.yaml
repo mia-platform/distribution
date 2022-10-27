@@ -5,4 +5,6 @@ resources:
 - networkpolicies.yaml
 labels:
 - pairs:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik
     app.kubernetes.io/component: monitoring

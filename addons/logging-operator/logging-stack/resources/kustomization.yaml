@@ -5,5 +5,6 @@ resources:
 - networkpolicies.yaml
 labels:
 - pairs:
-    app.kubernetes.io/name: logging
-    app.kubernetes.io/instance: logging
+    app.kubernetes.io/name: logging-operator
+    app.kubernetes.io/instance: logging-operator
+    app.kubernetes.io/component: logging

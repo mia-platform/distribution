@@ -15,7 +15,7 @@ replacements:
     - spec.selector.matchLabels
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-kube-green-monitoring
     fieldPaths:
     - spec.podSelector.matchLabels
 - source:
@@ -32,18 +32,18 @@ replacements:
       create: true
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-kube-green-monitoring
     fieldPaths:
     - metadata.namespace
     options:
       create: true
 - source:
-    kind: Prometheus
-    name: prometheus
+    kind: Deployment
+    name: prometheus-operator
     fieldPath: metadata.namespace
   targets:
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-kube-green-monitoring
     fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name

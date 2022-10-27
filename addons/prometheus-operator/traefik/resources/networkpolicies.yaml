@@ -1,10 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-monitoring-ingress
-  labels:
-    app.kubernetes.io/name: allow-monitoring-ingress
-    app.kubernetes.io/instance: allow-monitoring-ingress
+  name: allow-traefik-monitoring
 spec:
   podSelector:
     matchLabels: {}

@@ -25,7 +25,8 @@ spec:
       Rotate_Wait: "30"
     labels:
       app.kubernetes.io/name: fluentbit
-      app.kubernetes.io/instance: logging
+      app.kubernetes.io/instance: fluentbit
+      app.kubernetes.io/component: logging
     metrics:
       interval: 30s
       path: /api/v1/metrics/prometheus
@@ -41,10 +42,6 @@ spec:
     positiondb:
       hostPath:
         path: /var/log/logging-operator
-    resources:
-      requests:
-        cpu: 50m
-        memory: 50Mi
     security:
       podSecurityContext:
         runAsNonRoot: false
@@ -88,7 +85,8 @@ spec:
       tag: ""
     labels:
       app.kubernetes.io/name: fluentd
-      app.kubernetes.io/instance: logging
+      app.kubernetes.io/instance: fluentd
+      app.kubernetes.io/component: logging
     livenessDefaultCheck: true
     metrics:
       interval: 30s

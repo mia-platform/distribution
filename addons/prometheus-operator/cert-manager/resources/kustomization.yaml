@@ -5,4 +5,6 @@ resources:
 - networkpolicies.yaml
 labels:
 - pairs:
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: monitoring

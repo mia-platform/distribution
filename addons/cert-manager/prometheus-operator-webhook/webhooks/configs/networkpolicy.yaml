@@ -2,9 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-prometheus-operator-webhook
-  labels:
-    app.kubernetes.io/name: allow-prometheus-operator-webhook
-    app.kubernetes.io/instance: allow-prometheus-operator-webhook
 spec:
   podSelector:
     matchLabels: {}

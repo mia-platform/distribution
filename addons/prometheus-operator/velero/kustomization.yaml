@@ -38,8 +38,8 @@ replacements:
     options:
       create: true
 - source:
-    kind: Prometheus
-    name: prometheus
+    kind: Deployment
+    name: prometheus-operator
     fieldPath: metadata.namespace
   targets:
   - select:

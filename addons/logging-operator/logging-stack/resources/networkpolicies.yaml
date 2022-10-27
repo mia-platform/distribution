@@ -6,7 +6,8 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: fluentbit
-      app.kubernetes.io/instance: logging
+      app.kubernetes.io/instance: fluentbit
+      app.kubernetes.io/component: logging
   policyTypes:
   - Egress
   egress:
@@ -20,7 +21,7 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: fluentd
-      app.kubernetes.io/instance: logging
+      app.kubernetes.io/instance: fluentd
   policyTypes:
   - Ingress
   - Egress
@@ -29,7 +30,8 @@ spec:
     - podSelector:
         matchLabels:
           app.kubernetes.io/name: fluentbit
-          app.kubernetes.io/instance: logging
+          app.kubernetes.io/instance: fluentbit
+          app.kubernetes.io/component: logging
     ports:
     - port: 24240
       protocol: TCP

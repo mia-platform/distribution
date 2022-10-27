@@ -5,4 +5,6 @@ resources:
 - networkpolicies.yaml
 labels:
 - pairs:
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/instance: velero
     app.kubernetes.io/component: monitoring
