@@ -1,0 +1,147 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kyverno
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: kyverno
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      initContainers:
+      - name: kyverno-pre
+        image: ghcr.io/kyverno/kyvernopre:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --loggingFormat=text
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        env:
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: KYVERNO_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: KYVERNO_DEPLOYMENT
+          value: kyverno
+        - name: KYVERNO_SVC
+          value: kyverno
+      containers:
+      - name: kyverno
+        image: ghcr.io/kyverno/kyverno:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        args:
+        - --autogenInternals=true
+        - --loggingFormat=text
+        env:
+        - name: INIT_CONFIG
+          value: kyverno
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: KYVERNO_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: kyverno
+        - name: KYVERNO_SVC
+          value: kyverno
+        - name: TUF_ROOT
+          value: /.sigstore
+        - name: KYVERNO_DEPLOYMENT
+          value: kyverno
+        ports:
+        - containerPort: 9443
+          name: controller
+          protocol: TCP
+        - containerPort: 8000
+          name: metrics
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /health/liveness
+            port: 9443
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /health/liveness
+            port: 9443
+            scheme: HTTPS
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /health/readiness
+            port: 9443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /.sigstore
+          name: sigstore
+      volumes:
+      - name: sigstore
+        emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65500
+        runAsGroup: 65500
+        fsGroup: 65500
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - kyverno
+              topologyKey: "kubernetes.io/hostname"

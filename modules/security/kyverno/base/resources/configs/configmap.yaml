@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kyverno
+data:
+  resourceFilters: >
+    [Event,*,*]
+    [*,kube-system,*]
+    [*,kube-public,*]
+    [*,kube-node-lease,*]
+    [*,kyverno-system,*]
+    [Node,*,*]
+    [APIService,*,*]
+    [TokenReview,*,*]
+    [SubjectAccessReview,*,*]
+    [SelfSubjectAccessReview,*,*]
+    [*,kyverno-system,kyverno*]
+    [Binding,*,*]
+    [ReplicaSet,*,*]
+    [AdmissionReport,*,*]
+    [ClusterAdmissionReport,*,*]
+    [BackgroundScanReport,*,*]
+    [ClusterBackgroundScanReport,*,*]
+    [PolicyReport,*,*]
+    [ClusterPolicyReport,*,*]
+  webhooks: '[{"namespaceSelector": {"matchExpressions": [{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kyverno-system"]}]}}]'

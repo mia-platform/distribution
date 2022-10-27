@@ -1,11 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- CustomResourceDefinition--clusterpolicies.kyverno.io.yaml
-- CustomResourceDefinition--clusterpolicyreports.wgpolicyk8s.io.yaml
-- CustomResourceDefinition--clusterreportchangerequests.kyverno.io.yaml
-- CustomResourceDefinition--generaterequests.kyverno.io.yaml
-- CustomResourceDefinition--policies.kyverno.io.yaml
-- CustomResourceDefinition--policyreports.wgpolicyk8s.io.yaml
-- CustomResourceDefinition--reportchangerequests.kyverno.io.yaml
-- CustomResourceDefinition--updaterequests.kyverno.io.yaml
+- admissionreports.kyverno.io.yaml
+- backgroundscanreports.kyverno.io.yaml
+- clusteradmissionreports.kyverno.io.yaml
+- clusterbackgroundscanreports.kyverno.io.yaml
+- clusterpolicies.kyverno.io.yaml
+- clusterpolicyreports.wgpolicyk8s.io.yaml
+- generaterequests.kyverno.io.yaml
+- policies.kyverno.io.yaml
+- policyreports.wgpolicyk8s.io.yaml
+- updaterequests.kyverno.io.yaml

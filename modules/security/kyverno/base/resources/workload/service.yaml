@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kyverno
+spec:
+  type: ClusterIP
+  ports:
+  - name: controller
+    port: 443
+    targetPort: controller
+    protocol: TCP
+  - name: metrics
+    port: 8000
+    targetPort: metrics
+    protocol: TCP
