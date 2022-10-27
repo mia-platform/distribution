@@ -15,7 +15,7 @@ replacements:
     - spec.selector.matchLabels
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-traefik-monitoring
     fieldPaths:
     - spec.podSelector.matchLabels
 - source:
@@ -32,7 +32,7 @@ replacements:
       create: true
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-traefik-monitoring
     fieldPaths:
     - metadata.namespace
     options:
@@ -44,6 +44,6 @@ replacements:
   targets:
   - select:
       kind: NetworkPolicy
-      name: allow-monitoring-ingress
+      name: allow-traefik-monitoring
     fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
