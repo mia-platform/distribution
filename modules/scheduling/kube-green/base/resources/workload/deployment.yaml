@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-green
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,6 +20,8 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       initContainers:
       - name: kube-webhook-certgen
         image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
@@ -48,8 +52,7 @@ spec:
             - ALL
       containers:
       - name: kube-green
-        image: docker.io/kubegreen/kube-green:0.4.0
-        imagePullPolicy: IfNotPresent
+        image: docker.io/kubegreen/kube-green:latest
         resources: {}
         args:
         - --health-probe-bind-address=:$(PROBES_PORT)
@@ -65,11 +68,11 @@ spec:
         - name: METRICS_PORT
           value: VALUE
         ports:
-        - containerPort: 11381
-          name: probes
-          protocol: TCP
-        - containerPort: 11380
+        - containerPort: 11450
           name: metrics
+          protocol: TCP
+        - containerPort: 11451
+          name: probes
           protocol: TCP
         - containerPort: 9443
           name: webhook

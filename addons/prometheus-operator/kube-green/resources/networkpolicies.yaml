@@ -13,5 +13,5 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: ""
     ports:
-    - port: 11380
+    - port: 11450
       protocol: TCP
