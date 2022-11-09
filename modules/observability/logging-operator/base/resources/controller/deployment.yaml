@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logging-operator
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,19 +20,21 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: logging-operator
         image: ghcr.io/banzaicloud/logging-operator:latest
         resources: {}
         args:
-        - "--metrics-addr=:8080"
+        - "--metrics-addr=:11150"
         - "--enable-leader-election=true"
         - "--verbose=false"
         - "--output-format=json"
         - "--klogLevel=0"
         ports:
         - name: web
-          containerPort: 8080
+          containerPort: 11150
           protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false

@@ -6,7 +6,7 @@ spec:
   type: ClusterIP
   selector: {}
   ports:
-    - port: 8080
+    - port: 11150
       targetPort: web
       protocol: TCP
       name: web
