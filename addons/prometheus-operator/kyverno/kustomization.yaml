@@ -1,0 +1,49 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+- resources
+replacements:
+- source:
+    kind: Deployment
+    name: kyverno
+    fieldPath: spec.selector.matchLabels
+  targets:
+  - select:
+      kind: ServiceMonitor
+      name: kyverno
+    fieldPaths:
+    - spec.selector.matchLabels
+  - select:
+      kind: NetworkPolicy
+      name: allow-kyverno-monitoring
+    fieldPaths:
+    - spec.podSelector.matchLabels
+- source:
+    kind: Deployment
+    name: kyverno
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: ServiceMonitor
+      name: kyverno
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: NetworkPolicy
+      name: allow-kyverno-monitoring
+    fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Deployment
+    name: prometheus-operator
+    fieldPath: metadata.namespace
+  targets:
+  - select:
+      kind: NetworkPolicy
+      name: allow-kyverno-monitoring
+    fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name

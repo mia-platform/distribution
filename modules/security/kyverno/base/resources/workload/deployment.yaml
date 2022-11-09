@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kyverno
+  labels:
+    disribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,10 +20,11 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       initContainers:
       - name: kyverno-pre
         image: ghcr.io/kyverno/kyvernopre:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
         - --loggingFormat=text
@@ -52,11 +55,12 @@ spec:
       containers:
       - name: kyverno
         image: ghcr.io/kyverno/kyverno:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
-        - --autogenInternals=true
-        - --loggingFormat=text
+        - -autogenInternals=true
+        - -loggingFormat=text
+        - -metricsPort=11551
+        - -profilePort=11552
         env:
         - name: INIT_CONFIG
           value: kyverno
@@ -82,8 +86,11 @@ spec:
         - containerPort: 9443
           name: controller
           protocol: TCP
-        - containerPort: 8000
+        - containerPort: 11551
           name: metrics
+          protocol: TCP
+        - containerPort: 11552
+          name: profile
           protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false
