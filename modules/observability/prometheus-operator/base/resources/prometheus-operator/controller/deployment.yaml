@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-operator
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,15 +20,17 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: prometheus-operator
         image: quay.io/prometheus-operator/prometheus-operator:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
         - --log-level=warn
         - --log-format=json
         - --localhost=127.0.0.1
+        - --web.listen-address=:11350
         - --web.enable-tls=$(ENABLE_TLS)
         - --prometheus-config-reloader=$(CONFIG_RELOADER_IMAGE)
         - --config-reloader-cpu-request=100m
@@ -47,7 +51,7 @@ spec:
           value: "false"
         ports:
         - name: operator
-          containerPort: 8080
+          containerPort: 11350
           protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false

@@ -12,5 +12,5 @@ spec:
     - podSelector:
         matchLabels: {}
     ports:
-    - port: 8080
+    - port: 11350
       protocol: TCP

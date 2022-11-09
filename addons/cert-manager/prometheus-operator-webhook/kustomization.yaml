@@ -15,12 +15,6 @@ patches:
     kind: Deployment
     name: prometheus-operator
   patch: |-
-    - op: replace
-      path: /spec/template/spec/containers/0/ports/0/containerPort
-      value: 8443
-    - op: add
-      path: /spec/template/spec/containers/0/args/-
-      value: "--web.listen-address=:8443"
     - op: add
       path: /spec/template/spec/containers/0/args/-
       value: "--web.cert-file=/etc/prometheus-operator/tls/tls.crt"

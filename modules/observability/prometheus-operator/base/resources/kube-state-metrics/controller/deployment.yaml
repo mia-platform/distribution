@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-state-metrics
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,20 +20,21 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: kube-state-metrics
-        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.6.0
-        imagePullPolicy: IfNotPresent
+        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:latest
         resources: {}
         args:
-        - --port=8080
-        - --telemetry-port=8081
+        - --port=11351
+        - --telemetry-port=11352
         ports:
         - name: web
-          containerPort: 8080
+          containerPort: 11351
           protocol: TCP
         - name: metrics
-          containerPort: 8081
+          containerPort: 11352
           protocol: TCP
         readinessProbe:
           httpGet:

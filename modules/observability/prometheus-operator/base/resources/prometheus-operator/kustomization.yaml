@@ -5,9 +5,9 @@ commonLabels:
   app.kubernetes.io/instance: prometheus-operator
 images:
 - name: quay.io/prometheus-operator/prometheus-operator
-  newTag: v0.59.2
+  newTag: v0.60.1
 - name: quay.io/prometheus-operator/prometheus-config-reloader
-  newTag: v0.59.2
+  newTag: v0.60.1
 resources:
 - controller
 - rbac

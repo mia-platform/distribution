@@ -6,8 +6,8 @@ spec:
   clusterIP: None
   ports:
   - name: web
-    port: 8080
+    port: 11151
     targetPort: web
   - name: metrics
-    port: 8081
+    port: 11152
     targetPort: metrics
