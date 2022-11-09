@@ -18,58 +18,19 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: traefik
         image: traefik:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
-        readinessProbe:
-          httpGet:
-            path: /ping
-            port: 9000
-          failureThreshold: 1
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 2
-        livenessProbe:
-          httpGet:
-            path: /ping
-            port: 9000
-          failureThreshold: 3
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 2
-        ports:
-        - name: traefik
-          containerPort: 9000
-          protocol: TCP
-        - name: web
-          containerPort: 8080
-          protocol: TCP
-        - name: websecure
-          containerPort: 8443
-          protocol: TCP
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          privileged: false
-          seccompProfile:
-            type: RuntimeDefault
-          capabilities:
-            drop:
-            - ALL
-        volumeMounts:
-        - name: tmp
-          mountPath: /tmp
         args:
         - --global.checknewversion=false
         - --global.sendanonymoususage=false
         - --api.dashboard=true
         - --ping=true
         - --log.format=json
-        - --log.level=WARN
+        - --log.level=$(LOG_LEVEL)
         - --accesslog.format=json
         - --metrics.prometheus.entrypoint=traefik
         - --entryPoints.traefik.address=:9000/tcp
@@ -90,6 +51,49 @@ spec:
         - --providers.kubernetesingress.allowexternalnameservices=false
         - --providers.kubernetescrd.allowcrossnamespace=true
         - --providers.kubernetescrd.allowexternalnameservices=false
+        env:
+        - name: LOG_LEVEL
+          value: WARN
+        ports:
+        - name: traefik
+          containerPort: 9000
+          protocol: TCP
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+        - name: websecure
+          containerPort: 8443
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
       volumes:
       - name: tmp
         emptyDir:
