@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rbac-manager
+  labels:
+    disribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,25 +20,29 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: rbac-manager
         image: quay.io/reactiveops/rbac-manager:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
         - --log-level=$(LOG_LEVEL)
+        - --metrics-address=:$(METRICS_PORT)
         env:
         - name: LOG_LEVEL
           value: warn
+        - name: METRICS_PORT
+          value: PORT
         ports:
         - name: metrics
-          containerPort: 8042
+          containerPort: 11650
           protocol: TCP
         readinessProbe:
           httpGet:
             scheme: HTTP
             path: /metrics
-            port: 8042
+            port: metrics
           initialDelaySeconds: 5
           timeoutSeconds: 3
           periodSeconds: 3
@@ -45,7 +51,7 @@ spec:
           httpGet:
             scheme: HTTP
             path: /metrics
-            port: 8042
+            port: metrics
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

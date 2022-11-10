@@ -1,10 +1,8 @@
+---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: rbacdefinitions.rbacmanager.reactiveops.io
-  labels:
-    app: rbacmanger
-    release: rbac-manager
 spec:
   group: rbacmanager.reactiveops.io
   names:
@@ -61,7 +59,8 @@ spec:
                                   key:
                                     type: string
                                   operator:
-                                    type: string
+                                    type:
+                                      string
                                     enum:
                                       - Exists
                                       - DoesNotExist
@@ -82,6 +81,8 @@ spec:
                     items:
                       type: object
                       properties:
+                        automountServiceAccountToken:
+                          type: boolean
                         imagePullSecrets:
                           type: array
                           items:
