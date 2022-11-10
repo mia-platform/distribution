@@ -3,3 +3,14 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+replacements:
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=cert-manager].ports.[name=metrics].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=cert-manager].env.[name=METRICS_PORT].value
+      options:
+        create: true

@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cert-manager-cainjector
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,10 +20,11 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: cainjector
         image: quay.io/jetstack/cert-manager-cainjector:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
         - --v=2

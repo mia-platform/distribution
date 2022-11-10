@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cert-manager-webhook
+  labels:
+    distribution.mia-platform.eu/role: controller
 spec:
   revisionHistoryLimit: 5
   selector:
@@ -18,14 +20,15 @@ spec:
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       containers:
       - name: webhook
         image: quay.io/jetstack/cert-manager-webhook:latest
-        imagePullPolicy: IfNotPresent
         resources: {}
         args:
         - --v=2
-        - --secure-port=11250
+        - --secure-port=$(HTTP_PORT)
         - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
         - --dynamic-serving-ca-secret-name=$(SECRET_NAME)
         - --dynamic-serving-dns-names=$(SERVICE_NAME)
@@ -40,10 +43,12 @@ spec:
           value: cert-manager-webhook
         - name: SECRET_NAME
           value: cert-manager-webhook-ca
+        - name: HTTP_PORT
+          value: PORT
         ports:
         - name: https
           protocol: TCP
-          containerPort: 11250
+          containerPort: 11251
         livenessProbe:
           httpGet:
             path: /livez

@@ -5,3 +5,14 @@ resources:
 - service.yaml
 configurations:
 - kustomizeconfig.yaml
+replacements:
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=webhook].env.[name=HTTP_PORT].value
+      options:
+        create: true

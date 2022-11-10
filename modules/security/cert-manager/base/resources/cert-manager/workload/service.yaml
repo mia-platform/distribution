@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   ports:
   - protocol: TCP
-    port: 9402
+    port: 11250
     name: metrics
-    targetPort: 9402
+    targetPort: metrics
