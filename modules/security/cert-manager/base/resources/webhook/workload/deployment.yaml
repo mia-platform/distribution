@@ -29,6 +29,7 @@ spec:
         args:
         - --v=2
         - --secure-port=$(HTTP_PORT)
+        - --healthz-port=$(HEALTHZ_PORT)
         - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
         - --dynamic-serving-ca-secret-name=$(SECRET_NAME)
         - --dynamic-serving-dns-names=$(SERVICE_NAME)
@@ -45,14 +46,19 @@ spec:
           value: cert-manager-webhook-ca
         - name: HTTP_PORT
           value: PORT
+        - name: HEALTHZ_PORT
+          value: PORT
         ports:
         - name: https
           protocol: TCP
           containerPort: 11251
+        - name: healthz
+          protocol: TCP
+          containerPort: 11252
         livenessProbe:
           httpGet:
             path: /livez
-            port: 6080
+            port: healthz
             scheme: HTTP
           initialDelaySeconds: 60
           periodSeconds: 10
@@ -62,7 +68,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 6080
+            port: healthz
             scheme: HTTP
           initialDelaySeconds: 5
           periodSeconds: 5

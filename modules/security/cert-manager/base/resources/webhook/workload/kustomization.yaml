@@ -16,3 +16,13 @@ replacements:
         - .spec.template.spec.containers.[name=webhook].env.[name=HTTP_PORT].value
       options:
         create: true
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=healthz].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=webhook].env.[name=HEALTHZ_PORT].value
+      options:
+        create: true

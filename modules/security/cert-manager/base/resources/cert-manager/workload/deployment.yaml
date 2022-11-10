@@ -29,7 +29,7 @@ spec:
         args:
         - --v=2
         - --leader-elect
-        - --metrics-listen-address="0.0.0.0:$(METRICS_PORT)"
+        - --metrics-listen-address=0.0.0.0:$(METRICS_PORT)
         - --leader-election-namespace=$(POD_NAMESPACE)
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --enable-certificate-owner-ref=$(ENABLE_CERTIFICATE_REF)
