@@ -54,7 +54,7 @@ spec:
         allowPrivilegeEscalation: false
         capabilities:
           drop:
-          - all
+          - ALL
         privileged: false
         readOnlyRootFilesystem: true
     tls:
@@ -112,7 +112,7 @@ spec:
         allowPrivilegeEscalation: false
         capabilities:
           drop:
-          - all
+          - ALL
         privileged: false
         readOnlyRootFilesystem: false
     tls:
