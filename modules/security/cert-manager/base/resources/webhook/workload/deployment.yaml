@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cert-manager-webhook
   labels:
-    distribution.mia-platform.eu/role: controller
+    distribution.mia-platform.eu/expose-webhook: "true"
 spec:
   revisionHistoryLimit: 5
   selector:
