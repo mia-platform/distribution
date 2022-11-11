@@ -4,6 +4,7 @@ metadata:
   name: kube-green
   labels:
     distribution.mia-platform.eu/role: controller
+    distribution.mia-platform.eu/expose-webhook: "true"
 spec:
   revisionHistoryLimit: 5
   selector:
