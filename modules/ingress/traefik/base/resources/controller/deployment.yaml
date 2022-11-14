@@ -22,7 +22,7 @@ spec:
       hostIPC: false
       containers:
       - name: traefik
-        image: traefik:latest
+        image: docker.io/library/traefik:latest
         resources: {}
         args:
         - --global.checknewversion=false
