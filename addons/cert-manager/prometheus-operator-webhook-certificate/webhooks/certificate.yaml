@@ -16,4 +16,5 @@ spec:
   issuerRef:
     kind: Issuer
     name: prometheus-operator
-  secretName: prometheus-operator-tls
+    group: cert-manager.io
+  secretName: webhook-tls

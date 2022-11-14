@@ -8,9 +8,9 @@ images:
   newTag: v0.60.1
 - name: quay.io/prometheus-operator/prometheus-config-reloader
   newTag: v0.60.1
+- name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
+  newTag: v1.3.0
 resources:
 - controller
 - rbac
 - configs
-configurations:
-- kustomizeconfig.yaml

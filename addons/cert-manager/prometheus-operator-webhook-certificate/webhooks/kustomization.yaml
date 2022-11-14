@@ -3,9 +3,8 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: prometheus-operator
   app.kubernetes.io/instance: prometheus-operator
-  app.kubernetes.io/component: monitoring
+  app.kubernetes.io/component: prometheus-operator
 resources:
-- configs
-- workloads
+- certificate.yaml
 configurations:
 - kustomizeconfig.yaml

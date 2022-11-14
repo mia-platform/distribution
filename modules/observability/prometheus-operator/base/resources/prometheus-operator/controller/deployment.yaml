@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-operator
+  annotations:
+    distribution.mia-platform.eu/certificate-ca-key: ca
   labels:
     distribution.mia-platform.eu/role: controller
     distribution.mia-platform.eu/expose-webhook: "true"
@@ -23,6 +25,59 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
+      initContainers:
+      - name: kube-webhook-certgen
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - create
+        - --host=$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
+        - --namespace=$(POD_NAMESPACE)
+        - --secret-name=$(SECRET_NAME)
+        - --cert-name=tls.crt
+        - --key-name=tls.key
+        env:
+        - name: SERVICE_NAME
+          value: prometheus-operator
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      - name: kube-webhook-certpatch
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - patch
+        - --namespace=$(POD_NAMESPACE)
+        - --patch-mutating
+        - --patch-validating
+        - --secret-name=$(SECRET_NAME)
+        - --webhook-name=prometheus-operator
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
       containers:
       - name: prometheus-operator
         image: quay.io/prometheus-operator/prometheus-operator:latest
@@ -32,7 +87,9 @@ spec:
         - --log-format=json
         - --localhost=127.0.0.1
         - --web.listen-address=:11350
-        - --web.enable-tls=$(ENABLE_TLS)
+        - --web.enable-tls=true
+        - --web.cert-file=/etc/prometheus-operator/tls/tls.crt
+        - --web.key-file=/etc/prometheus-operator/tls/tls.key
         - --prometheus-config-reloader=$(CONFIG_RELOADER_IMAGE)
         - --config-reloader-cpu-request=100m
         - --config-reloader-cpu-limit=100m
@@ -48,8 +105,6 @@ spec:
               fieldPath: metadata.namespace
         - name: CONFIG_RELOADER_IMAGE
           value: quay.io/prometheus-operator/prometheus-config-reloader:latest
-        - name: ENABLE_TLS
-          value: "false"
         ports:
         - name: operator
           containerPort: 11350
@@ -63,8 +118,14 @@ spec:
           capabilities:
             drop:
             - ALL
-        volumeMounts: []
-      volumes: []
+        volumeMounts:
+        - name: webhook-tls
+          mountPath: /etc/prometheus-operator/tls
+      volumes:
+      - name: webhook-tls
+        secret:
+          secretName: webhook-tls
+          optional: true
       securityContext:
         runAsNonRoot: true
         runAsUser: 65200

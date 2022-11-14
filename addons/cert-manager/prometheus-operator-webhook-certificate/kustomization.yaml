@@ -6,32 +6,15 @@ patches:
 - target:
     kind: Deployment
     name: prometheus-operator
-  path: patches/prometheus-operator.yaml
-- target:
-    kind: Service
-    name: prometheus-operator
-  path: patches/prometheus-operator-service.yaml
-- target:
-    kind: Deployment
-    name: prometheus-operator
   patch: |-
-    - op: add
-      path: /spec/template/spec/containers/0/args/-
-      value: "--web.cert-file=/etc/prometheus-operator/tls/tls.crt"
-    - op: add
-      path: /spec/template/spec/containers/0/args/-
-      value: "--web.key-file=/etc/prometheus-operator/tls/tls.key"
+    - op: remove
+      path: /spec/template/spec/initContainers
+    - op: remove
+      path: /spec/template/spec/volumes/0/secret/optional
+    - op: replace
+      path: /metadata/annotations/distribution.mia-platform.eu~1certificate-ca-key
+      value: ca.crt
 replacements:
-- source:
-    kind: Deployment
-    name: prometheus-operator
-    fieldPath: .spec.selector.matchLabels
-  targets:
-  - select:
-      kind: NetworkPolicy
-      name: allow-prometheus-operator-webhook
-    fieldPaths:
-      - spec.podSelector.matchLabels
 - source:
     kind: Deployment
     name: prometheus-operator
@@ -54,13 +37,6 @@ replacements:
     options:
       delimiter: '/'
       index: 0
-      create: true
-  - select:
-      kind: NetworkPolicy
-      name: allow-prometheus-operator-webhook
-    fieldPaths:
-      - .metadata.namespace
-    options:
       create: true
   - select:
       kind: Certificate

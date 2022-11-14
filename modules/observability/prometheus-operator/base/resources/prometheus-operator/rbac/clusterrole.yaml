@@ -86,3 +86,13 @@ rules:
   - subjectaccessreviews
   verbs:
   - create
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - validatingwebhookconfigurations
+  - mutatingwebhookconfigurations
+  verbs:
+  - get
+  - update
+  resourceNames:
+  - prometheus-operator

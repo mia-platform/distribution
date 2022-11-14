@@ -3,3 +3,17 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+configurations:
+- kustomizeconfig.yaml
+replacements:
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.volumes.[name=webhook-tls].secret.secretName
+  targets:
+  - select:
+      kind: Deployment
+    fieldPaths:
+    - .spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
+    - .spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
+    options:
+      create: true

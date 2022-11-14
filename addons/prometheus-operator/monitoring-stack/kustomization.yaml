@@ -80,3 +80,43 @@ replacements:
         name: allow-node-exporter-monitoring
       fieldPaths:
         - spec.ingress.0.from.0.podSelector.matchLabels
+- source:
+    kind: Deployment
+    name: prometheus-operator
+    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
+  targets:
+    - select:
+        kind: ServiceMonitor
+        name: prometheus-operator
+      fieldPaths:
+        - spec.endpoints.[targetPort=operator].tlsConfig.ca.secret.key
+      options:
+        create: true
+- source:
+    kind: Service
+    name: prometheus-operator
+    fieldPath: metadata.name
+  targets:
+    - select:
+        kind: ServiceMonitor
+        name: prometheus-operator
+      fieldPaths:
+        - spec.endpoints.[targetPort=operator].tlsConfig.serverName
+      options:
+        delimiter: '.'
+        index: 0
+        create: true
+- source:
+    kind: Service
+    name: prometheus-operator
+    fieldPath: metadata.namespace
+  targets:
+    - select:
+        kind: ServiceMonitor
+        name: prometheus-operator
+      fieldPaths:
+        - spec.endpoints.[targetPort=operator].tlsConfig.serverName
+      options:
+        delimiter: '.'
+        index: 1
+        create: true
