@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-green
+  annotations:
+    distribution.mia-platform.eu/certificate-ca-key: ca
   labels:
     distribution.mia-platform.eu/role: controller
     distribution.mia-platform.eu/expose-webhook: "true"
@@ -28,20 +30,45 @@ spec:
         image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
         args:
         - create
-        - --host=$(POD_NAME),$(POD_NAME).$(POD_NAMESPACE).svc
+        - --host=$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
         - --namespace=$(POD_NAMESPACE)
-        - --secret-name=kube-green-tls
+        - --secret-name=$(SECRET_NAME)
         - --cert-name=tls.crt
         - --key-name=tls.key
         env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
+        - name: SERVICE_NAME
+          value: prometheus-operator
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      - name: kube-webhook-certpatch
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - patch
+        - --namespace=$(POD_NAMESPACE)
+        - --patch-mutating=false
+        - --patch-validating=true
+        - --secret-name=$(SECRET_NAME)
+        - --webhook-name=kube-green
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -100,12 +127,12 @@ spec:
             drop:
             - ALL
         volumeMounts:
-        - name: kube-green-tls
+        - name: webhook-tls
           mountPath: /tmp/k8s-webhook-server/serving-certs
       volumes:
-      - name: kube-green-tls
+      - name: webhook-tls
         secret:
-          secretName: kube-green-tls
+          secretName: webhook-tls
           optional: true
       securityContext:
         runAsNonRoot: true

@@ -19,5 +19,8 @@ spec:
     matchLabels: {}
   policyTypes:
   - Egress
+  - Ingress
   egress:
+  - {}
+  ingress:
   - {}

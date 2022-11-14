@@ -9,7 +9,7 @@ images:
 - name: docker.io/kubegreen/kube-green
   newTag: 0.4.0
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v1.3.0
+  newTag: v20220916-gd32f8c343
 resources:
 - configs
 - rbac

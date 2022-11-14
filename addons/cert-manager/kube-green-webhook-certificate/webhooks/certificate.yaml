@@ -16,4 +16,5 @@ spec:
   issuerRef:
     kind: Issuer
     name: kube-green
-  secretName: kube-green-tls
+    group: cert-manager.io
+  secretName: webhook-tls

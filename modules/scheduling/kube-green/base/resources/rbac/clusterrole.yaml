@@ -65,3 +65,12 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - validatingwebhookconfigurations
+  verbs:
+  - get
+  - update
+  resourceNames:
+  - kube-green

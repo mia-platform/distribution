@@ -4,4 +4,4 @@ resources:
 - ../../modules/security/cert-manager/base
 - ../../modules/scheduling/kube-green/base
 components:
-- ../../addons/cert-manager/kube-green-webhook
+- ../../addons/cert-manager/kube-green-webhook-certificate

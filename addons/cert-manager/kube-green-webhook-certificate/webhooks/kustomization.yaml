@@ -5,7 +5,6 @@ commonLabels:
   app.kubernetes.io/instance: kube-green
   app.kubernetes.io/component: kube-green
 resources:
-- configs
-- workloads
+- certificate.yaml
 configurations:
 - kustomizeconfig.yaml
