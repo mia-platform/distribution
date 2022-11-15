@@ -3,7 +3,6 @@ kind: ClusterRole
 metadata:
   labels:
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
-    app: kyverno
   name: mia-platform:kyverno:admin-generaterequest
 rules:
 - apiGroups:
