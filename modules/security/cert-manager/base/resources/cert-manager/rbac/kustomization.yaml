@@ -20,3 +20,5 @@ resources:
 - role.yaml
 - rolebinding.yaml
 - serviceaccount.yaml
+configurations:
+- kustomizeconfig.yaml
