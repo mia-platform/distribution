@@ -14,8 +14,7 @@ spec:
       hostNetwork: false
       containers:
       - name: mc
-        image: minio/mc:latest
-        imagePullPolicy: IfNotPresent
+        image: docker.io/minio/mc:latest
         resources: {}
         command:
         - /bin/sh

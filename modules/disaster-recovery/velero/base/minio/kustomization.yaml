@@ -6,9 +6,9 @@ commonLabels:
   app.kubernetes.io/instance: minio
   app.kubernetes.io/component: disaster-recovery
 images:
-- name: minio/minio
+- name: docker.io/minio/minio
   newTag: RELEASE.2022-10-02T19-29-29Z
-- name: minio/mc
+- name: docker.io/minio/mc
   newTag: RELEASE.2022-10-01T07-56-14Z
 resources:
 - rbac

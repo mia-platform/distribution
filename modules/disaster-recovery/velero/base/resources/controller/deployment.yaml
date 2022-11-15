@@ -20,8 +20,7 @@ spec:
       hostNetwork: false
       containers:
       - name: velero
-        image: velero/velero:latest
-        imagePullPolicy: IfNotPresent
+        image: docker.io/velero/velero:latest
         command:
         - /velero
         args:

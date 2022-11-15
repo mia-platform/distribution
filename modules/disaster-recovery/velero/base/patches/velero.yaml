@@ -7,8 +7,7 @@ spec:
     spec:
       initContainers:
       - name: aws-plugin
-        image: velero/velero-plugin-for-aws:latest
-        imagePullPolicy: Always
+        image: docker.io/velero/velero-plugin-for-aws:latest
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false

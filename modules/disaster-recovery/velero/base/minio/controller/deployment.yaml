@@ -17,8 +17,7 @@ spec:
       hostNetwork: false
       containers:
       - name: minio
-        image: minio/minio:latest
-        imagePullPolicy: IfNotPresent
+        image: docker.io/minio/minio:latest
         resources: {}
         args:
           - server

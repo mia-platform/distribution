@@ -19,16 +19,4 @@ patches:
   patch: |-
     - op: add
       path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-type
-      value: external
-    - op: add
-      path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-nlb-target-type
-      value: instance
-# Patch only the service named traefik for making it internet-facing, so we can support extension
-# that add private load balancers
-- target:
-    kind: Service
-    name: traefik
-  patch: |-
-    - op: add
-      path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-scheme
-      value: internet-facing
+      value: nlb
