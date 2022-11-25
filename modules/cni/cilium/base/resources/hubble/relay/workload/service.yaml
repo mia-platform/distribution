@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hubble-relay
+spec:
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 4245

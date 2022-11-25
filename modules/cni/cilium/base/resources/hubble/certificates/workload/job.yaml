@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hubble-generate-certs
+spec:
+  parallelism: 1
+  completions: 1
+  ttlSecondsAfterFinished: 1800
+  template:
+    spec:
+      serviceAccountName: hubble-generate-certs
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 1
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      restartPolicy: OnFailure
+      containers:
+      - name: certgen
+        image: quay.io/cilium/certgen:latest
+        resources: {}
+        command:
+        - /usr/bin/cilium-certgen
+        args:
+        - --cilium-namespace=$(CILIUM_K8S_NAMESPACE)
+        - --ca-generate
+        - --ca-reuse-secret
+        - --hubble-server-cert-generate
+        - --hubble-server-cert-common-name=*.default.hubble-grpc.cilium.io
+        - --hubble-server-cert-validity-duration=$(CERTIFICATE_VALIDITY)
+        - --hubble-relay-client-cert-generate
+        - --hubble-relay-client-cert-validity-duration=$(CERTIFICATE_VALIDITY)
+        env:
+          - name: CILIUM_K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: CERTIFICATE_VALIDITY
+            value: 94608000s
+        volumeMounts: []
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      volumes: []

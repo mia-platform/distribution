@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+commonLabels:
+  app.kubernetes.io/component: cni
+images:
+- name: quay.io/cilium/startup-script
+  newTag: d69851597ea019af980891a4628fb36b7880ec26
+resources:
+- node-init

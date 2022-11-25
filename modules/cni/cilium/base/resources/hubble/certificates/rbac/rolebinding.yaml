@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mia-platform:hubble-generate-certs
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: mia-platform:hubble-generate-certs
+subjects:
+- kind: ServiceAccount
+  name: hubble-generate-certs

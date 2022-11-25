@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cilium-config
+data:
+  identity-allocation-mode: crd
+  cilium-endpoint-gc-interval: 5m0s
+  nodes-gc-interval: 5m0s
+  disable-endpoint-crd: "false"
+  debug: "false"
+  enable-policy: default
+  prometheus-serve-addr: :9962
+  proxy-prometheus-port: "9964"
+  operator-prometheus-serve-addr: :9963
+  enable-metrics: "true"
+  enable-ipv4: "true"
+  enable-ipv6: "false"
+  custom-cni-conf: "false"
+  enable-bpf-clock-probe: "true"
+  monitor-aggregation: medium
+  monitor-aggregation-interval: 5s
+  monitor-aggregation-flags: all
+  bpf-map-dynamic-size-ratio: "0.0025"
+  bpf-policy-map-max: "16384"
+  bpf-lb-map-max: "65536"
+  bpf-lb-external-clusterip: "false"
+  preallocate-bpf-maps: "false"
+  sidecar-istio-proxy-image: cilium/istio_proxy
+  cluster-name: default
+  cluster-id: "0"
+  tunnel: vxlan
+  enable-l7-proxy: "true"
+  enable-ipv4-masquerade: "true"
+  enable-ipv6-masquerade: "true"
+  enable-xt-socket-fallback: "true"
+  install-iptables-rules: "true"
+  install-no-conntrack-iptables-rules: "false"
+  auto-direct-node-routes: "false"
+  enable-local-redirect-policy: "false"
+  kube-proxy-replacement: disabled
+  bpf-lb-sock: "false"
+  enable-health-check-nodeport: "true"
+  node-port-bind-protection: "true"
+  enable-auto-protect-node-port-range: "true"
+  enable-svc-source-range-check: "true"
+  enable-l2-neigh-discovery: "true"
+  arping-refresh-period: 30s
+  enable-endpoint-health-checking: "true"
+  enable-health-checking: "true"
+  enable-well-known-identities: "false"
+  enable-remote-node-identity: "true"
+  synchronize-k8s-nodes: "true"
+  operator-api-serve-addr: 127.0.0.1:9234
+  enable-hubble: "true"
+  hubble-socket-path: /var/run/cilium/hubble.sock
+  hubble-metrics-server: ":9965"
+  hubble-metrics:
+    dns:query;ignoreAAAA
+    drop
+    tcp
+    flow
+    icmp
+    http
+  hubble-listen-address: ":4244"
+  hubble-disable-tls: "false"
+  hubble-tls-cert-file: /var/lib/cilium/tls/hubble/server.crt
+  hubble-tls-key-file: /var/lib/cilium/tls/hubble/server.key
+  hubble-tls-client-ca-files: /var/lib/cilium/tls/hubble/client-ca.crt
+  ipam: kubernetes
+  disable-cnp-status-updates: "true"
+  enable-vtep: "false"
+  vtep-endpoint: ""
+  vtep-cidr: ""
+  vtep-mask: ""
+  vtep-mac: ""
+  enable-bgp-control-plane: "false"
+  procfs: /host/proc
+  bpf-root: /sys/fs/bpf
+  cgroup-root: /run/cilium/cgroupv2
+  enable-k8s-terminating-endpoint: "true"
+  remove-cilium-node-taints: "true"
+  set-cilium-is-up-condition: "true"
+  unmanaged-pod-watcher-interval: "15"
+  tofqdns-dns-reject-response-code: refused
+  tofqdns-enable-dns-compression: "true"
+  tofqdns-endpoint-max-ip-per-hostname: "50"
+  tofqdns-idle-connection-grace-period: 0s
+  tofqdns-max-deferred-connection-deletes: "10000"
+  tofqdns-min-ttl: "3600"
+  tofqdns-proxy-response-max-delay: 100ms
+  agent-not-ready-taint-key: ignore-taint.cluster-autoscaler.kubernetes.io/cilium-agent-not-ready

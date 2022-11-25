@@ -1,16 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-helmCharts:
-- name: cilium
-  repo: https://helm.cilium.io/
-  version: v1.12.1
-  namespace: kube-system
-  releaseName: cilium
-  valuesInline:
-    ipam:
-      mode: kubernetes
-    hubble:
-      ui:
-        enabled: true
-      relay:
-        enabled: true
+resources:
+- resources
+patches:
+- target:
+    kind: DaemonSet
+    name: cilium
+  patch: |-
+    - op: remove
+      path: /spec/template/spec/initContainers/3
+    - op: remove
+      path: /spec/template/spec/volumes/3

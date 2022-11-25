@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+commonLabels:
+  app.kubernetes.io/component: cni
+images:
+- name: quay.io/cilium/cilium
+  newTag: v1.12.4@sha256:4b074fcfba9325c18e97569ed1988464309a5ebf64bbc79bec6f3d58cafcb8cf
+- name: quay.io/cilium/operator-generic
+  newTag: v1.12.4@sha256:071089ec5bca1f556afb8e541d9972a0dfb09d1e25504ae642ced021ecbedbd1
+- name: quay.io/cilium/hubble-relay
+  newTag: v1.12.4@sha256:dc5b396e94f986f83ccef89f13a91c29df482d4af491ff3bd4d40c05873d351a
+- name: quay.io/cilium/hubble-ui
+  newTag: v0.9.2@sha256:d3596efc94a41c6b772b9afe6fe47c17417658956e04c3e2a28d293f2670663e
+- name: quay.io/cilium/hubble-ui-backend
+  newTag: v0.9.2@sha256:a3ac4d5b87889c9f7cc6323e86d3126b0d382933bd64f44382a92778b0cde5d7
+- name: quay.io/cilium/certgen
+  newTag: v0.1.8@sha256:4a456552a5f192992a6edcec2febb1c54870d665173a33dc7d876129b199ddbd
+- name: quay.io/cilium/startup-script
+  newTag: d69851597ea019af980891a4628fb36b7880ec26
+resources:
+- configs
+- cilium-agent
+- cilium-operator
+- hubble

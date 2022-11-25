@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: name
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: mount-cgroup
+        env:
+        - name: BIN_PATH
+          value: /home/kubernetes/bin
+      - name: apply-sysctl-overwrites
+        env:
+        - name: BIN_PATH
+          value: /home/kubernetes/bin
+      volumes:
+      - name: cni-path
+        hostPath:
+          path:  /home/kubernetes/bin
+          type: DirectoryOrCreate

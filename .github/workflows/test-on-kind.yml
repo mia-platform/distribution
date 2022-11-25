@@ -71,9 +71,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install helm
-        uses: azure/setup-helm@v3
-
       - name: Install yq
         uses: mikefarah/yq@master
 
@@ -83,7 +80,7 @@ jobs:
       - name: Kustomize Build
         run: |
           mkdir ci
-          kustomize build --enable-helm ${{ matrix.module }} > ci/rendered.yaml
+          kustomize build ${{ matrix.module }} > ci/rendered.yaml
 
       - name: Create k8s Kind Cluster for Cilium
         if: matrix.module == 'modules/cni/cilium-base'
