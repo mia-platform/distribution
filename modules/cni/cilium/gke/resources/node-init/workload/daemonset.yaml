@@ -178,11 +178,10 @@ spec:
             mkdir -p "/tmp/cilium-bootstrap.d"
             date > "/tmp/cilium-bootstrap.d/cilium-bootstrap-time"
             echo "Node initialization complete"
-            v9++
         volumeMounts: []
         terminationMessagePolicy: FallbackToLogsOnError
         securityContext:
-          allowPrivilegeEscalation: false
+          allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
           privileged: false
           seccompProfile:
