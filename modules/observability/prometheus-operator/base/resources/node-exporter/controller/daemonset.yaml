@@ -19,6 +19,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: true
       hostPID: true
+      hostIPC: false
       containers:
       - name: node-exporter
         image: quay.io/prometheus/node-exporter:latest

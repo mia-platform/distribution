@@ -9,14 +9,8 @@ resources:
 - clusterrole-ingress-shim.yaml
 - clusterrole-issuers.yaml
 - clusterrole-orders.yaml
-- clusterrolebinding-approve.yaml
-- clusterrolebinding-certificates.yaml
-- clusterrolebinding-certificatesigningrequests.yaml
-- clusterrolebinding-challenges.yaml
-- clusterrolebinding-clusterissuers.yaml
-- clusterrolebinding-ingress-shim.yaml
-- clusterrolebinding-issuers.yaml
-- clusterrolebinding-orders.yaml
+- clusterrole.yaml
+- clusterrolebinding.yaml
 - role.yaml
 - rolebinding.yaml
 - serviceaccount.yaml
