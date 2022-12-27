@@ -4,6 +4,9 @@ resources:
 - ../base/crds
 - ../base/resources
 - backupstoragelocation.yaml
+images:
+- name: velero/velero-plugin-for-gcp
+  newTag: v1.3.0
 patches:
 - patches/velero.yaml
 secretGenerator:

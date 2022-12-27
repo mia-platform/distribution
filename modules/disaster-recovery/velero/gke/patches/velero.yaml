@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       initContainers:
-      - image: velero/velero-plugin-for-gcp:v1.3.0
+      - image: velero/velero-plugin-for-gcp:latest
         imagePullPolicy: IfNotPresent
         name: velero-plugin-for-gcp
         volumeMounts:
