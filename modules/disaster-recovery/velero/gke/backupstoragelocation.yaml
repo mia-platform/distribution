@@ -1,0 +1,13 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: velero-bsl
+  namespace: dr-system
+  labels:
+    app.kubernetes.io/name: velero
+spec:
+  provider: gcp
+  accessMode: ReadWrite
+  objectStorage:
+    bucket: "mia-disaster-recovery"
+    prefix: "console"
