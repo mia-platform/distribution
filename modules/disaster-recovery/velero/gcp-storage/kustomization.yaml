@@ -13,5 +13,6 @@ generatorOptions:
   disableNameSuffixHash: true
 secretGenerator:
 - name: cloud-credentials
+  namespace: dr-system
   files:
   - ./secrets/cloud-credentials.json
