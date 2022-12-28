@@ -6,7 +6,8 @@ rules:
 - apiGroups:
   - acme.cert-manager.io
   resources:
-  - challenges challenges/status
+  - challenges
+  - challenges/status
   verbs:
   - update
   - patch
@@ -21,7 +22,8 @@ rules:
 - apiGroups:
   - cert-manager.io
   resources:
-  - issuers clusterissuers
+  - issuers
+  - clusterissuers
   verbs:
   - get
   - list
