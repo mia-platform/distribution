@@ -9,6 +9,8 @@ images:
   newTag: v1.3.0
 patches:
 - patches/velero.yaml
+generatorOptions:
+  disableNameSuffixHash: true
 secretGenerator:
 - name: cloud-credentials
   files:
