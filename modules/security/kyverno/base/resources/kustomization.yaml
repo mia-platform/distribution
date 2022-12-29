@@ -7,9 +7,9 @@ commonLabels:
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.8.1
+  newTag: v1.8.5
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.8.1
+  newTag: v1.8.5
 resources:
 - configs
 - rbac

@@ -9,6 +9,8 @@ metadata:
 spec:
   group: kyverno.io
   names:
+    categories:
+    - kyverno
     kind: ClusterBackgroundScanReport
     listKind: ClusterBackgroundScanReportList
     plural: clusterbackgroundscanreports
