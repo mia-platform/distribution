@@ -5,7 +5,7 @@ commonLabels:
   app.kubernetes.io/instance: kube-state-metrics
 images:
 - name: registry.k8s.io/kube-state-metrics/kube-state-metrics
-  newTag: v2.6.0
+  newTag: v2.7.0
 resources:
 - rbac
 - controller
