@@ -6,7 +6,7 @@ spec:
   type: ClusterIP
   ports:
   - name: operator
-    port: 11350
+    port: 443
     targetPort: operator
     protocol: TCP
   selector: {}
