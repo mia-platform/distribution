@@ -6,6 +6,6 @@ resources:
 - backupstoragelocation.yaml
 images:
 - name: velero/velero-plugin-for-gcp
-  newTag: v1.3.0
+  newTag: v1.5.3
 patches:
 - patches/velero.yaml
