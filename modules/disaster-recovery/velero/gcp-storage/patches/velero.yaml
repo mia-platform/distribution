@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+spec:
+  template:
+    spec:
+      initContainers:
+      - image: velero/velero-plugin-for-gcp:latest
+        imagePullPolicy: IfNotPresent
+        name: velero-plugin-for-gcp
+        volumeMounts:
+        - mountPath: /target
+          name: plugins
+      containers:
+      - name: velero
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /credentials/cloud-credentials
+        volumeMounts:
+        - name: cloud-credentials
+          mountPath: /credentials
+      volumes:
+      - name: cloud-credentials
+        secret:
+          secretName: cloud-credentials
