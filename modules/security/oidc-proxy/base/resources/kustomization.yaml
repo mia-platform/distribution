@@ -1,5 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonLabels:
+  app.kubernetes.io/name: kube-oidc-proxy
+  app.kubernetes.io/instance: kube-oidc-proxy
+  app.kubernetes.io/component: kube-oidc-proxy
+namespace: kube-oidc-system
+- name: docker.io/tremolosecurity/kube-oidc-proxy
+  newTag: latest
 resources:
 - configs
 - rbac
