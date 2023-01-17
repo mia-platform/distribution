@@ -15,6 +15,9 @@ data:
   enable-metrics: "true"
   enable-ipv4: "true"
   enable-ipv6: "false"
+  enable-session-affinity: "true"
+  cni-chaining-mode: portmap
+  cluster-pool-ipv4-mask-size: "24"
   custom-cni-conf: "false"
   enable-bpf-clock-probe: "true"
   monitor-aggregation: medium
@@ -66,7 +69,7 @@ data:
   hubble-tls-cert-file: /var/lib/cilium/tls/hubble/server.crt
   hubble-tls-key-file: /var/lib/cilium/tls/hubble/server.key
   hubble-tls-client-ca-files: /var/lib/cilium/tls/hubble/client-ca.crt
-  ipam: kubernetes
+  ipam: cluster-pool
   disable-cnp-status-updates: "true"
   enable-vtep: "false"
   vtep-endpoint: ""
