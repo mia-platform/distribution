@@ -13,9 +13,3 @@ patches:
     - op: add
       path: /data/egress-masquerade-interfaces
       value: eth0
-    - op: add
-      path: /data/cluster-pool-ipv4-cidr
-      value: 10.0.0.0/8
-    - op: add
-      path: /data/cluster-pool-ipv4-mask-size
-      value: "24"

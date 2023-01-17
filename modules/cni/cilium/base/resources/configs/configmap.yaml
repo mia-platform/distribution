@@ -18,6 +18,7 @@ data:
   enable-session-affinity: "true"
   cni-chaining-mode: portmap
   cluster-pool-ipv4-mask-size: "24"
+  cluster-pool-ipv4-cidr: 10.0.0.0/8
   custom-cni-conf: "false"
   enable-bpf-clock-probe: "true"
   monitor-aggregation: medium
