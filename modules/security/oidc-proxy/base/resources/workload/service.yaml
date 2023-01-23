@@ -1,16 +1,11 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
-  labels:
-    app: kube-oidc-proxy
-  name: kube-oidc-proxy
+  name: oidc-proxy
 spec:
+  type: ClusterIP
   ports:
-    - port: 443
-      protocol: TCP
-      targetPort: 443
-  type: LoadBalancer
-  selector:
-    app: kube-oidc-proxy
+  - name: controller
+    port: 443
+    targetPort: controller
+    protocol: TCP

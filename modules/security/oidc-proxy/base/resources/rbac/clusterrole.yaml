@@ -1,27 +1,7 @@
----
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: mia-platform:kube-oidc-proxy
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - "users"
-      - "groups"
-      - "serviceaccounts"
-    verbs:
-      - "impersonate"
-  - apiGroups:
-      - "authentication.k8s.io"
-    resources:
-      - "userextras/scopes"
-      - "userextras/remote-client-ip"
-      - "tokenreviews"
-      # to support end user impersonation
-      - "userextras/originaluser.jetstack.io-user"
-      - "userextras/originaluser.jetstack.io-groups"
-      - "userextras/originaluser.jetstack.io-extra"
-    verbs:
-      - "create"
-      - "impersonate"
+  name: mia-platform:oidc-proxy
+aggregationRule:
+  clusterRoleSelectors:
+  - matchLabels: {}

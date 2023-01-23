@@ -1,0 +1,27 @@
+issuer: https://dex.oidc-proxy-system.svc:5556
+storage:
+  type: kubernetes
+  config:
+    inCluster: true
+web:
+  https: 0.0.0.0:5556
+  tlsCert: /etc/dex/tls/tls.crt
+  tlsKey: /etc/dex/tls/tls.key
+connectors: []
+oauth2:
+  skipApprovalScreen: true
+
+staticClients:
+- name: Kubectl Login
+  id: kubectl-login
+  redirectURIs:
+  - http://localhost:8000
+  secret: c7CmxalKfhn723WilTFUoUaA
+
+enablePasswordDB: true
+staticPasswords:
+- username: admin
+  userID: 9090681a-13fc-4b03-9439-aaf36013a9c3
+  email: admin@example.com
+  # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+  hash: $2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W

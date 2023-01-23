@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oidc-proxy
+spec:
+  template:
+    spec:
+      containers:
+      - name: oidc-proxy
+        env:
+        - name: OIDC_CA_FILE_PATH
+          value: /etc/dex/tls/ca
+        volumeMounts:
+        - name: dex-tls
+          mountPath: /etc/dex/tls
+          readOnly: true
+      volumes:
+      - name: dex-tls
+        secret:
+          secretName: dex-tls

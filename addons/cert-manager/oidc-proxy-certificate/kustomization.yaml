@@ -1,0 +1,66 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+- resources
+patches:
+- target:
+    kind: Deployment
+    name: oidc-proxy
+  patch: |-
+    - op: remove
+      path: /spec/template/spec/initContainers
+    - op: remove
+      path: /spec/template/spec/volumes/1/secret/optional
+    - op: replace
+      path: /metadata/annotations/distribution.mia-platform.eu~1certificate-ca-key
+      value: ca.crt
+replacements:
+- source:
+    kind: Deployment
+    name: oidc-proxy
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: Certificate
+      name: oidc-proxy
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+  - select:
+      kind: Issuer
+      name: oidc-proxy
+    fieldPaths:
+      - .metadata.namespace
+    options:
+      create: true
+- source:
+    kind: Service
+    name: oidc-proxy
+    fieldPath: .metadata.name
+  targets:
+  - select:
+      kind: Certificate
+      name: oidc-proxy
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 0
+      create: true
+- source:
+    kind: Service
+    name: oidc-proxy
+    fieldPath: .metadata.namespace
+  targets:
+  - select:
+      kind: Certificate
+      name: oidc-proxy
+    fieldPaths:
+    - .spec.dnsNames.0
+    - .spec.dnsNames.1
+    options:
+      delimiter: '.'
+      index: 1
+      create: true

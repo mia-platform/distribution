@@ -1,77 +1,136 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: kube-oidc-proxy
-  name: kube-oidc-proxy
+  name: oidc-proxy
+  annotations:
+    distribution.mia-platform.eu/certificate-ca-key: ca
 spec:
-  replicas: 1
+  revisionHistoryLimit: 5
   selector:
-    matchLabels:
-      app: kube-oidc-proxy
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
   template:
-    metadata:
-      labels:
-        app: kube-oidc-proxy
     spec:
-      serviceAccountName: kube-oidc-proxy
+      serviceAccountName: oidc-proxy
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      initContainers:
+      - name: kube-webhook-certgen
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        resources: {}
+        args:
+        - create
+        - --host=$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
+        - --namespace=$(POD_NAMESPACE)
+        - --secret-name=$(SECRET_NAME)
+        - --cert-name=tls.crt
+        - --key-name=tls.key
+        env:
+        - name: SERVICE_NAME
+          value: oidc-proxy
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
       containers:
-        - image: quay.io/jetstack/kube-oidc-proxy:v0.3.0
-          ports:
-            - containerPort: 443
-            - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 8080
-            initialDelaySeconds: 15
-            periodSeconds: 10
-          name: kube-oidc-proxy
-          command: ["kube-oidc-proxy"]
-          args:
-            - "--secure-port=443"
-            - "--tls-cert-file=/etc/oidc/tls/crt.pem"
-            - "--tls-private-key-file=/etc/oidc/tls/key.pem"
-            - "--oidc-client-id=$(OIDC_CLIENT_ID)"
-            - "--oidc-issuer-url=$(OIDC_ISSUER_URL)"
-            - "--oidc-username-claim=$(OIDC_USERNAME_CLAIM)"
-            - "--oidc-ca-file=/etc/oidc/oidc-ca.pem"
-          env:
-            - name: OIDC_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: kube-oidc-proxy-config
-                  key: oidc.client-id
-            - name: OIDC_ISSUER_URL
-              valueFrom:
-                secretKeyRef:
-                  name: kube-oidc-proxy-config
-                  key: oidc.issuer-url
-            - name: OIDC_USERNAME_CLAIM
-              valueFrom:
-                secretKeyRef:
-                  name: kube-oidc-proxy-config
-                  key: oidc.username-claim
-          volumeMounts:
-            - name: kube-oidc-proxy-config
-              mountPath: /etc/oidc
-              readOnly: true
-            - name: kube-oidc-proxy-tls
-              mountPath: /etc/oidc/tls
-              readOnly: true
+      - name: oidc-proxy
+        image: docker.io/tremolosecurity/kube-oidc-proxy:latest
+        resources: {}
+        command:
+        - kube-oidc-proxy
+        args:
+        - --secure-port=$(CONTROLLER_PORT)
+        - --readiness-probe-port=$(READINESS_PORT)
+        - --tls-cert-file=/etc/oidc-proxy/tls/tls.crt
+        - --tls-private-key-file=/etc/oidc-proxy/tls/tls.key
+        - --oidc-client-id=$(OIDC_CLIENT_ID)
+        - --oidc-issuer-url=$(OIDC_ISSUER_URL)
+        - --oidc-username-claim=$(OIDC_USERNAME_CLAIM)
+        - --oidc-groups-claim=$(OIDC_GROUPS_CLAIM)
+        - --oidc-ca-file=$(OIDC_CA_FILE_PATH)
+        env:
+        - name: CONTROLLER_PORT
+          value: VALUE
+        - name: READINESS_PORT
+          value: VALUE
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: oidc-config
+              key: oidc.client-id
+        - name: OIDC_ISSUER_URL
+          valueFrom:
+            secretKeyRef:
+              name: oidc-config
+              key: oidc.issuer-url
+        - name: OIDC_USERNAME_CLAIM
+          valueFrom:
+            secretKeyRef:
+              name: oidc-config
+              key: oidc.username-claim
+        - name: OIDC_GROUPS_CLAIM
+          valueFrom:
+            secretKeyRef:
+              name: oidc-config
+              key: oidc.groups-claim
+        - name: OIDC_CA_FILE_PATH
+          value: /etc/ssl/certs/ca-certificates.crt
+        ports:
+        - name: controller
+          containerPort: 11750
+          protocol: TCP
+        - name: readiness
+          containerPort: 11751
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        readinessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /ready
+            port: readiness
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: oidc-proxy-tls
+          mountPath: /etc/oidc-proxy/tls
+          readOnly: true
       volumes:
-        - name: kube-oidc-proxy-config
-          secret:
-            secretName: kube-oidc-proxy-config
-            items:
-              - key: oidc.ca-pem
-                path: oidc-ca.pem
-        - name: kube-oidc-proxy-tls
-          secret:
-            secretName: kube-oidc-proxy-tls
-            items:
-              - key: tls.crt
-                path: crt.pem
-              - key: tls.key
-                path: key.pem
+      - name: oidc-proxy-tls
+        secret:
+          secretName: oidc-proxy-tls
+          optional: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65600
+        runAsGroup: 65600
+        fsGroup: 65600

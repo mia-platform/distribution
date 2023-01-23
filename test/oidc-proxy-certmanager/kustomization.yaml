@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../modules/security/cert-manager/base
+- ../../modules/security/oidc-proxy/base
+components:
+- ../../addons/cert-manager/oidc-proxy-certificate

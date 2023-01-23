@@ -1,10 +1,10 @@
-kind: ClusterRoleBinding
+kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: mia-platform:oidc-proxy
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
+  kind: Role
   name: mia-platform:oidc-proxy
 subjects:
 - kind: ServiceAccount

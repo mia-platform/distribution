@@ -8,7 +8,7 @@ images:
 - name: docker.io/velero/velero-plugin-for-aws
   newTag: v1.5.1
 patches:
-- patches/velero.yaml
+- path: patches/velero.yaml
 replacements:
 - source:
     kind: Deployment
