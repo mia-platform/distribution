@@ -8,8 +8,10 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - reportchangerequests
-  - clusterreportchangerequests
+  - admissionreports
+  - clusteradmissionreports
+  - backgroundscanreports
+  - clusterbackgroundscanreports
   verbs:
   - create
   - delete
