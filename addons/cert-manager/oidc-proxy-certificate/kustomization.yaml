@@ -3,14 +3,13 @@ kind: Component
 resources:
 - resources
 patches:
+- path: patches/oidc-deployment.yaml
 - target:
     kind: Deployment
     name: oidc-proxy
   patch: |-
     - op: remove
       path: /spec/template/spec/initContainers
-    - op: remove
-      path: /spec/template/spec/volumes/1/secret/optional
     - op: replace
       path: /metadata/annotations/distribution.mia-platform.eu~1certificate-ca-key
       value: ca.crt

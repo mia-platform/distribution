@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oidc-proxy
+spec:
+  template:
+    spec:
+      volumes:
+      - name: oidc-proxy-tls
+        secret:
+          optional: null
