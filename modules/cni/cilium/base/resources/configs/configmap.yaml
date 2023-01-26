@@ -6,6 +6,7 @@ data:
   identity-allocation-mode: crd
   cilium-endpoint-gc-interval: 5m0s
   nodes-gc-interval: 5m0s
+  skip-cnp-status-startup-clean: "false"
   disable-endpoint-crd: "false"
   debug: "false"
   enable-policy: default
@@ -15,10 +16,6 @@ data:
   enable-metrics: "true"
   enable-ipv4: "true"
   enable-ipv6: "false"
-  enable-session-affinity: "true"
-  cni-chaining-mode: portmap
-  cluster-pool-ipv4-mask-size: "24"
-  cluster-pool-ipv4-cidr: 10.0.0.0/8
   custom-cni-conf: "false"
   enable-bpf-clock-probe: "true"
   monitor-aggregation: medium
@@ -34,6 +31,7 @@ data:
   cluster-id: "0"
   tunnel: vxlan
   enable-l7-proxy: "true"
+  cni-chaining-mode: portmap
   enable-ipv4-masquerade: "true"
   enable-ipv6-masquerade: "true"
   enable-xt-socket-fallback: "true"
@@ -46,6 +44,7 @@ data:
   enable-health-check-nodeport: "true"
   node-port-bind-protection: "true"
   enable-auto-protect-node-port-range: "true"
+  enable-session-affinity: "true"
   enable-svc-source-range-check: "true"
   enable-l2-neigh-discovery: "true"
   arping-refresh-period: 30s
@@ -57,7 +56,7 @@ data:
   operator-api-serve-addr: 127.0.0.1:9234
   enable-hubble: "true"
   hubble-socket-path: /var/run/cilium/hubble.sock
-  hubble-metrics-server: ":9965"
+  hubble-metrics-server: :9965
   hubble-metrics:
     dns:query;ignoreAAAA
     drop
@@ -65,12 +64,14 @@ data:
     flow
     icmp
     http
-  hubble-listen-address: ":4244"
+  hubble-listen-address: :4244
   hubble-disable-tls: "false"
   hubble-tls-cert-file: /var/lib/cilium/tls/hubble/server.crt
   hubble-tls-key-file: /var/lib/cilium/tls/hubble/server.key
   hubble-tls-client-ca-files: /var/lib/cilium/tls/hubble/client-ca.crt
   ipam: cluster-pool
+  cluster-pool-ipv4-cidr: 10.0.0.0/8
+  cluster-pool-ipv4-mask-size: "24"
   disable-cnp-status-updates: "true"
   enable-vtep: "false"
   vtep-endpoint: ""

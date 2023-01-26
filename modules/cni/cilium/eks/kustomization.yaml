@@ -7,9 +7,6 @@ patches:
     kind: ConfigMap
     name: cilium-config
   patch: |-
-    - op: replace
-      path: /data/ipam
-      value: cluster-pool
     - op: add
       path: /data/egress-masquerade-interfaces
       value: eth0

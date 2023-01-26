@@ -20,6 +20,13 @@ patches:
     - op: replace
       path: /data/ipv4-native-routing-cidr
       value: "CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR"
+    - op: replace
+      path: /data/ipam
+      value: kubernetes
+    - op: delete
+      path: /data/cluster-pool-ipv4-cidr
+    - op: delete
+      path: /data/cluster-pool-ipv4-mask-size
 - target:
     kind: DaemonSet
     name: cilium
