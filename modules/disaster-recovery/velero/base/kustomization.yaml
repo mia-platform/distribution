@@ -6,7 +6,7 @@ resources:
 - minio
 images:
 - name: docker.io/velero/velero-plugin-for-aws
-  newTag: v1.5.1
+  newTag: v1.5.3
 patches:
 - path: patches/velero.yaml
 replacements:

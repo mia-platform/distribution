@@ -4,7 +4,7 @@ resources:
 - ../base/crds
 - ../base/resources
 images:
-- name: velero/velero-plugin-for-gcp
+- name: docker.io/velero/velero-plugin-for-gcp
   newTag: v1.5.3
 patches:
 - path: patches/velero.yaml
