@@ -3,6 +3,8 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: cert-manager
   app.kubernetes.io/instance: cert-manager
+configurations:
+- kustomizeconfig.yaml
 resources:
 - configs
 - rbac

@@ -33,6 +33,8 @@ spec:
         - --leader-election-namespace=$(POD_NAMESPACE)
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --enable-certificate-owner-ref=$(ENABLE_CERTIFICATE_REF)
+        - --acme-http01-solver-image=$(ACMERESOLVER_IMAGE)
+        - --max-concurrent-challenges=$(MAX_CONCURRENT_CHALLENGES)
         env:
         - name: POD_NAMESPACE
           valueFrom:
@@ -42,6 +44,10 @@ spec:
           value: "false"
         - name: METRICS_PORT
           value: PORT
+        - name: ACMERESOLVER_IMAGE
+          value: quay.io/jetstack/cert-manager-acmesolver:latest
+        - name: MAX_CONCURRENT_CHALLENGES
+          value: "60"
         ports:
         - name: metrics
           containerPort: 11250
