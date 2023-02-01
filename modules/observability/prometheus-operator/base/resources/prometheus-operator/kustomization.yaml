@@ -3,13 +3,6 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: prometheus-operator
   app.kubernetes.io/instance: prometheus-operator
-images:
-- name: quay.io/prometheus-operator/prometheus-operator
-  newTag: v0.61.1
-- name: quay.io/prometheus-operator/prometheus-config-reloader
-  newTag: v0.61.1
-- name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v20220916-gd32f8c343
 resources:
 - controller
 - rbac
