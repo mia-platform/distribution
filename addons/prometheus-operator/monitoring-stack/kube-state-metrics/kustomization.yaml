@@ -4,7 +4,7 @@ commonLabels:
   app.kubernetes.io/name: kube-state-metrics
   app.kubernetes.io/instance: kube-state-metrics
 resources:
-- servicemonitor.yaml
+- podmonitor.yaml
 - networkpolicy.yaml
 configurations:
 - kustomizeconfig.yaml

@@ -2,10 +2,23 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: kube-dns
-  namespace: kube-system
 spec:
   podMetricsEndpoints:
   - path: /metrics
     port: metrics
+    metricRelabelings:
+    - action: keep
+      regex: (coredns.*|skydns.*|kubedns.*)
+      sourceLabels:
+      - __name__
+    - action: drop
+      # deprecated metrics, don't count on them
+      regex: coredns_cache_misses_total
+      sourceLabels:
+      - __name__
+  jobLabel: k8s-app
+  namespaceSelector:
+    matchNames:
+    - kube-system
   selector:
     matchLabels: {}

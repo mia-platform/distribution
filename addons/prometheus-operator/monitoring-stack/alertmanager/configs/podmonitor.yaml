@@ -6,7 +6,18 @@ spec:
   podMetricsEndpoints:
   - path: /metrics
     port: web
+    metricRelabelings:
+    - action: keep
+      regex: alertmanager.*
+      sourceLabels:
+      - __name__
   - path: /metrics
     port: reloader-web
+    metricRelabelings:
+    - action: keep
+      regex: reloader.*
+      sourceLabels:
+      - __name__
+  jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}

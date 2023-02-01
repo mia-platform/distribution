@@ -13,6 +13,11 @@ spec:
       sourceLabels:
       - __meta_kubernetes_pod_node_name
       targetLabel: instance
+    metricRelabelings:
+    - action: keep
+      regex: node.*
+      sourceLabels:
+      - __name__
   jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}

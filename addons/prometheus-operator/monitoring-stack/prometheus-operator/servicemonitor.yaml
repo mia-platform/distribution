@@ -14,5 +14,15 @@ spec:
           name: webhook-tls
           key: ca
           optional: false
+    metricRelabelings:
+    - action: keep
+      regex: prometheus_operator.*
+      sourceLabels:
+      - __name__
+    - action: drop
+      # deprecated metrics, don't count on them
+      regex: (prometheus_operator_alertmanager_config_validation_errors_total|prometheus_operator_alertmanager_config_validation_triggered_total|prometheus_operator_rule_validation_errors_total|prometheus_operator_rule_validation_triggered_total)
+      sourceLabels:
+      - __name__
   selector:
     matchLabels: {}
