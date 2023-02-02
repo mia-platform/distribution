@@ -33,7 +33,7 @@ spec:
         - "--output-format=json"
         - "--klogLevel=0"
         ports:
-        - name: web
+        - name: metrics
           containerPort: 11150
           protocol: TCP
         securityContext:

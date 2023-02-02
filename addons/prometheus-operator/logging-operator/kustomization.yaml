@@ -9,7 +9,7 @@ replacements:
     fieldPath: spec.selector.matchLabels
   targets:
   - select:
-      kind: ServiceMonitor
+      kind: PodMonitor
       name: logging-operator
     fieldPaths:
     - spec.selector.matchLabels
@@ -24,7 +24,7 @@ replacements:
     fieldPath: metadata.namespace
   targets:
   - select:
-      kind: ServiceMonitor
+      kind: PodMonitor
       name: logging-operator
     fieldPaths:
     - metadata.namespace
