@@ -4,10 +4,15 @@ metadata:
   name: kube-green
 spec:
   endpoints:
-  - honorLabels: false
-    interval: 60s
-    path: /metrics
-    scrapeTimeout: 30s
+  - path: /metrics
     port: metrics
+    honorLabels: false
+    interval: 60s
+    scrapeTimeout: 30s
+    metricRelabelings:
+    - action: keep
+      regex: controller_runtime.*
+      sourceLabels:
+      - __name__
   selector:
     matchLabels: {}
