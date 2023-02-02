@@ -7,5 +7,5 @@ spec:
   - name: peer-service
     port: 443
     protocol: TCP
-    targetPort: 4244
+    targetPort: peer-service
   internalTrafficPolicy: Local

@@ -7,4 +7,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 4245
+    targetPort: grpc
