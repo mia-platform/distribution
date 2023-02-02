@@ -4,10 +4,16 @@ metadata:
   name: velero
 spec:
   podMetricsEndpoints:
-  - honorLabels: false
+  - path: /metrics
+    targetPort: metrics
+    honorLabels: false
     interval: 60s
-    path: /metrics
     scrapeTimeout: 30s
-    port: metrics
+    metricRelabelings:
+    - action: keep
+      regex: velero.*
+      sourceLabels:
+      - __name__
+  jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}
