@@ -9,7 +9,7 @@ replacements:
     fieldPath: spec.selector.matchLabels
   targets:
   - select:
-      kind: ServiceMonitor
+      kind: PodMonitor
       name: cert-manager
     fieldPaths:
     - spec.selector.matchLabels
@@ -24,7 +24,7 @@ replacements:
     fieldPath: metadata.namespace
   targets:
   - select:
-      kind: ServiceMonitor
+      kind: PodMonitor
       name: cert-manager
     fieldPaths:
     - metadata.namespace
