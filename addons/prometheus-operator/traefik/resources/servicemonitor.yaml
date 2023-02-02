@@ -4,10 +4,16 @@ metadata:
   name: traefik
 spec:
   endpoints:
-  - honorLabels: false
-    interval: 60s
-    path: /metrics
-    scrapeTimeout: 30s
+  - path: /metrics
     port: traefik
+    honorLabels: false
+    interval: 60s
+    scrapeTimeout: 30s
+    metricRelabelings:
+    - action: keep
+      regex: traefik.*
+      sourceLabels:
+      - __name__
+  jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}
