@@ -7,40 +7,29 @@ and persistent volumes. It provides disaster recovery, data migration, and stora
 
 ## What the base module contains
 
-- **CRDs:**
-  - `Backups`
-  - `BackupStorageLocations`
-  - `DeleteBackupRequests`
-  - `DownloadRequests`
-  - `PodVolumeBackups`
-  - `PodVolumeRestores`
-  - `ResticRepositories`
-  - `Restores`
-  - `Schedules`
-  - `ServerStatusRequests`
-  - `VolumeSnapShotLocations`
+- **CRDs:** Velero custom resource definitions
 - **Minio:**
   - **Configs:** configurations of related resources (e.g. `BackupStorageLocation`, network
-  - policies, Minio authentication, etc.)
+  policies, Minio authentication, etc.)
   - **Controller:** Minio deployment and service
   - **RBAC:** Minio service account
 - **Resources (Velero):**
   - **Configs:** configurations of related resources (namespace, network policies)
   - **Controller:** base deployment for Velero
-  - **RBAC:** service account, clusterrole and binding, with all the permissions needed to manage Velero resources
-- **Patches:** a patch to add the GCP Velero plugin as `initContainer` and mount the GCP credentials to Velero container
+  - **RBAC:** service account, `ClusterRole` and `ClusterRoleBinding`, with all the permissions needed to manage Velero resources
 
 ## Flavors
 
 ### GCP Storage
 
-- Patches and settings to use **GCP storage** instead of Minio. Follow the [instructions below](#gcp-storage-1) for a correct configuration.
+- Includes settings and patches to use **GCP storage** instead of Minio.
+Follow the [instructions below](#gcp-storage-1) for a correct configuration.
 
 ## Compatibility Matrix
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.0.0          | 1.9.5	        |
+| 1.24.0         | 1.9.5	        |
 
 ## User customization
 
