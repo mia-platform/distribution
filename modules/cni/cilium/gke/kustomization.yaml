@@ -23,9 +23,9 @@ patches:
     - op: replace
       path: /data/ipam
       value: kubernetes
-    - op: delete
+    - op: remove
       path: /data/cluster-pool-ipv4-cidr
-    - op: delete
+    - op: remove
       path: /data/cluster-pool-ipv4-mask-size
 - target:
     kind: DaemonSet
