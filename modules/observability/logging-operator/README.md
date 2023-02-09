@@ -1,8 +1,9 @@
 # Logging Operator Module
 
 The Banzai Cloud Logging Operator is an open-source tool that helps you manage logging
-resources in your Kubernetes cluster. It automates the deployment of popular logging tools
-such as Fluentd, Elasticsearch, and Kibana, and provides a unified logging solution for your cluster.
+resources in your Kubernetes cluster. It manages the deployment of a fluentbit-fluentd 
+stack that can be configured to send logs to other services like Elasticsearch, Loki, 
+Sumologic, etc., providing a unified logging solution for your cluster.
 
 [Here is the link to Logging Operator official repository.](https://github.com/banzaicloud/logging-operator)
 
