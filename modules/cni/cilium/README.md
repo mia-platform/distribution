@@ -31,7 +31,7 @@ Note: When using this module, it is expected that the AWS CNI Daemonset is disab
   - `ipam: kubernetes`
   - `cluster-pool-ipv4-cidr` removed  
   - `cluster-pool-ipv4-mask-size` removed
-- Creates the path `/home/kubernetes/bin` in the Daemonsets and uses it as `BIN_PATH`
+- Changes the path `/opt/cni/bin` to `/home/kubernetes/bin` in the Daemonsets.
 
 ## Compatibility Matrix
 
