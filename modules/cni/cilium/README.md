@@ -39,5 +39,10 @@ The Cilium module configures the *Container Network Interface* (CNI) necessary t
 
 ## User customization
 
+### Base, EKS
 In the `cilium-config` configmap:
-- `ipv4-native-routing-cidr`: Set up your pods' CIDR
+- `ipv4-native-routing-cidr`: Set up your pods' CIDR. By default this value is `10.10.0.0/16`
+
+### GKE
+In the `cilium-config` configmap:
+- `ipv4-native-routing-cidr`: Set up your pods' CIDR. It needs to be initialized with the pod cidr selected in cluster creation.
