@@ -19,6 +19,8 @@ The Cilium module configures the *Container Network Interface* (CNI) necessary t
 
 - Adds `egress-masquerad-interfaces: eth0` in the Cilium config.
 
+Note: When using this module, it is expected that the AWS CNI Daemonset is disabled in the cluster
+
 ### GKE
 
 - Deploys the `node-init` daemonset with the correspoing RBACs. 
