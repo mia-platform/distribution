@@ -8,9 +8,9 @@ Kube-green is a Kubernetes addon that allows you to shut down the workloads you 
 
 - **CRDs:** Kube-green custom resource definitions
 - **Resources:**
-  - **Configs:** configurations of related resources.
+  - **Configs:** configurations of namespace and networkpolicies. Contains a validating webhook for Kube-Green CRD.
   - **Workload:** deployments and services for Kube-green controller and its service
-  - **RBAC:** The necessary service account, `ClusterRole` and `ClusterRoleBinding`.
+  - **RBAC:** The necessary service account, `ClusterRole` and `ClusterRoleBinding` and their namespaced counterparts.
 
 ## Flavors
 
