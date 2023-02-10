@@ -1,10 +1,8 @@
 # Kyverno Module
 
-Kyverno is a Kubernetes policy manager, that via the use of CRDs can enforce policies at cluster or namespace
-level to control what is been deployed and ensuring that certain level of security is meet or that some
-functionality are restricted.  
-It also allow for changing resources during apply time or generating new resources for automating certain feature
-or ensuring that certain fields are automatically compiled.
+Kyverno is a Kubernetes policy manager that leverages CRDs to enforce policies at cluster or namespace level. These policies filter what is been deployed and ensure that they meet the defined security specifications or that some functionality are restricted.  
+Kyverno can also patch resources at apply time or generate them from scratch in order to automate certain features
+or ensure that necessary fields are automatically compiled.
 
 [Here is the link to official repository.](https://github.com/kyverno/kyverno)
 
@@ -30,6 +28,5 @@ This module has no flavors
 
 ## User customization
 
-No customization is needed, you have to create your `Policies` or `ClusterPolicies` to apply to your cluster,
-a good start is to explore the [kyverno policies repository](https://github.com/kyverno/policies) or explore them
-in the [documentation](https://kyverno.io/policies/).
+No customization is needed to use Kyverno, you can start by defining your `Policies` or `ClusterPolicies` and apply them your cluster.
+To view some examples, you can explore the [kyverno policies repository](https://github.com/kyverno/policies) or check them in the [documentation](https://kyverno.io/policies/).
