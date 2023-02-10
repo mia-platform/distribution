@@ -26,3 +26,4 @@ This module has no flavors
 
 No customization is strictly needed. The module is ready-to-use in each of its flavors.
 
+[Here is the link to Kube-green official repository.]: "https://github.com/kube-green/kube-green"
