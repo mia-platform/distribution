@@ -1,15 +1,15 @@
 # Traefik Module
 
-Kube-green is a Kubernetes addon that allows you to shut down the workload you don't need with the definition of *schedules*.
+Kube-green is a Kubernetes addon that allows you to shut down the workloads you don't need with the definition of *schedules*.
 
 [Here is the link to Kube-green official repository.]
 
 ## What the base module contains
 
 - **CRDs:** Kube-green custom resource definitions
-- **Resources (Traefik ingress):**
+- **Resources:**
   - **Configs:** configurations of related resources.
-  - **Workload:** deployments and services for Kube-green ingress and its dashboards
+  - **Workload:** deployments and services for Kube-green controller and its service
   - **RBAC:** The necessary service account, `ClusterRole` and `ClusterRoleBinding`.
 
 ## Flavors
@@ -20,7 +20,7 @@ This module has no flavors
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.24.0         | 0.5.0          |
+| 1.24.0         | 0.4.0          |
 
 ## User customization
 
