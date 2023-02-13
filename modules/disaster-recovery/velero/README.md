@@ -27,9 +27,9 @@ Follow the [instructions below](#gcp-storage-1) for a correct configuration.
 
 ## Compatibility Matrix
 
-| Module Version | Tool Version   |
-|----------------|----------------|
-| 1.24.0         | 1.9.5	        |
+| Module Version | Velero			    | GCP Plugin |
+|----------------|----------------|------------|
+| 1.24.0         | 1.9.5	        | 1.5.3      |
 
 ## User customization
 
