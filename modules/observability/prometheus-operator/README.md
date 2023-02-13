@@ -4,7 +4,7 @@ The Quay.io Prometheus Operator is an open-source tool that helps you manage Pro
 It automates the deployment of Prometheus, Alertmanager, and other components, and provides
 an easy way to monitor and alert on your cluster resources and custom applications.
 
-[Here is the link to Logging Operator official repository.](https://quay.io/prometheus-operator)
+[Here is the link to Prometheus Operator official repository.](https://quay.io/prometheus-operator)
 
 ## What the base module contains
 
