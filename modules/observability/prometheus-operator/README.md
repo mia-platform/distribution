@@ -17,9 +17,9 @@ an easy way to monitor and alert on your cluster resources and custom applicatio
 
 ## Compatibility Matrix
 
-| Module Version | Prometheus Operator   | Node Exporter | Kube State Metrics |
-|----------------|-----------------------|---------------|--------------------|
-| 1.24.0         | 0.62.0	      			   | 1.5.0         | 2.7.0              |
+| Module Version | Prometheus Operator | Node Exporter | Kube State Metrics |
+|----------------|---------------------|---------------|--------------------|
+| 1.24.0         | 0.62.0              | 1.5.0         | 2.7.0              |
 
 ## User customization
 
