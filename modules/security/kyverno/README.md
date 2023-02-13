@@ -1,6 +1,6 @@
 # Kyverno Module
 
-Kyverno is a Kubernetes policy manager that leverages CRDs to enforce policies at cluster or namespace level. These policies filter what is been deployed and ensure that they meet the defined security specifications or that some functionality are restricted.  
+Kyverno is a Kubernetes policy manager that leverages CRDs to enforce policies at the cluster or namespace level. These policies filter what is being deployed, and ensure that they meet the defined security specifications or that some functionalities are restricted.  
 Kyverno can also patch resources at apply time or generate them from scratch in order to automate certain features
 or ensure that necessary fields are automatically compiled.
 
@@ -10,7 +10,7 @@ or ensure that necessary fields are automatically compiled.
 
 - **CRDs:** Kyverno custom resource definitions
 - **Resources:**
-  - **Configs:** configuration and network policies for Kyverno
+  - **Configs:** configurations and network policies for Kyverno
   - **Workload:** the kyverno deployment and service for exposing the generated webhooks
   - **RBAC:** `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding` `Role` and `RoleBinding` needed by kyverno,
 		some of the `ClusterRole`s will be aggregated in the `admin` one for allowing users that bind to it to operate
