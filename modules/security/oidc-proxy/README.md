@@ -1,7 +1,7 @@
 # OIDC Proxy Module
 
-The OIDC Proxy is a reverse proxy for Kubernetes authentication via and external provider using the OIDC standard,
-that can be used when you cannot setup the api-server directly, like with managed kubernetes services like GKE, AKS etc.
+The OIDC Proxy is a reverse proxy for Kubernetes authentication via an external provider using the OIDC standard.
+It can be used when you cannot set up the API server directly, like with managed Kubernetes services such as GKE, AKS, etc.
 
 The module is using the forked version mantained by Tremolo Security but the original work has been done by JetStack.
 
@@ -17,19 +17,19 @@ The module is using the forked version mantained by Tremolo Security but the ori
   - **Configs:** configurations for oidc-proxy
   - **Controller:** deployment and service for oidc-proxy
   - **RBAC:** `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding`, `Role` and `RoleBinding` needed by odic-proxy
-- **Patches:** patches need for working with the automatic certificate generator
+- **Patches:** patches needed for working with the automatic certificate generator
 
 ## Flavors
 
 ## Base
 
-In this flavor in addition to the proxy we will deploy an internal instance of dex that you can use for testing
-porpuse and is not intended for production use. Even if you want to deploy it with dex we reccomend to use the
-`external-oidc` flavor and configure it to use your hardened and production ready dex deployment.
+In this flavor, in addition to the proxy, we will deploy an internal instance of dex that you can use for testing
+purposes and is not intended for production use. Even if you want to deploy it with dex we recommend using the
+`external-oidc` flavor and configuring it to use your hardened and production-ready dex deployment.
 
 ## External OIDC
 
-In 99% of your usage you likely need this flavor; it will drop Dex as an internal provider for allowing you to
+In 99% of cases you likely need this flavor; it will drop Dex as an internal provider allowing you to
 specify the external one you would like to use for authenticating in your cluster.
 
 ## Compatibility Matrix
@@ -48,6 +48,6 @@ deployment and that contains at least this keys:
 - oidc.username-claim
 - oidc.groups-claim
 
-The values of the keys depends on your provider and its documentation. Additionally if your provider is expesed
-with a certificate firmed by a private CA you can patch the deployment with a volume that contains it and
-patching the path inside the env variabile named `OIDC_CA_FILE_PATH`.
+The values of the keys depend on your provider and its documentation. Additionally, if your provider is exposed
+with a certificate firmed by a private CA, you can patch the deployment with a volume that contains it and
+patching the path inside the env variable named `OIDC_CA_FILE_PATH`.
