@@ -16,4 +16,4 @@ This add-on defines and deploys the logging stack of the Logging operator. It co
 
 ## User customization
 
-No customization is needed
+No customization is needed. The add-on is ready-to-use.
