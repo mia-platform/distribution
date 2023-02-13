@@ -27,9 +27,9 @@ Follow the [instructions below](#gcp-storage-1) for a correct configuration.
 
 ## Compatibility Matrix
 
-| Module Version | Velero | GCP Plugin |
-|----------------|--------|------------|
-| 1.24.0         | 1.9.5  | 1.5.3      |
+| Module Version | Velero | Minio                        | GCP Plugin | AWS Plugin |
+|----------------|--------|------------------------------|------------|------------|
+| 1.24.0         | 1.9.5  | RELEASE.2022-10-02T19-29-29Z | 1.5.3      | 1.5.3      |
 
 ## User customization
 
