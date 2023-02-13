@@ -9,10 +9,12 @@ With Cert-manager you can define certificate issuers, check the status of the ce
 
 - **CRDs:** Cert-manager custom resource definitions
 - **Resources:**
-  - **Ca-injector:** deployment responsible of injecting the certificates in the various cluster resources.
-  - **Cert-manager:** deployment responsible of managing the life-cycle of certificates.
+  - **Ca-injector:** Deployment responsible of injecting the certificates in the various cluster resources.
+  - **Cert-manager:** Deployment responsible of managing the life-cycle of certificates.
+  - **Configs:** Namespace and networkpolicy to manage the Cert-manager resources.
+  - **Webhook:** A webhook responsible for validation, defaulting and conversion (converts version of the resources to support multiple versin simultaneously).
   - **RBAC:** service account, `ClusterRole` and `ClusterRoleBinding`, with all the
-  permissions needed to manage cert-manager resources
+  permissions needed to manage the Cert-manager resources.
 
 
 ## Compatibility Matrix
