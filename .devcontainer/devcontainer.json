@@ -2,16 +2,20 @@
 	"name": "Mia-Platform Distribution",
 	"image": "mcr.microsoft.com/vscode/devcontainers/base:0-bullseye",
 	"remoteUser": "vscode",
-	"settings": {
-		"files.eol": "\n",
-		"files.insertFinalNewline": true,
-		"files.trimFinalNewlines": true,
-		"files.trimTrailingWhitespace": false,
-		"editor.formatOnSave": true
-	},
-	"extensions": [
-		"editorconfig.editorconfig",
-		"ms-kubernetes-tools.vscode-kubernetes-tools",
-		"davidanson.vscode-markdownlint"
-	]
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"files.eol": "\n",
+				"files.insertFinalNewline": true,
+				"files.trimFinalNewlines": true,
+				"files.trimTrailingWhitespace": false,
+				"editor.formatOnSave": true
+			},
+			"extensions": [
+				"editorconfig.editorconfig",
+				"davidanson.vscode-markdownlint",
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			]
+		}
+	}
 }
