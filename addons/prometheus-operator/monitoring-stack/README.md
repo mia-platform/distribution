@@ -1,7 +1,8 @@
 # Monitoring stack add-on for Prometheus operator
 
 This add-on defines a complete monitoring stack needed to export the metrics of the cluster.
-It configures the `Prometheus` and `Alertmanager` resources, `kube-state-metrics`, and the `Monitors` that enable harvesting the metrics.
+It configures `Prometheus` and `Alertmanager` custom resources, `kube-state-metrics`, `node-exporter` and the `Monitors` that enable harvesting the metrics.
+
 ## What the Add-On Contains
 
 **Resurces:**
