@@ -6,13 +6,13 @@ It configures `Prometheus` and `Alertmanager` custom resources, `kube-state-metr
 ## What the Add-On Contains
 
 **Resurces:**
-- **Alertmanager:** Deploys the Alertmanager resource with its configurations.
-- **Dns-service:** Deploys the podMonitor resource needed to track the cluster's `dns services`.
-- **Kube-state-metrics:** Defines the podMonitor resource needed to track the cluster's `kube*` pods.
-- **Kubelet:** Defines the podMonitor resource needed to track the kubelet's services.
-- **Node-exporter:** Defines the podMonitor resource needed to track the cluster's `node-exporter` pods.
-- **Prometheus:** Deploys the Prometheus resource with its configurations.
-- **Prometheus-operator:** Defines the ServiceMonitor needed to track the `prometheus-operator` services.
+- **Alertmanager:** Defines the `Alertmanager` resource with its configurations.
+- **Dns-service:** Defines the `podMonitor` resource needed to track the cluster's `dns services`.
+- **Kube-state-metrics:** Defines the `podMonitor` resource needed to track the cluster's `kube*` pods.
+- **Kubelet:** Defines the `podMonitor` resource needed to track the kubelet's services.
+- **Node-exporter:** Defines the `podMonitor` resource needed to track the cluster's `node-exporter` pods.
+- **Prometheus:** Defines the `Prometheus` resource with its configurations.
+- **Prometheus-operator:** Defines the `ServiceMonitor` resource needed to track the `prometheus-operator` services.
 
 ## Compatibility Matrix
 
@@ -22,4 +22,4 @@ It configures `Prometheus` and `Alertmanager` custom resources, `kube-state-metr
 
 ## User customization
 
-No customization is needed
+No customization is needed. The add-on is ready-to-use.
