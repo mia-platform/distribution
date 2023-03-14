@@ -1,13 +1,15 @@
-# Prometheus Operator Resources for cert-manager
+# Prometheus Operator Resources for `cert-manager`
 
-This add-on adds support for Prometheus Operator resource for the cert-manager module workloads
+This add-on adds support for Prometheus Operator resource for the cert-manager module workloads.  
 To work properly it needs both the Prometheus Operator and Cert Manager module.
 
-## What the Add-On Contains
+The add-on will add the appropriate NetworkPolicy for allowing the comunication between Prometheus and the
+cert-manager controller and the PodMonitor resource for letting the Prometheus Operator to generate the correct
+configuration for scraping the data.
 
-- **Resources:** the `PodMonitor` resource needed for allowing Prometheus Operator to correctly
-	setup Prometheus for scraping the cert-manager workloads and the `NetworkPolicy` for allowing Prometheus to reach
-	the exposed port.
+## Add-On Contents
+
+- **[resources](./resources):** containst the `PodMonitor` and `NetworkPolicy` resources
 
 ## Compatibility Matrix
 
