@@ -4,5 +4,5 @@ resources:
 - ../../modules/security/cert-manager/base
 - ../../modules/observability/prometheus-operator/base
 components:
-- ../../addons/prometheus-operator/monitoring-stack
 - ../../addons/prometheus-operator/cert-manager
+- ../../addons/prometheus-operator/monitoring-stack

@@ -16,5 +16,4 @@ spec:
       sourceLabels:
       - __name__
   jobLabel: app.kubernetes.io/name
-  selector:
-    matchLabels: {}
+  selector: {}
