@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager
+  labels:
+    distribution.mia-platform.eu/role: controller
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: cert-manager
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+      - name: cert-manager
+        image: quay.io/jetstack/cert-manager-controller:latest
+        resources: {}
+        args:
+        - --v=2
+        - --leader-elect
+        - --metrics-listen-address=0.0.0.0:$(METRICS_PORT)
+        - --leader-election-namespace=$(POD_NAMESPACE)
+        - --cluster-resource-namespace=$(POD_NAMESPACE)
+        - --enable-certificate-owner-ref=$(ENABLE_CERTIFICATE_REF)
+        - --acme-http01-solver-image=$(ACMERESOLVER_IMAGE)
+        - --max-concurrent-challenges=$(MAX_CONCURRENT_CHALLENGES)
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: ENABLE_CERTIFICATE_REF
+          value: "false"
+        - name: METRICS_PORT
+          value: PORT
+        - name: ACMERESOLVER_IMAGE
+          value: quay.io/jetstack/cert-manager-acmesolver:latest
+        - name: MAX_CONCURRENT_CHALLENGES
+          value: "60"
+        ports:
+        - name: metrics
+          containerPort: 11200
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 48001
+        runAsGroup: 48001
+        fsGroup: 48001

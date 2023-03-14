@@ -14,49 +14,46 @@ images:
   newTag: v1.11.0
 resources:
 - configs
-- cainjector
-- cert-manager
-- webhook
+- rbac
+- workloads
 replacements:
 - source:
-    kind: Deployment
-    name: cert-manager-webhook
     fieldPath: .metadata.namespace
-  targets:
-  - select:
-      kind: ValidatingWebhookConfiguration
-    fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
-    options:
-      delimiter: '/'
-      index: 0
-      create: true
-  - select:
-      kind: MutatingWebhookConfiguration
-    fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
-    options:
-      delimiter: '/'
-      index: 0
-      create: true
-- source:
     kind: Deployment
     name: cert-manager-webhook
-    fieldPath: .spec.template.spec.containers.[name=webhook].env.[name=SECRET_NAME].value
   targets:
-  - select:
+  - fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      create: true
+      delimiter: /
+    select:
       kind: ValidatingWebhookConfiguration
-    fieldPaths:
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
-      delimiter: '/'
-      index: 1
       create: true
-  - select:
+      delimiter: /
+    select:
       kind: MutatingWebhookConfiguration
-    fieldPaths:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=webhook].env.[name=SECRET_NAME].value
+    kind: Deployment
+    name: cert-manager-webhook
+  targets:
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
-      delimiter: '/'
-      index: 1
       create: true
+      delimiter: /
+      index: 1
+    select:
+      kind: ValidatingWebhookConfiguration
+  - fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    options:
+      create: true
+      delimiter: /
+      index: 1
+    select:
+      kind: MutatingWebhookConfiguration

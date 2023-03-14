@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/name: webhook
+  app.kubernetes.io/instance: webhook
+resources:
+- configs
+- rbac
+- workloads
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
+    kind: Deployment
+    name: cert-manager-webhook
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-cert-manager-webhook
