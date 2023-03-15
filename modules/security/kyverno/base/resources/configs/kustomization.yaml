@@ -4,7 +4,8 @@ resources:
 - configmap.yaml
 - namespace.yaml
 - networkpolicies.yaml
+- poddistruptionbudget.yaml
 configMapGenerator:
-- name: kyverno-metrics
-  files:
+- files:
   - namespaces=kyverno-metrics.json
+  name: kyverno-metrics

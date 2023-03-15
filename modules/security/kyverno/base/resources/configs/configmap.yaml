@@ -14,13 +14,10 @@ data:
     [TokenReview,*,*]
     [SubjectAccessReview,*,*]
     [SelfSubjectAccessReview,*,*]
-    [*,kyverno-system,kyverno*]
     [Binding,*,*]
     [ReplicaSet,*,*]
     [AdmissionReport,*,*]
     [ClusterAdmissionReport,*,*]
     [BackgroundScanReport,*,*]
     [ClusterBackgroundScanReport,*,*]
-    [PolicyReport,*,*]
-    [ClusterPolicyReport,*,*]
   webhooks: '[{"namespaceSelector": {"matchExpressions": [{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kyverno-system"]}]}}]'

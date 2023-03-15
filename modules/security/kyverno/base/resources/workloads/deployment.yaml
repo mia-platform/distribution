@@ -18,7 +18,7 @@ spec:
   template:
     spec:
       serviceAccountName: kyverno
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -29,15 +29,6 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          privileged: false
-          seccompProfile:
-            type: RuntimeDefault
-          capabilities:
-            drop:
-            - ALL
         env:
         - name: METRICS_CONFIG
           value: kyverno-metrics
@@ -53,20 +44,42 @@ spec:
           value: kyverno
         - name: KYVERNO_SVC
           value: kyverno
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       containers:
       - name: kyverno
         image: ghcr.io/kyverno/kyverno:latest
         resources: {}
         args:
+        - -clientRateLimitBurst=100
+        - -clientRateLimitQPS=300
         - -autogenInternals=true
         - -loggingFormat=text
-        - -metricsPort=11551
-        - -profilePort=11552
+        - -metricsPort=$(METRICS_PORT)
+        - -profile=$(PROFILE_ENABLED)
+        - -profilePort=$(PROFILE_PORT)
         env:
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
           value: kyverno-metrics
+        - name: METRICS_PORT
+          value: "0"
+        - name: PROFILE_ENABLED
+          value: "false"
+        - name: PROFILE_PORT
+          value: "0"
         - name: KYVERNO_NAMESPACE
           valueFrom:
             fieldRef:
@@ -87,10 +100,10 @@ spec:
         - containerPort: 9443
           name: controller
           protocol: TCP
-        - containerPort: 11551
+        - containerPort: 11210
           name: metrics
           protocol: TCP
-        - containerPort: 11552
+        - containerPort: 11211
           name: profile
           protocol: TCP
         securityContext:
@@ -106,7 +119,7 @@ spec:
           failureThreshold: 12
           httpGet:
             path: /health/liveness
-            port: 9443
+            port: controller
             scheme: HTTPS
           initialDelaySeconds: 30
           periodSeconds: 10
@@ -114,7 +127,7 @@ spec:
           failureThreshold: 2
           httpGet:
             path: /health/liveness
-            port: 9443
+            port: controller
             scheme: HTTPS
           initialDelaySeconds: 15
           periodSeconds: 30
@@ -124,7 +137,7 @@ spec:
           failureThreshold: 6
           httpGet:
             path: /health/readiness
-            port: 9443
+            port: controller
             scheme: HTTPS
           initialDelaySeconds: 5
           periodSeconds: 10
@@ -133,14 +146,35 @@ spec:
         volumeMounts:
         - mountPath: /.sigstore
           name: sigstore
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       volumes:
       - name: sigstore
         emptyDir: {}
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
       securityContext:
         runAsNonRoot: true
-        runAsUser: 65500
-        runAsGroup: 65500
-        fsGroup: 65500
+        runAsUser: 48010
+        runAsGroup: 48010
+        fsGroup: 48010
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
