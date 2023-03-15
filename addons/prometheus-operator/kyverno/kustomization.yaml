@@ -4,46 +4,62 @@ resources:
 - resources
 replacements:
 - source:
-    kind: Deployment
-    name: kyverno
     fieldPath: spec.selector.matchLabels
-  targets:
-  - select:
-      kind: ServiceMonitor
-      name: kyverno
-    fieldPaths:
-    - spec.selector.matchLabels
-  - select:
-      kind: NetworkPolicy
-      name: allow-kyverno-monitoring
-    fieldPaths:
-    - spec.podSelector.matchLabels
-- source:
     kind: Deployment
     name: kyverno
-    fieldPath: metadata.namespace
   targets:
-  - select:
+  - fieldPaths:
+    - spec.selector.matchLabels
+    select:
       kind: ServiceMonitor
       name: kyverno
-    fieldPaths:
-    - metadata.namespace
     options:
       create: true
-  - select:
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    select:
       kind: NetworkPolicy
       name: allow-kyverno-monitoring
-    fieldPaths:
-    - metadata.namespace
     options:
       create: true
 - source:
+    fieldPath: metadata.namespace
+    kind: Deployment
+    name: kyverno
+  targets:
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: kyverno
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=metrics].containerPort
+    kind: Deployment
+    name: kyverno
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-monitoring
+- source:
+    fieldPath: metadata.namespace
     kind: Deployment
     name: prometheus-operator
-    fieldPath: metadata.namespace
   targets:
-  - select:
+  - fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    select:
       kind: NetworkPolicy
       name: allow-kyverno-monitoring
-    fieldPaths:
-    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name

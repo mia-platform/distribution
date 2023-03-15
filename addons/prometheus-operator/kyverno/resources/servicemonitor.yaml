@@ -9,5 +9,4 @@ spec:
     honorLabels: false
     interval: 60s
     scrapeTimeout: 30s
-  selector:
-    matchLabels: {}
+  selector: {}
