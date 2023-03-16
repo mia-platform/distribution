@@ -17,7 +17,7 @@ spec:
   template:
     spec:
       serviceAccountName: rbac-manager
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -33,10 +33,10 @@ spec:
         - name: LOG_LEVEL
           value: warn
         - name: METRICS_PORT
-          value: PORT
+          value: "0"
         ports:
         - name: metrics
-          containerPort: 11650
+          containerPort: 11220
           protocol: TCP
         readinessProbe:
           httpGet:
@@ -61,8 +61,31 @@ spec:
           capabilities:
             drop:
             - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
       securityContext:
         runAsNonRoot: true
-        runAsUser: 66000
-        runAsGroup: 66000
-        fsGroup: 66000
+        runAsUser: 48020
+        runAsGroup: 48020
+        fsGroup: 48020
