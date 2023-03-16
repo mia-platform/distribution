@@ -14,7 +14,11 @@
 
 ## Addons
 
-## prometheus-operator
+### cert-manager
+
+- [kube-green-webhook-certificate](./addons/cert-manager/kube-green-webhook-certificate/CHANGELOG.md)
+
+### prometheus-operator
 
 - [cert-maanger](./addons/prometheus-operator/cert-manager/CHANGELOG.md)
 - [kube-green](./addons/prometheus-operator/kube-green/CHANGELOG.md)
