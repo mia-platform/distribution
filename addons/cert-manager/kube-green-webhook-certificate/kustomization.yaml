@@ -1,12 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 resources:
-- webhooks
+- resources
 patches:
-- target:
-    kind: Deployment
-    name: kube-green
-  patch: |-
+- patch: |-
     - op: remove
       path: /spec/template/spec/initContainers
     - op: remove
@@ -14,76 +11,80 @@ patches:
     - op: replace
       path: /metadata/annotations/distribution.mia-platform.eu~1certificate-ca-key
       value: ca.crt
-replacements:
-- source:
+  target:
     kind: Deployment
     name: kube-green
+replacements:
+- source:
     fieldPath: .metadata.namespace
+    kind: Deployment
+    name: kube-green
   targets:
-  - select:
-      kind: ValidatingWebhookConfiguration
-      name: kube-green
-    fieldPaths:
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
-      delimiter: '/'
-      index: 0
       create: true
-  - select:
-      kind: Certificate
+      delimiter: /
+    select:
+      kind: ValidatingWebhookConfiguration
       name: kube-green
-    fieldPaths:
-      - .metadata.namespace
+  - fieldPaths:
+    - .metadata.namespace
     options:
       create: true
-  - select:
+    select:
+      kind: Certificate
+      name: kube-green
+  - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
       kind: Issuer
       name: kube-green
-    fieldPaths:
-      - .metadata.namespace
-    options:
-      create: true
 - source:
+    fieldPath: .metadata.name
     kind: Certificate
     name: kube-green
-    fieldPath: .metadata.name
   targets:
-  - select:
-      kind: ValidatingWebhookConfiguration
-      name: kube-green
-    fieldPaths:
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
-      delimiter: '/'
-      index: 1
       create: true
+      delimiter: /
+      index: 1
+    select:
+      kind: ValidatingWebhookConfiguration
+      name: kube-green
 - source:
-    kind: Service
-    name: kube-green
     fieldPath: .metadata.name
-  targets:
-  - select:
-      kind: Certificate
-      name: kube-green
-    fieldPaths:
-    - .spec.dnsNames.0
-    - .spec.dnsNames.1
-    options:
-      delimiter: '.'
-      index: 0
-      create: true
-- source:
     kind: Service
     name: kube-green
-    fieldPath: .metadata.namespace
   targets:
-  - select:
-      kind: Certificate
-      name: kube-green
-    fieldPaths:
+  - fieldPaths:
     - .spec.dnsNames.0
     - .spec.dnsNames.1
+    - .spec.dnsNames.2
+    - .spec.dnsNames.3
     options:
-      delimiter: '.'
-      index: 1
       create: true
+      delimiter: .
+    select:
+      kind: Certificate
+      name: kube-green
+- source:
+    fieldPath: .metadata.namespace
+    kind: Service
+    name: kube-green
+  targets:
+  - fieldPaths:
+    - .spec.dnsNames.1
+    - .spec.dnsNames.2
+    - .spec.dnsNames.3
+    options:
+      create: true
+      delimiter: .
+      index: 1
+    select:
+      kind: Certificate
+      name: kube-green
