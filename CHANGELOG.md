@@ -2,6 +2,10 @@
 
 ## Modules
 
+### Scheduling
+
+- [kube-green](./modules/scheduling/kube-green/CHANGELOG.md)
+
 ### Security
 
 - [cert-manager](./modules/security/cert-manager/CHANGELOG.md)
