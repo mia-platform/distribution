@@ -1,21 +1,30 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: mia-platform:kube-green:leader-election
+  name: mia-platform:kube-green
 rules:
 - apiGroups:
   - ""
   resources:
-  - configmaps
+  - secrets
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
   - secrets
   verbs:
   - get
-  - list
-  - watch
-  - create
-  - update
   - patch
-  - delete
+  - update
+  resourceNames:
+  - webhook-tls
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
 - apiGroups:
   - coordination.k8s.io
   resources:
@@ -24,10 +33,11 @@ rules:
   - get
   - list
   - watch
-  - create
   - update
   - patch
   - delete
+  resourceNames:
+  - 2bd226ed.kube-green.com
 - apiGroups:
   - ""
   resources:

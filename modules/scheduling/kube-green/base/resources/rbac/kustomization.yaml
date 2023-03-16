@@ -1,8 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- clusterrole.yaml
-- clusterrolebinding.yaml
-- role.yaml
-- rolebinding.yaml
-- serviceaccount.yaml
+- clusterrole-aggregate-to-editor.yaml
+- clusterrole-aggregate-to-view.yaml

@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mia-platform:kube-green:aggregate-to-editor
+  annotations:
+    rbac.authorization.k8s.io/aggregate-to-editor: "true"
+rules:
+- apiGroups:
+  - kube-green.com
+  resources:
+  - sleepinfos
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update

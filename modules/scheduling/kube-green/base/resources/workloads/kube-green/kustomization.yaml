@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- configs
+- rbac
+- workloads
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=webhook].containerPort
+    kind: Deployment
+    name: kube-green
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kube-green
