@@ -1,15 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:kyverno:admin-policies
-  labels:
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+  name: mia-platform:kyverno:webhook
 rules:
 - apiGroups:
-  - kyverno.io
+  - admissionregistration.k8s.io
   resources:
-  - policies
-  - clusterpolicies
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
   verbs:
   - create
   - delete
@@ -18,3 +16,4 @@ rules:
   - patch
   - update
   - watch
+  - deletecollection

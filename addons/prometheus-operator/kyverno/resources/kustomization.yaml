@@ -6,4 +6,4 @@ commonLabels:
   app.kubernetes.io/name: kyverno
 resources:
 - networkpolicies.yaml
-- servicemonitor.yaml
+- servicemonitors.yaml

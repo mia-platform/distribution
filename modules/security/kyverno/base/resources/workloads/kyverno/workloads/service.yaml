@@ -10,9 +10,9 @@ spec:
     targetPort: controller
     protocol: TCP
   - name: metrics
-    port: 11551
+    port: 11210
     targetPort: metrics
     protocol: TCP
   - name: profile
-    port: 11552
+    port: 11211
     targetPort: profile

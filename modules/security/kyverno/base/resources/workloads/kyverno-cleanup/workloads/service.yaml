@@ -1,0 +1,19 @@
+# Source: kyverno/templates/cleanup-controller/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kyverno-cleanup
+spec:
+  type: ClusterIP
+  ports:
+  - name: controller
+    port: 443
+    targetPort: controller
+    protocol: TCP
+  - name: metrics
+    port: 11212
+    targetPort: metrics
+    protocol: TCP
+  - name: profile
+    port: 11213
+    targetPort: profile

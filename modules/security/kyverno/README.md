@@ -18,26 +18,36 @@ on the installed CRDs for the builtin `admin` ClusterRole.
   - **[configs](./resources/configs):** contains the configurations for the service, including the `Namespace`,
 		`NetworkPolicy` and `PodDistruptionBudget` resources
   - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRole
-  - **[workloads](./resources/workloads):** resources for the kyverno workload. It’s component that
-			will handle the application of the policies in the cluster. It is reccomanded to run it in a cluster of a even
-			number of replicas for handling big clusters with a lot of policies and resources
+  - **[workloads](./resources/workloads):**
+    - **[kyverno](./resources/workloads/kyverno):** resources for the kyverno main controller. This component will
+				manage the main policies for security and resource generation of the cluster
+    - **[kyverno-cleanup](./resources/workloads/kyverno-cleanup):** resources for the kyverno cleanup controller.
+				This component will manage the cleanup policies for the cluster
 
 ## Module Configurations
 
 The module will install all its component inside the `kyverno-system` namespace and will use the following
 default **ports**:
 
-- **9443**: it cannot be changed for now and is the port that expose the webhook functionality
-- **11210**: expose the metrics for the service
-- **11211**: expose the profile information for the service
+- kyverno:
+  - **9443** it cannot be changed for now and is the port that expose the webhook functionality
+  - **11210** expose the metrics for the service
+  - **11211** expose the profile information for the service
+- kyverno-cleanup:
+  - **9443** it cannot be changed for now and is the port that expose the webhook functionality
+  - **11212** expose the metrics for the service
+  - **11213** expose the profile information for the service
 
-This module use the following user, gid and fsGroup: **48010**
+This module use the following user, gid and fsGroup:
+
+- kyverno: **48010**
+- kyverno-cleanup: **48011**
 
 ## Compatibility Matrix
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.24.x         | 1.8.5          |
+| 1.24.x         | 1.9.1          |
 
 ## User customization
 
@@ -49,7 +59,8 @@ site.
 
 ## GKE User
 
-For private GKE cluster you may have to add a new firewall rules for allowing the api-resource network to reach the webhook port.
+For private GKE cluster you may have to add a new firewall rules for allowing the api-resource network to
+reach the webhook port.
 
 ## EKS User
 

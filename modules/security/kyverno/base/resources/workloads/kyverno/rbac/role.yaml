@@ -9,10 +9,20 @@ rules:
   - leases
   verbs:
   - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
   - delete
   - get
   - patch
   - update
+  resourceNames:
+  - kyvernopre
+  - kyvernopre-lock
+  - kyverno
+  - kyverno-health
 - apiGroups:
   - apps
   resources:
@@ -23,3 +33,5 @@ rules:
   - patch
   - update
   - watch
+  resourceNames:
+  - kyverno

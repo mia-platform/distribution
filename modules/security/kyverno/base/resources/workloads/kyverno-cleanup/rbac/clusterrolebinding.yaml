@@ -1,0 +1,11 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mia-platform:kyverno:cleanup
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mia-platform:kyverno:cleanup
+subjects:
+- kind: ServiceAccount
+  name: kyverno-cleanup

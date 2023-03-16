@@ -2,30 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 commonLabels:
   app.kubernetes.io/component: kyverno
-  app.kubernetes.io/instance: kyverno
-  app.kubernetes.io/name: kyverno
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.8.5
+  newTag: v1.9.1
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.8.5
+  newTag: v1.9.1
+- name: ghcr.io/kyverno/cleanup-controller
+  newTag: v1.9.1
 resources:
 - configs
 - rbac
 - workloads
-configurations:
-- kustomizeconfig.yaml
-replacements:
-- source:
-    fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=controller].containerPort
-    kind: Deployment
-    name: kyverno
-  targets:
-  - fieldPaths:
-    - .spec.ingress.0.ports.0.port
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kyverno

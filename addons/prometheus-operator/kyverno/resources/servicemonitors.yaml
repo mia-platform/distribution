@@ -1,0 +1,35 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kyverno
+spec:
+  endpoints:
+  - path: /metrics
+    targetPort: metrics
+    honorLabels: false
+    interval: 60s
+    scrapeTimeout: 30s
+    metricRelabelings:
+    - action: keep
+      regex: kyverno.*
+      sourceLabels:
+      - __name__
+  selector: {}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kyverno-cleanup
+spec:
+  endpoints:
+  - path: /metrics
+    targetPort: metrics
+    honorLabels: false
+    interval: 60s
+    scrapeTimeout: 30s
+    metricRelabelings:
+    - action: keep
+      regex: kyverno.*
+      sourceLabels:
+      - __name__
+  selector: {}

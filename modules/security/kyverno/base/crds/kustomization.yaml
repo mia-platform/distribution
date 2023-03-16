@@ -3,11 +3,14 @@ kind: Kustomization
 resources:
 - admissionreports.kyverno.io.yaml
 - backgroundscanreports.kyverno.io.yaml
+- cleanuppolicies.kyverno.io.yaml
 - clusteradmissionreports.kyverno.io.yaml
 - clusterbackgroundscanreports.kyverno.io.yaml
+- clustercleanuppolicies.kyverno.io.yaml
 - clusterpolicies.kyverno.io.yaml
 - clusterpolicyreports.wgpolicyk8s.io.yaml
 - generaterequests.kyverno.io.yaml
 - policies.kyverno.io.yaml
+- policyexceptions.kyverno.io.yaml
 - policyreports.wgpolicyk8s.io.yaml
 - updaterequests.kyverno.io.yaml

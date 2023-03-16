@@ -4,7 +4,8 @@ metadata:
   name: mia-platform:kyverno:events
 rules:
 - apiGroups:
-  - "*"
+  - ''
+  - events.k8s.io
   resources:
   - events
   verbs:

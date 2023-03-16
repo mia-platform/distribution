@@ -1,21 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- clusterrole-admin-generaterequest.yaml
-- clusterrole-admin-policies.yaml
-- clusterrole-admin-policyreport.yaml
-- clusterrole-admin-reportchangerequest.yaml
-- clusterrole-admin-updaterequest.yaml
-- clusterrole-events.yaml
-- clusterrole-generate.yaml
-- clusterrole-policies.yaml
-- clusterrole-userinfo.yaml
-- clusterrole-view.yaml
-- clusterrole-webhook.yaml
-- clusterrole.yaml
-- clusterrolebinding.yaml
-- role.yaml
-- rolebinding.yaml
-- serviceaccount.yaml
-configurations:
-- kustomizeconfig.yaml
+- clusterrole-aggregate-to-admin.yaml

@@ -1,0 +1,49 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mia-platform:kyverno:cleanup
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - update
+  - delete
+  resourceNames:
+  - kyverno-cleanup.kyverno-system.svc.kyverno-tls-ca
+  - kyverno-cleanup.kyverno-system.svc.kyverno-tls-pair
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - delete
+  - get
+  - patch
+  - update
+  resourceNames:
+  - kyverno-cleanup-controller

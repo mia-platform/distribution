@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:kyverno:admin-reportchangerequest
+  name: mia-platform:kyverno:aggregate-to-admin
   labels:
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
 rules:
@@ -9,9 +9,23 @@ rules:
   - kyverno.io
   resources:
   - admissionreports
-  - clusteradmissionreports
   - backgroundscanreports
-  - clusterbackgroundscanreports
+  - cleanuppolicies
+  - generaterequests
+  - policies
+  - updaterequests
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - policyreports
   verbs:
   - create
   - delete

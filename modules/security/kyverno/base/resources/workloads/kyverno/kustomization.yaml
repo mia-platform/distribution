@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/instance: kyverno
+  app.kubernetes.io/name: kyverno
+configurations:
+- kustomizeconfig.yaml
+resources:
+- configs
+- rbac
+- workloads
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=controller].containerPort
+    kind: Deployment
+    name: kyverno
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno

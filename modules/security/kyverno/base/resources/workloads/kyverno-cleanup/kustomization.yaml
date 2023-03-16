@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/instance: kyverno-cleanup
+  app.kubernetes.io/name: kyverno-cleanup
+resources:
+- configs
+- rbac
+- workloads
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno-cleanup].ports.[name=controller].containerPort
+    kind: Deployment
+    name: kyverno-cleanup
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-cleanup

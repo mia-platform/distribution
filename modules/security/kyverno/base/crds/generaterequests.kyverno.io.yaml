@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.10.0
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.11.1
   name: generaterequests.kyverno.io
 spec:
   group: kyverno.io
@@ -42,10 +41,14 @@ spec:
         description: GenerateRequest is a request to process generate rule.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
             type: string
           metadata:
             type: object
@@ -56,19 +59,23 @@ spec:
                 description: Context ...
                 properties:
                   admissionRequestInfo:
-                    description: AdmissionRequestInfoObject stores the admission request and operation details
+                    description: AdmissionRequestInfoObject stores the admission request
+                      and operation details
                     properties:
                       admissionRequest:
                         type: string
                       operation:
-                        description: Operation is the type of resource operation being checked for admission control
+                        description: Operation is the type of resource operation being
+                          checked for admission control
                         type: string
                     type: object
                   userInfo:
-                    description: RequestInfo contains permission info carried in an admission request.
+                    description: RequestInfo contains permission info carried in an
+                      admission request.
                     properties:
                       clusterRoles:
-                        description: ClusterRoles is a list of possible clusterRoles send the request.
+                        description: ClusterRoles is a list of possible clusterRoles
+                          send the request.
                         items:
                           type: string
                         nullable: true
@@ -80,15 +87,18 @@ spec:
                         nullable: true
                         type: array
                       userInfo:
-                        description: UserInfo is the userInfo carried in the admission request.
+                        description: UserInfo is the userInfo carried in the admission
+                          request.
                         properties:
                           extra:
                             additionalProperties:
-                              description: ExtraValue masks the value so protobuf can generate
+                              description: ExtraValue masks the value so protobuf
+                                can generate
                               items:
                                 type: string
                               type: array
-                            description: Any additional information provided by the authenticator.
+                            description: Any additional information provided by the
+                              authenticator.
                             type: object
                           groups:
                             description: The names of groups this user is a part of.
@@ -96,10 +106,14 @@ spec:
                               type: string
                             type: array
                           uid:
-                            description: A unique value that identifies this user across time. If this user is deleted and another user by the same name is added, they will have different UIDs.
+                            description: A unique value that identifies this user
+                              across time. If this user is deleted and another user
+                              by the same name is added, they will have different
+                              UIDs.
                             type: string
                           username:
-                            description: The name that uniquely identifies this user among all active users.
+                            description: The name that uniquely identifies this user
+                              among all active users.
                             type: string
                         type: object
                     type: object
@@ -108,7 +122,8 @@ spec:
                 description: Specifies the name of the policy.
                 type: string
               resource:
-                description: ResourceSpec is the information to identify the generate request.
+                description: ResourceSpec is the information to identify the generate
+                  request.
                 properties:
                   apiVersion:
                     description: APIVersion specifies resource apiVersion.
@@ -132,7 +147,8 @@ spec:
             description: Status contains statistics related to generate request.
             properties:
               generatedResources:
-                description: This will track the resources that are generated by the generate Policy. Will be used during clean up resources.
+                description: This will track the resources that are generated by the
+                  generate Policy. Will be used during clean up resources.
                 items:
                   properties:
                     apiVersion:

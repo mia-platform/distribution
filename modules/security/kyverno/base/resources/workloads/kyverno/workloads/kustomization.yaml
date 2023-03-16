@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=metrics].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=kyverno].env.[name=METRICS_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=profile].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=kyverno].env.[name=PROFILE_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
