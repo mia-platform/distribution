@@ -1,10 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonLabels:
+  app.kubernetes.io/component: monitoring
+  app.kubernetes.io/instance: traefik
+  app.kubernetes.io/name: traefik
 resources:
+- networkpolicy.yaml
 - servicemonitor.yaml
-- networkpolicies.yaml
-labels:
-- pairs:
-    app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/component: monitoring
