@@ -1,0 +1,37 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mia-platform:traefik:aggregate-to-view
+  annotations:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+rules:
+- apiGroups:
+  - traefik.containo.us
+  resources:
+  - ingressroutes
+  - ingressroutetcps
+  - ingressrouteudps
+  - middlewares
+  - middlewaretcps
+  - tlsoptions
+  - tlsstores
+  - traefikservices
+  - serverstransports
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - traefik.containo.us
+  resources:
+  - ingressroutes/status
+  - ingressroutetcps/status
+  - ingressrouteudps/status
+  - middlewares/status
+  - middlewaretcps/status
+  - tlsoptions/status
+  - tlsstores/status
+  - traefikservices/status
+  - serverstransports/status
+  verbs:
+  - get

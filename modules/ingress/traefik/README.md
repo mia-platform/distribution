@@ -1,46 +1,89 @@
 # Traefik Module
 
-Traefik is a popular open-source reverse proxy and load balancer for microservices.
+Traefik is a popular open-source reverse proxy and load balancer for microservices.  
 The Traefik ingress controller allows you to route traffic to your Kubernetes services and secure them with TLS
 encryption and other features.
 
-[Here is the link to Traefik official repository.](https://github.com/containous/traefik)
+[Here is the link to Traefik official repository].
 
-## What the base module contains
+The module will install the deployment, ingress class, and will add the correct permissions to operate
+on the installed CRDs for the builtin `admin`, `editor` and `view` ClusterRoles.
 
-- **CRDs:** Traefik custom resource definitions
-- **Resources (Traefik ingress):**
-  - **Configs:** configurations of related resources (e.g. namespace, network policies, etc.)
-  - **Controller:** deployments and services for Traefik ingress and its dashboards
-  - **RBAC:** service account, `ClusterRole` and `ClusterRoleBinding`, with all the
-  permissions needed to manage Traefik resources
+The NetworkPolicy applied to the traefik workload will explicity deny exposing services that will run in the following
+namespaces for added security:
+
+- `default`
+- `kube-node-lease`
+- `kube-system`
+
+If you **absolutely** need to expose workloads that are in one of this namespace please add a specific allow that will
+match only those pods.
+
+## Module Contents
+
+- **[crds](./crds)**: `traefik` custom resource definitions
+- **[resources](./resources)**:
+  - **[configs](./resources/configs):** contains the configurations for the service, including the `Namespace` and
+			`NetworkPolicy`
+  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./resources/workloads):**
+    - **[traefik](./resources/workloads/traefik):** resources for the traefik controller
+
+## Module Configurations
+
+The module will install all its component inside the `ingress-system` namespace and will use the following
+default **ports**:
+
+- traefik:
+  - **11240** for exposing the plain http traffic
+  - **11241** for exposing the https traffic
+  - **11242** for exposing the internal traefik dashboard and metric endpoint
+
+This module use the following user, gid and fsGroup:
+
+- traefik: **48040**
 
 ## Flavors
 
+The modules comes with three additional flavors that will add minimal configurations needed for different flavor of
+Kubernetes:
+
 ### AKS
 
-- Replaces the Traefik service type From `NodePort` to `LoadBalancer`.
+- replaces the Traefik service type From `NodePort` to `LoadBalancer`
 
 ### EKS
 
-- Replaces the Traefik service type From `NodePort` to `LoadBalancer`.
-- Sets the `service.beta.kubernetes.io~1aws-load-balancer-type` to `nlb` in Traefik service.
+- replaces the Traefik service type From `NodePort` to `LoadBalancer`
+- sets the `service.beta.kubernetes.io/aws-load-balancer-type` to `nlb` in Traefik service
 
 ### GKE
 
-- Replaces the Traefik service type From `NodePort` to `LoadBalancer`.
+- replaces the Traefik service type From `NodePort` to `LoadBalancer`
 
 ## Compatibility Matrix
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.24.0         | 2.9.6          |
+| 1.24.x         | 2.9.8          |
 
 ## User customization
 
-No customization is strictly needed. The module is ready-to-use in each of its flavors.
+After the installation a namespace `admin` or `editor` may want to add the correct resources for exposing one or more
+endpoints for their microservices.  
+Additionally a `cluster-admin` can add a `default` `TLSStore` and `TLSOptions` resource with the default configurations
+that the secure connection must have if the user will not specify nothing in their `IngressRoutes`.
 
-### GKE
+## GKE User
 
-If you wish to change the IP of the load balancer, you can do so by adding the
-`LoadBalancerIP` as a Kustomization patch and set it to the target IP.
+You can set a fixed `LoadBalancerIP` if you want using a patch targeting the Service with the
+`distribution.mia-platform.eu/service-type` annotation set to `ingress` for adding the field with a custom value.
+In doing so you will force GCP to use that specific IP when is creating the Cloud Load Balancer resource, if it is
+available and you have already reserved it.
+
+## EKS User
+
+You can use the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation to the LoadBalancer service
+to specify a series of ARN for selecting Elastc IPs that you want to attach to the load balancer created.
+
+[Here is the link to traefik official repository]: "https://github.com/traefik/traefik" "Traefik GitHub Repository"

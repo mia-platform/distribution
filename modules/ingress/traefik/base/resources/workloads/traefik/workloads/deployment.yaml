@@ -15,7 +15,7 @@ spec:
   template:
     spec:
       serviceAccountName: traefik
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -33,16 +33,16 @@ spec:
         - --log.level=$(LOG_LEVEL)
         - --accesslog.format=json
         - --metrics.prometheus.entrypoint=traefik
-        - --entryPoints.traefik.address=:9000/tcp
+        - --entryPoints.traefik.address=:$(METRICS_PORT)/tcp
         - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
-        - --entryPoints.web.address=:8080/tcp
+        - --entryPoints.web.address=:$(HTTP_PORT)/tcp
         - --entryPoints.web.transport.lifecycle.gracetimeout=30
         - --entrypoints.web.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --entrypoints.web.http.redirections.entrypoint.priority=0
-        - --entryPoints.websecure.address=:8443/tcp
+        - --entryPoints.websecure.address=:$(HTTPS_PORT)/tcp
         - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
@@ -54,20 +54,26 @@ spec:
         env:
         - name: LOG_LEVEL
           value: WARN
+        - name: HTTP_PORT
+          value: "0"
+        - name: HTTPS_PORT
+          value: "0"
+        - name: METRICS_PORT
+          value: "0"
         ports:
-        - name: traefik
-          containerPort: 9000
-          protocol: TCP
         - name: web
-          containerPort: 8080
+          containerPort: 11240
           protocol: TCP
         - name: websecure
-          containerPort: 8443
+          containerPort: 11241
+          protocol: TCP
+        - name: traefik
+          containerPort: 11242
           protocol: TCP
         readinessProbe:
           httpGet:
             path: /ping
-            port: 9000
+            port: traefik
           failureThreshold: 1
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -76,7 +82,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /ping
-            port: 9000
+            port: traefik
           failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -94,12 +100,33 @@ spec:
         volumeMounts:
         - name: tmp
           mountPath: /tmp
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       volumes:
       - name: tmp
         emptyDir:
           medium: Memory
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
       securityContext:
         runAsNonRoot: true
-        runAsUser: 65000
-        runAsGroup: 65000
-        fsGroup: 65000
+        runAsUser: 48040
+        runAsGroup: 48040
+        fsGroup: 48040

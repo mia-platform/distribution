@@ -25,7 +25,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 9000
+  - port: 11242
     name: traefik
     targetPort: traefik
     protocol: TCP

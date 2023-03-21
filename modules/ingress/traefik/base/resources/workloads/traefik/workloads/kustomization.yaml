@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- services.yaml
+replacements:
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=web].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=traefik].env.[name=HTTP_PORT].value
+      options:
+        create: true
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=websecure].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=traefik].env.[name=HTTPS_PORT].value
+      options:
+        create: true
+- source:
+    kind: Deployment
+    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
+  targets:
+    - select:
+        kind: Deployment
+      fieldPaths:
+        - .spec.template.spec.containers.[name=traefik].env.[name=METRICS_PORT].value
+      options:
+        create: true
