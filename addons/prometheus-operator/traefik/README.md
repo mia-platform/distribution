@@ -1,13 +1,15 @@
 # Prometheus Operator Resources for Traefik
 
-This add-on adds support for Prometheus Operator resource for Traefik module workloads.  
-To work properly it needs both the Prometheus Operator and Traefik modules.
+This add-on adds support for Prometheus Operator resource for the Traefik module workloads.  
+To work properly it needs both the Prometheus Operator and Traefik module.
+
+The add-on will add the appropriate NetworkPolicy for allowing the comunication between Prometheus and the
+Traefik controller and the ServiceMonitor resource for letting the Prometheus Operator to generate the correct
+configuration for scraping the data.
 
 ## What the Add-On Contains
 
-- **Resources:** the `ServiceMonitor` resource needed for allowing Prometheus Operator to correctly
-	setup Prometheus for scraping Traefik workloads and the `NetworkPolicy` for allowing Prometheus to reach
-	the exposed port.
+- **[resources](./resources):** containst the `ServiceMonitor` and `NetworkPolicy` resources
 
 ## Compatibility Matrix
 
