@@ -5,7 +5,7 @@ metadata:
 spec:
   podMetricsEndpoints:
   - path: /metrics
-    targetPort: metrics
+    port: metrics
     honorLabels: false
     interval: 60s
     scrapeTimeout: 30s
@@ -15,5 +15,4 @@ spec:
       sourceLabels:
       - __name__
   jobLabel: app.kubernetes.io/name
-  selector:
-    matchLabels: {}
+  selector: {}
