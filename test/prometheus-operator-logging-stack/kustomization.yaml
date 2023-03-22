@@ -1,10 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../../modules/observability/prometheus-operator/base
 - ../../modules/observability/logging-operator/base
+- ../../modules/observability/prometheus-operator/base
 components:
-- ../../addons/prometheus-operator/monitoring-stack
 - ../../addons/logging-operator/logging-stack
 - ../../addons/prometheus-operator/logging-operator
 - ../../addons/prometheus-operator/logging-stack
+- ../../addons/prometheus-operator/monitoring-stack

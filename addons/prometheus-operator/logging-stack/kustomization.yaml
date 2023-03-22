@@ -2,63 +2,114 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 resources:
 - resources
-patches:
-- target:
-    kind: Logging
-    name: logging
-  path: patches/logging.yaml
 replacements:
 - source:
-    kind: Logging
-    name: logging
     fieldPath: spec.fluentbit.labels
-  targets:
-  - select:
-      kind: NetworkPolicy
-      name: allow-fluentbit-monitoring
-    fieldPaths:
-    - spec.selector.matchLabels
-- source:
     kind: Logging
     name: logging
+  targets:
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-monitoring
+  - fieldPaths:
+    - spec.selector.matchLabels
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: fluentbit
+- source:
+    fieldPath: spec.fluentbit.metrics.port
+    kind: Logging
+    name: logging
+  targets:
+  - fieldPaths:
+    - spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-monitoring
+- source:
     fieldPath: spec.fluentd.labels
-  targets:
-  - select:
-      kind: NetworkPolicy
-      name: allow-fluentd-monitoring
-    fieldPaths:
-    - spec.selector.matchLabels
-- source:
     kind: Logging
     name: logging
-    fieldPath: metadata.namespace
   targets:
-  - select:
-      kind: NetworkPolicy
-      name: allow-fluentbit-monitoring
-    fieldPaths:
-    - metadata.namespace
+  - fieldPaths:
+    - spec.podSelector.matchLabels
     options:
       create: true
-  - select:
+    select:
       kind: NetworkPolicy
       name: allow-fluentd-monitoring
-    fieldPaths:
+  - fieldPaths:
+    - spec.selector.matchLabels
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: fluentd
+- source:
+    fieldPath: spec.fluentd.metrics.port
+    kind: Logging
+    name: logging
+  targets:
+  - fieldPaths:
+    - spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentd-monitoring
+- source:
+    fieldPath: metadata.namespace
+    kind: Logging
+    name: logging
+  targets:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-monitoring
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentd-monitoring
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: fluentbit
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: fluentd
 - source:
+    fieldPath: metadata.namespace
     kind: Deployment
     name: prometheus-operator
-    fieldPath: metadata.namespace
   targets:
-  - select:
+  - fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    select:
       kind: NetworkPolicy
       name: allow-fluentbit-monitoring
-    fieldPaths:
+  - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
-  - select:
+    select:
       kind: NetworkPolicy
       name: allow-fluentd-monitoring
-    fieldPaths:
-    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
