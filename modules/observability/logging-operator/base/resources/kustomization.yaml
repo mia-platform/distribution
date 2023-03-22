@@ -2,12 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: logging-system
 commonLabels:
-  app.kubernetes.io/name: logging-operator
-  app.kubernetes.io/instance: logging-operator
+  app.kubernetes.io/component: logging
 images:
-- name: ghcr.io/banzaicloud/logging-operator
-  newTag: 3.17.10
+- name: ghcr.io/kube-logging/logging-operator
+  newTag: 4.0.0
 resources:
-- rbac
-- controller
 - configs
+- rbac
+- workloads

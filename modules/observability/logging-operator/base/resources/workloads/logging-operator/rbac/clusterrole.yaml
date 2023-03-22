@@ -7,6 +7,18 @@ rules:
   - ""
   resources:
   - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
   - secrets
   verbs:
   - create
@@ -30,10 +42,31 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - events
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
   - persistentvolumeclaims
   - pods
   - serviceaccounts
   - services
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
   verbs:
   - create
   - delete
@@ -54,10 +87,48 @@ rules:
   - watch
 - apiGroups:
   - apps
-  - extensions
   resources:
   - daemonsets
   - replicasets
+  - statefulsets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  - extensions
+  resources:
+  - daemonsets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  - extensions
+  resources:
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  - extensions
+  resources:
   - statefulsets
   verbs:
   - create
@@ -80,11 +151,13 @@ rules:
   - update
   - watch
 - apiGroups:
-  - coordination.k8s.io
+  - events.k8s.io
   resources:
-  - leases
+  - events
   verbs:
-  - '*'
+  - get
+  - list
+  - watch
 - apiGroups:
   - extensions
   - networking.k8s.io
@@ -181,6 +254,32 @@ rules:
   - patch
   - update
 - apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - syslogngclusterflows
+  - syslogngclusteroutputs
+  - syslogngflows
+  - syslogngoutputs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - syslogngclusterflows/status
+  - syslogngclusteroutputs/status
+  - syslogngflows/status
+  - syslogngoutputs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - monitoring.coreos.com
   resources:
   - prometheusrules
@@ -197,9 +296,33 @@ rules:
   - rbac.authorization.k8s.io
   resources:
   - clusterrolebindings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
   - clusterroles
   - rolebindings
   - roles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
   verbs:
   - create
   - delete

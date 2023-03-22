@@ -1,0 +1,29 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mia-platform:logging-operator:aggregate-to-view
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+rules:
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - flows
+  - flows/status
+  - outputs
+  - outputs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - syslogngflows
+  - syslogngflows/status
+  - syslogngoutputs
+  - syslogngoutputs/status
+  verbs:
+  - get
+  - list
+  - watch

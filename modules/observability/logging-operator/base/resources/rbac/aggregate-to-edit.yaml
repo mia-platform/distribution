@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mia-platform:logging-operator:aggregate-to-edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+rules:
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - flows
+  - outputs
+  - syslogngflows
+  - syslogngoutputs
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update

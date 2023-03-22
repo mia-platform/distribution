@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-operator
+  labels:
+    distribution.mia-platform.eu/role: controller
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: logging-operator
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+      - name: logging-operator
+        image: ghcr.io/kube-logging/logging-operator:latest
+        resources: {}
+        args:
+        - "--metrics-addr=:$(METRICS_PORT)"
+        - "--enable-leader-election=true"
+        - "--verbose=false"
+        - "--output-format=json"
+        - "--klogLevel=0"
+        env:
+        - name: METRICS_PORT
+          value: "0"
+        ports:
+        - name: metrics
+          containerPort: 11250
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      volumes:
+      - name: webhook-tls
+        secret:
+          secretName: webhook-tls
+          optional: true
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 48050
+        runAsGroup: 48050
+        fsGroup: 48050

@@ -678,6 +678,8 @@ spec:
                     type: string
                   scheme:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sniffer_class_name:
                     type: string
                   ssl_max_version:
@@ -944,6 +946,8 @@ spec:
                     type: string
                   path:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                 required:
                 - azure_container
                 - azure_storage_account
@@ -1164,6 +1168,8 @@ spec:
                     type: string
                   retention_in_days_key:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   use_tag_as_group:
                     type: boolean
                   use_tag_as_stream:
@@ -1298,6 +1304,8 @@ spec:
                   port:
                     type: string
                   service:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   ssl_port:
                     type: string
@@ -1699,6 +1707,8 @@ spec:
                     type: string
                   scheme:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sniffer_class_name:
                     type: string
                   ssl_max_version:
@@ -1887,6 +1897,8 @@ spec:
                     type: string
                   recompress:
                     type: boolean
+                  slow_flush_log_threshold:
+                    type: string
                   symlink_path:
                     type: boolean
                 required:
@@ -2123,6 +2135,8 @@ spec:
                       - host
                       type: object
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   tls_allow_self_signed_cert:
                     type: boolean
                   tls_cert_logical_store_name:
@@ -2435,6 +2449,8 @@ spec:
                     type: string
                   project:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   storage_class:
                     type: string
                   store_as:
@@ -2647,6 +2663,8 @@ spec:
                     items:
                       type: integer
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   ssl_timeout:
                     type: integer
                   tls_ca_cert_path:
@@ -2995,6 +3013,8 @@ spec:
                   sasl_over_ssl:
                     type: boolean
                   scram_mechanism:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   ssl_ca_cert:
                     properties:
@@ -3397,6 +3417,8 @@ spec:
                     type: boolean
                   retries_on_batch_request:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   stream_name:
                     type: string
                 required:
@@ -3484,6 +3506,8 @@ spec:
                   ingester_endpoint:
                     type: string
                   request_timeout:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   tags:
                     type: string
@@ -3620,6 +3644,8 @@ spec:
                     type: integer
                   retry_sleep:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                 required:
                 - endpoint
                 type: object
@@ -3770,6 +3796,8 @@ spec:
                     type: object
                   extract_kubernetes_labels:
                     type: boolean
+                  include_thread_label:
+                    type: boolean
                   insecure_tls:
                     type: boolean
                   key:
@@ -3848,6 +3876,8 @@ spec:
                     items:
                       type: string
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   tenant:
                     type: string
                   url:
@@ -4174,6 +4204,12 @@ spec:
                     type: string
                   customize_template:
                     type: string
+                  data_stream_enable:
+                    type: boolean
+                  data_stream_name:
+                    type: string
+                  data_stream_template_name:
+                    type: string
                   default_opensearch_version:
                     type: integer
                   emit_error_for_missing_id:
@@ -4294,6 +4330,8 @@ spec:
                   scheme:
                     type: string
                   selector_class_name:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   sniffer_class_name:
                     type: string
@@ -4561,6 +4599,8 @@ spec:
                     type: string
                   read_timeout:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   store_as:
                     type: string
                   upload_crc_enable:
@@ -4704,6 +4744,8 @@ spec:
                     type: object
                   port:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   strftime_format:
                     type: string
                   ttl:
@@ -4965,6 +5007,8 @@ spec:
                         type: string
                     type: object
                   signature_version:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   sse_customer_algorithm:
                     type: string
@@ -5282,6 +5326,8 @@ spec:
                     type: string
                   read_timeout:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   source:
                     type: string
                   source_key:
@@ -5445,6 +5491,8 @@ spec:
                     type: string
                   region:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sqs_url:
                     type: string
                   tag_property_name:
@@ -5581,6 +5629,8 @@ spec:
                   open_timeout:
                     type: integer
                   proxy_uri:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   source_category:
                     type: string
@@ -5809,6 +5859,8 @@ spec:
                             type: object
                         type: object
                     type: object
+                  slow_flush_log_threshold:
+                    type: string
                   transport:
                     type: string
                   trusted_ca_path:
@@ -6531,6 +6583,8 @@ spec:
                     type: string
                   scheme:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sniffer_class_name:
                     type: string
                   ssl_max_version:
@@ -6797,6 +6851,8 @@ spec:
                     type: string
                   path:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                 required:
                 - azure_container
                 - azure_storage_account
@@ -7017,6 +7073,8 @@ spec:
                     type: string
                   retention_in_days_key:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   use_tag_as_group:
                     type: boolean
                   use_tag_as_stream:
@@ -7151,6 +7209,8 @@ spec:
                   port:
                     type: string
                   service:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   ssl_port:
                     type: string
@@ -7552,6 +7612,8 @@ spec:
                     type: string
                   scheme:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sniffer_class_name:
                     type: string
                   ssl_max_version:
@@ -7740,6 +7802,8 @@ spec:
                     type: string
                   recompress:
                     type: boolean
+                  slow_flush_log_threshold:
+                    type: string
                   symlink_path:
                     type: boolean
                 required:
@@ -7976,6 +8040,8 @@ spec:
                       - host
                       type: object
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   tls_allow_self_signed_cert:
                     type: boolean
                   tls_cert_logical_store_name:
@@ -8288,6 +8354,8 @@ spec:
                     type: string
                   project:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   storage_class:
                     type: string
                   store_as:
@@ -8500,6 +8568,8 @@ spec:
                     items:
                       type: integer
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   ssl_timeout:
                     type: integer
                   tls_ca_cert_path:
@@ -8848,6 +8918,8 @@ spec:
                   sasl_over_ssl:
                     type: boolean
                   scram_mechanism:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   ssl_ca_cert:
                     properties:
@@ -9250,6 +9322,8 @@ spec:
                     type: boolean
                   retries_on_batch_request:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   stream_name:
                     type: string
                 required:
@@ -9337,6 +9411,8 @@ spec:
                   ingester_endpoint:
                     type: string
                   request_timeout:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   tags:
                     type: string
@@ -9473,6 +9549,8 @@ spec:
                     type: integer
                   retry_sleep:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                 required:
                 - endpoint
                 type: object
@@ -9623,6 +9701,8 @@ spec:
                     type: object
                   extract_kubernetes_labels:
                     type: boolean
+                  include_thread_label:
+                    type: boolean
                   insecure_tls:
                     type: boolean
                   key:
@@ -9701,6 +9781,8 @@ spec:
                     items:
                       type: string
                     type: array
+                  slow_flush_log_threshold:
+                    type: string
                   tenant:
                     type: string
                   url:
@@ -10027,6 +10109,12 @@ spec:
                     type: string
                   customize_template:
                     type: string
+                  data_stream_enable:
+                    type: boolean
+                  data_stream_name:
+                    type: string
+                  data_stream_template_name:
+                    type: string
                   default_opensearch_version:
                     type: integer
                   emit_error_for_missing_id:
@@ -10147,6 +10235,8 @@ spec:
                   scheme:
                     type: string
                   selector_class_name:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   sniffer_class_name:
                     type: string
@@ -10414,6 +10504,8 @@ spec:
                     type: string
                   read_timeout:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   store_as:
                     type: string
                   upload_crc_enable:
@@ -10557,6 +10649,8 @@ spec:
                     type: object
                   port:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   strftime_format:
                     type: string
                   ttl:
@@ -10818,6 +10912,8 @@ spec:
                         type: string
                     type: object
                   signature_version:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   sse_customer_algorithm:
                     type: string
@@ -11135,6 +11231,8 @@ spec:
                     type: string
                   read_timeout:
                     type: integer
+                  slow_flush_log_threshold:
+                    type: string
                   source:
                     type: string
                   source_key:
@@ -11298,6 +11396,8 @@ spec:
                     type: string
                   region:
                     type: string
+                  slow_flush_log_threshold:
+                    type: string
                   sqs_url:
                     type: string
                   tag_property_name:
@@ -11434,6 +11534,8 @@ spec:
                   open_timeout:
                     type: integer
                   proxy_uri:
+                    type: string
+                  slow_flush_log_threshold:
                     type: string
                   source_category:
                     type: string
@@ -11662,6 +11764,8 @@ spec:
                             type: object
                         type: object
                     type: object
+                  slow_flush_log_threshold:
+                    type: string
                   transport:
                     type: string
                   trusted_ca_path:
