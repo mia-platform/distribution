@@ -4,29 +4,64 @@ resources:
 - resources
 replacements:
 - source:
+    fieldPath: metadata.namespace
     kind: Deployment
     name: logging-operator
-    fieldPath: metadata.namespace
   targets:
-  - select:
-      kind: Logging
-      name: logging
-    fieldPaths:
+  - fieldPaths:
     - spec.controlNamespace
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
+      kind: Logging
+      name: logging
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
       kind: NetworkPolicy
       name: allow-fluentbit-traffic
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       kind: NetworkPolicy
       name: allow-fluentd-traffic
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
+    select:
+      kind: ServiceAccount
+      name: fluentd
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: ServiceAccount
+      name: fluentbit
+  - fieldPaths:
+    - subjects.0.namespace
+    options:
+      create: true
+    select:
+      kind: ClusterRoleBinding
+      name: mia-platform:logging-operator:fluentbit
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: RoleBinding
+      name: mia-platform:logging-operator:fluentd
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: Role
+      name: mia-platform:logging-operator:fluentd

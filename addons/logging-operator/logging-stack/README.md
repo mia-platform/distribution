@@ -1,13 +1,33 @@
-# Logging system for Logging operator 
+# Logging system for Logging operator
 
-This add-on defines and deploys the logging stack of the Logging operator. It consists of the necessary `FluentD` and `FluentBit` configurations. 
+This add-on defines a default `Logging` resource for the Logging Opeartor that will create a `fluent-bit` and `fluentd`
+stack with the appropriate NetworkPolicy for communicating between them and an eventual external system for the LTS
+storage of the logs.
 To work properly it needs the Logging Operator module.
+
+The resource is set to allow Cluster resources only in the same namespace of the Logging Operator workload and all RBAC
+resources are created manually.
 
 ## What the Add-On Contains
 
-**Resurces:**
-- **Logging:** Logging CRD that defines configurations for FluentD and FluentBit.
-- **Network policies:** Network policy needed to allow traffic for FluentBit.
+- **[resources](./resources):** containst the `Logging` and `NetworkPolicy` resources
+
+## Add-on Configurations
+
+The add-on will install all its component inside the `logging-system` namespace and will use the following
+default **ports**:
+
+- fluentbit:
+  - **11251** for exposing the metrics endpoint
+- fluentd:
+  - **24240** forwarder listening port, it cannot be changed from this value
+  - **24444** fluentd port for reloading config, exposed on localhost it cannot be changed from this value
+  - **11253** for exposing the metrics endpoint
+
+This module use the following user, gid and fsGroup:
+
+- fluentbit: user **0**, for reading files on nodes, **48051** for group and fsGroup
+- fluentd: **48052**
 
 ## Compatibility Matrix
 

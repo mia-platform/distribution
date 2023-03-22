@@ -1,10 +1,46 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonLabels:
+  app.kubernetes.io/component: logging
 resources:
-- logging.yaml
-- networkpolicies.yaml
-labels:
-- pairs:
-    app.kubernetes.io/name: logging-operator
-    app.kubernetes.io/instance: logging-operator
-    app.kubernetes.io/component: logging
+- configs
+- workloads
+replacements:
+- source:
+    fieldPath: spec.fluentbit.labels
+    kind: Logging
+    name: logging
+  targets:
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-traffic
+    options:
+      create: true
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentd-traffic
+    options:
+      create: true
+- source:
+    fieldPath: spec.fluentd.labels
+    kind: Logging
+    name: logging
+  targets:
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentd-traffic
+    options:
+      create: true
+  - fieldPaths:
+    - spec.egress.2.to.0.podSelector.matchLabels
+    select:
+      kind: NetworkPolicy
+      name: allow-fluentbit-traffic
+    options:
+      create: true

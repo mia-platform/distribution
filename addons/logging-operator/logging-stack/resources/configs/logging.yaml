@@ -1,0 +1,123 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+metadata:
+  name: logging
+spec:
+  flowConfigCheckDisabled: false
+  skipInvalidResources: false
+  flowConfigOverride: ""
+  controlNamespace: NAMESPACE
+  enableRecreateWorkloadOnImmutableFieldChange: true
+  fluentbit:
+    labels:
+      app.kubernetes.io/instance: fluentbit
+      app.kubernetes.io/name: fluentbit
+    image:
+      repository: ""
+      tag: ""
+    tls:
+      enabled: false
+    resources: {}
+    metrics:
+      path: /api/v1/metrics/prometheus
+      port: 11251
+      prometheusAnnotations: false
+      serviceMonitor: false
+    security:
+      serviceAccount: fluentbit
+      roleBasedAccessControlCreate: false
+      podSecurityPolicyCreate: false
+      podSecurityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 48051
+        fsGroup: 48051
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+          - ALL
+    positiondb:
+      hostPath:
+        path: /var/log/logging-operator
+    inputTail:
+      Mem_Buf_Limit: 10MB
+      Path: /var/log/containers/*.log
+      Refresh_Interval: "30"
+      Rotate_Wait: "30"
+    filterKubernetes:
+      Annotations: "On"
+      Buffer_Size: "0"
+      K8S-Logging.Exclude: "On"
+      Labels: "On"
+      Merge_Log: "Off"
+    network:
+      dnsMode: TCP
+    enableUpstream: true
+  fluentd:
+    labels:
+      app.kubernetes.io/instance: fluentd
+      app.kubernetes.io/name: fluentd
+    tls:
+      enabled: false
+    image:
+      repository: ""
+      tag: ""
+    bufferStorageVolume:
+      pvc:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+    resources: {}
+    configCheckResources: {}
+    configReloaderResources: {}
+    livenessDefaultCheck: true
+    readinessDefaultCheck:
+      bufferFreeSpaceThreshold: 80
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: fluentd
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    metrics:
+      path: /metrics
+      port: 11253
+      prometheusAnnotations: false
+      serviceMonitor: false
+    security:
+      serviceAccount: fluentd
+      roleBasedAccessControlCreate: false
+      podSecurityPolicyCreate: false
+      podSecurityContext:
+        runAsNonRoot: false
+        runAsUser: 48052
+        runAsGroup: 48052
+        fsGroup: 48052
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+        capabilities:
+          drop:
+          - ALL
+    extraVolumes:
+    - volumeName: logvolume
+      path: /fluentd/log
+      volume:
+        emptyDir:
+          medium: Memory
+    scaling:
+      replicas: 1
+      drain:
+        enabled: true
+    logLevel: warn
+  nodeAgents: []
