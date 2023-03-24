@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+  labels:
+    distribution.mia-platform.eu/role: controller
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: kube-state-metrics
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+      - name: kube-state-metrics
+        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:latest
+        resources: {}
+        args:
+        - --port=$(K8S_METRICS_PORT)
+        - --telemetry-port=$(SELF_METRICS_PORT)
+        env:
+        - name: K8S_METRICS_PORT
+          value: "0"
+        - name: SELF_METRICS_PORT
+          value: "0"
+        ports:
+        - name: k8s-metrics
+          containerPort: 11260
+          protocol: TCP
+        - name: self-metrics
+          containerPort: 11261
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: k8s-metrics
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: k8s-metrics
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 48060
+        runAsGroup: 48060
+        fsGroup: 48060
