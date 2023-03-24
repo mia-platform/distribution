@@ -4,7 +4,7 @@ metadata:
   name: prometheus-operator
 spec:
   endpoints:
-  - targetPort: operator
+  - port: operator
     path: /metrics
     scheme: https
     tlsConfig:

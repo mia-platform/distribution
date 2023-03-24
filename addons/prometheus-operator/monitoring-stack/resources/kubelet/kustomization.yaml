@@ -1,11 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 commonLabels:
-  app.kubernetes.io/name: prometheus
-  app.kubernetes.io/instance: prometheus
-resources:
-- rbac
-- configs
-- workload
+  app.kubernetes.io/name: kubelet
 configurations:
 - kustomizeconfig.yaml
+resources:
+- servicemonitor.yaml

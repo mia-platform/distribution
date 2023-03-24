@@ -2,134 +2,175 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 images:
 - name: quay.io/prometheus/prometheus
-  newTag: v2.41.0
+  newTag: v2.42.0
 - name: quay.io/prometheus/alertmanager
   newTag: v0.25.0
 resources:
-- alertmanager
-- dns-service
-- kube-state-metrics
-- kubelet
-- node-exporter
-- prometheus
-- prometheus-operator
+- resources
 replacements:
 - source:
+    fieldPath: metadata.namespace
     kind: Deployment
     name: prometheus-operator
-    fieldPath: metadata.namespace
   targets:
-  - select:
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
       labelSelector: app.kubernetes.io/name=alertmanager
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: app.kubernetes.io/name=prometheus
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: app.kubernetes.io/name=prometheus-operator
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: app.kubernetes.io/name=kube-state-metrics
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: app.kubernetes.io/name=node-exporter
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: k8s-app=kube-dns
-    fieldPaths:
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
-  - select:
+    select:
       labelSelector: app.kubernetes.io/name=kubelet
-    fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-  - select:
+  - fieldPaths:
+    - spec.alerting.alertmanagers.0.namespace
+    select:
       kind: Prometheus
       name: prometheus
-    fieldPaths:
-    - spec.alerting.alertmanagers.0.namespace
-  - select:
-      kind: ClusterRoleBinding
-      name: mia-platform:prometheus
-    fieldPaths:
+  - fieldPaths:
     - subjects.0.namespace
     options:
       create: true
+    select:
+      kind: ClusterRoleBinding
+      name: mia-platform:prometheus
 - source:
-    kind: Prometheus
     fieldPath: spec.podMetadata.labels
+    kind: Prometheus
   targets:
-    - select:
-        name: allow-alertmanager
-      fieldPaths:
-        - spec.ingress.0.from.0.podSelector.matchLabels
-    - select:
-        name: allow-prometheus-operator-monitoring
-      fieldPaths:
-        - spec.ingress.0.from.0.podSelector.matchLabels
-    - select:
-        name: allow-kube-state-metrics-monitoring
-      fieldPaths:
-        - spec.ingress.0.from.0.podSelector.matchLabels
-    - select:
-        name: allow-node-exporter-monitoring
-      fieldPaths:
-        - spec.ingress.0.from.0.podSelector.matchLabels
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    select:
+      name: allow-alertmanager
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    select:
+      name: allow-prometheus-operator-monitoring
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    select:
+      name: allow-kube-state-metrics-monitoring
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    select:
+      name: allow-node-exporter-monitoring
 - source:
+    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
     kind: Deployment
     name: prometheus-operator
-    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
   targets:
-    - select:
-        kind: ServiceMonitor
-        name: prometheus-operator
-      fieldPaths:
-        - spec.endpoints.[targetPort=operator].tlsConfig.ca.secret.key
-      options:
-        create: true
+  - fieldPaths:
+    - spec.endpoints.[port=operator].tlsConfig.ca.secret.key
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator
 - source:
-    kind: Service
-    name: prometheus-operator
     fieldPath: metadata.name
-  targets:
-    - select:
-        kind: ServiceMonitor
-        name: prometheus-operator
-      fieldPaths:
-        - spec.endpoints.[targetPort=operator].tlsConfig.serverName
-      options:
-        delimiter: '.'
-        index: 0
-        create: true
-- source:
     kind: Service
     name: prometheus-operator
-    fieldPath: metadata.namespace
   targets:
-    - select:
-        kind: ServiceMonitor
-        name: prometheus-operator
-      fieldPaths:
-        - spec.endpoints.[targetPort=operator].tlsConfig.serverName
-      options:
-        delimiter: '.'
-        index: 1
-        create: true
+  - fieldPaths:
+    - spec.endpoints.[port=operator].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator
+- source:
+    fieldPath: metadata.namespace
+    kind: Service
+    name: prometheus-operator
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=operator].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+      index: 1
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator
+- source:
+    fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
+    kind: Deployment
+    name: prometheus-operator
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-prometheus-operator-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=node-exporter].ports.[name=metrics].containerPort
+    kind: DaemonSet
+    name: node-exporter
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-node-exporter-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=k8s-metrics].containerPort
+    kind: Deployment
+    name: kube-state-metrics
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kube-state-metrics-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=self-metrics].containerPort
+    kind: Deployment
+    name: kube-state-metrics
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.1.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kube-state-metrics-monitoring

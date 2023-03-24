@@ -3,8 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: allow-prometheus-operator-monitoring
 spec:
-  podSelector:
-    matchLabels: {}
+  podSelector: {}
   policyTypes:
   - Ingress
   ingress:
@@ -12,5 +11,5 @@ spec:
     - podSelector:
         matchLabels: {}
     ports:
-    - port: 11350
+    - port: 0
       protocol: TCP

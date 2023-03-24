@@ -9,9 +9,9 @@ spec:
   resources: {}
   securityContext:
     runAsNonRoot: true
-    runAsUser: 65240
-    runAsGroup: 65240
-    fsGroup: 65240
+    runAsUser: 48064
+    runAsGroup: 48064
+    fsGroup: 48064
   logLevel: warn
   logFormat: json
   prometheusExternalLabelName: ""

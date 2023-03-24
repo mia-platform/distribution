@@ -9,9 +9,9 @@ spec:
   resources: {}
   securityContext:
     runAsNonRoot: true
-    runAsUser: 65230
-    runAsGroup: 65230
-    fsGroup: 65230
+    runAsUser: 48063
+    runAsGroup: 48063
+    fsGroup: 48063
   logLevel: warn
   logFormat: json
   paused: false
