@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- use `port` instead of deprecated `targetPort` in `PodMonitor`
+
 ## v1.0.0
 
 - First Release
