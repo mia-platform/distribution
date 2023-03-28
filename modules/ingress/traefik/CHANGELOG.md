@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.24.1
 
-### Fix
+### Fixed
 
 - aggregation to `admin`, `edit` and `view` cluster roles
 
