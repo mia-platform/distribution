@@ -23,6 +23,17 @@ rules:
   - update
   - watch
 - apiGroups:
+  - kyverno.io
+  resources:
+  - cleanuppolicies/status
+  - generaterequests/status
+  - policies/status
+  - updaterequests/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - wgpolicyk8s.io
   resources:
   - policyreports
@@ -33,4 +44,12 @@ rules:
   - list
   - patch
   - update
+  - watch
+- apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - policyreports/status
+  verbs:
+  - get
+  - list
   - watch
