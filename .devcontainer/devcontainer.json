@@ -1,5 +1,5 @@
 {
-	"name": "Mia-Platform Distribution",
+	"name": "Magellano",
 	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian",
 	"remoteUser": "vscode",
 	"customizations": {

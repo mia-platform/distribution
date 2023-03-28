@@ -1,4 +1,4 @@
-# Mia-Platform Distribution
+# Mia-Platform Magellano
 
 ![Kubernetes]
 ![License]
@@ -23,7 +23,7 @@ supported ones.
 
 ### Security Features
 
-By default we strive to give the user of the distribution the most secure feature enabled by default for every modules
+By default we strive to give the user of Magellano the most secure feature enabled by default for every modules
 and addons where possibile. These features are:
 
 - all pods run with dedicated ServiceAccounts with `automountServiceAccountToken` set to false and the
@@ -63,7 +63,7 @@ that the cluster will make.
 
 ## The Distribution
 
-The Mia-Platform Distribution is compose of different modules that will install different operators for certain
+Magellano is compose of different modules that will install different operators for certain
 tasks that are needed in day two operation of a kubernetes clusters. For now only one kind of operator is chosen for
 a task but in the future we can support different tools for the same function and the user will be able to select the
 components that suites it better.
@@ -74,10 +74,10 @@ webhook with `cert-manager` or the addon for adding the `prometheus-operator` CR
 
 ### What is a Module or Addon?
 
-A module of the distribution is ultimately a kustomize bundle of yaml manifests that will setup all the resource
+A module of Magellano is ultimately a kustomize bundle of yaml manifests that will setup all the resource
 needed for setting up a kubernetes operator for managing different function inside the cluster.
 
-An addon of the distribution is a kustomize Component that will add resources and patches to the connected modules
+An addon of Magellano is a kustomize Component that will add resources and patches to the connected modules
 for adding functionality that will need the presence of two different modules inside the cluster.
 
 You can manually donwload and compose the various modules and addons but we also have developed a cli named [`vab`]
@@ -94,7 +94,7 @@ If you are unsure or have additional questions please feel free to open an issue
 as possible.
 
 [License]: https://img.shields.io/github/license/mia-platform/distribution?color=informational&style=for-the-badge
-	"Distribution License"
+	"Magellano License"
 [Kubernetes]: https://img.shields.io/badge/kubernetes-1.24-success?style=for-the-badge&logo=kubernetes "Supported
 	Kubernetes version"
 [`vab`]: https://github.com/mia-platform/vab "cli for handling installation and upgrade of Mia-Platform
