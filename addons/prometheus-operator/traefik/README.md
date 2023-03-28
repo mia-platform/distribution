@@ -15,7 +15,7 @@ configuration for scraping the data.
 
 | Add-On Version | Prometheus Operator Module Version | Traefik Module Version |
 |----------------|------------------------------------|------------------------|
-| 1.0.0          | 1.24.0                             | 1.24.0                 |
+| 1.0.0          | 1.24.0                             | 1.24.x                 |
 
 ## User customization
 
