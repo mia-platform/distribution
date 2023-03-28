@@ -7,7 +7,7 @@ encryption and other features.
 [Here is the link to Traefik official repository].
 
 The module will install the deployment, ingress class, and will add the correct permissions to operate
-on the installed CRDs for the builtin `admin`, `editor` and `view` ClusterRoles.
+on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 
 The NetworkPolicy applied to the traefik workload will explicity deny exposing services that will run in the following
 namespaces for added security:
@@ -69,7 +69,7 @@ Kubernetes:
 
 ## User customization
 
-After the installation a namespace `admin` or `editor` may want to add the correct resources for exposing one or more
+After the installation a namespace `admin` or `edit` may want to add the correct resources for exposing one or more
 endpoints for their microservices.  
 Additionally a `cluster-admin` can add a `default` `TLSStore` and `TLSOptions` resource with the default configurations
 that the secure connection must have if the user will not specify nothing in their `IngressRoutes`.

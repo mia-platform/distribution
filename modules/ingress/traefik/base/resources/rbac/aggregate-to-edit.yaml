@@ -1,9 +1,9 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: mia-platform:traefik:aggregate-to-editor
-  annotations:
-    rbac.authorization.k8s.io/aggregate-to-editor: "true"
+  name: mia-platform:traefik:aggregate-to-edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
 rules:
 - apiGroups:
   - traefik.containo.us
