@@ -15,7 +15,7 @@ initContainers that are responsible for autogenerate it.
 
 | Add-On Version | Cert Manager Module Version | Prometheus Operator Module Version |
 |----------------|-----------------------------|------------------------------------|
-| 1.0.0          | 1.24.0                      | 1.24.0                             |
+| 1.0.0          | 1.24.x                      | 1.24.0                             |
 
 ## User customization
 

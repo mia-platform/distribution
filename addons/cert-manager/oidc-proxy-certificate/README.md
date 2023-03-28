@@ -13,7 +13,7 @@ To work properly it needs both the Cert Manager and oidc-proxy module.
 
 | Add-On Version | Cert Manager Module Version | OIDC Proxy Module Version |
 |----------------|-----------------------------|---------------------------|
-| 1.0.0          | 1.24.0                      | 1.24.0                    |
+| 1.0.0          | 1.24.x                      | 1.24.0                    |
 
 ## User customization
 
