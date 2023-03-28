@@ -8,28 +8,8 @@ spec:
   policyTypes:
   - Egress
   egress:
-  # Connect to the DNS service inside the kube-system namespace
-  - ports:
-    - port: 53
-      protocol: TCP
-    - port: 53
-      protocol: UDP
-    to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchExpressions:
-        - key: k8s-app
-          values:
-          - kube-dns
-          operator: In
-  # Connect to the api-server endpoint (enable to all ips for allowing all kind of network topologies) and
-  # allowing the http01 challeng self test for http and https
-  - ports:
-    - port: 80
-      protocol: TCP
-    - port: 443
-      protocol: TCP
-    - port: 6443
-      protocol: TCP
+  # Allow all egress because the http01 and dns01 challenges can be resolved in different network
+  # topologies and via different ports.
+  # To limit the reach we reccomend to always add a deny all ingress and egress to your namespace and adding only the
+  # needed rules matching the correct pods to avoid unwanted access from other namespaces
+  - {}

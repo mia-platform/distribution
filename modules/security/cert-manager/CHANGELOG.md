@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - aggregation to `admin`, `edit` and `view` cluster roles
+- egress network policy for cert-manager controller
 
 ## v1.24.0
 
