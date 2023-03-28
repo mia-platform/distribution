@@ -1,0 +1,31 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mia-platform:hubble:generate-certs
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  resourceNames:
+  - hubble-server-certs
+  - hubble-relay-client-certs
+  - hubble-relay-server-certs
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  resourceNames:
+  - cilium-ca
+  - hubble-ca-secret
+  verbs:
+  - get
+  - update

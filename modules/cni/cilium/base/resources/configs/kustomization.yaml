@@ -3,5 +3,7 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: cilium
   app.kubernetes.io/instance: cilium
-resources:
-- configmap.yaml
+configMapGenerator:
+- name: cilium-config
+  envs:
+  - ./configmap.env

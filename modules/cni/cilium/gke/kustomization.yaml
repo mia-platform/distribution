@@ -4,10 +4,7 @@ resources:
 - ../base/resources
 - resources
 patches:
-- target:
-    kind: ConfigMap
-    name: cilium-config
-  patch: |-
+- patch: |-
     - op: replace
       path: /data/tunnel
       value: disabled
@@ -27,7 +24,10 @@ patches:
       path: /data/cluster-pool-ipv4-cidr
     - op: remove
       path: /data/cluster-pool-ipv4-mask-size
-- target:
+  target:
+    kind: ConfigMap
+    name: cilium-config
+- path: patches/daemonset.yaml
+  target:
     kind: DaemonSet
     name: cilium
-  path: patches/daemonset.yaml

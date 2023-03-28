@@ -3,11 +3,11 @@ kind: Kustomization
 resources:
 - resources
 patches:
-- target:
-    kind: DaemonSet
-    name: cilium
-  patch: |-
+- patch: |-
     - op: remove
       path: /spec/template/spec/initContainers/3
     - op: remove
       path: /spec/template/spec/volumes/3
+  target:
+    kind: DaemonSet
+    name: cilium

@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
 - ../base
 patches:
-- target:
-    kind: ConfigMap
-    name: cilium-config
-  patch: |-
+- patch: |-
     - op: add
       path: /data/egress-masquerade-interfaces
       value: eth0
+  target:
+    kind: ConfigMap
+    name: cilium-config
