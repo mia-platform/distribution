@@ -6,7 +6,7 @@ don’t need them.
 [Here is the link to Kube-green official repository].
 
 The module will install the deployment, and will add the correct permissions to operate
-on the installed CRDs for the builtin `admin`, `report` and `view` ClusterRoles.
+on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 
 ## Module Contents
 
@@ -41,7 +41,7 @@ This module use the following user, gid and fsGroup:
 
 ## User customization
 
-After the installation a namespace `admin` or `editor` may want to add `SleepInfo` to their namespaces for setting
+After the installation a namespace `admin` or `edit` may want to add `SleepInfo` to their namespaces for setting
 schedule where unused workloads can be turned off to free up resources.
 
 ## GKE User
