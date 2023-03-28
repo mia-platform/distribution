@@ -15,7 +15,7 @@ that are responsible for autogenerate it.
 
 | Add-On Version | Cert Manager Module Version | kube-green Module Version |
 |----------------|-----------------------------|---------------------------|
-| 1.0.0          | 1.24.0                      | 1.24.0                    |
+| 1.0.0          | 1.24.0                      | 1.24.x                    |
 
 ## User customization
 
