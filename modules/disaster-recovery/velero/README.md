@@ -3,75 +3,96 @@
 Velero is an open-source tool for backing up and restoring your Kubernetes cluster resources
 and persistent volumes. It provides disaster recovery, data migration, and storage migration solutions.
 
-[Here is the link to Velero official repository.](https://github.com/vmware-tanzu/velero)
+[Here is the link to the official repository].
+
+The module will install velero and a MinIO instance for being autosufficient inside your cluster or if you cannot use
+one of the flavor available for using cloud storage services.
 
 ## What the base module contains
 
-- **CRDs:** Velero custom resource definitions
-- **Minio:**
-  - **Configs:** configurations of related resources (e.g. `BackupStorageLocation`, network
-  policies, Minio authentication, etc.)
-  - **Controller:** Minio deployment and service
-  - **RBAC:** Minio service account
-- **Resources (Velero):**
-  - **Configs:** configurations of related resources (namespace, network policies)
-  - **Controller:** base deployment for Velero
-  - **RBAC:** service account, `ClusterRole` and `ClusterRoleBinding`, with all the permissions needed to manage Velero resources
+## Module Contents
+
+- **[crds](./crds)**: Prometheus Operator custom resource definitions
+- **[resources](./resources)**:
+  - **[configs](./resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
+  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./resources/workloads):**
+    - **[kube-state-metrics](./resources/workloads/kube-state-metrics):** configurations, deployment, and RBAC
+				definitions for `kube-state-metrics`
+    - **[node-exporter](./resources/workloads/node-exporter):** configurations, daemonset, and RBAC definitions for
+				Node exporter
+    - **[prometheus-operator](./resources/workloads/node-exporter):** configurations, deployment, and RBAC definitions
+				for Prometheus Operator
+
+## Module Configurations
+
+The module will install all its component inside the `dr-system` namespace and will use the following
+default **ports**:
+
+- velero:
+  - **11270** expose the metrics for the k8s cluster
+  - **11271** expose the metrics for the service
+- minio:
+  - **11272** expose the metrics for the service
+  - **11273** expose the minio console
+
+This module use the following user, gid and fsGroup:
+
+- velero: **48060**
+- minio: **48061**
 
 ## Flavors
 
 ### GCP Storage
 
-- Includes settings and patches to use **GCP storage** instead of Minio.
-Follow the [instructions below](#gcp-storage-1) for a correct configuration.
+- drop all minio related files and configuration
+- add GCP Plugin `initContainer` to Velero
+
+Follow the [instructions below](#gcp-storage) for a correct configuration.
 
 ## Compatibility Matrix
 
-| Module Version | Velero | Minio                        | GCP Plugin | AWS Plugin |
-|----------------|--------|------------------------------|------------|------------|
-| 1.24.0         | 1.9.5  | RELEASE.2022-10-02T19-29-29Z | 1.5.3      | 1.5.3      |
+### Base Flavor
 
-## User customization
+| Module Version | Velero | Minio                        | Minio Config                 | AWS Plugin |
+|----------------|--------|------------------------------|------------------------------|------------|
+| 1.24.x         | 1.10.2 | RELEASE.2023-03-22T06-36-24Z | RELEASE.2023-03-23T20-03-04Z | 1.6.1      |
 
-### GCP storage
+### GCP Storage Flavor
 
-The GCP storage flavor needs some additional configuration to set up the GCP credentials and the `BackupStorageLocation`.
+| Module Version | Velero | GCP Plugin |
+|----------------|--------|------------|
+| 1.24.x         | 1.10.2 | 1.6.1      |
 
-#### **Secret**
+## User Customization
 
-To use the flavor, you need to generate the `cloud-credentials` secret containing the GCP credentials to access the
-bucket service account.
+After the installation of the module a `cluster-admin` may want to add one or more `BackupStorageLocation` in addition
+of the `defualt` location installed with the **base** flavor, and then create one or more `Schedule` for setting up
+the backup of the cluster resources.
 
-Append this block to your `kustomization.yaml` in the `custom-resources` directory, and add the credentials file in the
-exact relative path indicated below.
+### Base
+
+The base flavor for being in a production ready state will need an override of the `minio-credentials` secret with
+a more robust password than the default one created automatically.
+
+### GCP Storage
+
+The GCP storage flavor will not create a `default` `BackupStorageLocation` for leaving the full configuration to
+the end user, and it will need further configurations for setting up the authorization between velero and the GCP
+API.
+
+By default the flavor will configure the GCP plugin to mount a secret named `cloud-credentials` containing the GCP
+credentials to access the bucket service account.
+
+Append this block to your `kustomization.yaml` in the `custom-resources` directory, be careful that the path inside
+the secretGenerator block can only be relative to the location of the yaml file:
 
 ```yaml
-generatorOptions:
-  disableNameSuffixHash: true
 secretGenerator:
 - name: cloud-credentials
   namespace: dr-system
   files:
-  - ./secrets/cloud-credentials.json
+  - cloud-credentals=<path-to-local-file>
 ```
 
-#### **BackupStorageLocation**
-
-The BackupStorageLocation resource is necessary to specify the GCP bucket location to Velero.
-
-Here's a sample resource manifest, that can be customized with your information and features:
-
-```yaml
-apiVersion: velero.io/v1
-kind: BackupStorageLocation
-metadata:
-  name: velero-bsl
-  namespace: dr-system
-  labels:
-    app.kubernetes.io/name: velero
-spec:
-  provider: gcp
-  accessMode: ReadWrite
-  objectStorage:
-    bucket: "disaster-recovery"
-```
+[Here is the link to the official repository]: https://github.com/vmware-tanzu/velero "Velero GitHub Repository"

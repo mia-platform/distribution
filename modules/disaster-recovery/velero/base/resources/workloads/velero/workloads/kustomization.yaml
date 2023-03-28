@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=velero].ports.[name=metrics].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=velero].env.[name=METRICS_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
+    fieldPath: .spec.template.spec.containers.[name=velero].ports.[name=profiler].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=velero].env.[name=PROFILER_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment

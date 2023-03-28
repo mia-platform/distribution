@@ -3,21 +3,5 @@ kind: Kustomization
 resources:
 - crds
 - resources
+components:
 - minio
-images:
-- name: docker.io/velero/velero-plugin-for-aws
-  newTag: v1.5.3
-patches:
-- path: patches/velero.yaml
-replacements:
-- source:
-    kind: Deployment
-    name: velero
-    fieldPath: spec.selector.matchLabels
-  targets:
-  - select:
-      name: allow-minio
-    fieldPaths:
-    - spec.ingress.1.from.0.podSelector.matchLabels
-    options:
-      create: true

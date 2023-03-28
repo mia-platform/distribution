@@ -2,13 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: dr-system
 commonLabels:
-  app.kubernetes.io/name: velero
-  app.kubernetes.io/instance: velero
   app.kubernetes.io/component: disaster-recovery
+  app.kubernetes.io/instance: velero
+  app.kubernetes.io/name: velero
 images:
 - name: docker.io/velero/velero
-  newTag: v1.9.5
+  newTag: v1.10.2
 resources:
-- rbac
 - configs
-- controller
+- rbac
+- workloads

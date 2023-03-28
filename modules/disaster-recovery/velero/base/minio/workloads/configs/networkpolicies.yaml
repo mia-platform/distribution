@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-minio
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels: {}
+    ports:
+    - port: 0
+      protocol: TCP
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels: {}
+    ports:
+    - port: 0
+      protocol: TCP
+  - from:
+    - podSelector: {}
+    ports:
+    - port: 0
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-velero-minio-egress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - port: 0
+      protocol: TCP
+    to:
+    - podSelector:
+        matchLabels: {}

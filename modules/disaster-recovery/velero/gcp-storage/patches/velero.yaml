@@ -6,12 +6,21 @@ spec:
   template:
     spec:
       initContainers:
-      - image: docker.io/velero/velero-plugin-for-gcp:latest
-        imagePullPolicy: IfNotPresent
-        name: velero-plugin-for-gcp
+      - name: gcp-plugin
+        image: docker.io/velero/velero-plugin-for-gcp:latest
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
         volumeMounts:
-        - mountPath: /target
-          name: plugins
+        - name: plugins
+          mountPath: /target
       containers:
       - name: velero
         env:

@@ -1,38 +1,56 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: dr-system
-commonLabels:
-  app.kubernetes.io/name: minio
-  app.kubernetes.io/instance: minio
-  app.kubernetes.io/component: disaster-recovery
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
 images:
 - name: docker.io/minio/minio
-  newTag: RELEASE.2022-10-02T19-29-29Z
+  newTag: RELEASE.2023-03-22T06-36-24Z
 - name: docker.io/minio/mc
-  newTag: RELEASE.2022-10-01T07-56-14Z
+  newTag: RELEASE.2023-03-23T20-03-04Z
+- name: docker.io/velero/velero-plugin-for-aws
+  newTag: v1.6.1
 resources:
-- rbac
-- configs
-- controller
-replacements:
-- source:
-    kind: Deployment
-    name: minio
-    fieldPath: metadata.name
-  targets:
-  - select:
-      name: minio-setup
-    fieldPaths:
-    - spec.template.spec.containers.[name=mc].env.[name=MINIO_SERVICE_NAME].value
-    options:
-      create: true
+- workloads
+patches:
+- path: patches/velero.yaml
 secretGenerator:
-- name: minio-credentials
-  type: Opaque
-  files:
-  - configs/MINIO_ROOT_USER
-  - configs/MINIO_ROOT_PASSWORD
 - name: cloud-credentials
   type: Opaque
   files:
-  - configs/cloud-credentials
+  - workloads/configs/cloud-credentials
+replacements:
+- source:
+    fieldPath: .metadata.namespace
+    kind: Deployment
+    name: velero
+  targets:
+  - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
+      labelSelector: app.kubernetes.io/name=minio
+  - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
+      kind: Secret
+      name: cloud-credentials
+- source:
+    fieldPath: spec.selector.matchLabels
+    kind: Deployment
+    name: velero
+  targets:
+  - fieldPaths:
+    - spec.ingress.1.from.0.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      name: allow-minio
+      kind: NetworkPolicy
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      name: allow-velero-minio-egress
+      kind: NetworkPolicy

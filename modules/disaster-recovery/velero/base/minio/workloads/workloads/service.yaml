@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   ports:
   - name: server
-    port: 9000
+    port: 11272
     targetPort: server
     protocol: TCP

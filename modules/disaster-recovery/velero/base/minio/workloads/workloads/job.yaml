@@ -4,7 +4,7 @@ metadata:
   name: minio-setup
 spec:
   backoffLimit: 5
-  ttlSecondsAfterFinished: 60
+  ttlSecondsAfterFinished: 30
   template:
     spec:
       serviceAccountName: minio
@@ -19,7 +19,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        - mc --config-dir=/config config host add ${POD_NAMESPACE} http://${MINIO_SERVICE_NAME}:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} && mc --config-dir=/config mb -p ${POD_NAMESPACE}/${POD_NAMESPACE}
+        - mc --config-dir=/config config host add ${POD_NAMESPACE} http://${MINIO_SERVICE_NAME}:$(SERVER_PORT) ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} && mc --config-dir=/config mb -p ${POD_NAMESPACE}/${POD_NAMESPACE}
         envFrom:
         - secretRef:
             name: minio-credentials
@@ -32,6 +32,8 @@ spec:
           value: MINIO_SERVICE_NAME
         - name: MINIO_NAMESPACE
           value: minio
+        - name: SERVER_PORT
+          value: "0"
         volumeMounts:
         - name: config
           mountPath: /config

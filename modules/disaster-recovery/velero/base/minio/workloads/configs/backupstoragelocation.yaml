@@ -5,9 +5,8 @@ metadata:
 spec:
   provider: velero.io/aws
   objectStorage:
-    bucket: minio
+    bucket: dr-system
   config:
     region: minio
-    insecureSkipTLSVerify: "true"
     s3ForcePathStyle: "true"
-    s3Url: http://minio.dr-system.svc.cluster.local:9000
+    s3Url: http://minio.dr-system.svc.cluster.local:SERVICE_PORT
