@@ -1,19 +1,21 @@
 # Prometheus Operator Resources for Velero
 
-This add-on adds support for Prometheus Operator resource for Velero module workloads.  
-To work properly it needs both the Prometheus Operator and Velero modules.
+This add-on adds support for Prometheus Operator resource for the Velero module workloads.  
+To work properly it needs both the Prometheus Operator and Velero module.
+
+The add-on will add the appropriate NetworkPolicy for allowing the comunication between Prometheus and the
+Velero controller and the PodMonitor resource for letting the Prometheus Operator to generate the correct
+configuration for scraping the data.
 
 ## What the Add-On Contains
 
-- **Resources:** the `PodMonitor` resource needed for allowing Prometheus Operator to correctly
-	setup Prometheus for scraping Velero workloads and the `NetworkPolicy` for allowing Prometheus to reach
-	the exposed port.
+- **[resources](./resources):** containst the `PodMonitor` and `NetworkPolicy` resources
 
 ## Compatibility Matrix
 
 | Add-On Version | Prometheus Operator Module Version | Velero Module Version |
 |----------------|------------------------------------|-----------------------|
-| 1.0.0          | 1.24.0                             | 1.24.0                |
+| 1.0.0          | 1.24.x                             | 1.24.x                |
 
 ## User customization
 

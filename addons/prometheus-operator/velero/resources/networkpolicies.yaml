@@ -3,8 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: allow-velero-monitoring
 spec:
-  podSelector:
-    matchLabels: {}
+  podSelector: {}
   policyTypes:
   - Ingress
   ingress:
@@ -13,5 +12,5 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: ""
     ports:
-    - port: 8085
+    - port: 0
       protocol: TCP
