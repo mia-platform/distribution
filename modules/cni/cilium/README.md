@@ -29,6 +29,15 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
 				correct configuration for cilium
     - **[hubble](./resources/workloads/hubble):** workloads for the Hubble observability platform
 
+## Module Configurations
+
+The module will install all its components inside the `kube-system` namespace. This is to further highlight that
+the Cilium workloads must be protected in the same way you will protect the main Kubernetes components.
+
+As Cilium is a complex application that will need multiple ports to handle correctly all its functions we will not
+change the default ports or uid, gid or fsGroup for its workloads but we will encourage you to seek the official
+documentation for all the system requirements needed at this [link].
+
 ## Flavors
 
 ### EKS
@@ -85,3 +94,4 @@ avoiding the setup with a wrong value, the module will set the property to `CHAN
 value that will trigger an error inside Cilium workload and will not start.
 
 [Here is the link to the official repository]: https://github.com/cilium/cilium "Cilium GitHub Repository"
+[link]: https://docs.cilium.io/en/v1.12/operations/system_requirements/ "Cilium System Requirements"
