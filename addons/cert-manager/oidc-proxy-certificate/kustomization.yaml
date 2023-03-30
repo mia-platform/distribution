@@ -3,63 +3,73 @@ kind: Component
 resources:
 - resources
 patches:
-- path: patches/oidc-deployment.yaml
-- target:
+- path: patches/deployment.yaml
+  target:
     kind: Deployment
     name: oidc-proxy
-  patch: |-
-    - op: remove
-      path: /spec/template/spec/initContainers
-    - op: replace
-      path: /metadata/annotations/distribution.mia-platform.eu~1certificate-ca-key
-      value: ca.crt
 replacements:
 - source:
+    fieldPath: .metadata.namespace
     kind: Deployment
     name: oidc-proxy
-    fieldPath: .metadata.namespace
   targets:
-  - select:
-      kind: Certificate
-      name: oidc-proxy
-    fieldPaths:
-      - .metadata.namespace
+  - fieldPaths:
+    - .metadata.namespace
     options:
       create: true
-  - select:
+    select:
+      kind: Certificate
+      name: oidc-proxy
+  - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
       kind: Issuer
       name: oidc-proxy
-    fieldPaths:
-      - .metadata.namespace
-    options:
-      create: true
 - source:
-    kind: Service
-    name: oidc-proxy
     fieldPath: .metadata.name
+    kind: Certificate
+    name: oidc-proxy
   targets:
-  - select:
-      kind: Certificate
-      name: oidc-proxy
-    fieldPaths:
-    - .spec.dnsNames.0
-    - .spec.dnsNames.1
+  - fieldPaths:
+    - .metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
-      delimiter: '.'
-      index: 0
       create: true
+      delimiter: /
+      index: 1
+    select:
+      kind: ValidatingWebhookConfiguration
+      name: oidc-proxy
 - source:
+    fieldPath: .metadata.name
     kind: Service
     name: oidc-proxy
-    fieldPath: .metadata.namespace
   targets:
-  - select:
-      kind: Certificate
-      name: oidc-proxy
-    fieldPaths:
+  - fieldPaths:
     - .spec.dnsNames.0
     - .spec.dnsNames.1
+    - .spec.dnsNames.2
+    - .spec.dnsNames.3
     options:
-      delimiter: '.'
-      index: 1
       create: true
+      delimiter: .
+    select:
+      kind: Certificate
+      name: oidc-proxy
+- source:
+    fieldPath: .metadata.namespace
+    kind: Service
+    name: oidc-proxy
+  targets:
+  - fieldPaths:
+    - .spec.dnsNames.1
+    - .spec.dnsNames.2
+    - .spec.dnsNames.3
+    options:
+      create: true
+      delimiter: .
+      index: 1
+    select:
+      kind: Certificate
+      name: oidc-proxy

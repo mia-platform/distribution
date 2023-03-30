@@ -2,9 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: oidc-proxy
+  annotations:
+    distribution.mia-platform.eu/certificate-ca-key: ca.crt
 spec:
   template:
     spec:
+      initContainers: null
       volumes:
       - name: oidc-proxy-tls
         secret:

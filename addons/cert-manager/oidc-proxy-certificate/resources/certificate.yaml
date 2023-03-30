@@ -11,6 +11,8 @@ metadata:
   name: oidc-proxy
 spec:
   dnsNames:
+  - SERVICE_NAME
+  - SERVICE_NAME.SERVICE_NAMESPACE
   - SERVICE_NAME.SERVICE_NAMESPACE.svc
   - SERVICE_NAME.SERVICE_NAMESPACE.svc.cluster.local
   issuerRef:
