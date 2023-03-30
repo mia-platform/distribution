@@ -7,7 +7,6 @@ on:
       - feat/logging-operator
     paths:
       - "modules/*/*/base/**"
-      - "!modules/security/oidc-proxy/**"
       - "test/**"
   pull_request:
 
