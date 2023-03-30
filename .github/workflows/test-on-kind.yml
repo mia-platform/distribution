@@ -3,11 +3,10 @@ name: Test Modules
 on:
   push:
     branches:
-      - main
-      - feat/logging-operator
+    - main
     paths:
-      - "modules/*/*/base/**"
-      - "test/**"
+    - "modules/*/*/base/**"
+    - "test/**"
   pull_request:
 
 concurrency:
@@ -21,38 +20,38 @@ jobs:
     outputs:
       module_paths: ${{ steps.changed.outputs.module_paths }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          list-files: shell
-          filters: |
-            modules:
-              - 'modules/*/!(oidc-proxy)/base/**'
-            test:
-              - 'test/**'
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        list-files: shell
+        filters: |
+          modules:
+            - 'modules/*/!(oidc-proxy)/base/**'
+          test:
+            - 'test/**'
 
-      - name: Clean Changed Filter
-        id: changed
-        run: |
-          MODULES="${{ steps.filter.outputs.modules_files }}"
-          TESTS="${{ steps.filter.outputs.test_files }}"
-          FINAL_LIST="["
-          for file in $MODULES; do
-            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??4g')"
-          done
-          for file in $TESTS; do
-            DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
-          done
-          for directory in $(tr ' ' '\n' <<< "${DIR_LIST[@]}" | sort -u | tr '\n' ' ') ; do
-            [ ! -d $directory ] && continue
-            FINAL_LIST+=\"$directory\",
-          done
-          FINAL_LIST+="]"
-          echo $(sed 's/,]/]/' <<< $FINAL_LIST)
-          echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
+    - name: Clean Changed Filter
+      id: changed
+      run: |
+        MODULES="${{ steps.filter.outputs.modules_files }}"
+        TESTS="${{ steps.filter.outputs.test_files }}"
+        FINAL_LIST="["
+        for file in $MODULES; do
+          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??4g')"
+        done
+        for file in $TESTS; do
+          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
+        done
+        for directory in $(tr ' ' '\n' <<< "${DIR_LIST[@]}" | sort -u | tr '\n' ' ') ; do
+          [ ! -d $directory ] && continue
+          FINAL_LIST+=\"$directory\",
+        done
+        FINAL_LIST+="]"
+        echo $(sed 's/,]/]/' <<< $FINAL_LIST)
+        echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
 
   test-module:
     name: "Test"
@@ -62,68 +61,68 @@ jobs:
     strategy:
       matrix:
         kind_version:
-          - kindest/node:v1.25.3@sha256:f52781bc0d7a19fb6c405c2af83abfeb311f130707a0e219175677e366cc45d1
-          - kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315
-          - kindest/node:v1.23.13@sha256:ef453bb7c79f0e3caba88d2067d4196f427794086a7d0df8df4f019d5e336b61
+        - kindest/node:v1.25.3@sha256:f52781bc0d7a19fb6c405c2af83abfeb311f130707a0e219175677e366cc45d1
+        - kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315
+        - kindest/node:v1.23.13@sha256:ef453bb7c79f0e3caba88d2067d4196f427794086a7d0df8df4f019d5e336b61
         module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Install yq
-        uses: mikefarah/yq@master
+    - name: Install yq
+      uses: mikefarah/yq@master
 
-      - name: Install kustomize
-        uses: imranismail/setup-kustomize@v1
+    - name: Install kustomize
+      uses: imranismail/setup-kustomize@v1
 
-      - name: Kustomize Build
-        run: |
-          mkdir ci
-          kustomize build ${{ matrix.module }} > ci/rendered.yaml
+    - name: Kustomize Build
+      run: |
+        mkdir ci
+        kustomize build ${{ matrix.module }} > ci/rendered.yaml
 
-      - name: Create k8s Kind Cluster for Cilium
-        if: matrix.module == 'modules/cni/cilium-base'
-        uses: helm/kind-action@v1
-        with:
-          node_image: "{{ matrix.kind_version }}"
-          config: .github/workflows/kind-configs/no-cni.yaml
-          wait: 10s
+    - name: Create k8s Kind Cluster for Cilium
+      if: matrix.module == 'modules/cni/cilium-base'
+      uses: helm/kind-action@v1
+      with:
+        node_image: "{{ matrix.kind_version }}"
+        config: .github/workflows/kind-configs/no-cni.yaml
+        wait: 10s
 
-      - name: Create k8s Kind Cluster
-        if: matrix.module != 'modules/cni/cilium-base'
-        uses: helm/kind-action@v1
-        with:
-          node_image: "${{ matrix.kind_version }}"
-          config: .github/workflows/kind-configs/default.yaml
-          wait: 60s
+    - name: Create k8s Kind Cluster
+      if: matrix.module != 'modules/cni/cilium-base'
+      uses: helm/kind-action@v1
+      with:
+        node_image: "${{ matrix.kind_version }}"
+        config: .github/workflows/kind-configs/default.yaml
+        wait: 60s
 
-      - name: Install module
-        run: |
-          kubectl cluster-info
-          CRDS=$(yq ea 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
-          NON_CRDS=$(yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
-          if [ -n "$CRDS" ] ; then
-            echo "Apply CRDs.."
-            kubectl create -f - <<< $CRDS
-            echo "Wait until all CRDs are available.."
-            kubectl wait --for condition=established crd $(yq ea 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
-          fi
-          echo "Apply other resources.."
-          kubectl create -f - <<< $NON_CRDS
+    - name: Install module
+      run: |
+        kubectl cluster-info
+        CRDS=$(yq ea 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
+        NON_CRDS=$(yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
+        if [ -n "$CRDS" ] ; then
+          echo "Apply CRDs.."
+          kubectl create -f - <<< $CRDS
+          echo "Wait until all CRDs are available.."
+          kubectl wait --for condition=established crd $(yq ea 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
+        fi
+        echo "Apply other resources.."
+        kubectl create -f - <<< $NON_CRDS
 
-      - name: Test - Rollout success
-        run: |
-          AWAITABLES="Deployment StatefulSet DaemonSet"
-          for KIND in $AWAITABLES ; do
-            NAMES=$(yq ea "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
-            for NAME in $NAMES ; do
-              kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
-            done
+    - name: Test - Rollout success
+      run: |
+        AWAITABLES="Deployment StatefulSet DaemonSet"
+        for KIND in $AWAITABLES ; do
+          NAMES=$(yq ea "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
+          for NAME in $NAMES ; do
+            kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 120s $NAME
           done
+        done
 
-      - name: Custom test script
-        if: startsWith( 'test/', ${{matrix.module}} )
-        run: |
-          [ ! -x ${{ matrix.module }}/test.sh ] && exit 0
-          ${{ matrix.module }}/test.sh
+    - name: Custom test script
+      if: startsWith( 'test/', ${{matrix.module}} )
+      run: |
+        [ ! -x ${{ matrix.module }}/test.sh ] && exit 0
+        ${{ matrix.module }}/test.sh
