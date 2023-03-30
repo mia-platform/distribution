@@ -2,15 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: oidc-proxy-system
 commonLabels:
-  app.kubernetes.io/name: oidc-proxy
-  app.kubernetes.io/instance: oidc-proxy
   app.kubernetes.io/component: oidc-proxy
 images:
 - name: docker.io/tremolosecurity/kube-oidc-proxy
-  newTag: latest@sha256:3b623f33c7d1752c2c7851221aa7f8ed74bcd37a9211c939af29225be531449d
+  newTag: latest@sha256:22c42188683ea59dea578f6928aea145d614bf200454db833a315ef03d43e65a
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v20220916-gd32f8c343
 resources:
 - configs
 - rbac
-- workload
+- workloads

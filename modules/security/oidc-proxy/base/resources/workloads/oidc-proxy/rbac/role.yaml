@@ -8,6 +8,13 @@ rules:
   resources:
   - secrets
   verbs:
-  - get
   - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
   - update
+  resourceNames:
+  - oidc-proxy-tls

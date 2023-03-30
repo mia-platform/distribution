@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: dex
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: dex
-    port: 5556
+    port: 11282
     protocol: TCP
-    nodePort: 32000
     targetPort: controller

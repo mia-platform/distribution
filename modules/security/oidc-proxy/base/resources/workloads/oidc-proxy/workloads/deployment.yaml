@@ -17,7 +17,7 @@ spec:
   template:
     spec:
       serviceAccountName: oidc-proxy
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -28,7 +28,7 @@ spec:
         resources: {}
         args:
         - create
-        - --host=$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
+        - --host=dex.localhost,$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
         - --namespace=$(POD_NAMESPACE)
         - --secret-name=$(SECRET_NAME)
         - --cert-name=tls.crt
@@ -41,7 +41,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: SECRET_NAME
-          value: SECRET
+          value: oidc-proxy-tls
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -51,6 +51,10 @@ spec:
           capabilities:
             drop:
             - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       containers:
       - name: oidc-proxy
         image: docker.io/tremolosecurity/kube-oidc-proxy:latest
@@ -96,20 +100,11 @@ spec:
           value: /etc/ssl/certs/ca-certificates.crt
         ports:
         - name: controller
-          containerPort: 11750
+          containerPort: 11280
           protocol: TCP
         - name: readiness
-          containerPort: 11751
+          containerPort: 11281
           protocol: TCP
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          privileged: false
-          seccompProfile:
-            type: RuntimeDefault
-          capabilities:
-            drop:
-            - ALL
         readinessProbe:
           failureThreshold: 2
           httpGet:
@@ -120,17 +115,47 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
         volumeMounts:
         - name: oidc-proxy-tls
           mountPath: /etc/oidc-proxy/tls
+          readOnly: true
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
           readOnly: true
       volumes:
       - name: oidc-proxy-tls
         secret:
           secretName: oidc-proxy-tls
           optional: true
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
       securityContext:
         runAsNonRoot: true
-        runAsUser: 65600
-        runAsGroup: 65600
-        fsGroup: 65600
+        runAsUser: 48080
+        runAsGroup: 48080
+        fsGroup: 48080

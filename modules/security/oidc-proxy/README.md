@@ -1,23 +1,42 @@
 # OIDC Proxy Module
 
-The OIDC Proxy is a reverse proxy for Kubernetes authentication via an external provider using the OIDC standard.
-It can be used when you cannot set up the API server directly, like with managed Kubernetes services such as GKE, AKS, etc.
+The OIDC Proxy is a reverse proxy for Kubernetes authentication via an external provider using the OIDC standard.  
+It can be used when you cannot set up the API server directly, like with managed Kubernetes services such as
+GKE, AKS, etc.
 
 The module is using the forked version mantained by Tremolo Security but the original work has been done by JetStack.
 
-[Here is the link to official repository.](https://github.com/TremoloSecurity/kube-oidc-proxy/)
+[Here is the link to official repository].
 
-## What the base module contains
+The module will install the `kube-oidc-proxy` deployment and the Dex idp provider for local testing, for a production
+setup we will reccomend to use the external-oidc flavor.
 
-- **Dex:**
-  - **Configs:** configurations for dex identity provider
-  - **Workload:** deployment and service for dex
-  - **RBAC:** `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding`, `Role` and `RoleBinding` needed by Dex
-- **Resources:**
-  - **Configs:** configurations for oidc-proxy
-  - **Controller:** deployment and service for oidc-proxy
-  - **RBAC:** `ServiceAccount`, `ClusterRole`, `ClusterRoleBinding`, `Role` and `RoleBinding` needed by odic-proxy
-- **Patches:** patches needed for working with the automatic certificate generator
+## Module Contents
+
+- **[dex](./dex)**: contains resources and patches for setting up the Dex idp for local testing
+- **[resources](./resources)**:
+  - **[configs](./resources/configs):** contains the base configurations for the service, including the `Namespace` and
+			`NetworkPolicy`
+  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./resources/workloads):**
+    - **[oidc-proxy](./resources/workloads/oidc-proxy):** resources for the kube-oidc-proxy workloads and its
+			configurations
+
+## Module Configurations
+
+The module will install all its component inside the `oidc-proxy` namespace and will use the following
+default **ports**:
+
+- kube-oidc-proxy:
+  - **11280** expose the proxy endpoint
+  - **11281** expose the readiness probe
+- dex:
+  - **11282** expose the idp endpoint
+
+This module use the following user, gid and fsGroup:
+
+- kube-oidc-proxy: **48080**
+- dex: **48081**
 
 ## Flavors
 
@@ -34,9 +53,9 @@ specify the external one you would like to use for authenticating in your cluste
 
 ## Compatibility Matrix
 
-| Module Version | Tool Version                           |
-|----------------|----------------------------------------|
-| 1.24.0         | latest@3b623f33c (no semver available) |
+| Module Version | kube-oidc-proxy Version                | Dex Version |
+|----------------|----------------------------------------|-------------|
+| 1.24.x         | latest@22c421886 (no semver available) | 2.36.0      |
 
 ## User customization
 
@@ -51,3 +70,6 @@ deployment and that contains at least this keys:
 The values of the keys depend on your provider and its documentation. Additionally, if your provider is exposed
 with a certificate firmed by a private CA, you can patch the deployment with a volume that contains it and
 patching the path inside the env variable named `OIDC_CA_FILE_PATH`.
+
+[Here is the link to official repository]: https://github.com/TremoloSecurity/kube-oidc-proxy
+	"kube-oidc-proxy GitHub Repository"

@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+replacements:
+- source:
+    fieldPath: .spec.template.spec.containers.[name=oidc-proxy].ports.[name=controller].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=oidc-proxy].env.[name=CONTROLLER_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
+    fieldPath: .spec.template.spec.containers.[name=oidc-proxy].ports.[name=readiness].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=oidc-proxy].env.[name=READINESS_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment

@@ -1,0 +1,7 @@
+nameReference:
+- kind: Secret
+  group: ""
+  fieldSpecs:
+  - kind: ServiceAccount
+    group: ""
+    path: /secrets/name

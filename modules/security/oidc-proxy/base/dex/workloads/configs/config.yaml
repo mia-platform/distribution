@@ -1,15 +1,13 @@
-issuer: https://dex.oidc-proxy-system.svc:5556
+issuer: https://dex.oidc-proxy-system.svc:11282
 storage:
   type: kubernetes
   config:
     inCluster: true
 web:
-  https: 0.0.0.0:5556
+  https: 0.0.0.0:11282
   tlsCert: /etc/dex/tls/tls.crt
   tlsKey: /etc/dex/tls/tls.key
 connectors: []
-oauth2:
-  skipApprovalScreen: true
 
 staticClients:
 - name: Kubectl Login

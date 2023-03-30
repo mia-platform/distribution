@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   ports:
   - name: controller
-    port: 443
+    port: 11280
     targetPort: controller
     protocol: TCP

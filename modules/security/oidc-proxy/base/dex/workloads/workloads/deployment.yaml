@@ -15,7 +15,7 @@ spec:
   template:
     spec:
       serviceAccountName: dex
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -49,6 +49,10 @@ spec:
           capabilities:
             drop:
             - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       containers:
       - name: dex
         image: ghcr.io/dexidp/dex:latest
@@ -60,8 +64,13 @@ spec:
         - /etc/dex/config/config.yaml
         ports:
         - name: controller
-          containerPort: 5556
+          containerPort: 11282
           protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: controller
+            scheme: HTTPS
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -78,11 +87,9 @@ spec:
         - name: dex-tls
           mountPath: /etc/dex/tls
           readOnly: true
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: controller
-            scheme: HTTPS
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
       volumes:
       - name: dex-config
         secret:
@@ -91,8 +98,26 @@ spec:
         secret:
           secretName: dex-tls
           optional: true
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
       securityContext:
         runAsNonRoot: true
-        runAsUser: 65601
-        runAsGroup: 65601
-        fsGroup: 65601
+        runAsUser: 48081
+        runAsGroup: 48081
+        fsGroup: 48081
