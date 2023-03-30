@@ -3,7 +3,8 @@ kind: NetworkPolicy
 metadata:
   name: allow-oidc-proxy
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels: {}
   policyTypes:
   - Egress
   egress:
