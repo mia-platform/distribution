@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- default labels for some resources for alignment to other modules
+
 ## v1.24.0
 
 - First Release

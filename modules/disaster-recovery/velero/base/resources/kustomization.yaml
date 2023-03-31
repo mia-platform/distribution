@@ -3,8 +3,6 @@ kind: Kustomization
 namespace: dr-system
 commonLabels:
   app.kubernetes.io/component: disaster-recovery
-  app.kubernetes.io/instance: velero
-  app.kubernetes.io/name: velero
 images:
 - name: docker.io/velero/velero
   newTag: v1.10.2
