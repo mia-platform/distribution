@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- removed wrong volume in logging-operator
+
 ## v1.24.0
 
 - First Release

@@ -53,10 +53,6 @@ spec:
           name: serviceaccount-token
           readOnly: true
       volumes:
-      - name: webhook-tls
-        secret:
-          secretName: webhook-tls
-          optional: true
       - name: serviceaccount-token
         projected:
           defaultMode: 0444
