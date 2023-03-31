@@ -3,7 +3,8 @@ kind: NetworkPolicy
 metadata:
   name: allow-prometheus-operator-monitoring
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels: {}
   policyTypes:
   - Ingress
   ingress:

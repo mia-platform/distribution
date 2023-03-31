@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- add missing labels match for `allow-prometheus-operator-monitoring` network policy
+
 ## v1.0.1
 
 ### Fixed
