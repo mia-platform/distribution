@@ -52,6 +52,13 @@ replacements:
       kind: ClusterRoleBinding
       name: mia-platform:logging-operator:fluentbit
   - fieldPaths:
+    - subjects.0.namespace
+    options:
+      create: true
+    select:
+      kind: ClusterRoleBinding
+      name: mia-platform:logging-operator:fluentd
+  - fieldPaths:
     - metadata.namespace
     options:
       create: true
