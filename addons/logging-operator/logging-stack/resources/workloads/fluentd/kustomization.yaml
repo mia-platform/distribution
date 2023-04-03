@@ -4,6 +4,8 @@ commonLabels:
   app.kubernetes.io/instance: fluentd
   app.kubernetes.io/name: fluentd
 resources:
+- clusterrole.yaml
+- clusterrolebinding.yaml
 - networkpolicy.yaml
 - role.yaml
 - rolebinding.yaml
