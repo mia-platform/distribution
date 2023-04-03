@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.0.2
+
+### Fixed
+
+- missing namespace property in service account reference of fluentd clusterrole
+
 ## v1.0.1
 
 ### Fixed
