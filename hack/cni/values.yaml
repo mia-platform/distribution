@@ -1,0 +1,36 @@
+upgradeCompatibility: "1.12"
+agentNotReadyTaintKey: ignore-taint.cluster-autoscaler.kubernetes.io/cilium-agent-not-ready
+cni:
+  chainingMode: portmap
+sessionAffinity: true
+hubble:
+  metrics:
+    enabled:
+    - dns:query;ignoreAAAA
+    - drop
+    - tcp
+    - flow
+    - icmp
+    - http
+    serviceMonitor:
+      enabled: false
+  tls:
+    auto:
+      method: cronJob
+  relay:
+    enabled: true
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: false
+  ui:
+    enabled: true
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: false
+operator:
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: false

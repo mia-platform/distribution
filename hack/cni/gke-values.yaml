@@ -1,0 +1,11 @@
+gke:
+  enabled: true
+cni:
+  binPath: /home/kubernetes/bin
+ipv4NativeRoutingCIDR: 10.0.0.0/16
+nodeinit:
+  enabled: true
+  reconfigureKubelet: true
+  removeCbrBridge: true
+ipam:
+  mode: kubernetes
