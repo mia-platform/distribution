@@ -6,7 +6,7 @@ spec:
     cni/cilium/base:
       version: v1.24.0
     disaster-recovery/velero/base:
-      version: v1.24.1
+      version: v1.24.2
     ingress/traefik/base:
       version: v1.24.1
     observability/logging-operator/base:
@@ -23,8 +23,6 @@ spec:
       version: v1.24.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
-      version: v1.0.0
-    cert-manager/oidc-proxy-certificate:
       version: v1.0.0
     cert-manager/prometheus-operator-webhook-certificate:
       version: v1.0.0
