@@ -22,6 +22,8 @@ replacements:
   - select:
       kind: NetworkPolicy
       name: allow-minio
+    options:
+      create: true
     fieldPaths:
     - .spec.egress.0.ports.0.port
     - .spec.ingress.0.ports.0.port
@@ -31,6 +33,8 @@ replacements:
       name: allow-velero-minio-egress
     fieldPaths:
     - .spec.egress.0.ports.0.port
+    options:
+      create: true
   - select:
       kind: BackupStorageLocation
     fieldPaths:
@@ -38,3 +42,4 @@ replacements:
     options:
       delimiter: ":"
       index: 2
+      create: true
