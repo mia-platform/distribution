@@ -1,5 +1,7 @@
 # Mia-Platform Magellano
 
+![Magellano Distribution Logo](./artworks/horizontal/color/magellano-horizontal-color.svg)
+
 ![Kubernetes]
 ![License]
 
