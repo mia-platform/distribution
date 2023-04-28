@@ -4,4 +4,4 @@ nameReference:
   fieldSpecs:
   - kind: ServiceAccount
     group: ""
-    path: /secrets/name
+    path: secrets/name
