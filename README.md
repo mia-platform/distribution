@@ -1,8 +1,7 @@
 # Mia-Platform Magellano
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./artworks/horizontal/color/magellano-horizontal-white.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./artworks/horizontal/color/magellano-horizontal-color.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./artworks/horizontal/white/magellano-horizontal-white.svg">
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./artworks/horizontal/color/magellano-horizontal-color.svg">
 </picture>
 
