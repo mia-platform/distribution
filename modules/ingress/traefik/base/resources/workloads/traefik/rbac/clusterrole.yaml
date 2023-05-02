@@ -7,8 +7,8 @@ rules:
   - extensions
   - networking.k8s.io
   resources:
-  - ingressclasses
   - ingresses
+  - ingressclasses
   verbs:
   - get
   - list
@@ -31,6 +31,7 @@ rules:
   verbs:
   - update
 - apiGroups:
+  - traefik.io
   - traefik.containo.us
   resources:
   - ingressroutes
