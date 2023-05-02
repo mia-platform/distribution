@@ -28,8 +28,6 @@ spec:
         image: ghcr.io/kyverno/cleanup-controller:latest
         resources: {}
         args:
-        - --clientRateLimitBurst=100
-        - --clientRateLimitQPS=300
         - --loggingFormat=text
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)

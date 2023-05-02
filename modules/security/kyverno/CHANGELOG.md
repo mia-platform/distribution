@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update kyverno to v1.9.2
+- remove clientRateLimitQPS and clientRateLimitBurst flags to use the new increased defaults
 
 ## v1.24.1
 
