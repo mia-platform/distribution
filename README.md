@@ -1,6 +1,10 @@
 # Mia-Platform Magellano
 
-![Magellano Distribution Logo](./artworks/horizontal/color/magellano-horizontal-color.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./artworks/horizontal/color/magellano-horizontal-white.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./artworks/horizontal/color/magellano-horizontal-color.svg">
+  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./artworks/horizontal/color/magellano-horizontal-color.svg">
+</picture>
 
 ![Kubernetes]
 ![License]
