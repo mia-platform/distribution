@@ -7,16 +7,17 @@ metadata:
 rules:
 - apiGroups:
   - traefik.containo.us
+  - traefik.io
   resources:
   - ingressroutes
   - ingressroutetcps
   - ingressrouteudps
   - middlewares
   - middlewaretcps
+  - serverstransports
   - tlsoptions
   - tlsstores
   - traefikservices
-  - serverstransports
   verbs:
   - create
   - delete
