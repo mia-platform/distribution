@@ -7,3 +7,5 @@ configMapGenerator:
 - name: cilium-config
   envs:
   - ./configmap.env
+  options:
+    disableNameSuffixHash: true

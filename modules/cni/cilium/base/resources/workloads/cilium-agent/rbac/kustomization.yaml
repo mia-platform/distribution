@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
 - clusterrole.yaml
 - clusterrolebinding.yaml
+- role.yaml
+- rolebinding.yaml
 - serviceaccount.yaml
