@@ -5,9 +5,9 @@ commonLabels:
   app.kubernetes.io/component: monitoring
 images:
 - name: quay.io/prometheus-operator/prometheus-operator
-  newTag: v0.63.0
+  newTag: v0.64.1
 - name: quay.io/prometheus-operator/prometheus-config-reloader
-  newTag: v0.63.0
+  newTag: v0.64.1
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v20220916-gd32f8c343
 - name: quay.io/prometheus/node-exporter
