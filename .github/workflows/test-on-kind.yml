@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - main
+    - realease/*
     paths:
     - "modules/*/*/base/**"
     - "test/**"
