@@ -17,7 +17,7 @@ to generate the correct configuration for scraping the data.
 
 | Add-On Version | Prometheus Operator Module Version | Logging Stack Add-on Version |
 |----------------|------------------------------------|------------------------------|
-| 1.0.0          | 1.24.0                             | 1.0.0                        |
+| 1.0.x          | 1.24.x, 1.25.x                     | 1.0.x                        |
 
 ## User customization
 

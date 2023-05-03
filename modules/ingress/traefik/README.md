@@ -66,6 +66,7 @@ Kubernetes:
 | Module Version | Tool Version   |
 |----------------|----------------|
 | 1.24.x         | 2.9.8          |
+| 1.25.x         | 2.10.1         |
 
 ## User customization
 

@@ -33,7 +33,7 @@ This module use the following user, gid and fsGroup:
 
 | Add-On Version | Logging Operator Module Version |
 |----------------|---------------------------------|
-| 1.0.0          | 1.24.0                          |
+| 1.0.x          | 1.24.x, 1.25.x                  |
 
 ## User customization
 

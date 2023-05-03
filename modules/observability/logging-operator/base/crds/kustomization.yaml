@@ -7,6 +7,7 @@ resources:
 - flows.logging.banzaicloud.io.yaml
 - hosttailers.logging-extensions.banzaicloud.io.yaml
 - loggings.logging.banzaicloud.io.yaml
+- nodeagents.logging.banzaicloud.io.yaml
 - outputs.logging.banzaicloud.io.yaml
 - syslogngclusterflows.logging.banzaicloud.io.yaml
 - syslogngclusteroutputs.logging.banzaicloud.io.yaml

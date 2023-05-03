@@ -27,6 +27,42 @@ spec:
       hostPID: false
       hostIPC: false
       initContainers:
+      - name: config
+        image: "quay.io/cilium/cilium:v1.13.2@sha256:85708b11d45647c35b9288e0de0706d24a5ce8a378166cadc700f756cc1a38d6"
+        imagePullPolicy: IfNotPresent
+        command:
+        - cilium
+        - build-config
+        env:
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: CILIUM_K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+        terminationMessagePolicy: FallbackToLogsOnError
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+          capabilities:
+            drop:
+            - ALL
       - name: mount-cgroup
         image: quay.io/cilium/cilium:latest
         resources: {}
@@ -263,10 +299,10 @@ spec:
           postStart:
             exec:
               command:
-              - /cni-install.sh
-              - --enable-debug=false
-              - --cni-exclusive=true
-              - --log-file=/var/run/cilium/cilium-cni.log
+              - "bash"
+              - "-c"
+              - |
+                /cni-install.sh --enable-debug=false --cni-exclusive=true --log-file=/var/run/cilium/cilium-cni.log
           preStop:
             exec:
               command:
@@ -372,9 +408,6 @@ spec:
         - name: clustermesh-secrets
           mountPath: /var/lib/cilium/clustermesh
           readOnly: true
-        - name: cilium-config-path
-          mountPath: /tmp/cilium/config-map
-          readOnly: true
         - name: lib-modules
           mountPath: /lib/modules
           readOnly: true
@@ -387,7 +420,11 @@ spec:
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token
           readOnly: true
+        - name: tmp
+          mountPath: /tmp
       volumes:
+      - name: tmp
+        emptyDir: {}
       - name: hostproc
         hostPath:
           path: /proc
@@ -429,9 +466,6 @@ spec:
           secretName: cilium-clustermesh
           defaultMode: 0400
           optional: true
-      - name: cilium-config-path
-        configMap:
-          name: cilium-config
       - name: lib-modules
         hostPath:
           path: /lib/modules

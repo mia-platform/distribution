@@ -5,7 +5,7 @@ commonLabels:
   app.kubernetes.io/component: ingress-controller
 images:
 - name: docker.io/library/traefik
-  newTag: 2.9.8
+  newTag: 2.10.1
 resources:
 - configs
 - rbac

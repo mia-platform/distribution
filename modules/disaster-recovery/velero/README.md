@@ -57,12 +57,14 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | Module Version | Velero | Minio                        | Minio Config                 | AWS Plugin |
 |----------------|--------|------------------------------|------------------------------|------------|
 | 1.24.x         | 1.10.2 | RELEASE.2023-03-22T06-36-24Z | RELEASE.2023-03-23T20-03-04Z | 1.6.1      |
+| 1.25.x         | 1.10.2 | RELEASE.2023-04-12T02-21-51Z | RELEASE.2023-03-23T20-03-04Z | 1.6.1      |
 
 ### GCP Storage Flavor
 
 | Module Version | Velero | GCP Plugin |
 |----------------|--------|------------|
 | 1.24.x         | 1.10.2 | 1.6.1      |
+| 1.25.x         | 1.10.2 | 1.6.1      |
 
 ## User Customization
 
