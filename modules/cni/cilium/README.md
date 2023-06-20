@@ -77,7 +77,7 @@ update the nodes correctly to use Cilium as CNI plugin.
 | Module Version | Cilium           | Hubble UI   |
 |----------------|------------------|-------------|
 | 1.24.x         | 1.12.8           | v0.9.2      |
-| 1.25.x         | 1.13.2           | v0.11.0     |
+| 1.25.x         | 1.13.4           | v0.11.0     |
 
 ## User customization
 
