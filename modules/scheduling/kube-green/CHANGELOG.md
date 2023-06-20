@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- ServiceMonitor keep also metrics with prefix `kube_green`
+
 ## v1.25.0
 
 - no changes
