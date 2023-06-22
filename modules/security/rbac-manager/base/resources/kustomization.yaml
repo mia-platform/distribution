@@ -5,7 +5,7 @@ commonLabels:
 namespace: rbac-manager-system
 images:
 - name: quay.io/reactiveops/rbac-manager
-  newTag: v1.5.0
+  newTag: v1.5.0@sha256:d03c8a1f6bb81cfc2016b84399e9567f55393d85a8553798459fbbb6da1bb0af
 resources:
 - configs
 - rbac

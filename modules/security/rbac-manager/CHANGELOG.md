@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- reference the image version with also the @digest
+
 ## v1.25.0
 
 ### Changed
