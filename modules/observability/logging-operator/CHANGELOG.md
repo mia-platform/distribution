@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.25.1
+
+### Changed
+
+- add digest to logging-operator image reference
+
 ## v1.25.0
 
 ### Changed
