@@ -5,11 +5,11 @@ commonLabels:
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.9.2
+  newTag: v1.9.5@sha256:2dca3b9a549e6b84289b6c200dacccdc2521c535dc932574b7ed99d3f33bcd1a
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.9.2
+  newTag: v1.9.5@sha256:6cd135f45386eeb932400c2fefee6d2edcd1a39b2526e2e7f2b0781bb8c80e32
 - name: ghcr.io/kyverno/cleanup-controller
-  newTag: v1.9.2
+  newTag: v1.9.5@sha256:43beb39e0c5549044e33de93e13164a7e7681521e8e271186f97cc27f53c7a2f
 resources:
 - configs
 - rbac

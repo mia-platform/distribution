@@ -48,7 +48,7 @@ This module use the following user, gid and fsGroup:
 | Module Version | Tool Version   |
 |----------------|----------------|
 | 1.24.x         | 1.9.1          |
-| 1.25.x         | 1.9.2          |
+| 1.25.x         | 1.9.5          |
 
 ## User customization
 
