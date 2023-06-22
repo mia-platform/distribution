@@ -24,7 +24,7 @@ The module will install all its component inside the `kube-green-system` namespa
 default **ports**:
 
 - kube-green:
-  - **11230**for exposing the webhook endpoint, the api-server must reach this port for avoiding timeout errors on
+  - **11230** for exposing the webhook endpoint, the api-server must reach this port for avoiding timeout errors on
 		CRDs creation
   - **11231** for exposing the metrics endpoint
   - **11232** expose the health probe endpoint for kubernetes

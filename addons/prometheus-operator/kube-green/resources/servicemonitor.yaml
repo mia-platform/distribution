@@ -11,7 +11,7 @@ spec:
     scrapeTimeout: 30s
     metricRelabelings:
     - action: keep
-      regex: controller_runtime.*
+      regex: (controller_runtime|kube_green_).*
       sourceLabels:
       - __name__
   selector:
