@@ -2,11 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 images:
 - name: docker.io/minio/minio
-  newTag: RELEASE.2023-06-19T19-52-50Z
+  newTag: RELEASE.2023-06-19T19-52-50Z@sha256:766c98aa24fc9758287d0a09d0532fb03e7c5cf3322732981f9294d7284eecb1
 - name: docker.io/minio/mc
-  newTag: RELEASE.2023-06-19T19-31-19Z
+  newTag: RELEASE.2023-06-19T19-31-19Z@sha256:d501c50840f94a76be20c165ec59b93d31843b54009fda1d2988ff05e7be9f9e
 - name: docker.io/velero/velero-plugin-for-aws
-  newTag: v1.6.1
+  newTag: v1.6.1@sha256:39734038bcdffd50a050bac004deef2578a29c756de330e70566279152d6d5b1
 resources:
 - workloads
 patches:
