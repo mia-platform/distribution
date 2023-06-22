@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update prometheus to v2.43.1
+- add digest to alertmanager and prometheus image reference
+
 ## v1.0.2
 
 ### Fixed
