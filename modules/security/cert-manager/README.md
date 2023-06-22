@@ -50,7 +50,7 @@ This module use the following user, gid and fsGroup:
 | Module Version | Tool Version   |
 |----------------|----------------|
 | 1.24.x         | 1.11.0         |
-| 1.25.x         | 1.11.1         |
+| 1.25.x         | 1.11.4         |
 
 ## User customization
 
