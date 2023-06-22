@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- ServiceMonitor keep also metrics with prefix `kube_green`
 - update kube-green to 0.5.1
 
 ## v1.25.0
