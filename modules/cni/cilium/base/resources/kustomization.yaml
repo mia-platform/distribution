@@ -16,8 +16,6 @@ images:
   newTag: v0.11.0@sha256:14c04d11f78da5c363f88592abae8d2ecee3cbe009f443ef11df6ac5f692d839
 - name: quay.io/cilium/certgen
   newTag: v0.1.8@sha256:4a456552a5f192992a6edcec2febb1c54870d665173a33dc7d876129b199ddbd
-- name: quay.io/cilium/startup-script
-  newTag: d69851597ea019af980891a4628fb36b7880ec26
 resources:
 - configs
 - rbac
