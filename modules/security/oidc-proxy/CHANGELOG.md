@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update oidc-proxy to latest digest
+
+### Fixed
+
+- digest reference for the tremolo image
+
 ## v1.25.0
 
 ### Changed
