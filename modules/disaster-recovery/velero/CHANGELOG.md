@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update minio and minio config version to latest releases
+- update velero to 1.10.3
+- update plugins to 1.6.2
+
 ## v1.25.0
 
 ### Changed
