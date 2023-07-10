@@ -3,11 +3,11 @@ apiVersion: vab.mia-platform.eu/v1alpha1
 name: eks-installation
 spec:
   modules:
-    cni/cilium/base:
+    cni/cilium/eks:
       version: v1.25.1
     disaster-recovery/velero/base:
       version: v1.25.1
-    ingress/traefik/base:
+    ingress/traefik/eks:
       version: v1.25.1
     observability/logging-operator/base:
       version: v1.25.1
@@ -31,7 +31,7 @@ spec:
     prometheus-operator/cert-manager:
       version: v1.0.1
     prometheus-operator/kube-green:
-      version: v1.0.0
+      version: v1.0.1
     prometheus-operator/kyverno:
       version: v1.0.1
     prometheus-operator/logging-operator:

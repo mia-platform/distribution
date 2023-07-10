@@ -31,7 +31,7 @@ spec:
     prometheus-operator/cert-manager:
       version: v1.0.1
     prometheus-operator/kube-green:
-      version: v1.0.0
+      version: v1.0.1
     prometheus-operator/kyverno:
       version: v1.0.1
     prometheus-operator/logging-operator:
