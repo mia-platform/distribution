@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- init container to minio config job for waiting that the minio server has been started correctly
+
+### Changed
+
+- update minio and minio config version to latest releases
+- update velero to 1.11.1
+- update plugins to 1.7.1
+
 ## v1.25.1
 
 ### Changed

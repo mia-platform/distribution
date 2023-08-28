@@ -31,6 +31,7 @@ replacements:
   targets:
   - fieldPaths:
     - .spec.template.spec.containers.[name=mc].env.[name=SERVER_PORT].value
+    - .spec.template.spec.initContainers.[name=wait-until-minio-is-ready].env.[name=SERVER_PORT].value
     options:
       create: true
     select:
@@ -41,6 +42,7 @@ replacements:
   targets:
   - fieldPaths:
     - spec.template.spec.containers.[name=mc].env.[name=MINIO_SERVICE_NAME].value
+    - .spec.template.spec.initContainers.[name=wait-until-minio-is-ready].env.[name=MINIO_SERVICE_NAME].value
     options:
       create: true
     select:
