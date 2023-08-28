@@ -28,6 +28,7 @@ spec:
         resources: {}
         args:
         - --v=2
+        - --logging-format=json
         - --secure-port=$(HTTP_PORT)
         - --healthz-port=$(HEALTHZ_PORT)
         - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)

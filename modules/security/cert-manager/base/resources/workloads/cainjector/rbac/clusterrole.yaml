@@ -38,6 +38,7 @@ rules:
   - list
   - watch
   - update
+  - patch
 - apiGroups:
   - apiregistration.k8s.io
   resources:
@@ -47,6 +48,7 @@ rules:
   - list
   - watch
   - update
+  - patch
 - apiGroups:
   - apiextensions.k8s.io
   resources:
@@ -56,3 +58,4 @@ rules:
   - list
   - watch
   - update
+  - patch

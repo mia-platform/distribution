@@ -26,6 +26,7 @@ spec:
         resources: {}
         args:
         - --v=2
+        - --logging-format=json
         - --leader-elect
         - --leader-election-namespace=$(POD_NAMESPACE)
         env:
