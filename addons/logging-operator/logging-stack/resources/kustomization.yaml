@@ -7,9 +7,9 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: spec.fluentbit.labels
-    kind: Logging
-    name: logging
+    fieldPath: spec.labels
+    kind: FluentbitAgent
+    name: fluentbit
   targets:
   - fieldPaths:
     - spec.podSelector.matchLabels

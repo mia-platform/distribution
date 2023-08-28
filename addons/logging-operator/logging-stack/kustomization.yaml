@@ -10,7 +10,6 @@ replacements:
   targets:
   - fieldPaths:
     - spec.controlNamespace
-    - metadata.namespace
     options:
       create: true
     select:

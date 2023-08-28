@@ -1,16 +1,15 @@
 # Logging system for Logging operator
 
-This add-on defines a default `Logging` resource for the Logging Opeartor that will create a `fluent-bit` and `fluentd`
-stack with the appropriate NetworkPolicy for communicating between them and an eventual external system for the LTS
-storage of the logs.
-To work properly it needs the Logging Operator module.
+This add-on defines default `Logging` and `FluentbitAgent` resources for the Logging Opeartor that will
+create a `fluent-bit` and `fluentd` stack with the appropriate NetworkPolicy for communicating between them
+and an eventual external system for the LTS storage of the logs. To work properly it needs the Logging Operator module.
 
 The resource is set to allow Cluster resources only in the same namespace of the Logging Operator workload and all RBAC
 resources are created manually.
 
 ## What the Add-On Contains
 
-- **[resources](./resources):** containst the `Logging` and `NetworkPolicy` resources
+- **[resources](./resources):** containst the `Logging`, `FluentbitAgent` and `NetworkPolicy` resources
 
 ## Add-on Configurations
 
@@ -34,6 +33,7 @@ This module use the following user, gid and fsGroup:
 | Add-On Version | Logging Operator Module Version |
 |----------------|---------------------------------|
 | 1.0.x          | 1.24.x, 1.25.x                  |
+| 2.0.x          | 1.26.x                          |
 
 ## User customization
 

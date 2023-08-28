@@ -4,4 +4,5 @@ commonLabels:
   app.kubernetes.io/instance: logging-operator
   app.kubernetes.io/name: logging-operator
 resources:
+- fluentbitagent.yaml
 - logging.yaml

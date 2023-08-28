@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- use the new CRD for FluentBit configuration
+
 ## v1.0.2
 
 ### Fixed
