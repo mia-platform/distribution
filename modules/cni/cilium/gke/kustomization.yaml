@@ -14,7 +14,7 @@ patches:
     - op: add
       path: /data/enable-local-node-route
       value: "false"
-    - op: replace
+    - op: add
       path: /data/ipv4-native-routing-cidr
       value: "CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR"
     - op: replace

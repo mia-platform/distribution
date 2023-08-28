@@ -5,6 +5,6 @@ commonLabels:
   app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/startup-script
-  newTag: d69851597ea019af980891a4628fb36b7880ec26
+  newTag: 62093c5c233ea914bfa26a10ba41f8780d9b737f
 resources:
 - node-init
