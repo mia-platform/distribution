@@ -57,6 +57,7 @@ specify the external one you would like to use for authenticating in your cluste
 |----------------|----------------------------------------|-------------|
 | 1.24.x         | latest@22c421886 (no semver available) | 2.36.0      |
 | 1.25.x         | latest@169cccafa (no semver available) | 2.36.0      |
+| 1.26.x         | latest@51bda58e2 (no semver available) | 2.36.0      |
 
 ## User customization
 
