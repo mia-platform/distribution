@@ -7,7 +7,7 @@ images:
 - name: docker.io/tremolosecurity/kube-oidc-proxy
   newTag: latest@sha256:51bda58e29c2379c571e84366d19fd02bc03017a55d2be573c6d22f33b7994d1
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
+  newTag: v20230721-40f94ef1b@sha256:458b4ef757308c0e4c647856d4c35dabc4c2bcc9a97211861cc8e8772abfa044
 resources:
 - configs
 - rbac
