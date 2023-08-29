@@ -15,7 +15,7 @@ configuration for scraping the data.
 
 | Add-On Version | Prometheus Operator Module Version | Cert Manager Module Version |
 |----------------|------------------------------------|-----------------------------|
-| 1.0.x          | 1.24.x, 1.25.x                     | 1.24.x, 1.25.x              |
+| 1.0.x          | 1.24.x, 1.25.x, 1.26.x             | 1.24.x, 1.25.x, 1.26.x      |
 
 ## User customization
 
