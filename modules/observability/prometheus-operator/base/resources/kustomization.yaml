@@ -5,15 +5,15 @@ commonLabels:
   app.kubernetes.io/component: monitoring
 images:
 - name: quay.io/prometheus-operator/prometheus-operator
-  newTag: v0.64.1@sha256:d0d083707f45fb9a4a3e1d33c5159e6f4e2affe032b2ba3064103a05d20f3e55
+  newTag: v0.67.1@sha256:e68bff5dd72a5d1be98ec66ef1383a7d7a338f3ffbef8603d551f70dafc8d978
 - name: quay.io/prometheus-operator/prometheus-config-reloader
-  newTag: v0.64.1@sha256:76ede814dae1282bae3e1e5ecb4e1558c323b1a3f428ab698670530d9a15aa32
+  newTag: v0.67.1@sha256:0fe3cf36985e0e524801a0393f88fa4b5dd5ffdf0f091ff78ee02f2d281631b5
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
+  newTag: v20230721-40f94ef1b@sha256:458b4ef757308c0e4c647856d4c35dabc4c2bcc9a97211861cc8e8772abfa044
 - name: quay.io/prometheus/node-exporter
-  newTag: v1.5.0@sha256:39c642b2b337e38c18e80266fb14383754178202f40103646337722a594d984c
+  newTag: v1.6.1@sha256:81f94e50ea37a88dfee849d0f4acad25b96b397061f59e5095905f6bc5829637
 - name: registry.k8s.io/kube-state-metrics/kube-state-metrics
-  newTag: v2.7.0@sha256:a15ca437f2309b769caa36a88240ce0266d67028f02da90f1c817c849b144273
+  newTag: v2.9.2@sha256:5ac2e67a862cd3baa0eb4fd7683d54928fd76ea3a61cde50508922c956901d8c
 resources:
 - configs
 - rbac

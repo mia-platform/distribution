@@ -29,6 +29,9 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
+        - --v=2
+        - --enableDeferredLoading=true
+        - --enableConfigMapCaching=true
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)

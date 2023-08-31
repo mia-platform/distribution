@@ -96,9 +96,5 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
-      securityContext:
-        fsGroup: 1001
-        runAsGroup: 1001
-        runAsUser: 1001
       nodeSelector:
         kubernetes.io/os: linux

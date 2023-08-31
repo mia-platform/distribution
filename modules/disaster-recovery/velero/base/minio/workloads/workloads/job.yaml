@@ -12,6 +12,25 @@ spec:
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      initContainers:
+      - name: wait-until-minio-is-ready
+        image: docker.io/library/busybox:latest
+        resources: {}
+        command:
+        - /bin/sh
+        - -c
+        - |
+          until nc -w 5 -v $(MINIO_SERVICE_NAME) $(SERVER_PORT); do
+            echo "waiting for minio to be ready..."
+            sleep 5
+          done
+        env:
+        - name: MINIO_SERVICE_NAME
+          value: MINIO_SERVICE_NAME
+        - name: SERVER_PORT
+          value: "0"
       containers:
       - name: mc
         image: docker.io/minio/mc:latest
@@ -19,7 +38,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        - mc --config-dir=/config config host add ${POD_NAMESPACE} http://${MINIO_SERVICE_NAME}:$(SERVER_PORT) ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} && mc --config-dir=/config mb -p ${POD_NAMESPACE}/${POD_NAMESPACE}
+        - mc --config-dir=/config config host add ${POD_NAMESPACE} http://${MINIO_SERVICE_NAME}:${SERVER_PORT} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} && mc --config-dir=/config mb -p ${POD_NAMESPACE}/${POD_NAMESPACE}
         envFrom:
         - secretRef:
             name: minio-credentials
@@ -30,8 +49,6 @@ spec:
               fieldPath: metadata.namespace
         - name: MINIO_SERVICE_NAME
           value: MINIO_SERVICE_NAME
-        - name: MINIO_NAMESPACE
-          value: minio
         - name: SERVER_PORT
           value: "0"
         volumeMounts:

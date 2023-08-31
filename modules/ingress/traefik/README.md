@@ -21,13 +21,13 @@ match only those pods.
 
 ## Module Contents
 
-- **[crds](./crds)**: `traefik` custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the configurations for the service, including the `Namespace` and
+- **[crds](./base/crds)**: `traefik` custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[traefik](./resources/workloads/traefik):** resources for the traefik controller
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[traefik](./base/resources/workloads/traefik):** resources for the traefik controller
 
 ## Module Configurations
 
@@ -67,6 +67,7 @@ Kubernetes:
 |----------------|----------------|
 | 1.24.x         | 2.9.8          |
 | 1.25.x         | 2.10.3         |
+| 1.26.x         | 2.10.4         |
 
 ## User customization
 

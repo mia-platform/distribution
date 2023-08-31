@@ -28,6 +28,7 @@ spec:
         resources: {}
         args:
         - --v=2
+        - --logging-format=json
         - --leader-elect
         - --metrics-listen-address=0.0.0.0:$(METRICS_PORT)
         - --leader-election-namespace=$(POD_NAMESPACE)

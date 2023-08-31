@@ -5,6 +5,7 @@ resources:
 - clusteroutputs.logging.banzaicloud.io.yaml
 - eventtailers.logging-extensions.banzaicloud.io.yaml
 - flows.logging.banzaicloud.io.yaml
+- fluentbitagents.logging.banzaicloud.io.yaml
 - hosttailers.logging-extensions.banzaicloud.io.yaml
 - loggings.logging.banzaicloud.io.yaml
 - nodeagents.logging.banzaicloud.io.yaml

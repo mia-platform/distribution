@@ -8,10 +8,11 @@ rules:
 - apiGroups:
   - monitoring.coreos.com
   resources:
-  - servicemonitors
   - podmonitors
   - probes
   - prometheusrules
+  - scrapeconfigs
+  - servicemonitors
   verbs:
   - get
   - list

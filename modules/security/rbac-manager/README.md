@@ -9,14 +9,14 @@ The module will install the controller deployment and its CRDs.
 
 ## Module Contents
 
-- **[crds](./crds)**: RBAC Manager custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the base configurations for the service, including the `Namespace` and
-			`NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[rbac-manager](./resources/workloads/rbac-manager):** resources for the rbac-manager controller. This component
-				will manage the correct handling of the `RBACDefinition` installed in the cluster
+- **[crds](./base/crds)**: RBAC Manager custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the base configurations for the service, including the `Namespace`
+		and `NetworkPolicy`
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[rbac-manager](./base/resources/workloads/rbac-manager):** resources for the rbac-manager controller. This component
+			will manage the correct handling of the `RBACDefinition` installed in the cluster
 
 ## Module Configurations
 
@@ -36,6 +36,7 @@ This module use the following user, gid and fsGroup:
 |----------------|----------------|
 | 1.24.x         | 1.4.2          |
 | 1.25.x         | 1.5.0          |
+| 1.26.x         | 1.6.4          |
 
 ## User customization
 

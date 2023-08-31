@@ -14,12 +14,12 @@ setup we will reccomend to use the external-oidc flavor.
 ## Module Contents
 
 - **[dex](./dex)**: contains resources and patches for setting up the Dex idp for local testing
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the base configurations for the service, including the `Namespace` and
-			`NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[oidc-proxy](./resources/workloads/oidc-proxy):** resources for the kube-oidc-proxy workloads and its
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the base configurations for the service, including the `Namespace`
+		and `NetworkPolicy`
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[oidc-proxy](./base/resources/workloads/oidc-proxy):** resources for the kube-oidc-proxy workloads and its
 			configurations
 
 ## Module Configurations
@@ -57,6 +57,7 @@ specify the external one you would like to use for authenticating in your cluste
 |----------------|----------------------------------------|-------------|
 | 1.24.x         | latest@22c421886 (no semver available) | 2.36.0      |
 | 1.25.x         | latest@169cccafa (no semver available) | 2.36.0      |
+| 1.26.x         | latest@51bda58e2 (no semver available) | 2.36.0      |
 
 ## User customization
 

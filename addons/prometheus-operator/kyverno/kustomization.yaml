@@ -10,18 +10,18 @@ replacements:
   targets:
   - fieldPaths:
     - spec.selector.matchLabels
+    options:
+      create: true
     select:
       kind: ServiceMonitor
       name: kyverno
-    options:
-      create: true
   - fieldPaths:
     - spec.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-monitoring
-    options:
-      create: true
 - source:
     fieldPath: metadata.namespace
     kind: Deployment
@@ -60,18 +60,18 @@ replacements:
   targets:
   - fieldPaths:
     - spec.selector.matchLabels
+    options:
+      create: true
     select:
       kind: ServiceMonitor
       name: kyverno-cleanup
-    options:
-      create: true
   - fieldPaths:
     - spec.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-cleanup-monitoring
-    options:
-      create: true
 - source:
     fieldPath: metadata.namespace
     kind: Deployment
@@ -104,6 +104,106 @@ replacements:
       kind: NetworkPolicy
       name: allow-kyverno-cleanup-monitoring
 - source:
+    fieldPath: spec.selector.matchLabels
+    kind: Deployment
+    name: kyverno-background
+  targets:
+  - fieldPaths:
+    - spec.selector.matchLabels
+    options:
+      create: true
+    select:
+      kind: PodMonitor
+      name: kyverno-background
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-background-monitoring
+- source:
+    fieldPath: metadata.namespace
+    kind: Deployment
+    name: kyverno-background
+  targets:
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: PodMonitor
+      name: kyverno-background
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-background-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno-background].ports.[name=metrics].containerPort
+    kind: Deployment
+    name: kyverno-background
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-background-monitoring
+- source:
+    fieldPath: spec.selector.matchLabels
+    kind: Deployment
+    name: kyverno-reports
+  targets:
+  - fieldPaths:
+    - spec.selector.matchLabels
+    options:
+      create: true
+    select:
+      kind: PodMonitor
+      name: kyverno-reports
+  - fieldPaths:
+    - spec.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-reports-monitoring
+- source:
+    fieldPath: metadata.namespace
+    kind: Deployment
+    name: kyverno-reports
+  targets:
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: PodMonitor
+      name: kyverno-reports
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-reports-monitoring
+- source:
+    fieldPath: .spec.template.spec.containers.[name=kyverno-reports].ports.[name=metrics].containerPort
+    kind: Deployment
+    name: kyverno-reports
+  targets:
+  - fieldPaths:
+    - .spec.ingress.0.ports.0.port
+    options:
+      create: true
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-reports-monitoring
+- source:
     fieldPath: metadata.namespace
     kind: Deployment
     name: prometheus-operator
@@ -118,3 +218,13 @@ replacements:
     select:
       kind: NetworkPolicy
       name: allow-kyverno-cleanup-monitoring
+  - fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-background-monitoring
+  - fieldPaths:
+    - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    select:
+      kind: NetworkPolicy
+      name: allow-kyverno-reports-monitoring

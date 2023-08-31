@@ -10,13 +10,13 @@ on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 
 ## Module Contents
 
-- **[crds](./crds)**: `kube-green` custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the configurations for the service, including the `Namespace` and
+- **[crds](./base/crds)**: `kube-green` custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[kube-green](./resources/workloads/kube-green):** resources for the kube-green controller
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[kube-green](./base/resources/workloads/kube-green):** resources for the kube-green controller
 
 ## Module Configurations
 
@@ -55,4 +55,4 @@ reach the webhook port.
 If you are using our cni module or a cni that don’t use the amazon cni daemonset, you have to set the `networkHost`
 option of deployment to `true` for allowing the api-server to reach its endpoint.
 
-[Here is the link to Kube-green official repository]: "https://github.com/kube-green/kube-green" "kube-green GitHub Reository"
+[Here is the link to Kube-green official repository]: https://github.com/kube-green/kube-green "kube-green GitHub Reository"

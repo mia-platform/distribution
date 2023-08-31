@@ -14,17 +14,17 @@ The module will install the Prometheus Operator workloads with its CRDs, Cluster
 
 ## Module Contents
 
-- **[crds](./crds)**: Prometheus Operator custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[kube-state-metrics](./resources/workloads/kube-state-metrics):** configurations, deployment, and RBAC
+- **[crds](./base/crds)**: Prometheus Operator custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[kube-state-metrics](./base/resources/workloads/kube-state-metrics):** configurations, deployment, and RBAC
 				definitions for `kube-state-metrics`
-    - **[node-exporter](./resources/workloads/node-exporter):** configurations, daemonset, and RBAC definitions for
+    - **[node-exporter](./base/resources/workloads/node-exporter):** configurations, daemonset, and RBAC definitions for
 				Node exporter
-    - **[prometheus-operator](./resources/workloads/node-exporter):** configurations, deployment, and RBAC definitions
-				for Prometheus Operator
+    - **[prometheus-operator](./base/resources/workloads/node-exporter):** configurations, deployment, and RBAC
+			definitions for Prometheus Operator
 
 ## Module Configurations
 
@@ -51,6 +51,7 @@ This module use the following user, gid and fsGroup:
 |----------------|---------------------|---------------|--------------------|
 | 1.24.x         | 0.63.0              | 1.5.0         | 2.7.0              |
 | 1.25.x         | 0.64.1              | 1.5.0         | 2.7.0              |
+| 1.26.x         | 0.67.1              | 1.6.1         | 2.9.2              |
 
 ## User customization
 

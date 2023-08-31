@@ -4,9 +4,9 @@ resources:
 - resources
 replacements:
 - source:
-    fieldPath: spec.fluentbit.labels
-    kind: Logging
-    name: logging
+    fieldPath: spec.labels
+    kind: FluentbitAgent
+    name: fluentbit
   targets:
   - fieldPaths:
     - spec.podSelector.matchLabels
@@ -23,9 +23,9 @@ replacements:
       kind: ServiceMonitor
       name: fluentbit
 - source:
-    fieldPath: spec.fluentbit.metrics.port
-    kind: Logging
-    name: logging
+    fieldPath: spec.metrics.port
+    kind: FluentbitAgent
+    name: fluentbit
   targets:
   - fieldPaths:
     - spec.ingress.0.ports.0.port
@@ -66,7 +66,7 @@ replacements:
       kind: NetworkPolicy
       name: allow-fluentd-monitoring
 - source:
-    fieldPath: metadata.namespace
+    fieldPath: spec.controlNamespace
     kind: Logging
     name: logging
   targets:

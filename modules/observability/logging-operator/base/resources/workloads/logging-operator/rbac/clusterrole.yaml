@@ -231,6 +231,7 @@ rules:
   - clusterflows
   - clusteroutputs
   - flows
+  - fluentbitagents
   - loggings
   - nodeagents
   - outputs
@@ -248,6 +249,7 @@ rules:
   - clusterflows/status
   - clusteroutputs/status
   - flows/status
+  - fluentbitagents/status
   - loggings/status
   - nodeagents/status
   - outputs/status

@@ -28,6 +28,7 @@ spec:
         - --global.checknewversion=false
         - --global.sendanonymoususage=false
         - --api.dashboard=true
+        - --api.disabledashboardad=true
         - --ping=true
         - --log.format=json
         - --log.level=$(LOG_LEVEL)

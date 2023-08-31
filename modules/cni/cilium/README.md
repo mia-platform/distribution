@@ -19,15 +19,15 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
 
 ## Module Contents
 
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the main configuration for cilim and hubble workloads
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[cilium-agent](./resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the main configuration for cilim and hubble workloads
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[cilium-agent](./base/resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
 				eBPF module on the nodes
-    - **[cilium-operator](./resources/workloads/cilium-operator):** resources for the operator that will handle the
+    - **[cilium-operator](./base/resources/workloads/cilium-operator):** resources for the operator that will handle the
 				correct configuration for cilium
-    - **[hubble](./resources/workloads/hubble):** workloads for the Hubble observability platform
+    - **[hubble](./base/resources/workloads/hubble):** workloads for the Hubble observability platform
 
 ## Module Configurations
 
@@ -80,6 +80,7 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.25.0         | 1.13.2           | v0.11.0     |
 | 1.25.1         | 1.13.4           | v0.11.0     |
 | 1.25.2         | 1.13.6           | v0.11.0     |
+| 1.26.0         | 1.14.1           | v0.12.0     |
 
 ## User customization
 
@@ -97,4 +98,4 @@ avoiding the setup with a wrong value, the module will set the property to `CHAN
 value that will trigger an error inside Cilium workload and will not start.
 
 [Here is the link to the official repository]: https://github.com/cilium/cilium "Cilium GitHub Repository"
-[link]: https://docs.cilium.io/en/v1.13/operations/system_requirements/ "Cilium System Requirements"
+[link]: https://docs.cilium.io/en/v1.14/operations/system_requirements/ "Cilium System Requirements"

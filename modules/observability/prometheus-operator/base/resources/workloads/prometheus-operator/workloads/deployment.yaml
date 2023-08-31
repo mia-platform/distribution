@@ -99,10 +99,10 @@ spec:
         - --web.cert-file=/etc/prometheus-operator/tls/tls.crt
         - --web.key-file=/etc/prometheus-operator/tls/tls.key
         - --prometheus-config-reloader=$(CONFIG_RELOADER_IMAGE)
-        - --config-reloader-cpu-request=100m
-        - --config-reloader-cpu-limit=100m
-        - --config-reloader-memory-request=25Mi
-        - --config-reloader-memory-limit=25Mi
+        - --config-reloader-cpu-request=$(CONFIG_RELOADER_CPU_REQUEST)
+        - --config-reloader-cpu-limit=$(CONFIG_RELOADER_CPU_LIMIT)
+        - --config-reloader-memory-request=$(CONFIG_RELOADER_MEMORY_REQUEST)
+        - --config-reloader-memory-limit=$(CONFIG_RELOADER_MEMORY_LIMIT)
         - --kubelet-service=kube-system/kubelet
         - --prometheus-instance-namespaces=$(POD_NAMESPACE)
         - --alertmanager-instance-namespaces=$(POD_NAMESPACE)
@@ -116,6 +116,14 @@ spec:
           value: quay.io/prometheus-operator/prometheus-config-reloader:latest
         - name: CONTROLLER_PORT
           value: "0"
+        - name: CONFIG_RELOADER_CPU_REQUEST
+          value: 10m
+        - name: CONFIG_RELOADER_CPU_LIMIT
+          value: 10m
+        - name: CONFIG_RELOADER_MEMORY_REQUEST
+          value: 50Mi
+        - name: CONFIG_RELOADER_MEMORY_LIMIT
+          value: 50Mi
         ports:
         - name: operator
           containerPort: 11263

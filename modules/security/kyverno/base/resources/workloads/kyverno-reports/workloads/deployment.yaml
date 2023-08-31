@@ -1,0 +1,124 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kyverno-reports
+  labels:
+    distribution.mia-platform.eu/role: controller
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: kyverno-reports
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+      - name: kyverno-reports
+        image: ghcr.io/kyverno/reports-controller:latest
+        resources: {}
+        args:
+        - --loggingFormat=text
+        - --v=2
+        - --admissionReports=true
+        - --policyReports=true
+        - --backgroundScan=true
+        - --skipResourceFilters=true
+        - --enableConfigMapCaching=true
+        - --enableDeferredLoading=true
+        - --enablePolicyException=false
+        - --allowInsecureRegistry=false
+        - --registryCredentialHelpers=default,google,amazon,azure,github
+        - --metricsPort=$(METRICS_PORT)
+        - --profile=$(PROFILE_ENABLED)
+        - --profilePort=$(PROFILE_PORT)
+        env:
+        - name: INIT_CONFIG
+          value: kyverno
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
+        - name: METRICS_PORT
+          value: "0"
+        - name: PROFILE_ENABLED
+          value: "false"
+        - name: PROFILE_PORT
+          value: "0"
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: KYVERNO_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: TUF_ROOT
+          value: /.sigstore
+        ports:
+        - containerPort: 11216
+          name: metrics
+          protocol: TCP
+        - containerPort: 11217
+          name: profile
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+        - mountPath: /.sigstore
+          name: sigstore
+      volumes:
+      - name: sigstore
+        emptyDir: {}
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 48013
+        runAsGroup: 48013
+        fsGroup: 48013
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - kyverno-reports
+              topologyKey: "kubernetes.io/hostname"

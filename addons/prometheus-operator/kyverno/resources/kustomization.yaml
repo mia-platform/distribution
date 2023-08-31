@@ -5,5 +5,7 @@ commonLabels:
   app.kubernetes.io/instance: kyverno
   app.kubernetes.io/name: kyverno
 resources:
-- networkpolicies.yaml
-- servicemonitors.yaml
+- kyverno-admission
+- kyverno-background
+- kyverno-cleanup
+- kyverno-reports

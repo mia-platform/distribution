@@ -41,7 +41,7 @@ This module use the following user, gid and fsGroup:
 
 | Add-On Version | Prometheus operator Module Version |
 |----------------|------------------------------------|
-| 1.0.x          | 1.24.x, 1.25.x                     |
+| 1.0.x          | 1.24.x, 1.25.x, 1.26.x             |
 
 ## User customization
 

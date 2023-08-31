@@ -8,5 +8,6 @@ resources:
 - prometheusagents.monitoring.coreos.com.yaml
 - prometheuses.monitoring.coreos.com.yaml
 - prometheusrules.monitoring.coreos.com.yaml
+- scrapeconfigs.monitoring.coreos.com.yaml
 - servicemonitors.monitoring.coreos.com.yaml
 - thanosrulers.monitoring.coreos.com.yaml
