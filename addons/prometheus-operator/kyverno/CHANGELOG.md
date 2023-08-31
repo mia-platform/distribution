@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- add PodMonitors for kyverno-background and kyverno-reports resources
+
 ## v1.0.1
 
 ### Changed
