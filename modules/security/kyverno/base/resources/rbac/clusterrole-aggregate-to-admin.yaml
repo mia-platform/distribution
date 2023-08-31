@@ -11,22 +11,17 @@ rules:
   - admissionreports
   - backgroundscanreports
   - cleanuppolicies
-  - generaterequests
   - policies
   - updaterequests
   verbs:
   - create
   - delete
-  - get
-  - list
   - patch
   - update
-  - watch
 - apiGroups:
   - kyverno.io
   resources:
   - cleanuppolicies/status
-  - generaterequests/status
   - policies/status
   - updaterequests/status
   verbs:
@@ -40,11 +35,8 @@ rules:
   verbs:
   - create
   - delete
-  - get
-  - list
   - patch
   - update
-  - watch
 - apiGroups:
   - wgpolicyk8s.io
   resources:

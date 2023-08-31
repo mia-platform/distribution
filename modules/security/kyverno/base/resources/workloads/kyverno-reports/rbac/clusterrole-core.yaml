@@ -1,19 +1,19 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:kyverno:policies
+  name: mia-platform:kyverno:reports-core
 rules:
+- apiGroups:
+  - "*"
+  resources:
+  - "*"
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
   - kyverno.io
   resources:
-  - policies
-  - policies/status
-  - clusterpolicies
-  - clusterpolicies/status
-  - generaterequests
-  - generaterequests/status
-  - updaterequests
-  - updaterequests/status
   - admissionreports
   - clusteradmissionreports
   - backgroundscanreports
@@ -43,3 +43,11 @@ rules:
   - update
   - watch
   - deletecollection
+- apiGroups:
+  - ""
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch

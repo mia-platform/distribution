@@ -24,9 +24,32 @@ rules:
   - kyverno
   - kyverno-health
 - apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  resourceNames:
+  - kyverno
+  - kyverno-metrics
+- apiGroups:
   - apps
   resources:
   - deployments
+  - deployments/scale
   verbs:
   - get
   - list

@@ -3,12 +3,7 @@ kind: Kustomization
 configurations:
 - kustomizeconfig.yaml
 resources:
-- clusterrole-events.yaml
-- clusterrole-generate.yaml
-- clusterrole-policies.yaml
-- clusterrole-userinfo.yaml
-- clusterrole-view.yaml
-- clusterrole-webhook.yaml
+- clusterrole-defaults.yaml
 - clusterrole.yaml
 - clusterrolebinding.yaml
 - role.yaml

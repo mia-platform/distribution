@@ -29,7 +29,10 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
+        - --v=2
         env:
+        - name: INIT_CONFIG
+          value: kyverno
         - name: METRICS_CONFIG
           value: kyverno-metrics
         - name: KYVERNO_NAMESPACE
@@ -41,6 +44,8 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: KYVERNO_DEPLOYMENT
+          value: kyverno
+        - name: KYVERNO_SVC
           value: kyverno
         securityContext:
           allowPrivilegeEscalation: false
@@ -60,8 +65,20 @@ spec:
         image: ghcr.io/kyverno/kyverno:latest
         resources: {}
         args:
-        - --exceptionNamespace=$(KYVERNO_NAMESPACE)
         - --loggingFormat=text
+        - --v=2
+        - --backgroundServiceAccountName=system:serviceaccount:kyverno-system:kyverno-background
+        - --exceptionNamespace=$(KYVERNO_NAMESPACE)
+        - --admissionReports=true
+        - --autoUpdateWebhooks=true
+        - --enableConfigMapCaching=true
+        - --enableDeferredLoading=true
+        - --dumpPayload=false
+        - --forceFailurePolicyIgnore=false
+        - --enablePolicyException=false
+        - --protectManagedResources=false
+        - --allowInsecureRegistry=false
+        - --registryCredentialHelpers=default,google,amazon,azure,github
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
