@@ -12,12 +12,12 @@ one of the flavor available for using cloud storage services.
 
 ## Module Contents
 
-- **[crds](./crds)**: Prometheus Operator custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[velero](./resources/workloads/velero):** resources for the velero controller
+- **[crds](./base/crds)**: Prometheus Operator custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[velero](./base/resources/workloads/velero):** resources for the velero controller
 
 ## Module Configurations
 

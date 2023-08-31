@@ -11,13 +11,13 @@ The module will install the logging-operator deployment, its CRDs, and the corre
 
 ## Module Contents
 
-- **[crds](./crds)**: Logging Operator custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the configurations for the service, including the `Namespace` and
+- **[crds](./base/crds)**: Logging Operator custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[logging-operator](./resources/workloads/logging-operator):** resources for the Logging Operator controller
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[logging-operator](./base/resources/workloads/logging-operator):** resources for the Logging Operator controller
 
 ## Module Configurations
 

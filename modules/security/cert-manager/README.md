@@ -11,17 +11,17 @@ ClusterRoles the appropiate permissions to handle the CRDs that the operator wil
 
 ## Module Contents
 
-- **[crds](./crds)**: `cert-manager` custom resource definitions
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** `Namespace` of the module and the base deny all `NetworkPolicy`
-  - **[RBAC](./resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin` cluster roles
-  - **[workloads](./resources/workloads):**
-    - **[cainjector](./resources/workloads/cainjector):** resources for the ca-injector workload. It’s the component
+- **[crds](./base/crds)**: `cert-manager` custom resource definitions
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** `Namespace` of the module and the base deny all `NetworkPolicy`
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin` cluster roles
+  - **[workloads](./base/resources/workloads):**
+    - **[cainjector](./base/resources/workloads/cainjector):** resources for the ca-injector workload. It’s the component
 				that helps to configure the CA certificates for: Mutating Webhooks, Validating Webhooks Conversion Webhooks
 				and API Services
-    - **[cert-manager](./resources/workloads/cert-manager):** resources for the main cert-manager workload. It’s the
+    - **[cert-manager](./base/resources/workloads/cert-manager):** resources for the main cert-manager workload. It’s the
 				component that handle the certificates lifecycle
-    - **[webhook](./resources/workloads/webhook):** resources for the webhook workload. It’s the component that
+    - **[webhook](./base/resources/workloads/webhook):** resources for the webhook workload. It’s the component that
 				expose the Dynamic Admission Control functionality for validating, mutating  and converting the `cert-manager`
 				CRDs
 

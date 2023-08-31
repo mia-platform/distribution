@@ -19,15 +19,15 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
 
 ## Module Contents
 
-- **[resources](./resources)**:
-  - **[configs](./resources/configs):** contains the main configuration for cilim and hubble workloads
-  - **[RBAC](./resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./resources/workloads):**
-    - **[cilium-agent](./resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
+- **[resources](./base/resources)**:
+  - **[configs](./base/resources/configs):** contains the main configuration for cilim and hubble workloads
+  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[workloads](./base/resources/workloads):**
+    - **[cilium-agent](./base/resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
 				eBPF module on the nodes
-    - **[cilium-operator](./resources/workloads/cilium-operator):** resources for the operator that will handle the
+    - **[cilium-operator](./base/resources/workloads/cilium-operator):** resources for the operator that will handle the
 				correct configuration for cilium
-    - **[hubble](./resources/workloads/hubble):** workloads for the Hubble observability platform
+    - **[hubble](./base/resources/workloads/hubble):** workloads for the Hubble observability platform
 
 ## Module Configurations
 
