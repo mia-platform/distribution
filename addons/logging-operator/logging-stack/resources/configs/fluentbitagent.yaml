@@ -36,9 +36,6 @@ spec:
   positiondb:
     hostPath:
       path: /var/log/logging-operator
-  bufferStorageVolume:
-    hostPath:
-      path: ""
   inputTail:
     Mem_Buf_Limit: 10MB
     Path: /var/log/containers/*.log
