@@ -12,6 +12,8 @@ spec:
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       hostNetwork: false
+      hostPID: false
+      hostIPC: false
       initContainers:
       - name: wait-until-minio-is-ready
         image: docker.io/library/busybox:latest
@@ -20,7 +22,7 @@ spec:
         - /bin/sh
         - -c
         - |
-          until nc -w 1 -v $MINIO_SERVICE_NAME $SERVER_PORT; do
+          until nc -w 5 -v $(MINIO_SERVICE_NAME) $(SERVER_PORT); do
             echo "waiting for minio to be ready..."
             sleep 5
           done
@@ -47,8 +49,6 @@ spec:
               fieldPath: metadata.namespace
         - name: MINIO_SERVICE_NAME
           value: MINIO_SERVICE_NAME
-        - name: MINIO_NAMESPACE
-          value: MINIO_NAMESPACE
         - name: SERVER_PORT
           value: "0"
         volumeMounts:
