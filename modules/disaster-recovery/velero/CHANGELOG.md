@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.26.0
+
 ### Added
 
 - init container to minio config job for waiting that the minio server has been started correctly

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.0.0
+
+### Changed
+
+- add support for new loggin-stack addon version
+
 ## v1.0.0
 
 - First Release
