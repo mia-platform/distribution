@@ -32,7 +32,7 @@ This module use the following user, gid and fsGroup:
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.26.x         | 0.6.4          |
+| 1.27.x         | 0.6.4          |
 
 
 [Here is the link to Metrics Server official repository]: https://github.com/kubernetes-sigs/metrics-server
