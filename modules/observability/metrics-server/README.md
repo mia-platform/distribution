@@ -18,7 +18,15 @@ The module will install the metrics-server deployment, its APIService and the co
 
 ## Module Configurations
 
-The module will install all its component inside the `kube-system` namespace.
+The module will install all its component inside the `kube-system` namespace and will use the following
+default **ports**:
+
+- metrics-server:
+  - **11290** for exposing the metrics endpoint of the controller
+
+This module use the following user, gid and fsGroup:
+
+- metrics-server: **48050**
 
 ## Compatibility Matrix
 
