@@ -20,7 +20,7 @@ spec:
       containers:
       - args:
         - --cert-dir=/tmp
-        - --secure-port=11290
+        - --secure-port=4443
         - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
         - --kubelet-use-node-status-port
         - --metric-resolution=15s
@@ -35,7 +35,7 @@ spec:
           periodSeconds: 10
         name: metrics-server
         ports:
-        - containerPort: 11290
+        - containerPort: 4443
           name: https
           protocol: TCP
         readinessProbe:
@@ -54,9 +54,7 @@ spec:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-          runAsUser: 48090
-          runAsGroup: 48090
-          fsGroup: 48090
+          runAsUser: 1000
         volumeMounts:
         - mountPath: /tmp
           name: tmp-dir

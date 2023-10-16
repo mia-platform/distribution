@@ -4,3 +4,23 @@ resources:
 - api-service.yaml
 - deployment.yaml
 - service.yaml
+patches:
+- target:
+    kind: Deployment
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/args/1
+      value: --secure-port=11290
+    - op: replace
+      path: /spec/template/spec/containers/0/ports/0/containerPort
+      value: 11290
+    - op: replace
+      path: /spec/template/spec/containers/0/securityContext/runAsUser
+      value: 48090
+    - op: add
+      path: /spec/template/spec/securityContext
+      value:
+        securityContext:
+          runAsUser: 48090
+          runAsGroup: 48090
+          fsGroup: 48090
