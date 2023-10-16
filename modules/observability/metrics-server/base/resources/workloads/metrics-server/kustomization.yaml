@@ -20,7 +20,6 @@ patches:
     - op: add
       path: /spec/template/spec/securityContext
       value:
-        securityContext:
-          runAsUser: 48090
-          runAsGroup: 48090
-          fsGroup: 48090
+        runAsUser: 48090
+        runAsGroup: 48090
+        fsGroup: 48090
