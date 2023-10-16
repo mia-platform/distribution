@@ -1,48 +1,34 @@
-# Logging Operator Module
+# Metrics server Module
 
-The Logging Operator is an open-source tool that helps you manage logging resources in your Kubernetes cluster.
-It manages the deployment of a fluentbit-fluentd stack that can be configured to send logs to other services
-like Elasticsearch, Loki, Sumologic, etc., providing a unified logging solution for your cluster.
+Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes built-in autoscaling pipelines.
+Metrics Server collects resource metrics from Kubelets and exposes them in Kubernetes apiserver through [Metrics API]
+for use by [Horizontal Pod Autoscaler] and [Vertical Pod Autoscaler]. Metrics API can also be accessed by `kubectl top`,
+making it easier to debug autoscaling pipelines.
 
-[Here is the link to Logging Operator official repository].
+[Here is the link to Metrics Server official repository].
 
-The module will install the logging-operator deployment, its CRDs, and the correct permissions for the `admin`,
-`edit`, and `view` default ClusterRole for operate on them.
+The module will install the metrics-server deployment, its APIService and the correct permissions for the default ClusterRole for operate on them.
 
 ## Module Contents
 
-- **[crds](./base/crds)**: Logging Operator custom resource definitions
 - **[resources](./base/resources)**:
-  - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
-			`NetworkPolicy`
   - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workloads](./base/resources/workloads):**
-    - **[logging-operator](./base/resources/workloads/logging-operator):** resources for the Logging Operator controller
+  - **[workload](./base/resources/workloads):**
+    - **[metrics-server](./base/resources/workloads/metrics-server):** resources for the Metrics Server workload
 
 ## Module Configurations
 
-The module will install all its component inside the `logging-system` namespace and will use the following
-default **ports**:
-
-- logging-operator:
-  - **11250** for exposing the metrics endpoint of the controller
-
-This module use the following user, gid and fsGroup:
-
-- logging-operator: **48050**
+The module will install all its component inside the `kube-system` namespace.
 
 ## Compatibility Matrix
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.24.x         | 4.0.0          |
-| 1.25.x         | 4.1.0          |
-| 1.26.x         | 4.3.0          |
+| 1.26.x         | 0.6.4          |
 
-## User customization
 
-After the installation a cluster admin may want to setup Logging, ClusterOutput, and ClusterFlow for automatically get
-logs in the cluster or leave the `admin` and `edit` users to set up Flow and Output for their namespaces indipendently.
-
-[Here is the link to Logging Operator official repository]: https://github.com/kube-logging/logging-operator
-	"Logging Operator GitHub Repository"
+[Here is the link to Metrics Server official repository]: https://github.com/kubernetes-sigs/metrics-server
+	"Metrics Server GitHub Repository"
+[Metrics API]: https://github.com/kubernetes/metrics
+[Horizontal Pod Autoscaler]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+[Vertical Pod Autoscaler]: https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/
