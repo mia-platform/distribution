@@ -26,7 +26,7 @@ default **ports**:
 
 This module use the following user, gid and fsGroup:
 
-- metrics-server: **48050**
+- metrics-server: **48090**
 
 ## Compatibility Matrix
 
