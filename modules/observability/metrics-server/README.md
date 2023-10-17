@@ -28,6 +28,12 @@ This module use the following user, gid and fsGroup:
 
 - metrics-server: **48090**
 
+## Flavors
+
+### Secure kubelet
+
+- check TLS when to nodes
+
 ## Compatibility Matrix
 
 | Module Version | Tool Version   |
