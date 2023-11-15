@@ -36,7 +36,8 @@ This module use the following user, gid and fsGroup:
 |----------------|----------------|
 | 1.24.x         | 1.4.2          |
 | 1.25.x         | 1.5.0          |
-| 1.26.x         | 1.6.4          |
+| 1.26.0         | 1.6.4          |
+| 1.26.1         | 1.6.5          |
 
 ## User customization
 
