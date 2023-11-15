@@ -89,4 +89,4 @@ available and you have already reserved it.
 You can use the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation to the LoadBalancer service
 to specify a series of ARN for selecting Elastc IPs that you want to attach to the load balancer created.
 
-[Here is the link to traefik official repository]: "https://github.com/traefik/traefik" "Traefik GitHub Repository"
+[Here is the link to traefik official repository]: https://github.com/traefik/traefik "Traefik GitHub Repository"
