@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- update oidc-proxy to latest digest
+- update dex to 2.37.0
+
 ## v1.26.0
 
 ### Changed
