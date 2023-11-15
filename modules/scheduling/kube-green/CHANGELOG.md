@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- update kube-green to 0.5.2
+
 ## v1.26.0
 
 - no changes

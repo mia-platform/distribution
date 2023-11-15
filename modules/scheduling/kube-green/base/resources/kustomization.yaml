@@ -5,7 +5,7 @@ commonLabels:
   app.kubernetes.io/component: kube-green
 images:
 - name: ghcr.io/kube-green/kube-green
-  newTag: 0.5.1@sha256:73681e7e41b6b4141176e6eddacff68b2ce9d02b67cb41a5bc3eed5dff3bb915
+  newTag: 0.5.2@sha256:5ede69b66ee7b23edf3d083fd23c6c740496769ae87eeff31363e80c0409f1d6
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v20230721-40f94ef1b@sha256:458b4ef757308c0e4c647856d4c35dabc4c2bcc9a97211861cc8e8772abfa044
 resources:
