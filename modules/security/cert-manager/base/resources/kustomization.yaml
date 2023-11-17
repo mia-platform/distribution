@@ -11,7 +11,7 @@ images:
 - name: quay.io/jetstack/cert-manager-webhook
   newTag: v1.12.6@sha256:698ed6006c8b17493d56b07dd43fea8cf7dc0594a0abbb13457122a451157990
 - name: quay.io/jetstack/cert-manager-acmesolver
-  newTag: v1.12.6@sha256:sha256:d0e615cb225d4d2e09a1ef47d50b2d287a97450f9982d774494b88be0ba4cf15
+  newTag: v1.12.6@sha256:d0e615cb225d4d2e09a1ef47d50b2d287a97450f9982d774494b88be0ba4cf15
 resources:
 - configs
 - rbac

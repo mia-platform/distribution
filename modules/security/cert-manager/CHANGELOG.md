@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.26.3
+
+### Fixed
+
+- wrong sha for cert-manager-acmesolver image
+
 ## v1.26.2
+
+### Changed
 
 - update cert-manager to 1.12.6
 
