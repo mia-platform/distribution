@@ -16,7 +16,7 @@ spec:
     scheduling/kube-green/base:
       version: v1.26.1
     security/cert-manager/base:
-      version: v1.26.2
+      version: v1.26.3
     security/kyverno/base:
       version: v1.26.1
     security/rbac-manager/base:
