@@ -9,7 +9,6 @@ rules:
   - cert-manager.io
   resources:
   - certificates
-  - certificates/status
   - certificaterequests
   - issuers
   verbs:

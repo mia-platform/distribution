@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- bindings for Openshift cluster-view cluster role
+
+### Changed
+
+- update cert-manager to 1.13.2
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
 ## v1.26.2
+
+### Changed
 
 - update cert-manager to 1.12.6
 
