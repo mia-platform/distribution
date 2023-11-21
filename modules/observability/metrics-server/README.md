@@ -32,7 +32,7 @@ This module use the following user, gid and fsGroup:
 
 ### Secure kubelet
 
-- check TLS when to nodes
+- check TLS validity when connecting to the kubelet
 
 ## Compatibility Matrix
 
