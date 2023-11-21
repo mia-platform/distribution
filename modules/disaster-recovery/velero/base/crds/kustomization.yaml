@@ -4,6 +4,8 @@ resources:
 - backuprepositories.velero.io.yaml
 - backups.velero.io.yaml
 - backupstoragelocations.velero.io.yaml
+- datadownloads.velero.io.yaml
+- datauploads.velero.io.yaml
 - deletebackuprequests.velero.io.yaml
 - downloadrequests.velero.io.yaml
 - podvolumebackups.velero.io.yaml

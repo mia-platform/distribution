@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mia-platform:velero:aggregate-to-cluster-view
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-cluster-reader: "true"
+rules:
+- apiGroups:
+  - velero.io
+  resources:
+  - backuprepositories
+  - backups
+  - backupstoragelocations
+  - datadownloads
+  - datauploads
+  - deletebackuprequests
+  - downloadrequests
+  - podvolumebackups
+  - podvolumerestores
+  - restores
+  - schedules
+  - serverstatusrequests
+  - volumesnapshotlocations
+  verbs:
+  - get
+  - list
+  - watch

@@ -7,7 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Added
+
+- bindings for Openshift cluster-view cluster role
+
+### Changed
+
+- update minio and minio config version to latest releases
+- update velero to 1.12.1
+- update plugins to 1.8.1
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
 ## v1.26.1
+
+### Changed
 
 - update minio and minio config version to latest releases
 

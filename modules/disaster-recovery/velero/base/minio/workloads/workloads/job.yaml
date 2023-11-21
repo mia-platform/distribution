@@ -54,6 +54,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
+      nodeSelector:
+        kubernetes.io/os: linux
       volumes:
       - name: config
         emptyDir: {}
