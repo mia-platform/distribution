@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- add nodeSelector for certificate jobs to ensure that they will run only on linux nodes
+
 ## v1.26.1
+
+### Changed
 
 - update cilium to v1.14.4
 
