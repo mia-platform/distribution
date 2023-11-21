@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- bindings for Openshift cluster-view cluster role
+
 ### Changed
 
 - update rbac-manager to v1.7.0
