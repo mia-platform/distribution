@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
+### Changed
+
+- removed status section from the CRDs
+- changed pdb minimum availability from 1 to 25% for better default with a great number of replicas
+
 ## v1.26.1
+
+### Changed
 
 - update traefik to 2.10.5
 
