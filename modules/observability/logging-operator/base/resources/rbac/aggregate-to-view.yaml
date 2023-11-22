@@ -9,13 +9,9 @@ rules:
   - logging.banzaicloud.io
   resources:
   - flows
-  - flows/status
   - outputs
-  - outputs/status
   - syslogngflows
-  - syslogngflows/status
   - syslogngoutputs
-  - syslogngoutputs/status
   verbs:
   - get
   - list
