@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update plugins to 1.8.1
 - add nodeSelector for all workloads to ensure that they will run only on linux nodes
 
+### Removed
+
+- PodDistruptionBudget, no support for multiple replicas from maintainers the budget will only
+	impact on node drainage during mantainance
+
 ## v1.26.1
 
 ### Changed
