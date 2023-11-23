@@ -14,7 +14,8 @@ on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[kube-green](./base/resources/workloads/kube-green):** resources for the kube-green controller
 
@@ -41,6 +42,7 @@ This module use the following user, gid and fsGroup:
 | 1.25.x         | 0.5.1          |
 | 1.26.x         | 0.5.1          |
 | 1.26.1         | 0.5.2          |
+| 1.27.x         | 0.5.2          |
 
 ## User customization
 
