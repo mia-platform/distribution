@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
 - mutatingwebhookconfiguration.yaml
 - networkpolicy.yaml
-- poddisruptionbudget.yaml
 - validatingwebhookconfiguration.yaml
