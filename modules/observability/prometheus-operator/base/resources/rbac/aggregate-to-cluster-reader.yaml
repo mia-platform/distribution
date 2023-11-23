@@ -1,14 +1,18 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:rbac-manager:aggregate-to-cluster-view
+  name: mia-platform:prometheus-operator:aggregate-to-cluster-reader
   labels:
     rbac.authorization.k8s.io/aggregate-to-cluster-reader: "true"
 rules:
 - apiGroups:
-  - rbacmanager.reactiveops.io
+  - monitoring.coreos.com
   resources:
-  - rbacdefinitions
+  - alertmanagerconfigs
+  - alertmanagers
+  - prometheusagents
+  - prometheuses
+  - thanorsrulers
   verbs:
   - get
   - list

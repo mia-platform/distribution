@@ -1,14 +1,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:cert-manager:aggregate-to-cluster-view
+  name: mia-platform:rbac-manager:aggregate-to-aggregate-to-cluster-reader
   labels:
     rbac.authorization.k8s.io/aggregate-to-cluster-reader: "true"
 rules:
 - apiGroups:
-  - cert-manager.io
+  - rbacmanager.reactiveops.io
   resources:
-  - clusterissuers
+  - rbacdefinitions
   verbs:
   - get
   - list
