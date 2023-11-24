@@ -4,40 +4,11 @@ metadata:
   name: mia-platform:kyverno:background:defaults
 rules:
 - apiGroups:
-  - ""
-  - events.k8s.io
-  resources:
-  - events
-  verbs:
-  - create
-  - update
-  - patch
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  - secrets
-  - resourcequotas
-  - limitranges
-  verbs:
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses
-  - ingressclasses
-  - networkpolicies
-  verbs:
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
   - kyverno.io
   resources:
+  - policies
+  - clusterpolicies
+  - policyexceptions
   - updaterequests
   - updaterequests/status
   verbs:
@@ -50,6 +21,46 @@ rules:
   - watch
   - deletecollection
 - apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - "*"
+  resources:
+  - "*"
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingressclasses
+  - networkpolicies
+  verbs:
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
   - rbac.authorization.k8s.io
   resources:
   - rolebindings
@@ -60,10 +71,14 @@ rules:
   - patch
   - delete
 - apiGroups:
-  - "*"
+  - ""
   resources:
-  - "*"
+  - configmaps
+  - secrets
+  - resourcequotas
+  - limitranges
   verbs:
-  - get
-  - list
-  - watch
+  - create
+  - update
+  - patch
+  - delete

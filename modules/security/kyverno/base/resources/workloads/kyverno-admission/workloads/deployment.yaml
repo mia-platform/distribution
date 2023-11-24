@@ -31,6 +31,8 @@ spec:
         - --loggingFormat=text
         - --v=2
         env:
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
@@ -44,9 +46,9 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: KYVERNO_DEPLOYMENT
-          value: kyverno
+          value: default
         - name: KYVERNO_SVC
-          value: kyverno
+          value: default
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -67,6 +69,8 @@ spec:
         args:
         - --loggingFormat=text
         - --v=2
+        - --caSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-ca
+        - --tlsSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-pair
         - --backgroundServiceAccountName=system:serviceaccount:kyverno-system:kyverno-background
         - --exceptionNamespace=$(KYVERNO_NAMESPACE)
         - --admissionReports=true
@@ -75,24 +79,28 @@ spec:
         - --enableDeferredLoading=true
         - --dumpPayload=false
         - --forceFailurePolicyIgnore=false
-        - --enablePolicyException=false
+        - --generateValidatingAdmissionPolicy=false
+        - --enablePolicyException=true
         - --protectManagedResources=false
         - --allowInsecureRegistry=false
         - --registryCredentialHelpers=default,google,amazon,azure,github
         - --metricsPort=$(METRICS_PORT)
+        - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
         env:
-        - name: INIT_CONFIG
-          value: kyverno
-        - name: METRICS_CONFIG
-          value: kyverno-metrics
         - name: METRICS_PORT
           value: "0"
         - name: PROFILE_ENABLED
           value: "false"
         - name: PROFILE_PORT
           value: "0"
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
+        - name: INIT_CONFIG
+          value: kyverno
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
         - name: KYVERNO_NAMESPACE
           valueFrom:
             fieldRef:
@@ -101,14 +109,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_SERVICEACCOUNT_NAME
-          value: kyverno
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         - name: KYVERNO_SVC
-          value: kyverno
+          value: default
         - name: TUF_ROOT
           value: /.sigstore
-        - name: KYVERNO_DEPLOYMENT
-          value: kyverno
         ports:
         - containerPort: 9443
           name: controller
@@ -164,7 +170,8 @@ spec:
           readOnly: true
       volumes:
       - name: sigstore
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: serviceaccount-token
         projected:
           defaultMode: 0444
@@ -183,6 +190,8 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48010
@@ -191,12 +200,12 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
+          - podAffinityTerm:
               labelSelector:
                 matchExpressions:
                 - key: app.kubernetes.io/name
                   operator: In
                   values:
                   - kyverno
-              topologyKey: "kubernetes.io/hostname"
+              topologyKey: kubernetes.io/hostname
+            weight: 1

@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- bindings for Openshift cluster-view cluster role
+
+### Changed
+
+- update kyverno to v1.11.0
+- run the reports cleanup cronjob every hour instead of every 10 minutes
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
 ## v1.26.1
+
+### Changed
 
 - update kyverno to v1.10.5
 

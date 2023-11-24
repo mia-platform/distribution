@@ -25,29 +25,25 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - cleanuppolicies
-  - cleanuppolicies/*
   - clustercleanuppolicies
-  - clustercleanuppolicies/*
+  - cleanuppolicies
   verbs:
-  - create
-  - delete
-  - get
   - list
-  - patch
-  - update
   - watch
-  - deletecollection
 - apiGroups:
-  - batch
+  - kyverno.io
   resources:
-  - cronjobs
+  - clustercleanuppolicies/status
+  - cleanuppolicies/status
   verbs:
-  - create
-  - delete
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
   - get
   - list
-  - update
   - watch
 - apiGroups:
   - ""
