@@ -20,7 +20,7 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
 ## Module Contents
 
 - **[resources](./base/resources)**:
-  - **[configs](./base/resources/configs):** contains the main configuration for cilim and hubble workloads
+  - **[configs](./base/resources/configs):** contains the main configuration for cilium and hubble workloads
   - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
   - **[workloads](./base/resources/workloads):**
     - **[cilium-agent](./base/resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
