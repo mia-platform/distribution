@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update rbac-manager to v1.7.0
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
 
 ### Removed
 
