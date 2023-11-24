@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update oidc-proxy to latest digest
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
 ## v1.26.1
+
+### Changed
 
 - update oidc-proxy to latest digest
 - update dex to 2.37.0
