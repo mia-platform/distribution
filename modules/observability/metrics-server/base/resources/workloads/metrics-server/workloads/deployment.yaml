@@ -13,9 +13,6 @@ spec:
       maxUnavailable: 0
   minReadySeconds: 0
   template:
-    metadata:
-      labels:
-        k8s-app: metrics-server
     spec:
       serviceAccountName: metrics-server
       automountServiceAccountToken: false
@@ -35,10 +32,10 @@ spec:
         - --metric-resolution=15s
         - --kubelet-insecure-tls=$(INSECURE_TLS)
         env:
-          - name: INSECURE_TLS
-            value: "true"
-          - name: METRICS_SERVER_PORT
-            value: "0"
+        - name: INSECURE_TLS
+          value: "true"
+        - name: METRICS_SERVER_PORT
+          value: "0"
         ports:
         - containerPort: 11290
           name: metrics-server
@@ -76,7 +73,8 @@ spec:
           readOnly: true
       priorityClassName: system-cluster-critical
       volumes:
-      - emptyDir: {}
+      - emptyDir:
+          medium: Memory
         name: tmp-dir
       - name: serviceaccount-token
         projected:
@@ -96,6 +94,8 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48090

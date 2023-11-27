@@ -17,6 +17,7 @@
 ### Observability
 
 - [logging-operator](./modules/observability/logging-operator/CHANGELOG.md)
+- [metrics-server](./modules/observability/metrics-server/CHANGELOG.md)
 - [prometheus-operator](./modules/observability/prometheus-operator/CHANGELOG.md)
 
 ### Scheduling

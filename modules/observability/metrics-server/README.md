@@ -7,14 +7,19 @@ making it easier to debug autoscaling pipelines.
 
 [Here is the link to Metrics Server official repository].
 
-The module will install the metrics-server deployment, its APIService and the correct permissions for the default ClusterRole for operate on them.
+The module will install the metrics-server deployment, its APIService and the correct permissions for the default
+ClusterRole for operate on them.
 
 ## Module Contents
 
 - **[resources](./base/resources)**:
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
-  - **[workload](./base/resources/workloads):**
-    - **[metrics-server](./base/resources/workloads/metrics-server):** resources for the Metrics Server workload
+  - **[configs](./base/resources/configs):** contains the base configurations for the service
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+			cluster roles
+  - **[workloads](./base/resources/workloads):**
+    - **[metrics-server](./base/resources/workloads/metrics-server):** resources for the metrics-server controller. This
+			component will collects resource metrics from Kubelets and exposes them in Kubernetes apiserver through Metrics
+			API.
 
 ## Module Configurations
 
@@ -39,7 +44,6 @@ This module use the following user, gid and fsGroup:
 | Module Version | Tool Version   |
 |----------------|----------------|
 | 1.27.x         | 0.6.4          |
-
 
 [Here is the link to Metrics Server official repository]: https://github.com/kubernetes-sigs/metrics-server
 	"Metrics Server GitHub Repository"
