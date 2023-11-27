@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- for every emtpyDir volume use the Memory medium
 - add nodeSelector for certificate jobs to ensure that they will run only on linux nodes
 - move PodDistruptionBudget for hubble from minAvailable to maxUnavailable to allow single replicas during
 	server upgrades to not block the drain

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- for every emtpyDir volume use the Memory medium
 - update minio and minio config version to latest releases
 - update velero to 1.12.1
 - update plugins to 1.8.1
