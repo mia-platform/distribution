@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- update traefik to v2.10.7
 - removed status section from the CRDs
 - changed pdb minimum availability from 1 to 25% for better default with a great number of replicas
 

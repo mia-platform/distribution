@@ -5,7 +5,7 @@ commonLabels:
   app.kubernetes.io/component: disaster-recovery
 images:
 - name: docker.io/velero/velero
-  newTag: v1.12.1@sha256:c844be230373ead7e09bca40676fed9e16e40884cd99d66d8faa1867d35bbb83
+  newTag: v1.12.2@sha256:7f758f88a70ec989cd5a09e1e6dfe6d625b37680eb4acc724eca01b01b5fbddc
 resources:
 - configs
 - rbac

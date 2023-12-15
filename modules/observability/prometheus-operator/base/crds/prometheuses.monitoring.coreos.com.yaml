@@ -3108,6 +3108,12 @@ spec:
               queryLogFile:
                 description: "queryLogFile specifies where the file to which PromQL queries are logged. \n If the filename has an empty path, e.g. 'query.log', The Prometheus Pods will mount the file into an emptyDir volume at `/var/log/prometheus`. If a full path is provided, e.g. '/var/log/prometheus/query.log', you must mount a volume in the specified directory and it must be writable. This is because the prometheus container runs with a read-only root filesystem for security reasons. Alternatively, the location can be set to a standard I/O stream, e.g. `/dev/stdout`, to log query information to the default Prometheus log stream."
                 type: string
+              reloadStrategy:
+                description: Defines the strategy used to reload the Prometheus configuration. If not specified, the configuration is reloaded using the /-/reload HTTP endpoint.
+                enum:
+                - HTTP
+                - ProcessSignal
+                type: string
               remoteRead:
                 description: Defines the list of remote read configurations.
                 items:
@@ -4945,8 +4951,13 @@ spec:
               topologySpreadConstraints:
                 description: Defines the pod's topology spread constraints if specified.
                 items:
-                  description: TopologySpreadConstraint specifies how to spread matching pods among the given topology.
                   properties:
+                    additionalLabelSelectors:
+                      description: Defines what Prometheus Operator managed labels should be added to labelSelector on the topologySpreadConstraint.
+                      enum:
+                      - OnResource
+                      - OnShard
+                      type: string
                     labelSelector:
                       description: LabelSelector is used to find matching pods. Pods that match this label selector are counted to determine the number of pods in their corresponding topology domain.
                       properties:

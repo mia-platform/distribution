@@ -56,7 +56,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.25.x         | 1.10.3 | RELEASE.2023-06-19T19-52-50Z | RELEASE.2023-06-19T19-31-19Z | 1.6.2      |
 | 1.26.0         | 1.11.1 | RELEASE.2023-08-23T10-07-06Z | RELEASE.2023-08-18T21-57-55Z | 1.7.1      |
 | 1.26.1         | 1.11.1 | RELEASE.2023-11-11T08-14-41Z | RELEASE.2023-11-10T21-37-17Z | 1.7.1      |
-| 1.27.x         | 1.12.1 | RELEASE.2023-11-15T20-43-25Z | RELEASE.2023-11-15T22-45-58Z | 1.8.1      |
+| 1.27.x         | 1.12.2 | RELEASE.2023-12-14T18-51-57Z | RELEASE.2023-12-14T00-37-41Z | 1.8.2      |
 
 ### GCP Storage Flavor
 
@@ -65,7 +65,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.24.x         | 1.10.2 | 1.6.1      |
 | 1.25.x         | 1.10.3 | 1.6.2      |
 | 1.26.x         | 1.11.1 | 1.7.1      |
-| 1.27.x         | 1.12.1 | 1.8.1      |
+| 1.27.x         | 1.12.2 | 1.8.2      |
 
 ## User Customization
 

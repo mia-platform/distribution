@@ -97,7 +97,7 @@ This module use the following user, gid and fsGroup:
 | 1.25.x         | 1.9.5          |
 | 1.26.0         | 1.10.3         |
 | 1.26.1         | 1.10.5         |
-| 1.27.x         | 1.11.0         |
+| 1.27.x         | 1.11.1         |
 
 ## User customization
 

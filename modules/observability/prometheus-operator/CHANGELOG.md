@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update prometheus-operator to v0.69.1
+- update prometheus-operator to v0.70.0
 - update node-exporter to 1.7.0
 - update kube-state-metrics to 2.10.1
 - add nodeSelector for all workloads to ensure that they will run only on linux nodes

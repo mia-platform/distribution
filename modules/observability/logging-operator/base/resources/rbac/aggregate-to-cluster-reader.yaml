@@ -11,9 +11,11 @@ rules:
   - clusterflows
   - clusteroutputs
   - fluentbitagents
+  - fluentdconfigs
   - loggingroutes
   - loggings
   - nodeagents
+  - syslogngconfigs
   - syslogngclusterflows
   - syslogngclusteroutputs
   verbs:

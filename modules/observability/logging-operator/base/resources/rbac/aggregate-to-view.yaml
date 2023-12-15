@@ -9,7 +9,9 @@ rules:
   - logging.banzaicloud.io
   resources:
   - flows
+  - fluentdconfigs
   - outputs
+  - syslogngconfigs
   - syslogngflows
   - syslogngoutputs
   verbs:

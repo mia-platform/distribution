@@ -6,6 +6,7 @@ resources:
 - eventtailers.logging-extensions.banzaicloud.io.yaml
 - flows.logging.banzaicloud.io.yaml
 - fluentbitagents.logging.banzaicloud.io.yaml
+- fluentdconfigs.logging.banzaicloud.io.yaml
 - hosttailers.logging-extensions.banzaicloud.io.yaml
 - loggingroutes.logging.banzaicloud.io.yaml
 - loggings.logging.banzaicloud.io.yaml
@@ -13,5 +14,6 @@ resources:
 - outputs.logging.banzaicloud.io.yaml
 - syslogngclusterflows.logging.banzaicloud.io.yaml
 - syslogngclusteroutputs.logging.banzaicloud.io.yaml
+- syslogngconfigs.logging.banzaicloud.io.yaml
 - syslogngflows.logging.banzaicloud.io.yaml
 - syslogngoutputs.logging.banzaicloud.io.yaml

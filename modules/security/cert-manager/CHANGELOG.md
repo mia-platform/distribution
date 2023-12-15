@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update cert-manager to 1.13.2
+- update cert-manager to 1.13.3
 - add nodeSelector for all workloads to ensure that they will run only on linux nodes
 
 ## v1.26.2
