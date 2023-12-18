@@ -94,6 +94,12 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels: {}
+            topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:

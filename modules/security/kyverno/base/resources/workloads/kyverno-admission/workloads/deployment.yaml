@@ -190,6 +190,12 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels: {}
+            topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
@@ -197,15 +203,3 @@ spec:
         runAsUser: 48010
         runAsGroup: 48010
         fsGroup: 48010
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                  - kyverno
-              topologyKey: kubernetes.io/hostname
-            weight: 1
