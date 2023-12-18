@@ -8,6 +8,8 @@ images:
   newTag: v0.70.0@sha256:5ce078d4cd5d0b39bbb2d323a7902eb05680276e25a041115db9128f61b451c8
 - name: quay.io/prometheus-operator/prometheus-config-reloader
   newTag: v0.70.0@sha256:e20576b76ffd85d2a28d62809092f47b339737320e80646ec6d0e7ac0f4c8e43
+- name: quay.io/prometheus-operator/admission-webhook
+  newTag: v0.70.0@sha256:cf308bb8a33689c5b0eda47f592e2b550050e3efb3c47e23f2e6c03c6351c28f
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v20231011-8b53cabe0@sha256:a7943503b45d552785aa3b5e457f169a5661fb94d82b8a3373bcd9ebaf9aac80
 - name: quay.io/prometheus/node-exporter

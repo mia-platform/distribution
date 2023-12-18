@@ -18,7 +18,7 @@ webhooks:
   clientConfig:
     service:
       namespace: default
-      name: prometheus-operator
+      name: prometheus-operator-webhook
       path: /admission-prometheusrules/mutate
   admissionReviewVersions:
   - v1

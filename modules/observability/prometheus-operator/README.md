@@ -37,13 +37,16 @@ default **ports**:
 - node-exporter:
   - **11262** expose the metrics for the service
 - prometheus-operator:
-  - **11263** expose the webhook and metrics for the service
+  - **11263** expose the metrics for the service
+- prometheus-operator-webhook:
+  - **11264** expose the webhook and metrics for the service
 
 This module use the following user, gid and fsGroup:
 
 - kube-state-metrics: **48060**
 - node-exporter: **48061**
 - prometheus-operator: **48062**
+- prometheus-operator-webhook: **48063**
 
 ## Compatibility Matrix
 

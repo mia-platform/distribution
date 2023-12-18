@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - bindings for Openshift cluster-view cluster role
+- move webhook handling to a dedicated workload that support HA configuration
 
 ### Changed
 
