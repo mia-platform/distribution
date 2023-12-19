@@ -46,7 +46,7 @@ This module use the following user, gid and fsGroup:
 - kube-state-metrics: **48060**
 - node-exporter: **48061**
 - prometheus-operator: **48062**
-- prometheus-operator-webhook: **48063**
+- prometheus-operator-webhook: **48065**
 
 ## Compatibility Matrix
 

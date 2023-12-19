@@ -27,13 +27,3 @@ replacements:
       create: true
     select:
       kind: Deployment
-- source:
-    fieldPath: .metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
-    kind: Deployment
-  targets:
-  - fieldPaths:
-    - .spec.template.spec.containers.[name=prometheus-operator-webhook].env.[name=CA_FILE_NAME].value
-    options:
-      create: true
-    select:
-      kind: Deployment

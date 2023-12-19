@@ -1,23 +1,17 @@
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: prometheus-operator
 spec:
-  endpoints:
+  podMetricsEndpoints:
   - port: operator
     path: /metrics
-    scheme: https
-    tlsConfig:
-      serverName: SERVICE_NAME.SERVICE_NAMESPACE.svc
-      ca:
-        secret:
-          name: webhook-tls
-          key: ca
-          optional: false
+    scheme: http
     metricRelabelings:
     - action: keep
       regex: prometheus_operator.*
       sourceLabels:
       - __name__
+  jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}

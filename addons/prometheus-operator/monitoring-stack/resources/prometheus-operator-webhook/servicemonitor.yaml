@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-operator-webhook
+spec:
+  endpoints:
+  - port: webhook
+    path: /metrics
+    scheme: https
+    tlsConfig:
+      serverName: SERVICE_NAME.SERVICE_NAMESPACE.svc
+      ca:
+        secret:
+          name: webhook-tls
+          key: ca
+          optional: false
+    metricRelabelings:
+    - action: keep
+      regex: prometheus_operator.*
+      sourceLabels:
+      - __name__
+  selector:
+    matchLabels: {}

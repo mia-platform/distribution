@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- resources for monitoring the new webhook workload
+
 ### Changed
 
 - update prometheus to v2.47.2

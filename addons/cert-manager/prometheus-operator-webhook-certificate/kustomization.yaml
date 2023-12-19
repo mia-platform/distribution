@@ -105,15 +105,3 @@ replacements:
     select:
       kind: Certificate
       name: prometheus-operator
-- source:
-    fieldPath: .metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
-    kind: Deployment
-    name: prometheus-operator-webhook
-  targets:
-  - fieldPaths:
-    - .spec.template.spec.containers.[name=prometheus-operator-webhook].env.[name=CA_FILE_NAME].value
-    options:
-      create: true
-    select:
-      kind: Deployment
-      name: prometheus-operator-webhook

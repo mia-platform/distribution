@@ -16,8 +16,10 @@ monitoring all the workloads present in the Prometheus Operator namespace.
   - **[node-exporter](./resources/node-exporter):** defines the `PodMonitor` resource needed to monitor the
 			`node-exporter` workloads
   - **[prometheus](./resources/prometheus):** defines the `Prometheus` resource with its configurations
-  - **[prometheus-operator](./resources/prometheus-operator):** defines the `ServiceMonitor` resource needed to track
+  - **[prometheus-operator](./resources/prometheus-operator):** defines the `PodMonitor` resource needed to track
 			the Prometheus Operator workload
+  - **[prometheus-operator-webhook](./resources/prometheus-operator-webhook):** defines the `ServiceMonitor` resource
+			needed to track the Prometheus Operator Webhook workload
 
 ## Add-on Configurations
 

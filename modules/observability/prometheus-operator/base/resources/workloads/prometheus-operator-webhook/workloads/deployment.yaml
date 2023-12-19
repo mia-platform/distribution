@@ -97,7 +97,6 @@ spec:
         - --web.enable-tls=true
         - --web.cert-file=/etc/prometheus-operator/tls/tls.crt
         - --web.key-file=/etc/prometheus-operator/tls/tls.key
-        - --web.client-ca-file=/etc/prometheus-operator/tls/$(CA_FILE_NAME)
         env:
         - name: POD_NAMESPACE
           valueFrom:
@@ -105,8 +104,6 @@ spec:
               fieldPath: metadata.namespace
         - name: WEBHOOK_PORT
           value: "0"
-        - name: CA_FILE_NAME
-          value: ""
         ports:
         - name: webhook
           containerPort: 11264
@@ -157,6 +154,6 @@ spec:
         kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
-        runAsUser: 48063
-        runAsGroup: 48063
-        fsGroup: 48063
+        runAsUser: 48065
+        runAsGroup: 48065
+        fsGroup: 48065
