@@ -13,9 +13,9 @@ that are responsible for autogenerate it.
 
 ## Compatibility Matrix
 
-| Add-On Version | Cert Manager Module Version | kube-green Module Version |
-|----------------|-----------------------------|---------------------------|
-| 1.0.x          | 1.24.x, 1.25.x, 1.26.x      | 1.24.x, 1.25.x, 1.26.x    |
+| Add-On Version | Cert Manager Module Version    | kube-green Module Version      |
+|----------------|--------------------------------|--------------------------------|
+| 1.0.x          | 1.24.x, 1.25.x, 1.26.x, 1.27.x | 1.24.x, 1.25.x, 1.26.x, 1.27.x |
 
 ## User customization
 
