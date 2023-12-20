@@ -1,8 +1,8 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: rbac-manager
+  name: prometheus-operator-webhook
 spec:
-  minAvailable: 50%
   selector:
     matchLabels: {}
+  minAvailable: 25%

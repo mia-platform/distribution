@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mia-platform:prometheus-operator-webhook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: mia-platform:prometheus-operator:webhook
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-operator-webhook

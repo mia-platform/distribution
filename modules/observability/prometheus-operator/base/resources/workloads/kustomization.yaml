@@ -4,3 +4,4 @@ resources:
 - kube-state-metrics
 - node-exporter
 - prometheus-operator
+- prometheus-operator-webhook

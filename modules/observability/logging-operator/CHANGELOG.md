@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- bindings for Openshift cluster-view cluster role
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+- add pod anti affinity for all workloads to improve pod spreading in case of multiple replicas
+
+### Changed
+
+- update logging-operator to v4.5.0
+- changed pdb minimum availability from 1 to 33% for better default that is not fixed, in normal replicas for HA will
+	always default to 1
+
 ## v1.26.0
 
 ### Changed

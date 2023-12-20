@@ -17,7 +17,7 @@ The module will install the Prometheus Operator workloads with its CRDs, Cluster
 - **[crds](./base/crds)**: Prometheus Operator custom resource definitions
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
   - **[workloads](./base/resources/workloads):**
     - **[kube-state-metrics](./base/resources/workloads/kube-state-metrics):** configurations, deployment, and RBAC
 				definitions for `kube-state-metrics`
@@ -37,13 +37,16 @@ default **ports**:
 - node-exporter:
   - **11262** expose the metrics for the service
 - prometheus-operator:
-  - **11263** expose the webhook and metrics for the service
+  - **11263** expose the metrics for the service
+- prometheus-operator-webhook:
+  - **11264** expose the webhook and metrics for the service
 
 This module use the following user, gid and fsGroup:
 
 - kube-state-metrics: **48060**
 - node-exporter: **48061**
 - prometheus-operator: **48062**
+- prometheus-operator-webhook: **48065**
 
 ## Compatibility Matrix
 
@@ -52,6 +55,7 @@ This module use the following user, gid and fsGroup:
 | 1.24.x         | 0.63.0              | 1.5.0         | 2.7.0              |
 | 1.25.x         | 0.64.1              | 1.5.0         | 2.7.0              |
 | 1.26.x         | 0.67.1              | 1.6.1         | 2.9.2              |
+| 1.27.x         | 0.70.0              | 1.7.0         | 2.10.1             |
 
 ## User customization
 

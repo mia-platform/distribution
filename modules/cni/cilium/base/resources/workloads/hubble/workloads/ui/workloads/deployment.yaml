@@ -76,7 +76,8 @@ spec:
           defaultMode: 420
           name: hubble-ui-nginx
         name: hubble-ui-nginx-conf
-      - emptyDir: {}
+      - emptyDir:
+          medium: Memory
         name: tmp-dir
       - name: serviceaccount-token
         projected:

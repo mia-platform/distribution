@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Added
+
+- bindings for Openshift cluster-view cluster role
+
+### Changed
+
+- for every emtpyDir volume use the Memory medium
+- update minio and minio config version to latest releases
+- update velero to 1.12.2
+- update plugins to 1.8.2
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
+### Removed
+
+- PodDistruptionBudget, no support for multiple replicas from maintainers the budget will only
+	impact on node drainage during mantainance
+
 ## v1.26.1
+
+### Changed
 
 - update minio and minio config version to latest releases
 

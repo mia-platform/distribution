@@ -14,7 +14,8 @@ ClusterRoles the appropiate permissions to handle the CRDs that the operator wil
 - **[crds](./base/crds)**: `cert-manager` custom resource definitions
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** `Namespace` of the module and the base deny all `NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin` cluster roles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[cainjector](./base/resources/workloads/cainjector):** resources for the ca-injector workload. It’s the component
 				that helps to configure the CA certificates for: Mutating Webhooks, Validating Webhooks Conversion Webhooks
@@ -54,6 +55,7 @@ This module use the following user, gid and fsGroup:
 | 1.26.0         | 1.12.3         |
 | 1.26.1         | 1.12.4         |
 | 1.26.2         | 1.12.6         |
+| 1.27.x         | 1.13.3         |
 
 ## User customization
 

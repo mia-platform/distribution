@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: prometheus-operator
+spec:
+  podMetricsEndpoints:
+  - port: operator
+    path: /metrics
+    scheme: http
+    metricRelabelings:
+    - action: keep
+      regex: prometheus_operator.*
+      sourceLabels:
+      - __name__
+  jobLabel: app.kubernetes.io/name
+  selector:
+    matchLabels: {}

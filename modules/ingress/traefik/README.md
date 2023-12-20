@@ -25,7 +25,8 @@ match only those pods.
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[traefik](./base/resources/workloads/traefik):** resources for the traefik controller
 
@@ -69,6 +70,7 @@ Kubernetes:
 | 1.25.x         | 2.10.3         |
 | 1.26.0         | 2.10.4         |
 | 1.26.1         | 2.10.5         |
+| 1.27.x         | 2.10.7         |
 
 ## User customization
 

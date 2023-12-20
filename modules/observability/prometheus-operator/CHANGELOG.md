@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- bindings for Openshift cluster-view cluster role
+- move webhook handling to a dedicated workload that support HA configuration
+
+### Changed
+
+- update prometheus-operator to v0.70.0
+- update node-exporter to 1.7.0
+- update kube-state-metrics to 2.10.1
+- add nodeSelector for all workloads to ensure that they will run only on linux nodes
+
+### Removed
+
+- PodDistruptionBudget for prometheus-operator, no support for multiple replicas
+	the budget will only impact on node drainage during mantainance
+
 ## v1.26.1
+
+### Changed
 
 - update kube-webhook-certgen to v20231011-8b53cabe0
 

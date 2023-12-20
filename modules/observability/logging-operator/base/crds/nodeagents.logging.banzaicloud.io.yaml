@@ -50,6 +50,8 @@ spec:
                         type: string
                       storage.checksum:
                         type: string
+                      storage.metrics:
+                        type: string
                       storage.path:
                         type: string
                       storage.sync:
@@ -1067,6 +1069,8 @@ spec:
                                                 x-kubernetes-int-or-string: true
                                               type: object
                                           type: object
+                                        restartPolicy:
+                                          type: string
                                         securityContext:
                                           properties:
                                             allowPrivilegeEscalation:
@@ -1703,6 +1707,8 @@ spec:
                                                 x-kubernetes-int-or-string: true
                                               type: object
                                           type: object
+                                        restartPolicy:
+                                          type: string
                                         securityContext:
                                           properties:
                                             allowPrivilegeEscalation:
@@ -2343,6 +2349,8 @@ spec:
                                                 x-kubernetes-int-or-string: true
                                               type: object
                                           type: object
+                                        restartPolicy:
+                                          type: string
                                         securityContext:
                                           properties:
                                             allowPrivilegeEscalation:
@@ -3549,6 +3557,8 @@ spec:
                         type: string
                       Time_as_Integer:
                         type: boolean
+                      Workers:
+                        type: integer
                       storage.total_limit_size:
                         type: string
                     type: object
@@ -4315,9 +4325,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

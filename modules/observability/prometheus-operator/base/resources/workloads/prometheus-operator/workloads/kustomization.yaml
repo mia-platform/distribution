@@ -4,19 +4,7 @@ configurations:
 - kustomizeconfig.yaml
 resources:
 - deployment.yaml
-- service.yaml
 replacements:
-- source:
-    fieldPath: .spec.template.spec.volumes.[name=webhook-tls].secret.secretName
-    kind: Deployment
-  targets:
-  - fieldPaths:
-    - .spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
-    - .spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
-    options:
-      create: true
-    select:
-      kind: Deployment
 - source:
     fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
     kind: Deployment

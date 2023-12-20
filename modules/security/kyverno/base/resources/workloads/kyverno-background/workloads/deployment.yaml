@@ -31,23 +31,23 @@ spec:
         - --v=2
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
-        - --enablePolicyException=false
-        - --allowInsecureRegistry=false
-        - --registryCredentialHelpers=default,google,amazon,azure,github
+        - --enablePolicyException=true
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
         env:
-        - name: INIT_CONFIG
-          value: kyverno
-        - name: METRICS_CONFIG
-          value: kyverno-metrics
         - name: METRICS_PORT
           value: "0"
         - name: PROFILE_ENABLED
           value: "false"
         - name: PROFILE_PORT
           value: "0"
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
+        - name: INIT_CONFIG
+          value: kyverno
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
         - name: KYVERNO_NAMESPACE
           valueFrom:
             fieldRef:
@@ -56,6 +56,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         ports:
         - containerPort: 11214
           name: metrics
@@ -95,20 +97,16 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels: {}
+            topologyKey: kubernetes.io/hostname
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48012
         runAsGroup: 48012
         fsGroup: 48012
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                  - kyverno-background
-              topologyKey: "kubernetes.io/hostname"

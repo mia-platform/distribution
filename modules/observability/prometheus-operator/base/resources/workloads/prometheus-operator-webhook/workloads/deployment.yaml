@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-operator-webhook
+  annotations:
+    distribution.mia-platform.eu/certificate-ca-key: ca
+  labels:
+    distribution.mia-platform.eu/expose-webhook: "true"
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  minReadySeconds: 0
+  template:
+    spec:
+      serviceAccountName: prometheus-operator-webhook
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      initContainers:
+      - name: kube-webhook-certgen
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - create
+        - --host=$(SERVICE_NAME),$(SERVICE_NAME).$(POD_NAMESPACE).svc
+        - --namespace=$(POD_NAMESPACE)
+        - --secret-name=$(SECRET_NAME)
+        - --cert-name=tls.crt
+        - --key-name=tls.key
+        env:
+        - name: SERVICE_NAME
+          value: prometheus-operator-webhook
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      - name: kube-webhook-certpatch
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:latest
+        args:
+        - patch
+        - --namespace=$(POD_NAMESPACE)
+        - --patch-mutating
+        - --patch-validating
+        - --secret-name=$(SECRET_NAME)
+        - --webhook-name=prometheus-operator
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SECRET_NAME
+          value: SECRET
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      containers:
+      - name: prometheus-operator-webhook
+        image: quay.io/prometheus-operator/admission-webhook:latest
+        resources: {}
+        args:
+        - --log-level=warn
+        - --log-format=json
+        - --web.listen-address=:$(WEBHOOK_PORT)
+        - --web.enable-http2
+        - --web.enable-tls=true
+        - --web.cert-file=/etc/prometheus-operator/tls/tls.crt
+        - --web.key-file=/etc/prometheus-operator/tls/tls.key
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: WEBHOOK_PORT
+          value: "0"
+        ports:
+        - name: webhook
+          containerPort: 11264
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          privileged: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: webhook-tls
+          mountPath: /etc/prometheus-operator/tls
+          readOnly: true
+      volumes:
+      - name: webhook-tls
+        secret:
+          secretName: webhook-tls
+          optional: true
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3600
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels: {}
+            topologyKey: kubernetes.io/hostname
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 48065
+        runAsGroup: 48065
+        fsGroup: 48065

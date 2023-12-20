@@ -21,7 +21,8 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
 
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the main configuration for cilium and hubble workloads
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[cilium-agent](./base/resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
 				eBPF module on the nodes
@@ -82,6 +83,7 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.25.2         | 1.13.6           | v0.11.0     |
 | 1.26.0         | 1.14.1           | v0.12.0     |
 | 1.26.1         | 1.14.4           | v0.12.1     |
+| 1.27.x         | 1.14.5           | v0.12.1     |
 
 ## User customization
 

@@ -1,0 +1,33 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mia-platform:logging-operator:aggregate-to-cluster-reader
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-cluster-reader: "true"
+rules:
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - clusterflows
+  - clusteroutputs
+  - fluentbitagents
+  - fluentdconfigs
+  - loggingroutes
+  - loggings
+  - nodeagents
+  - syslogngconfigs
+  - syslogngclusterflows
+  - syslogngclusteroutputs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - logging-extensions.banzaicloud.io
+  resources:
+  - eventtailers
+  - hosttailers
+  verbs:
+  - get
+  - list
+  - watch

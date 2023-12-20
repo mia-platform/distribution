@@ -4,7 +4,6 @@ configurations:
 - kustomizeconfig.yaml
 resources:
 - clusterrole-core.yaml
-- clusterrole-webhook.yaml
 - clusterrole.yaml
 - clusterrolebinding.yaml
 - serviceaccount.yaml

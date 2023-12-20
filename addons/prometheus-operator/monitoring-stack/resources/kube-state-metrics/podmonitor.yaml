@@ -18,7 +18,7 @@ spec:
     interval: 30s
     relabelings:
     - action: labeldrop
-      regex: (container|pod|service|endpoint|namespace)
+      regex: (pod|service|endpoint|namespace)
     metricRelabelings:
     - action: drop
       regex: (kube_endpoint_address_not_ready|kube_endpoint_address_available)

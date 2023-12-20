@@ -6,5 +6,5 @@ commonLabels:
 configurations:
 - kustomizeconfig.yaml
 resources:
-- servicemonitor.yaml
+- podmonitor.yaml
 - networkpolicy.yaml

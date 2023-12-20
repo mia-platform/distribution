@@ -22,9 +22,9 @@ jobs:
       module_paths: ${{ steps.changed.outputs.module_paths }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-    - uses: dorny/paths-filter@v2
+    - uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
       id: filter
       with:
         list-files: shell
@@ -66,18 +66,17 @@ jobs:
         - kindest/node:v1.26.6@sha256:6e2d8b28a5b601defe327b98bd1c2d1930b49e5d8c512e1895099e4504007adb
         - kindest/node:v1.25.11@sha256:227fa11ce74ea76a0474eeefb84cb75d8dad1b08638371ecf0e86259b35be0c8
         - kindest/node:v1.24.15@sha256:7db4f8bea3e14b82d12e044e25e34bd53754b7f2b0e9d56df21774e6f66a70ab
-        - kindest/node:v1.23.17@sha256:59c989ff8a517a93127d4a536e7014d28e235fb3529d9fba91b3951d461edfdb
         module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
     - name: Install yq
-      uses: mikefarah/yq@master
+      uses: mikefarah/yq@dd648994340a5d03225d97abf19c9bf1086c3f07 # v4.40.5
 
     - name: Install kustomize
-      uses: imranismail/setup-kustomize@v1
+      uses: imranismail/setup-kustomize@6691bdeb1b0a3286fb7f70fd1423c10e81e5375f # v2.0.0
 
     - name: Kustomize Build
       run: |
@@ -86,7 +85,7 @@ jobs:
 
     - name: Create k8s Kind Cluster for Cilium
       if: matrix.module == 'modules/cni/cilium-base'
-      uses: helm/kind-action@v1
+      uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140 # v1.8.0
       with:
         node_image: "{{ matrix.kind_version }}"
         config: .github/workflows/kind-configs/no-cni.yaml
@@ -94,7 +93,7 @@ jobs:
 
     - name: Create k8s Kind Cluster
       if: matrix.module != 'modules/cni/cilium-base'
-      uses: helm/kind-action@v1
+      uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140 # v1.8.0
       with:
         node_image: "${{ matrix.kind_version }}"
         config: .github/workflows/kind-configs/default.yaml

@@ -1,5 +1,5 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
 resources:
 - alertmanager
 - dns-service
@@ -8,3 +8,44 @@ resources:
 - node-exporter
 - prometheus
 - prometheus-operator
+- prometheus-operator-webhook
+replacements:
+- source:
+    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
+    kind: Deployment
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.ca.secret.key
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook
+- source:
+    fieldPath: metadata.namespace
+    kind: Service
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+      index: 1
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook

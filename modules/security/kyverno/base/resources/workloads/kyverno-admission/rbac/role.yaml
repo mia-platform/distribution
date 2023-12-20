@@ -4,26 +4,6 @@ metadata:
   name: mia-platform:kyverno
 rules:
 - apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - create
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - delete
-  - get
-  - patch
-  - update
-  resourceNames:
-  - kyvernopre
-  - kyvernopre-lock
-  - kyverno
-  - kyverno-health
-- apiGroups:
   - ""
   resources:
   - secrets
@@ -46,6 +26,27 @@ rules:
   - kyverno
   - kyverno-metrics
 - apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  resourceNames:
+  - kyvernopre
+  - kyvernopre-lock
+  - kyverno
+  - kyverno-health
+- apiGroups:
   - apps
   resources:
   - deployments
@@ -53,8 +54,6 @@ rules:
   verbs:
   - get
   - list
+  - watch
   - patch
   - update
-  - watch
-  resourceNames:
-  - kyverno

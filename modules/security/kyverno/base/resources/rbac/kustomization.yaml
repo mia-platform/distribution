@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- clusterrole-aggregate-to-admin.yaml
-- clusterrole-aggregate-to-view.yaml
+- aggregate-to-admin.yaml
+- aggregate-to-cluster-reader.yaml
+- aggregate-to-view.yaml

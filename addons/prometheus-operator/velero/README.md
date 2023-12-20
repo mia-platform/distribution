@@ -13,9 +13,9 @@ configuration for scraping the data.
 
 ## Compatibility Matrix
 
-| Add-On Version | Prometheus Operator Module Version | Velero Module Version  |
-|----------------|------------------------------------|------------------------|
-| 1.0.x          | 1.24.x, 1.25.x, 1.26.x             | 1.24.x, 1.25.x, 1.26.x |
+| Add-On Version | Prometheus Operator Module Version | Velero Module Version          |
+|----------------|------------------------------------|--------------------------------|
+| 1.0.x          | 1.24.x, 1.25.x, 1.26.x, 1.27.x     | 1.24.x, 1.25.x, 1.26.x, 1.27.x |
 
 ## User customization
 

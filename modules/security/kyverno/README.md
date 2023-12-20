@@ -13,8 +13,9 @@ on the installed CRDs for the builtin `admin` ClusterRole.
 
 ## Upgrade Consideration
 
-If you are upgrading from 1.25 to 1.26 you have to do some work before upgrading. The upgrade will move you from the
-1.9 to the 1.10 version of kyverno and this will means that the main controller will be split up in 4 different ones.
+If you are upgrading from 1.25 to >= of 1.26 you have to do some work before upgrading. The upgrade will move you from
+the 1.9 to the 1.10+ version of kyverno and this will means that the main controller will be split up in 4 different
+ones.
 
 We suggest to do the update during an update windows because it will cause some downtime to the kyverno infrastructure.
 
@@ -42,10 +43,10 @@ mutatingwebhookconfigurations.admissionregistration.k8s.io -l webhook.kyverno.io
 ## Module Contents
 
 - **[crds](./base/crds)**: `kyverno` custom resource definitions
-- **[resources](./base/resources)**:
+- **[resources](./base/resources)**: `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace`,
 		`NetworkPolicy` and `PodDistruptionBudget` resources
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRole
+  - **[RBAC](./base/resources/rbac):**
   - **[workloads](./base/resources/workloads):**
     - **[kyverno-admission](./base/resources/workloads/kyverno-admission):** resources for the kyverno main controller.
 				This component handles webhook callbacks from the API server for verification, mutation, Policy Exceptions,
@@ -96,6 +97,7 @@ This module use the following user, gid and fsGroup:
 | 1.25.x         | 1.9.5          |
 | 1.26.0         | 1.10.3         |
 | 1.26.1         | 1.10.5         |
+| 1.27.x         | 1.11.1         |
 
 ## User customization
 

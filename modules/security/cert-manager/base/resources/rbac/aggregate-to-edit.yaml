@@ -18,6 +18,12 @@ rules:
   - patch
   - update
 - apiGroups:
+  - cert-amanger.io
+  resources:
+  - certificates/status
+  verbs:
+  - update
+- apiGroups:
   - acme.cert-manager.io
   resources:
   - challenges

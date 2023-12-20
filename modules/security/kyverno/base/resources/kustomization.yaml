@@ -5,17 +5,17 @@ commonLabels:
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.10.5@sha256:b5363bfe4cad5db500e4dc57108039acc55262a7f3f9aea19f34e1c34500dd4f
+  newTag: v1.11.1@sha256:54e9051459c21412223a71db5b8528972f4a513c515590ac1ed3b2e1db5997d2
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.10.5@sha256:4dc97cfbdbb9a49ffd011de8b382ef03d2fd103cd0bbea3ba25a0a0f0c0c31da
+  newTag: v1.11.1@sha256:9006082a800f9416dc0e74bc022523908d5abe315a5ae293c95c32c8abfccdd0
 - name: ghcr.io/kyverno/background-controller
-  newTag: v1.10.5@sha256:a5819bff4c70f021fb1a7e9de65bf1d5c492bd85591758a5130f02308a9b77e6
+  newTag: v1.11.1@sha256:b3dbcc1ec0bc3b30f2a1de0746a5ca016e2a3736535b46d11d74802736af6d7c
 - name: ghcr.io/kyverno/cleanup-controller
-  newTag: v1.10.5@sha256:28a4a5f55d44ba7b3a8938e91efbc7596f2884656f671061c8be8687f8ae1bed
+  newTag: v1.11.1@sha256:fb87d6c270746126ff30f85079c81d218728370e67b494a3e7636bb38d8709fe
 - name: ghcr.io/kyverno/reports-controller
-  newTag: v1.10.5@sha256:a4f5e8006b6d621630abd5a849f7ad4a70308ae55943282505b46ce43d3c2e88
+  newTag: v1.11.1@sha256:5b99dfa817002a139bc92592f5334a68c547d487ee515341712b2259ebc3b505
 - name: docker.io/bitnami/kubectl
-  newTag: 1.26.10-debian-11-r1@sha256:499e0b6a12bb59ca0c189c694f7553ace2e19cc816f754b6c7ea0e15372070c7
+  newTag: 1.27.8-debian-11-r2@sha256:e6e489e369024ccc94af2fe5aecf60658476fc0184bccc2155a81770c6fc43da
 resources:
 - configs
 - rbac

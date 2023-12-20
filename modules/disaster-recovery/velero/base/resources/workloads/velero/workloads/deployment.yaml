@@ -72,11 +72,14 @@ spec:
           readOnly: true
       volumes:
       - name: plugins
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: scratch
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: tmpdir
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: serviceaccount-token
         projected:
           defaultMode: 0444
@@ -95,6 +98,8 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48070

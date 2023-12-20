@@ -33,7 +33,13 @@ spec:
         - --log.format=json
         - --log.level=$(LOG_LEVEL)
         - --accesslog.format=json
-        - --metrics.prometheus.entrypoint=traefik
+        - --providers.providersthrottleduration=60s
+        - --providers.kubernetescrd
+        - --providers.kubernetescrd.allowcrossnamespace=true
+        - --providers.kubernetescrd.allowexternalnameservices=false
+        - --providers.kubernetesingress
+        - --providers.kubernetesingress.ingressclass=traefik
+        - --providers.kubernetesingress.allowexternalnameservices=false
         - --entryPoints.traefik.address=:$(METRICS_PORT)/tcp
         - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
@@ -47,11 +53,8 @@ spec:
         - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
-        - --providers.providersthrottleduration=60s
-        - --providers.kubernetesingress.ingressclass=traefik
-        - --providers.kubernetesingress.allowexternalnameservices=false
-        - --providers.kubernetescrd.allowcrossnamespace=true
-        - --providers.kubernetescrd.allowexternalnameservices=false
+        - --metrics.prometheus
+        - --metrics.prometheus.entrypoint=traefik
         env:
         - name: LOG_LEVEL
           value: WARN
@@ -126,6 +129,14 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
                 path: namespace
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels: {}
+            topologyKey: kubernetes.io/hostname
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48040

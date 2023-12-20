@@ -11,6 +11,9 @@ rules:
   - get
   - list
   - watch
+  resourceNames:
+  - kyverno
+  - kyverno-metrics
 - apiGroups:
   - coordination.k8s.io
   resources:

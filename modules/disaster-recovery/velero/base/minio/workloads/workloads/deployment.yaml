@@ -72,10 +72,13 @@ spec:
           mountPath: /.minio
       volumes:
       - name: storage
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: config
         emptyDir:
           medium: Memory
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 48071

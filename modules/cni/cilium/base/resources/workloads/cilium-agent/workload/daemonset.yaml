@@ -430,7 +430,8 @@ spec:
           mountPath: /tmp
       volumes:
       - name: tmp
-        emptyDir: {}
+        emptyDir:
+          medium: Memory
       - name: hostproc
         hostPath:
           path: /proc
