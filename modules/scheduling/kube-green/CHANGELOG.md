@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.27.0
+
 ### Changed
 
 - add nodeSelector for all workloads to ensure that they will run only on linux nodes
