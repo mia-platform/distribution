@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - changed pdb minimum availability from 1 to 33% for better default that is not fixed, in normal replicas for HA will
 	always default to 1
 
+### Removed
+
+- unused secret inside the operator service account
+
 ## v1.26.0
 
 ### Changed
