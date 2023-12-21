@@ -105,11 +105,15 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentbit-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentd-monitoring

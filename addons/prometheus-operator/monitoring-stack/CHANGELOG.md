@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- add `create: true` to all replacements, for increasing compatibility with older versions of kustomize
 - update prometheus to v2.47.2
 - update alertmanager to v0.26.0
 - update service monitors

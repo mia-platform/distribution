@@ -63,6 +63,8 @@ replacements:
       labelSelector: app.kubernetes.io/name=kubelet
   - fieldPaths:
     - spec.alerting.alertmanagers.0.namespace
+    options:
+      create: true
     select:
       kind: Prometheus
       name: prometheus
@@ -79,22 +81,32 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-alertmanager
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-prometheus-operator-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-prometheus-operator-webhook-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-kube-state-metrics-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-node-exporter-monitoring
 - source:
