@@ -9,37 +9,37 @@ resources:
 - rbac
 - workloads
 secretGenerator:
-- name: minio-credentials
-  type: Opaque
-  files:
+- files:
   - configs/MINIO_ROOT_USER
   - configs/MINIO_ROOT_PASSWORD
+  name: minio-credentials
+  type: Opaque
 replacements:
 - source:
     fieldPath: .spec.template.spec.containers.[name=minio].ports.[name=server].containerPort
     kind: Deployment
   targets:
-  - select:
-      kind: NetworkPolicy
-      name: allow-minio
-    options:
-      create: true
-    fieldPaths:
+  - fieldPaths:
     - .spec.egress.0.ports.0.port
     - .spec.ingress.0.ports.0.port
     - .spec.ingress.1.ports.0.port
-  - select:
+    options:
+      create: true
+    select:
       kind: NetworkPolicy
-      name: allow-velero-minio-egress
-    fieldPaths:
+      name: allow-minio
+  - fieldPaths:
     - .spec.egress.0.ports.0.port
     options:
       create: true
-  - select:
-      kind: BackupStorageLocation
-    fieldPaths:
+    select:
+      kind: NetworkPolicy
+      name: allow-velero-minio-egress
+  - fieldPaths:
     - .spec.config.s3Url
     options:
-      delimiter: ":"
-      index: 2
       create: true
+      delimiter: ':'
+      index: 2
+    select:
+      kind: BackupStorageLocation

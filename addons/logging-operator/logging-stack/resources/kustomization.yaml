@@ -13,18 +13,18 @@ replacements:
   targets:
   - fieldPaths:
     - spec.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentbit-traffic
-    options:
-      create: true
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentd-traffic
-    options:
-      create: true
 - source:
     fieldPath: spec.fluentd.labels
     kind: Logging
@@ -32,15 +32,15 @@ replacements:
   targets:
   - fieldPaths:
     - spec.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentd-traffic
-    options:
-      create: true
   - fieldPaths:
     - spec.egress.2.to.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-fluentbit-traffic
-    options:
-      create: true

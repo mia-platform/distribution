@@ -4,12 +4,12 @@ resources:
 - deployment.yaml
 replacements:
 - source:
-    kind: Deployment
     fieldPath: .spec.template.spec.containers.[name=rbac-manager].ports.[name=metrics].containerPort
+    kind: Deployment
   targets:
-    - select:
-        kind: Deployment
-      fieldPaths:
-        - .spec.template.spec.containers.[name=rbac-manager].env.[name=METRICS_PORT].value
-      options:
-        create: true
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=rbac-manager].env.[name=METRICS_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment

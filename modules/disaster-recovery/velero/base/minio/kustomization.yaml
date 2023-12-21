@@ -12,10 +12,10 @@ resources:
 patches:
 - path: patches/velero.yaml
 secretGenerator:
-- name: cloud-credentials
-  type: Opaque
-  files:
+- files:
   - workloads/configs/cloud-credentials
+  name: cloud-credentials
+  type: Opaque
 replacements:
 - source:
     fieldPath: .metadata.namespace
@@ -45,12 +45,12 @@ replacements:
     options:
       create: true
     select:
-      name: allow-minio
       kind: NetworkPolicy
+      name: allow-minio
   - fieldPaths:
     - spec.podSelector.matchLabels
     options:
       create: true
     select:
-      name: allow-velero-minio-egress
       kind: NetworkPolicy
+      name: allow-velero-minio-egress

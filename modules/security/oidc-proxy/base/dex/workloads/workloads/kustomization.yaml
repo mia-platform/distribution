@@ -5,12 +5,12 @@ resources:
 - service.yaml
 replacements:
 - source:
-    kind: Deployment
     fieldPath: .spec.template.spec.volumes.[name=dex-tls].secret.secretName
+    kind: Deployment
   targets:
-  - select:
-      kind: Deployment
-    fieldPaths:
+  - fieldPaths:
     - .spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
     options:
       create: true
+    select:
+      kind: Deployment

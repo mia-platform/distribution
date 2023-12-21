@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - poddisruptionpolicy.yaml
 configMapGenerator:
-- name: hubble-ui-nginx
-  files:
+- files:
   - nginx.conf
+  name: hubble-ui-nginx

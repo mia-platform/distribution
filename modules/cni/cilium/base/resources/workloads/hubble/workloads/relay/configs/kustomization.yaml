@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - poddisruptionpolicy.yaml
 configMapGenerator:
-- name: hubble-relay-config
-  files:
+- files:
   - config.yaml
+  name: hubble-relay-config
