@@ -15,6 +15,12 @@
 				"davidanson.vscode-markdownlint",
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
 			]
+		},
+		"codespaces": {
+			"openFiles": [
+				"README.md",
+				"CONTRIBUTING.md"
+			]
 		}
 	}
 }
