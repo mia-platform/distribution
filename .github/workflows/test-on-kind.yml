@@ -11,72 +11,53 @@ on:
   pull_request:
 
 concurrency:
-  group: ci-tests-${{ github.ref }}-1
+  group: ci-tests-${{ github.ref }}
   cancel-in-progress: true # cancels obsolete running jobs
 
 jobs:
   get-changed-modules:
     name: "Build Changed Modules List"
     runs-on: ubuntu-latest
+
     outputs:
       module_paths: ${{ steps.changed.outputs.module_paths }}
+
     steps:
     - name: Checkout
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-
-    - uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
-      id: filter
+    - name: Calculate file differences
+      id: changed-files
+      uses: tj-actions/changed-files@da093c1609db0edd0a037ce9664e135f74bf30d9 # v40.2.0
       with:
-        list-files: shell
-        filters: |
+        dir_names: true
+        json: true
+        escape_json: false
+        dir_names_max_depth: 4
+        files_yaml: |
           modules:
-            - 'modules/*/!(oidc-proxy)/base/**'
-          test:
-            - 'test/**'
-
-    - name: Clean Changed Filter
-      id: changed
-      run: |
-        MODULES="${{ steps.filter.outputs.modules_files }}"
-        TESTS="${{ steps.filter.outputs.test_files }}"
-        FINAL_LIST="["
-        for file in $MODULES; do
-          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??4g')"
-        done
-        for file in $TESTS; do
-          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
-        done
-        for directory in $(tr ' ' '\n' <<< "${DIR_LIST[@]}" | sort -u | tr '\n' ' ') ; do
-          [ ! -d $directory ] && continue
-          FINAL_LIST+=\"$directory\",
-        done
-        FINAL_LIST+="]"
-        echo $(sed 's/,]/]/' <<< $FINAL_LIST)
-        echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
+          - modules/*/*/base/**
+          tests:
+          - test/**
 
   test-module:
     name: "Test"
-    if: needs.get-changed-modules.outputs.module_paths != '[]'
-    needs: get-changed-modules
+    if: needs.changed-files.outputs.any_changed == 'true'
+    needs:
+    - changed-files
     runs-on: ubuntu-latest
     strategy:
       matrix:
         kind_version:
+        - kindest/node:v1.28.0@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31
         - kindest/node:v1.27.3@sha256:3966ac761ae0136263ffdb6cfd4db23ef8a83cba8a463690e98317add2c9ba72
         - kindest/node:v1.26.6@sha256:6e2d8b28a5b601defe327b98bd1c2d1930b49e5d8c512e1895099e4504007adb
         - kindest/node:v1.25.11@sha256:227fa11ce74ea76a0474eeefb84cb75d8dad1b08638371ecf0e86259b35be0c8
         - kindest/node:v1.24.15@sha256:7db4f8bea3e14b82d12e044e25e34bd53754b7f2b0e9d56df21774e6f66a70ab
-        module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
+        module: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
 
     steps:
     - name: Checkout
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-
-    - name: Install yq
-      uses: mikefarah/yq@dd648994340a5d03225d97abf19c9bf1086c3f07 # v4.40.5
-
-    - name: Install kustomize
-      uses: imranismail/setup-kustomize@6691bdeb1b0a3286fb7f70fd1423c10e81e5375f # v2.0.0
 
     - name: Kustomize Build
       run: |
@@ -84,7 +65,7 @@ jobs:
         kustomize build ${{ matrix.module }} > ci/rendered.yaml
 
     - name: Create k8s Kind Cluster for Cilium
-      if: matrix.module == 'modules/cni/cilium-base'
+      if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140 # v1.8.0
       with:
         node_image: "{{ matrix.kind_version }}"
@@ -92,7 +73,7 @@ jobs:
         wait: 10s
 
     - name: Create k8s Kind Cluster
-      if: matrix.module != 'modules/cni/cilium-base'
+      if: matrix.module != 'modules/cni/cilium/base'
       uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140 # v1.8.0
       with:
         node_image: "${{ matrix.kind_version }}"
