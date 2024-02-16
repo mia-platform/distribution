@@ -5,7 +5,7 @@ commonLabels:
   app.kubernetes.io/component: logging
 images:
 - name: ghcr.io/kube-logging/logging-operator
-  newTag: 4.5.0@sha256:8538f5fc68112e10b843c6ff4cd6aa4b907a8cae06eec7d876d667e485ae8df4
+  newTag: 4.5.6@sha256:9e8a17ad5a1b29c214ccac9fe93fc8dcfe828aaaed6a06b3ead329494a84cf9b
 resources:
 - configs
 - rbac

@@ -40,6 +40,7 @@ This module use the following user, gid and fsGroup:
 | 1.26.0         | 1.6.4          |
 | 1.26.1         | 1.6.5          |
 | 1.27.x         | 1.7.0          |
+| 1.27.1         | 1.8.0          |
 
 ## User customization
 
