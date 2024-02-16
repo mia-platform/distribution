@@ -68,10 +68,12 @@ spec:
                 path: namespace
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels: {}
-            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels: {}
+              topologyKey: kubernetes.io/hostname
+            weight: 100
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:

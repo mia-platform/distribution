@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update rbac-manager to v1.8.0
+- relaxed antiaffinity rule to allow pods on the same node if is not possible to spread them anymore
 
 ## v1.27.0
 
