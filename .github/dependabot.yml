@@ -6,3 +6,9 @@ updates:
   directory: /
   schedule:
     interval: monthly
+
+# keep up to date devcontainers
+- package-ecosystem: devcontainers
+  directory: "/"
+  schedule:
+    interval: monthly
