@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager-system
-commonLabels:
-  app.kubernetes.io/component: cert-manager
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: cert-manager
 images:
 - name: quay.io/jetstack/cert-manager-cainjector
   newTag: v1.13.3@sha256:ac5154525f99bd0872671613741aac1b7dcb9c0df988571a7618155ddb6fabd2

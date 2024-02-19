@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: dr-system
-commonLabels:
-  app.kubernetes.io/component: disaster-recovery
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: disaster-recovery
 images:
 - name: docker.io/velero/velero
   newTag: v1.12.3@sha256:26730a108f9beac9b0b90b4cfb622b0b644aa3114b2fbe6ac5c3aaf0f60ccd0e

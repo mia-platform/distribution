@@ -1,9 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  app.kubernetes.io/component: monitoring
-  app.kubernetes.io/instance: kube-green
-  app.kubernetes.io/name: kube-green
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: kube-green
+    app.kubernetes.io/name: kube-green
 resources:
 - networkpolicy.yaml
 - servicemonitor.yaml

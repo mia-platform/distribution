@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: kube-system
-commonLabels:
-  app.kubernetes.io/component: cni
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/cilium
   newTag: v1.14.7@sha256:45ce2b87696082ecf7d53ba1c64ceeb4217578033e5ef28ac479ec049a48bc32

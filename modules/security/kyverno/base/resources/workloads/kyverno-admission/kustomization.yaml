@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  app.kubernetes.io/instance: kyverno
-  app.kubernetes.io/name: kyverno
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/name: kyverno
 configurations:
 - kustomizeconfig.yaml
 resources:

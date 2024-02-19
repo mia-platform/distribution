@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring-system
-commonLabels:
-  app.kubernetes.io/component: monitoring
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: monitoring
 images:
 - name: quay.io/prometheus-operator/prometheus-operator
   newTag: v0.70.0@sha256:5ce078d4cd5d0b39bbb2d323a7902eb05680276e25a041115db9128f61b451c8
