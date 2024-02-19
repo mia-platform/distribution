@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      module_paths: ${{ steps.changed.outputs.module_paths }}
+      any_changed: ${{ steps.changed.outputs.any_changed }}
+      matrix: ${{ steps.changed.outputs.matrix }}
 
     steps:
     - name: Checkout
@@ -41,9 +42,9 @@ jobs:
 
   test-module:
     name: "Test"
-    if: needs.changed-files.outputs.any_changed == 'true'
+    if: needs.get-changed-modules.outputs.any_changed == 'true'
     needs:
-    - changed-files
+    - get-changed-modules
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,7 +54,7 @@ jobs:
         - kindest/node:v1.26.6@sha256:6e2d8b28a5b601defe327b98bd1c2d1930b49e5d8c512e1895099e4504007adb
         - kindest/node:v1.25.11@sha256:227fa11ce74ea76a0474eeefb84cb75d8dad1b08638371ecf0e86259b35be0c8
         - kindest/node:v1.24.15@sha256:7db4f8bea3e14b82d12e044e25e34bd53754b7f2b0e9d56df21774e6f66a70ab
-        module: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
+        module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
 
     steps:
     - name: Checkout
