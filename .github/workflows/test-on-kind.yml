@@ -21,7 +21,7 @@ jobs:
 
     outputs:
       any_changed: ${{ steps.changed-files.outputs.any_changed }}
-      matrix: ${{ steps.changed-files.outputs.matrix }}
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
 
     steps:
     - name: Checkout
@@ -34,11 +34,9 @@ jobs:
         json: true
         escape_json: false
         dir_names_max_depth: 4
-        files_yaml: |
-          modules:
-          - modules/*/*/base/**
-          tests:
-          - test/**
+        files: |
+          modules/*/*/base/**
+          test/**
 
   test-module:
     name: "Test"
