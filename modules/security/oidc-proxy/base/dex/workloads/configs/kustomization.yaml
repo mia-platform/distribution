@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - networkpolicies.yaml
 secretGenerator:
-- name: dex-config
-  files:
+- files:
   - config.yaml
+  name: dex-config
