@@ -15,7 +15,8 @@ one of the flavor available for using cloud storage services.
 - **[crds](./base/crds)**: Prometheus Operator custom resource definitions
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[velero](./base/resources/workloads/velero):** resources for the velero controller
 
@@ -55,6 +56,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.25.x         | 1.10.3 | RELEASE.2023-06-19T19-52-50Z | RELEASE.2023-06-19T19-31-19Z | 1.6.2      |
 | 1.26.0         | 1.11.1 | RELEASE.2023-08-23T10-07-06Z | RELEASE.2023-08-18T21-57-55Z | 1.7.1      |
 | 1.26.1         | 1.11.1 | RELEASE.2023-11-11T08-14-41Z | RELEASE.2023-11-10T21-37-17Z | 1.7.1      |
+| 1.26.2         | 1.11.1 | RELEASE.2024-04-06T05-26-02Z | RELEASE.2024-03-30T15-29-52Z | 1.7.1      |
 
 ### GCP Storage Flavor
 
