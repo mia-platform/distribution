@@ -14,7 +14,8 @@ on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[kube-green](./base/resources/workloads/kube-green):** resources for the kube-green controller
 

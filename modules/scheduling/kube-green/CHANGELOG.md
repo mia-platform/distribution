@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.26.1
 
+### Changed
+
 - update kube-green to 0.5.2
 - update kube-webhook-certgen to v20231011-8b53cabe0
 
