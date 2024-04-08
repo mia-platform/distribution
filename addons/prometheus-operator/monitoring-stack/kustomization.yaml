@@ -36,6 +36,12 @@ replacements:
     options:
       create: true
     select:
+      labelSelector: app.kubernetes.io/name=prometheus-operator
+  - fieldPaths:
+    - metadata.namespace
+    options:
+      create: true
+    select:
       labelSelector: app.kubernetes.io/name=kube-state-metrics
   - fieldPaths:
     - metadata.namespace
@@ -57,6 +63,8 @@ replacements:
       labelSelector: app.kubernetes.io/name=kubelet
   - fieldPaths:
     - spec.alerting.alertmanagers.0.namespace
+    options:
+      create: true
     select:
       kind: Prometheus
       name: prometheus
@@ -73,59 +81,46 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-alertmanager
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-prometheus-operator-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
+    select:
+      name: allow-prometheus-operator-monitoring
+  - fieldPaths:
+    - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-kube-state-metrics-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.podSelector.matchLabels
+    options:
+      create: true
     select:
       name: allow-node-exporter-monitoring
 - source:
-    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
+    fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
     kind: Deployment
     name: prometheus-operator
   targets:
   - fieldPaths:
-    - spec.endpoints.[port=operator].tlsConfig.ca.secret.key
+    - .spec.ingress.0.ports.0.port
     options:
       create: true
     select:
-      kind: ServiceMonitor
-      name: prometheus-operator
-- source:
-    fieldPath: metadata.name
-    kind: Service
-    name: prometheus-operator
-  targets:
-  - fieldPaths:
-    - spec.endpoints.[port=operator].tlsConfig.serverName
-    options:
-      create: true
-      delimiter: .
-    select:
-      kind: ServiceMonitor
-      name: prometheus-operator
-- source:
-    fieldPath: metadata.namespace
-    kind: Service
-    name: prometheus-operator
-  targets:
-  - fieldPaths:
-    - spec.endpoints.[port=operator].tlsConfig.serverName
-    options:
-      create: true
-      delimiter: .
-      index: 1
-    select:
-      kind: ServiceMonitor
-      name: prometheus-operator
+      kind: NetworkPolicy
+      name: allow-prometheus-operator-monitoring
 - source:
     fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
     kind: Deployment

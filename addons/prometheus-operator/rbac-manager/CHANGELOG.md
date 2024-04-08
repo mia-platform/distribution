@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.0.2
+
+### Changed
+
+- add `create: true` to all replacements, for increasing compatibility with older versions of kustomize
+
 ## v1.0.1
 
 ### Changed

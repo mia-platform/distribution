@@ -10,18 +10,18 @@ replacements:
   targets:
   - fieldPaths:
     - spec.selector.matchLabels
+    options:
+      create: true
     select:
       kind: PodMonitor
       name: rbac-manager
-    options:
-      create: true
   - fieldPaths:
     - spec.podSelector.matchLabels
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-rbac-manager-monitoring
-    options:
-      create: true
 - source:
     fieldPath: metadata.namespace
     kind: Deployment
@@ -60,6 +60,8 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-rbac-manager-monitoring

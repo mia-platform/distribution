@@ -29,23 +29,23 @@ spec:
     logging-operator/logging-stack:
       version: v2.0.0
     prometheus-operator/cert-manager:
-      version: v1.0.1
+      version: v1.0.2
     prometheus-operator/kube-green:
-      version: v1.0.1
+      version: v1.0.2
     prometheus-operator/kyverno:
-      version: v2.0.0
+      version: v2.0.1
     prometheus-operator/logging-operator:
-      version: v1.0.0
-    prometheus-operator/logging-stack:
-      version: v2.0.0
-    prometheus-operator/monitoring-stack:
-      version: v1.0.4
-    prometheus-operator/rbac-manager:
       version: v1.0.1
+    prometheus-operator/logging-stack:
+      version: v2.0.1
+    prometheus-operator/monitoring-stack:
+      version: v1.0.5
+    prometheus-operator/rbac-manager:
+      version: v1.0.2
     prometheus-operator/traefik:
-      version: v1.0.0
+      version: v1.0.1
     prometheus-operator/velero:
-      version: v1.0.0
+      version: v1.0.1
   groups:
   - name: base-installation
     clusters:

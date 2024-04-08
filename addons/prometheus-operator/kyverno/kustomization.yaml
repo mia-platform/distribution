@@ -210,21 +210,29 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-cleanup-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-background-monitoring
   - fieldPaths:
     - spec.ingress.0.from.0.namespaceSelector.matchLabels.kubernetes\.io/metadata\.name
+    options:
+      create: true
     select:
       kind: NetworkPolicy
       name: allow-kyverno-reports-monitoring
