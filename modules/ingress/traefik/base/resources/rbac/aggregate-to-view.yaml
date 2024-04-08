@@ -10,23 +10,14 @@ rules:
   - traefik.io
   resources:
   - ingressroutes
-  - ingressroutes/status
   - ingressroutetcps
-  - ingressroutetcps/status
   - ingressrouteudps
-  - ingressrouteudps/status
   - middlewares
-  - middlewares/status
   - middlewaretcps
-  - middlewaretcps/status
   - serverstransports
-  - serverstransports/status
   - tlsoptions
-  - tlsoptions/status
   - tlsstores
-  - tlsstores/status
   - traefikservices
-  - traefikservices/status
   verbs:
   - get
   - list
