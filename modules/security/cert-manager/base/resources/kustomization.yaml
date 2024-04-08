@@ -1,17 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager-system
-commonLabels:
-  app.kubernetes.io/component: cert-manager
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: cert-manager
 images:
 - name: quay.io/jetstack/cert-manager-cainjector
-  newTag: v1.12.6@sha256:0bfe3e0a746510396ce034ab41ff263dbafcce5163d946896a5898653e5581e6
+  newTag: v1.12.9@sha256:8da0502e253561d221e2ce8c832ebaa0a31dde53d798e0476cae3e8f9af6bdf0
 - name: quay.io/jetstack/cert-manager-controller
-  newTag: v1.12.6@sha256:73e503e7347867be2b845a8274c77ade23bd984d46d7eac826e24bace7b5390a
+  newTag: v1.12.9@sha256:6aa674cfe44572588438ccd27f5f75d2d3304872f9d6d075fe31d06561943bdc
 - name: quay.io/jetstack/cert-manager-webhook
-  newTag: v1.12.6@sha256:698ed6006c8b17493d56b07dd43fea8cf7dc0594a0abbb13457122a451157990
+  newTag: v1.12.9@sha256:5167037d98f7290b7567877432d2c367729e6980589239616cefa9dcae1ec998
 - name: quay.io/jetstack/cert-manager-acmesolver
-  newTag: v1.12.6@sha256:d0e615cb225d4d2e09a1ef47d50b2d287a97450f9982d774494b88be0ba4cf15
+  newTag: v1.12.9@sha256:1dbb912bc33064a5c43b5ab91e59b9288c3fa3409847f9258bf6729ffbd23650
 resources:
 - configs
 - rbac
