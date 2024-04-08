@@ -45,17 +45,17 @@ spec:
           containerPort: 11262
           protocol: TCP
         volumeMounts:
-        - name: proc
-          mountPath: /host/proc
+        - mountPath: /host/proc
           mountPropagation: HostToContainer
+          name: proc
           readOnly: true
-        - name: sys
-          mountPath: /host/sys
+        - mountPath: /host/sys
           mountPropagation: HostToContainer
+          name: sys
           readOnly: true
-        - name: root
-          mountPath: /host/root
+        - mountPath: /host/root
           mountPropagation: HostToContainer
+          name: root
           readOnly: true
         livenessProbe:
           httpGet:

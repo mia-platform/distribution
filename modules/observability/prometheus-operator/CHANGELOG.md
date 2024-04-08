@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update node-exporter to 1.7.0
+- update kube-state-metrics to 2.10.1
+
 ## v1.26.1
+
+### Changed
 
 - update kube-webhook-certgen to v20231011-8b53cabe0
 
