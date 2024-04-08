@@ -1,19 +1,21 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: kube-system
-commonLabels:
-  app.kubernetes.io/component: cni
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/cilium
-  newTag: v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+  newTag: v1.14.9@sha256:4ef1eb7a3bc39d0fefe14685e6c0d4e01301c40df2a89bc93ffca9a1ab927301
 - name: quay.io/cilium/operator-generic
-  newTag: v1.14.4@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55
+  newTag: v1.14.9@sha256:1552d653870dd8ebbd16ee985a5497dd78a2097370978b0cfbd2da2072f30712
 - name: quay.io/cilium/hubble-relay
-  newTag: v1.14.4@sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db
+  newTag: v1.14.9@sha256:f506f3c6e0a979437cde79eb781654fda4f10ddb5642cebc4dc81254cfb7eeaa
 - name: quay.io/cilium/hubble-ui
-  newTag: v0.12.1@sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267
+  newTag: v0.13.0@sha256:7d663dc16538dd6e29061abd1047013a645e6e69c115e008bee9ea9fef9a6666
 - name: quay.io/cilium/hubble-ui-backend
-  newTag: v0.12.1@sha256:1f86f3400827a0451e6332262467f894eeb7caf0eb8779bd951e2caa9d027cbe
+  newTag: v0.13.0@sha256:1e7657d997c5a48253bb8dc91ecee75b63018d16ff5e5797e5af367336bc8803
 - name: quay.io/cilium/certgen
   newTag: v0.1.9@sha256:89a0847753686444daabde9474b48340993bd19c7bea66a46e45b2974b82041f
 resources:
