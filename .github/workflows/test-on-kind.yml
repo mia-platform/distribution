@@ -11,73 +11,53 @@ on:
   pull_request:
 
 concurrency:
-  group: ci-tests-${{ github.ref }}-1
+  group: ci-tests-${{ github.ref }}
   cancel-in-progress: true # cancels obsolete running jobs
 
 jobs:
   get-changed-modules:
     name: "Build Changed Modules List"
     runs-on: ubuntu-latest
+
     outputs:
-      module_paths: ${{ steps.changed.outputs.module_paths }}
+      any_changed: ${{ steps.changed-files.outputs.any_changed }}
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-
-    - uses: dorny/paths-filter@v2
-      id: filter
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - name: Calculate file differences
+      id: changed-files
+      uses: tj-actions/changed-files@2d756ea4c53f7f6b397767d8723b3a10a9f35bf2 # v44.0.0
       with:
-        list-files: shell
-        filters: |
-          modules:
-            - 'modules/*/!(oidc-proxy)/base/**'
-          test:
-            - 'test/**'
-
-    - name: Clean Changed Filter
-      id: changed
-      run: |
-        MODULES="${{ steps.filter.outputs.modules_files }}"
-        TESTS="${{ steps.filter.outputs.test_files }}"
-        FINAL_LIST="["
-        for file in $MODULES; do
-          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??4g')"
-        done
-        for file in $TESTS; do
-          DIR_LIST+=" $(echo -n $(dirname $file) | sed 's?/[^/]*??2g')"
-        done
-        for directory in $(tr ' ' '\n' <<< "${DIR_LIST[@]}" | sort -u | tr '\n' ' ') ; do
-          [ ! -d $directory ] && continue
-          FINAL_LIST+=\"$directory\",
-        done
-        FINAL_LIST+="]"
-        echo $(sed 's/,]/]/' <<< $FINAL_LIST)
-        echo '::set-output name=module_paths::'$(sed 's/,]/]/' <<< $FINAL_LIST)
+        dir_names: true
+        json: true
+        escape_json: false
+        dir_names_max_depth: 4
+        files: |
+          modules/*/*/base/**
+          test/**
 
   test-module:
     name: "Test"
-    if: needs.get-changed-modules.outputs.module_paths != '[]'
-    needs: get-changed-modules
+    if: needs.get-changed-modules.outputs.any_changed == 'true'
+    needs:
+    - get-changed-modules
     runs-on: ubuntu-latest
     strategy:
       matrix:
         kind_version:
-        - kindest/node:v1.27.3@sha256:3966ac761ae0136263ffdb6cfd4db23ef8a83cba8a463690e98317add2c9ba72
-        - kindest/node:v1.26.6@sha256:6e2d8b28a5b601defe327b98bd1c2d1930b49e5d8c512e1895099e4504007adb
-        - kindest/node:v1.25.11@sha256:227fa11ce74ea76a0474eeefb84cb75d8dad1b08638371ecf0e86259b35be0c8
-        - kindest/node:v1.24.15@sha256:7db4f8bea3e14b82d12e044e25e34bd53754b7f2b0e9d56df21774e6f66a70ab
-        - kindest/node:v1.23.17@sha256:59c989ff8a517a93127d4a536e7014d28e235fb3529d9fba91b3951d461edfdb
-        module: ${{ fromJSON(needs.get-changed-modules.outputs.module_paths) }}
+        - kindest/node:v1.29.2@sha256:51a1434a5397193442f0be2a297b488b6c919ce8a3931be0ce822606ea5ca245
+        - kindest/node:v1.28.7@sha256:9bc6c451a289cf96ad0bbaf33d416901de6fd632415b076ab05f5fa7e4f65c58
+        - kindest/node:v1.27.11@sha256:681253009e68069b8e01aad36a1e0fa8cf18bb0ab3e5c4069b2e65cafdd70843
+        - kindest/node:v1.26.14@sha256:5d548739ddef37b9318c70cb977f57bf3e5015e4552be4e27e57280a8cbb8e4f
+        - kindest/node:v1.25.16@sha256:e8b50f8e06b44bb65a93678a65a26248fae585b3d3c2a669e5ca6c90c69dc519
+        - kindest/node:v1.24.17@sha256:bad10f9b98d54586cba05a7eaa1b61c6b90bfc4ee174fdc43a7b75ca75c95e51
+        module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Install yq
-      uses: mikefarah/yq@master
-
-    - name: Install kustomize
-      uses: imranismail/setup-kustomize@v1
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
     - name: Kustomize Build
       run: |
@@ -85,16 +65,16 @@ jobs:
         kustomize build ${{ matrix.module }} > ci/rendered.yaml
 
     - name: Create k8s Kind Cluster for Cilium
-      if: matrix.module == 'modules/cni/cilium-base'
-      uses: helm/kind-action@v1
+      if: matrix.module == 'modules/cni/cilium/base'
+      uses: helm/kind-action@99576bfa6ddf9a8e612d83b513da5a75875caced # v1.9.0
       with:
         node_image: "{{ matrix.kind_version }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
 
     - name: Create k8s Kind Cluster
-      if: matrix.module != 'modules/cni/cilium-base'
-      uses: helm/kind-action@v1
+      if: matrix.module != 'modules/cni/cilium/base'
+      uses: helm/kind-action@99576bfa6ddf9a8e612d83b513da5a75875caced # v1.9.0
       with:
         node_image: "${{ matrix.kind_version }}"
         config: .github/workflows/kind-configs/default.yaml

@@ -1,0 +1,14 @@
+version: 2
+
+updates:
+# keep up to date the github actions
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: monthly
+
+# keep up to date devcontainers
+- package-ecosystem: devcontainers
+  directory: "/"
+  schedule:
+    interval: monthly

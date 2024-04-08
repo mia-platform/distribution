@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../../modules/cni/cilium/base
+- ../../../modules/disaster-recovery/velero/base
+- ../../../modules/ingress/traefik/base
+- ../../../modules/observability/logging-operator/base
+- ../../../modules/observability/metrics-server/base
+- ../../../modules/observability/prometheus-operator/base
+- ../../../modules/scheduling/kube-green/base
+- ../../../modules/security/cert-manager/base
+- ../../../modules/security/kyverno/base
+- ../../../modules/security/rbac-manager/base
+components:
+- ../../../addons/cert-manager/kube-green-webhook-certificate
+- ../../../addons/cert-manager/prometheus-operator-webhook-certificate
+- ../../../addons/logging-operator/logging-stack
+- ../../../addons/prometheus-operator/cert-manager
+- ../../../addons/prometheus-operator/kube-green
+- ../../../addons/prometheus-operator/kyverno
+- ../../../addons/prometheus-operator/logging-operator
+- ../../../addons/prometheus-operator/logging-stack
+- ../../../addons/prometheus-operator/monitoring-stack
+- ../../../addons/prometheus-operator/rbac-manager
+- ../../../addons/prometheus-operator/traefik
+- ../../../addons/prometheus-operator/velero
