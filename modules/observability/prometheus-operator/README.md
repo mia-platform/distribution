@@ -17,7 +17,7 @@ The module will install the Prometheus Operator workloads with its CRDs, Cluster
 - **[crds](./base/crds)**: Prometheus Operator custom resource definitions
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the `Namespace` and main deny `NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin`
   - **[workloads](./base/resources/workloads):**
     - **[kube-state-metrics](./base/resources/workloads/kube-state-metrics):** configurations, deployment, and RBAC
 				definitions for `kube-state-metrics`
