@@ -13,7 +13,8 @@ The module will install the controller deployment and its CRDs.
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the base configurations for the service, including the `Namespace`
 		and `NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin`
+			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[rbac-manager](./base/resources/workloads/rbac-manager):** resources for the rbac-manager controller. This component
 			will manage the correct handling of the `RBACDefinition` installed in the cluster
@@ -38,6 +39,7 @@ This module use the following user, gid and fsGroup:
 | 1.25.x         | 1.5.0          |
 | 1.26.0         | 1.6.4          |
 | 1.26.1         | 1.6.5          |
+| 1.26.2         | 1.8.0          |
 
 ## User customization
 
