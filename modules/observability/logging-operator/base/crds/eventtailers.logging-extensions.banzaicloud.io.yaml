@@ -310,6 +310,22 @@ spec:
                 type: object
               controlNamespace:
                 type: string
+              image:
+                properties:
+                  imagePullSecrets:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                      type: object
+                    type: array
+                  pullPolicy:
+                    type: string
+                  repository:
+                    type: string
+                  tag:
+                    type: string
+                type: object
               positionVolume:
                 properties:
                   emptyDir:
@@ -2203,9 +2219,3 @@ spec:
         type: object
     served: true
     storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

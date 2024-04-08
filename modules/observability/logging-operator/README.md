@@ -15,7 +15,7 @@ The module will install the logging-operator deployment, its CRDs, and the corre
 - **[resources](./base/resources)**:
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace` and
 			`NetworkPolicy`
-  - **[RBAC](./base/resources/rbac):** RBAC resources for the workload and for adding capabilitis to the default ClusterRoles
+  - **[RBAC](./base/resources/rbac):** `ClusterRole`s to aggregate to `view`, `edit` and `admin`
   - **[workloads](./base/resources/workloads):**
     - **[logging-operator](./base/resources/workloads/logging-operator):** resources for the Logging Operator controller
 
@@ -37,7 +37,8 @@ This module use the following user, gid and fsGroup:
 |----------------|----------------|
 | 1.24.x         | 4.0.0          |
 | 1.25.x         | 4.1.0          |
-| 1.26.x         | 4.3.0          |
+| 1.26.0         | 4.3.0          |
+| 1.26.1         | 4.5.6          |
 
 ## User customization
 

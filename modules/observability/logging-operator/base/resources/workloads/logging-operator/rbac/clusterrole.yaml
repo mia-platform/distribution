@@ -232,9 +232,11 @@ rules:
   - clusteroutputs
   - flows
   - fluentbitagents
+  - fluentdconfigs
   - loggings
   - nodeagents
   - outputs
+  - syslogngconfigs
   verbs:
   - create
   - delete
@@ -250,9 +252,31 @@ rules:
   - clusteroutputs/status
   - flows/status
   - fluentbitagents/status
+  - fluentdconfigs/status
   - loggings/status
   - nodeagents/status
   - outputs/status
+  - syslogngconfigs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - loggingroutes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
+  - loggingroutes/status
   verbs:
   - get
   - patch
