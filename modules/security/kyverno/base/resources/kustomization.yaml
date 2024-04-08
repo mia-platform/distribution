@@ -1,21 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  app.kubernetes.io/component: kyverno
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/component: kyverno
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.10.5@sha256:b5363bfe4cad5db500e4dc57108039acc55262a7f3f9aea19f34e1c34500dd4f
+  newTag: v1.10.7@sha256:a76ec260bdac78be64aff22d1ec76a180d3b2fe4026738407f1a7e535d21192b
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.10.5@sha256:4dc97cfbdbb9a49ffd011de8b382ef03d2fd103cd0bbea3ba25a0a0f0c0c31da
+  newTag: v1.10.7@sha256:49fe4eb4cfa7b699d0b77c88b75afbff76ce5e052662fbd8c6025eda4e0e2375
 - name: ghcr.io/kyverno/background-controller
-  newTag: v1.10.5@sha256:a5819bff4c70f021fb1a7e9de65bf1d5c492bd85591758a5130f02308a9b77e6
+  newTag: v1.10.7@sha256:531bc8d25e4aa658832991910a07a5ac0ca068e78ac7b653ad9073dfdc63ff8d
 - name: ghcr.io/kyverno/cleanup-controller
-  newTag: v1.10.5@sha256:28a4a5f55d44ba7b3a8938e91efbc7596f2884656f671061c8be8687f8ae1bed
+  newTag: v1.10.7@sha256:eae20b9125fc4f63f46d35841d7ac131167510aa629b6da2385c859471dab1ca
 - name: ghcr.io/kyverno/reports-controller
-  newTag: v1.10.5@sha256:a4f5e8006b6d621630abd5a849f7ad4a70308ae55943282505b46ce43d3c2e88
+  newTag: v1.10.7@sha256:8cd609d9f3baaf2091ac1c4b7bd510a086f2f8e0ad6b94997c632c758073cb25
 - name: docker.io/bitnami/kubectl
-  newTag: 1.26.10-debian-11-r1@sha256:499e0b6a12bb59ca0c189c694f7553ace2e19cc816f754b6c7ea0e15372070c7
+  newTag: 1.26.15-debian-12-r3@sha256:3c9b70027289e999b5342f7b6fbdb5f228ea720a37bc13df42faf4056e7156e2
 resources:
 - configs
 - rbac

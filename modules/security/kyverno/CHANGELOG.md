@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update kyverno to v1.10.7
+- run the reports cleanup cronjob every hour instead of every 10 minutes
+- add `create: true` to all replacements, for increasing compatibility with older versions of kustomize
+
 ## v1.26.1
+
+### Changed
 
 - update kyverno to v1.10.5
 

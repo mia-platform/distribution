@@ -4,14 +4,29 @@ metadata:
   name: mia-platform:kyverno:defaults
 rules:
 - apiGroups:
-  - ""
-  - events.k8s.io
+  - admissionregistration.k8s.io
   resources:
-  - events
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
   verbs:
   - create
-  - update
+  - delete
+  - get
+  - list
   - patch
+  - update
+  - watch
+  - deletecollection
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  - clusterroles
+  - rolebindings
+  - clusterrolebindings
+  verbs:
+  - list
+  - watch
 - apiGroups:
   - kyverno.io
   resources:
@@ -51,15 +66,14 @@ rules:
   - watch
   - deletecollection
 - apiGroups:
-  - rbac.authorization.k8s.io
+  - ""
+  - events.k8s.io
   resources:
-  - roles
-  - clusterroles
-  - rolebindings
-  - clusterrolebindings
+  - events
   verbs:
-  - watch
-  - list
+  - create
+  - update
+  - patch
 - apiGroups:
   - authorization.k8s.io
   resources:
@@ -74,17 +88,3 @@ rules:
   - get
   - list
   - watch
-- apiGroups:
-  - admissionregistration.k8s.io
-  resources:
-  - mutatingwebhookconfigurations
-  - validatingwebhookconfigurations
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-  - deletecollection

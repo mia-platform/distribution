@@ -8,11 +8,20 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - admissionreports
-  - backgroundscanreports
   - cleanuppolicies
+  - clustercleanuppolicies
   - policies
-  - updaterequests
+  - clusterpolicies
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+- apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - policyreports
+  - clusterpolicyreports
   verbs:
   - create
   - delete
@@ -21,27 +30,21 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - cleanuppolicies/status
-  - policies/status
-  - updaterequests/status
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - wgpolicyk8s.io
-  resources:
-  - policyreports
+  - admissionreports
+  - clusteradmissionreports
+  - backgroundscanreports
+  - clusterbackgroundscanreports
   verbs:
   - create
   - delete
   - patch
   - update
 - apiGroups:
-  - wgpolicyk8s.io
+  - kyverno.io
   resources:
-  - policyreports/status
+  - updaterequests
   verbs:
-  - get
-  - list
-  - watch
+  - create
+  - delete
+  - patch
+  - update

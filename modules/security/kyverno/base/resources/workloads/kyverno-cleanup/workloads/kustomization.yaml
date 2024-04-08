@@ -24,3 +24,33 @@ replacements:
       create: true
     select:
       kind: Deployment
+- source:
+    fieldPath: .metadata.name
+    kind: Service
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=kyverno-cleanup].env.[name=KYVERNO_SVC].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
+    fieldPath: .metadata.name
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=kyverno-cleanup].env.[name=KYVERNO_DEPLOYMENT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
+    fieldPath: .spec.template.spec.serviceAccountName
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - .spec.template.spec.containers.[name=kyverno-cleanup].env.[name=KYVERNO_SERVICEACCOUNT_NAME].value
+    options:
+      create: true
+    select:
+      kind: Deployment

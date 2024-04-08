@@ -9,16 +9,16 @@ rules:
   - secrets
   verbs:
   - create
-  - list
-  - watch
 - apiGroups:
   - ""
   resources:
   - secrets
   verbs:
-  - get
-  - update
   - delete
+  - get
+  - list
+  - update
+  - watch
   resourceNames:
   - kyverno-cleanup.kyverno-system.svc.kyverno-tls-ca
   - kyverno-cleanup.kyverno-system.svc.kyverno-tls-pair
@@ -30,6 +30,9 @@ rules:
   - get
   - list
   - watch
+  resourceNames:
+  - kyverno
+  - kyverno-metrics
 - apiGroups:
   - coordination.k8s.io
   resources:

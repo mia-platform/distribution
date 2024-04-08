@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: kyverno-cleanup-reports
 spec:
-  schedule: "*/10 * * * *"
+  schedule: "0 * * * *"
   concurrencyPolicy: Forbid
   suspend: false
   successfulJobsHistoryLimit: 1
@@ -30,19 +30,22 @@ spec:
             - -c
             - |
               COUNT=$(kubectl get admissionreports.kyverno.io -A | wc -l)
-              if [ "$COUNT" -gt 10000 ]; then
+              if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
                 echo "too many reports found ($COUNT), cleaning up..."
                 kubectl delete admissionreports.kyverno.io -A -l='!audit.kyverno.io/report.aggregate'
               else
                 echo "($COUNT) reports found, no clean up needed"
               fi
               COUNT=$(kubectl get clusteradmissionreports.kyverno.io -A | wc -l)
-              if [ "$COUNT" -gt 10000 ]; then
+              if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
                 echo "too many cluster reports found ($COUNT), cleaning up..."
                 kubectl delete clusteradmissionreports.kyverno.io -A -l='!audit.kyverno.io/report.aggregate'
               else
                 echo "($COUNT) cluster reports found, no clean up needed"
               fi
+            env:
+            - name: MAX_REPORTS_COUNT
+              value: "10000"
             volumeMounts:
             - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
               name: serviceaccount-token

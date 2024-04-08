@@ -8,15 +8,19 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - admissionreports
-  - clusteradmissionreports
-  - backgroundscanreports
-  - clusterbackgroundscanreports
-  - clustercleanuppolicies
   - cleanuppolicies
-  - clusterpolicies
+  - clustercleanuppolicies
   - policies
-  - updaterequests
+  - clusterpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - policyreports
+  - clusterpolicyreports
   verbs:
   - get
   - list
@@ -24,29 +28,18 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - clustercleanuppolicies/status
-  - cleanuppolicies/status
-  - policies/status
-  - clusterpolicies/status
-  - updaterequests/status
+  - admissionreports
+  - clusteradmissionreports
+  - backgroundscanreports
+  - clusterbackgroundscanreports
   verbs:
   - get
   - list
   - watch
 - apiGroups:
-  - wgpolicyk8s.io
+  - kyverno.io
   resources:
-  - clusterpolicyreports
-  - policyreports
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - wgpolicyk8s.io
-  resources:
-  - clusterpolicyreports/status
-  - policyreports/status
+  - updaterequests
   verbs:
   - get
   - list

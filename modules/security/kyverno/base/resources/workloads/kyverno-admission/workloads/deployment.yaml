@@ -31,6 +31,8 @@ spec:
         - --loggingFormat=text
         - --v=2
         env:
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
@@ -44,9 +46,9 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: KYVERNO_DEPLOYMENT
-          value: kyverno
+          value: default
         - name: KYVERNO_SVC
-          value: kyverno
+          value: default
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -83,16 +85,18 @@ spec:
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
         env:
-        - name: INIT_CONFIG
-          value: kyverno
-        - name: METRICS_CONFIG
-          value: kyverno-metrics
         - name: METRICS_PORT
           value: "0"
         - name: PROFILE_ENABLED
           value: "false"
         - name: PROFILE_PORT
           value: "0"
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
+        - name: INIT_CONFIG
+          value: kyverno
+        - name: METRICS_CONFIG
+          value: kyverno-metrics
         - name: KYVERNO_NAMESPACE
           valueFrom:
             fieldRef:
@@ -101,14 +105,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_SERVICEACCOUNT_NAME
-          value: kyverno
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         - name: KYVERNO_SVC
-          value: kyverno
+          value: default
         - name: TUF_ROOT
           value: /.sigstore
-        - name: KYVERNO_DEPLOYMENT
-          value: kyverno
         ports:
         - containerPort: 9443
           name: controller
