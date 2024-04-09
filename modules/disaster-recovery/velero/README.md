@@ -58,6 +58,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.26.1         | 1.11.1 | RELEASE.2023-11-11T08-14-41Z | RELEASE.2023-11-10T21-37-17Z | 1.7.1      |
 | 1.27.0         | 1.12.2 | RELEASE.2023-12-14T18-51-57Z | RELEASE.2023-12-14T00-37-41Z | 1.8.2      |
 | 1.27.1         | 1.12.3 | RELEASE.2024-02-14T21-36-02Z | RELEASE.2023-12-14T00-37-41Z | 1.8.2      |
+| 1.27.2         | 1.12.4 | RELEASE.2024-04-06T05-26-02Z | RELEASE.2024-03-30T15-29-52Z | 1.8.2      |
 
 ### GCP Storage Flavor
 
