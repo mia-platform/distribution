@@ -38,7 +38,6 @@ rules:
   verbs:
   - delete
   - get
-  - list
   - patch
   - update
   resourceNames:

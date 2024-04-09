@@ -31,11 +31,3 @@ rules:
   - update
   resourceNames:
   - kyverno-background-controller
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch

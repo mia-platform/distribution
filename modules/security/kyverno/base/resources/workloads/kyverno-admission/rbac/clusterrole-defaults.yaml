@@ -25,8 +25,8 @@ rules:
   - rolebindings
   - clusterrolebindings
   verbs:
-  - list
   - watch
+  - list
 - apiGroups:
   - kyverno.io
   resources:

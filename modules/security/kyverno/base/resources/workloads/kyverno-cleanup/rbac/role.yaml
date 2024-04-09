@@ -9,6 +9,7 @@ rules:
   - secrets
   verbs:
   - create
+  - list
 - apiGroups:
   - ""
   resources:
@@ -16,7 +17,6 @@ rules:
   verbs:
   - delete
   - get
-  - list
   - update
   - watch
   resourceNames:
