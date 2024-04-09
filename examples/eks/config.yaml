@@ -4,23 +4,23 @@ name: eks-installation
 spec:
   modules:
     cni/cilium/eks:
-      version: v1.26.1
+      version: v1.26.2
     disaster-recovery/velero/base:
-      version: v1.26.1
+      version: v1.26.2
     ingress/traefik/eks:
-      version: v1.26.1
+      version: v1.26.2
     observability/logging-operator/base:
-      version: v1.26.0
-    observability/prometheus-operator/base:
       version: v1.26.1
+    observability/prometheus-operator/base:
+      version: v1.26.2
     scheduling/kube-green/base:
       version: v1.26.1
     security/cert-manager/base:
-      version: v1.26.3
+      version: v1.26.4
     security/kyverno/base:
-      version: v1.26.1
+      version: v1.26.2
     security/rbac-manager/base:
-      version: v1.26.1
+      version: v1.26.2
   addOns:
     cert-manager/kube-green-webhook-certificate:
       version: v1.0.0
