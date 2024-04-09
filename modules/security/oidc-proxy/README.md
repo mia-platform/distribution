@@ -62,8 +62,7 @@ specify the external one you would like to use for authenticating in your cluste
 | 1.26.1         | latest@5f75e4377 (no semver available) | 2.37.0      |
 | 1.27.0         | latest@b0aedbe3e (no semver available) | 2.37.0      |
 | 1.27.1         | latest@0e0ffbcc9 (no semver available) | 2.37.0      |
-
-5e50abdcf8469
+| 1.27.2         | 1.0.6-21733e                           | 2.39.0      |
 
 ## User customization
 

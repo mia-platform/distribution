@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update oidc-proxy to 1.0.6-21733e
+- update dex to 2.39.0
+- update kube-webhook-certgen to v20231226-1a7112e06
+
 ## v1.27.1
 
 ### Changed
