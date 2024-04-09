@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - main
-    - "realease/**"
+    - "release/**"
     paths:
     - "modules/*/*/base/**"
     - "test/**"
