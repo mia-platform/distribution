@@ -47,12 +47,9 @@ jobs:
     strategy:
       matrix:
         kind_version:
-        - kindest/node:v1.29.2@sha256:51a1434a5397193442f0be2a297b488b6c919ce8a3931be0ce822606ea5ca245
         - kindest/node:v1.28.7@sha256:9bc6c451a289cf96ad0bbaf33d416901de6fd632415b076ab05f5fa7e4f65c58
         - kindest/node:v1.27.11@sha256:681253009e68069b8e01aad36a1e0fa8cf18bb0ab3e5c4069b2e65cafdd70843
         - kindest/node:v1.26.14@sha256:5d548739ddef37b9318c70cb977f57bf3e5015e4552be4e27e57280a8cbb8e4f
-        - kindest/node:v1.25.16@sha256:e8b50f8e06b44bb65a93678a65a26248fae585b3d3c2a669e5ca6c90c69dc519
-        - kindest/node:v1.24.17@sha256:bad10f9b98d54586cba05a7eaa1b61c6b90bfc4ee174fdc43a7b75ca75c95e51
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
 
     steps:
@@ -68,7 +65,7 @@ jobs:
       if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@99576bfa6ddf9a8e612d83b513da5a75875caced # v1.9.0
       with:
-        node_image: "{{ matrix.kind_version }}"
+        node_image: "${{ matrix.kind_version }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
 
