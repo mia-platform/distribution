@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Source: https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
+# Source: https://github.com/cert-manager/cert-manager/releases/download/v1.13.5/cert-manager.crds.yaml
 ---
+# Source: cert-manager/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
