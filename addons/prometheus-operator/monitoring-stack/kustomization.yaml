@@ -5,7 +5,7 @@ images:
   newTag: v2.45.0@sha256:9309deb7c981e8a94584d9ed689fd62f7ac4549d816fd3881550311cf056a237
 - name: quay.io/prometheus/alertmanager
   newTag: v0.25.1@sha256:8a9c4cf91cef6fbe543133d24d6d64337eec274e3b50b99f45aee69c213b5810
-resources:
+components:
 - resources
 replacements:
 - source:
