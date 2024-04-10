@@ -35,11 +35,20 @@ spec:
           containerPort: 9966
           protocol: TCP
         readinessProbe:
-          tcpSocket:
-            port: grpc
+          grpc:
+            port: 4222
+          timeoutSeconds: 3
         livenessProbe:
-          tcpSocket:
-            port: grpc
+          grpc:
+            port: 4222
+          timeoutSeconds: 3
+        startupProbe:
+          # give the relay one minute to start up
+          grpc:
+            port: 4222
+          timeoutSeconds: 3
+          failureThreshold: 20
+          periodSeconds: 3
         volumeMounts:
         - name: config
           mountPath: /etc/hubble-relay

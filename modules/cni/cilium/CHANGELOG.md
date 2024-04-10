@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- new AKS flavour for installing the module in a BYOCNI AKS cluster on Microsoft Azure
+
+### Changed
+
+- update cilium to v1.15.3
+
 ## v1.27.2
+
+### Changed
 
 - update cilium to v1.14.9
 

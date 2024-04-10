@@ -57,6 +57,14 @@ spec:
         ports:
         - name: grpc
           containerPort: 8090
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
         volumeMounts:
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token

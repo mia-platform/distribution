@@ -3,7 +3,7 @@
 set -o nounset
 set -o errexit
 
-CILIUM_VERSION="${1:-1.14.7}"
+CILIUM_VERSION="${1:-1.15.3}"
 FOLDER_PATH=$(dirname -- "${0}")
 
 helm repo add cilium https://helm.cilium.io/
@@ -26,3 +26,9 @@ helm template cilium cilium/cilium \
 	--namespace kube-system \
 	--values "${FOLDER_PATH}/values.yaml" \
 	--values "${FOLDER_PATH}/gke-values.yaml" > "${FOLDER_PATH}/gke-${CILIUM_VERSION}.yaml"
+
+helm template cilium cilium/cilium \
+	--version "${CILIUM_VERSION}" \
+	--namespace kube-system \
+	--values "${FOLDER_PATH}/values.yaml" \
+	--values "${FOLDER_PATH}/aks-values.yaml" > "${FOLDER_PATH}/aks-${CILIUM_VERSION}.yaml"
