@@ -40,22 +40,26 @@ spec:
         - --providers.kubernetesingress
         - --providers.kubernetesingress.ingressclass=traefik
         - --providers.kubernetesingress.allowexternalnameservices=false
-        - --entryPoints.traefik.address=:$(METRICS_PORT)/tcp
+        - --entryPoints.traefik.address=$(POD_IP):$(METRICS_PORT)/tcp
         - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
-        - --entryPoints.web.address=:$(HTTP_PORT)/tcp
+        - --entryPoints.web.address=$(POD_IP):$(HTTP_PORT)/tcp
         - --entryPoints.web.transport.lifecycle.gracetimeout=30
         - --entrypoints.web.transport.lifecycle.requestacceptgracetimeout=29
-        - --entrypoints.web.http.redirections.entryPoint.to=:443
+        - --entrypoints.web.http.redirections.entryPoint.to=$(POD_IP):443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --entrypoints.web.http.redirections.entrypoint.priority=0
-        - --entryPoints.websecure.address=:$(HTTPS_PORT)/tcp
+        - --entryPoints.websecure.address=$(POD_IP):$(HTTPS_PORT)/tcp
         - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
         - --metrics.prometheus
         - --metrics.prometheus.entrypoint=traefik
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: LOG_LEVEL
           value: WARN
         - name: HTTP_PORT
