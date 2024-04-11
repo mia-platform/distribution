@@ -25,7 +25,7 @@ spec:
         image: quay.io/prometheus/node-exporter:latest
         resources: {}
         args:
-        - --web.listen-address=0.0.0.0:$(METRICS_PORT)
+        - --web.listen-address=$(POD_IP):$(METRICS_PORT)
         - --log.level=warn
         - --log.format=json
         - --path.sysfs=/host/sys
@@ -39,6 +39,10 @@ spec:
         - --collector.netdev.device-exclude=^(veth.*|[a-f0-9]{15})$
         - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: METRICS_PORT
           value: "0"
         ports:

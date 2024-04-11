@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update prometheus-operator to v0.73.1
+- update kube-state-metrics to 2.11.0
+- node-exporter now bind the pod ip and not all network interfaces
+- prometheus-operator now bind the pod ip and not all network interfaces
+- prometheus-operator-webhook now bind the pod ip and not all network interfaces
+- kube-state-metrcis now bind the pod ip and not all network interfaces
+
 ## v1.27.2
 
 ### Changed

@@ -92,12 +92,16 @@ spec:
         args:
         - --log-level=warn
         - --log-format=json
-        - --web.listen-address=:$(WEBHOOK_PORT)
+        - --web.listen-address=$(POD_IP):$(WEBHOOK_PORT)
         - --web.enable-http2
         - --web.enable-tls=true
         - --web.cert-file=/etc/prometheus-operator/tls/tls.crt
         - --web.key-file=/etc/prometheus-operator/tls/tls.key
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:

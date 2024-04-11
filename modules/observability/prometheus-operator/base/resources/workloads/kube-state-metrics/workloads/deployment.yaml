@@ -27,10 +27,16 @@ spec:
         image: registry.k8s.io/kube-state-metrics/kube-state-metrics:latest
         resources: {}
         args:
+        - --host=$(POD_IP)
         - --port=$(K8S_METRICS_PORT)
+        - --telemetry-host=$(POD_IP)
         - --telemetry-port=$(SELF_METRICS_PORT)
         - --use-apiserver-cache
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: K8S_METRICS_PORT
           value: "0"
         - name: SELF_METRICS_PORT
