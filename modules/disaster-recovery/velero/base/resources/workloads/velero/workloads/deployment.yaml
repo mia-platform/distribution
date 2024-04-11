@@ -30,11 +30,16 @@ spec:
         - server
         - --log-level=warning
         - --log-format=json
-        - --metrics-address=:$(METRICS_PORT)
-        - --profiler-address=:$(PROFILER_PORT)
+        - --uploader-type=kopia
+        - --metrics-address=$(POD_IP):$(METRICS_PORT)
+        - --profiler-address=$(POD_IP):$(PROFILER_PORT)
         env:
         - name: VELERO_SCRATCH_DIR
           value: /scratch
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: VELERO_NAMESPACE
           valueFrom:
             fieldRef:
@@ -44,6 +49,8 @@ spec:
           value: /plugins
         - name: METRICS_PORT
           value: "0"
+        - name: PROFILER_PORT
+          value: "0"
         ports:
         - name: metrics
           containerPort: 11270
@@ -51,6 +58,26 @@ spec:
         - name: profiler
           containerPort: 11271
           protocol: TCP
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /metrics
+            port: metrics
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /metrics
+            port: metrics
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- flavor for saving backups on AWS S3
+- flavor for saving backups on Microsoft Azure Storage
+
+### Changed
+
+- update velero to 1.13.1
+- update velero plugins for Azure and AWS to 1.9.1
+- update velero plugin for GCP to 1.9.0
+- gcp-storage flavor now is configured for easier setup with workload identity. It's a safer method and we want to
+	promote its use by default
+- velero server now bind the pod ip and not all network interfaces
+
 ## v1.27.2
 
 ### Changed
@@ -23,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.27.0
 
-## Added
+### Added
 
 - bindings for Openshift cluster-view cluster role
 

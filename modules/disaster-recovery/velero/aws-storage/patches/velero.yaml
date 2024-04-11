@@ -6,8 +6,8 @@ spec:
   template:
     spec:
       initContainers:
-      - name: gcp-plugin
-        image: docker.io/velero/velero-plugin-for-gcp:latest
+      - name: aws-plugin
+        image: docker.io/velero/velero-plugin-for-aws:latest
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
