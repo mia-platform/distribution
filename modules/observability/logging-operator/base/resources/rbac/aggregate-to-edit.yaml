@@ -10,6 +10,15 @@ rules:
   resources:
   - flows
   - outputs
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
   - syslogngflows
   - syslogngoutputs
   verbs:
