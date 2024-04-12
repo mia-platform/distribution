@@ -32,7 +32,7 @@ spec:
         - --log-format=json
         - --uploader-type=kopia
         - --metrics-address=$(POD_IP):$(METRICS_PORT)
-        - --profiler-address=$(POD_IP):$(PROFILER_PORT)
+        - --profiler-address=localhost:$(PROFILER_PORT)
         env:
         - name: VELERO_SCRATCH_DIR
           value: /scratch
