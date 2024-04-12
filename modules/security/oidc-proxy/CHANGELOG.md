@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update oidc-proxy to 1.0.6-ec5de3
+- update dex to 2.39.1
+- kube-oidc-proxy server now bind the pod ip and not all network interfaces
+
 ## v1.27.2
 
 ### Changed
