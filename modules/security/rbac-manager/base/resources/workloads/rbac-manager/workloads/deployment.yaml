@@ -28,12 +28,16 @@ spec:
         resources: {}
         args:
         - --log-level=$(LOG_LEVEL)
-        - --metrics-address=:$(METRICS_PORT)
+        - --metrics-address=$(POD_IP):$(METRICS_PORT)
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: LOG_LEVEL
           value: warn
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: metrics
           containerPort: 11220
