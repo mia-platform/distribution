@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update traefik to v2.11.1
+- update traefik to v2.11.2
 - traefik server now bind the pod ip and not all network interfaces
 
 ## v1.27.2
