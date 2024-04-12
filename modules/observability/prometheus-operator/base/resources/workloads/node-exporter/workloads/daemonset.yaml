@@ -44,7 +44,7 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: metrics
           containerPort: 11262

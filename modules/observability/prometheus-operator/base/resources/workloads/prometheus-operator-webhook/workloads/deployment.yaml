@@ -107,7 +107,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: WEBHOOK_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: webhook
           containerPort: 11264

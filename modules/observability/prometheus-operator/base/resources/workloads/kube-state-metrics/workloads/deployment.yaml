@@ -38,9 +38,9 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         - name: K8S_METRICS_PORT
-          value: "0"
+          value: PORT
         - name: SELF_METRICS_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: k8s-metrics
           containerPort: 11260

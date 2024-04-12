@@ -105,11 +105,11 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         - name: HTTPS_PORT
-          value: "0"
+          value: PORT
         - name: PROBES_PORT
-          value: "0"
+          value: PORT
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         ports:
         - containerPort: 11230
           name: webhook

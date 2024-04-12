@@ -48,9 +48,9 @@ spec:
         - name: LD_LIBRARY_PATH
           value: /plugins
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         - name: PROFILER_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: metrics
           containerPort: 11270

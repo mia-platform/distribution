@@ -52,7 +52,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: CONTROLLER_PORT
-          value: "0"
+          value: PORT
         - name: CONFIG_RELOADER_IMAGE
           value: quay.io/prometheus-operator/prometheus-config-reloader:latest
         - name: CONFIG_RELOADER_CPU_REQUEST

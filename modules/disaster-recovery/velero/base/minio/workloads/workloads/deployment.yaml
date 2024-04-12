@@ -31,9 +31,9 @@ spec:
           - /storage
         env:
         - name: SERVER_PORT
-          value: "0"
+          value: PORT
         - name: CONSOLE_PORT
-          value: "0"
+          value: PORT
         envFrom:
         - secretRef:
             name: minio-credentials

@@ -63,11 +63,11 @@ spec:
         - name: LOG_LEVEL
           value: WARN
         - name: HTTP_PORT
-          value: "0"
+          value: PORT
         - name: HTTPS_PORT
-          value: "0"
+          value: PORT
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         ports:
         - name: web
           containerPort: 11240
