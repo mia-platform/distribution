@@ -93,13 +93,17 @@ spec:
         args:
         - --leader-elect
         - --webhook-server-port=$(HTTPS_PORT)
-        - --metrics-bind-address=:$(METRICS_PORT)
-        - --health-probe-bind-address=:$(PROBES_PORT)
+        - --metrics-bind-address=$(POD_IP):$(METRICS_PORT)
+        - --health-probe-bind-address=$(POD_IP):$(PROBES_PORT)
         - --zap-encoder=json
         - --zap-log-level=$(LOG_LEVEL)
         env:
         - name: LOG_LEVEL
           value: error
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: HTTPS_PORT
           value: "0"
         - name: PROBES_PORT
