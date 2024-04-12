@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update cert-manager to 1.14.4
+- cert-manager controller now bind the pod ip and not all network interfaces
+
 ## v1.27.2
 
 ### Changed
