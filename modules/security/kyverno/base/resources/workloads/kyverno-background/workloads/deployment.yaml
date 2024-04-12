@@ -37,11 +37,11 @@ spec:
         - --profilePort=$(PROFILE_PORT)
         env:
         - name: METRICS_PORT
-          value: "0"
+          value: PORT
         - name: PROFILE_ENABLED
           value: "false"
         - name: PROFILE_PORT
-          value: "0"
+          value: PORT
         - name: KYVERNO_SERVICEACCOUNT_NAME
           value: default
         - name: INIT_CONFIG
