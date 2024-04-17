@@ -72,7 +72,8 @@ reach the webhook port.
 ## EKS User
 
 If you are using our cni module or a cni that don’t use the amazon cni daemonset, you have to set the `hostNetwork`
-option of deployment to `true` for allowing the api-server to reach its endpoint.
+option of deployment to `true` for allowing the api-server to reach its endpoint. You can easily target the correct
+workload with the labelSelector `distribution.mia-platform.eu/expose-webhook=true`.
 
 [Here is the link to the official repository]: https://github.com/prometheus-operator/prometheus-operator
 	"Prometheus Operator GitHub Repository"

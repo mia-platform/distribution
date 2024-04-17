@@ -50,7 +50,8 @@ This module use the following user, gid and fsGroup:
 ## EKS User
 
 If you are using our cni module or a cni that don’t use the amazon cni daemonset, you have to set the `hostNetwork`
-option of deployment to `true` for allowing the api-server to reach its endpoint.
+option of deployment to `true` for allowing the api-server to reach its endpoint. You can easily target the correct
+workload with the labelSelector `distribution.mia-platform.eu/expose-webhook=true`.
 
 [Here is the link to Metrics Server official repository]: https://github.com/kubernetes-sigs/metrics-server
 	"Metrics Server GitHub Repository"
