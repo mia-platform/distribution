@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-server
+  labels:
+    distribution.mia-platform.eu/expose-webhook: "true"
 spec:
   revisionHistoryLimit: 5
   selector:
