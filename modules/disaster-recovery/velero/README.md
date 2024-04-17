@@ -114,8 +114,9 @@ The AWS storage flavor will not create any resource for setting up backups with 
 configuration to the end user, and it will also need further configurations for setting up the authorization between
 velero and the AWS APIs.
 
-By default the flavor will setup velero to work with [EKS Pod Identities], and we suggest you to setup your EKS cluster
-to work with it if possible.
+By default the flavor will setup velero to work with [IAM Roles for Service Accounts], and we suggest you to
+setup your GKE cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
+`ServiceAccount` accordingly with the documentation.
 
 The IAM Policy to assign the to service account is the following:
 
@@ -168,8 +169,8 @@ configuration to the end user, and it will also need further configurations for 
 velero and the Microsoft Azure APIs.
 
 By default the flavor will setup velero to work with [Microsoft Entra Workload ID], and we suggest you to setup your
-AKS cluster to work with it if possible, you will have to add the correct annotations to the `ServiceAccount` and
-`Deployment` accordingly with the documentation.
+AKS cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
+`ServiceAccount` accordingly with the documentation.
 
 The IAM Role to assign the to service account is the following:
 
@@ -211,8 +212,8 @@ configuration to the end user, and it will also need further configurations for 
 velero and the GCP APIs.
 
 By default the flavor will setup velero to work with [Workload Identity Federation for GKE], and we suggest you to
-setup your GKE cluster to work with it if possible, you will have to add the correct annotations to the `ServiceAccount`
-accordingly with the documentation.
+setup your GKE cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
+`ServiceAccount` accordingly with the documentation.
 
 The IAM Role permissions to assign the to service account are the following:
 
@@ -234,6 +235,6 @@ iam.serviceAccounts.signBlob
 ```
 
 [Here is the link to the official repository]: https://github.com/vmware-tanzu/velero "Velero GitHub Repository"
-[EKS Pod Identities]: https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html "EKS Pod Identities official documentation"
+[IAM Roles for Service Accounts]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html "EKS IAM Roles for Service Accounts official documentation"
 [Microsoft Entra Workload ID]: https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview "Microsoft Entra Workload ID with Azure Kubernetes Service official documentation"
 [Workload Identity Federation for GKE]: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity "Authenticate to Google Cloud APIs from GKE workloads"
