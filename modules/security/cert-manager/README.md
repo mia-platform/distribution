@@ -73,7 +73,7 @@ port that the webhook service expose.
 
 ## EKS User
 
-If you are using our cni module or a cni that don’t use the amazon cni daemonset, you have to set the `networkHost`
+If you are using our cni module or a cni that don’t use the amazon cni daemonset, you have to set the `hostNetwork`
 option of the webhook pod to `true` for allowing the api-server to reach its endpoint.
 
 [Here is the link to the official repository]: https://github.com/cert-manager/cert-manager
