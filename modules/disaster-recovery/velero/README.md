@@ -115,10 +115,10 @@ configuration to the end user, and it will also need further configurations for 
 velero and the AWS APIs.
 
 By default the flavor will setup velero to work with [IAM Roles for Service Accounts], and we suggest you to
-setup your GKE cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
-`ServiceAccount` accordingly with the documentation.
+setup your GKE cluster to work with it if possible. You then will have to add the `eks.amazonaws.com/role-arn`
+annotation to the `velero` `ServiceAccount` with the arn of the role that you have created folling the AWS guide.
 
-The IAM Policy to assign the to service account is the following:
+The minimal IAM Policy to assign the to service account is the following:
 
 ```json
 {
@@ -169,10 +169,12 @@ configuration to the end user, and it will also need further configurations for 
 velero and the Microsoft Azure APIs.
 
 By default the flavor will setup velero to work with [Microsoft Entra Workload ID], and we suggest you to setup your
-AKS cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
-`ServiceAccount` accordingly with the documentation.
+AKS cluster to work with it if possible. You then will have to add the `azure.workload.identity/client-id`
+annotation to the `velero` `ServiceAccount` with client id property of the user assigned identity that you have created
+following the Azure guide. You will also have to add the `azure.workload.identity/use` label to the `velero` `Deployment`
+with a value of `"true"` to allow the pod to use the identity.
 
-The IAM Role to assign the to service account is the following:
+The minimal Role Definition to assign the to service account is the following:
 
 ```json
 {
@@ -212,10 +214,11 @@ configuration to the end user, and it will also need further configurations for 
 velero and the GCP APIs.
 
 By default the flavor will setup velero to work with [Workload Identity Federation for GKE], and we suggest you to
-setup your GKE cluster to work with it if possible. You then will have to add the correct annotations to the `velero`
-`ServiceAccount` accordingly with the documentation.
+setup your GKE cluster to work with it if possible. You then will have to add the `iam.gke.io/gcp-service-account`
+annotation to the `velero` `ServiceAccount` with the service account email that you have created following the GCP
+documentation.
 
-The IAM Role permissions to assign the to service account are the following:
+The minimal IAM Role permissions to assign the to service account are the following:
 
 ```txt
 compute.disks.get
