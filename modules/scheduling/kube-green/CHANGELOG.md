@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.28.0
+
 ### Changed
 
 - kube-green now bind the pod ip and not all network interfaces for their metrics and probes endpoints
