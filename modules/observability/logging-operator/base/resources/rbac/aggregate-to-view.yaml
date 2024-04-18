@@ -9,9 +9,14 @@ rules:
   - logging.banzaicloud.io
   resources:
   - flows
-  - fluentdconfigs
   - outputs
-  - syslogngconfigs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
   - syslogngflows
   - syslogngoutputs
   verbs:

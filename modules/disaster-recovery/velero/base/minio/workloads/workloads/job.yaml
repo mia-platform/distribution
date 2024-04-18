@@ -30,7 +30,7 @@ spec:
         - name: MINIO_SERVICE_NAME
           value: MINIO_SERVICE_NAME
         - name: SERVER_PORT
-          value: "0"
+          value: PORT
       containers:
       - name: mc
         image: docker.io/minio/mc:latest
@@ -50,7 +50,7 @@ spec:
         - name: MINIO_SERVICE_NAME
           value: MINIO_SERVICE_NAME
         - name: SERVER_PORT
-          value: "0"
+          value: PORT
         volumeMounts:
         - name: config
           mountPath: /config

@@ -30,7 +30,7 @@ spec:
         - --log-level=warn
         - --log-format=json
         - --localhost=127.0.0.1
-        - --web.listen-address=:$(CONTROLLER_PORT)
+        - --web.listen-address=$(POD_IP):$(CONTROLLER_PORT)
         - --prometheus-config-reloader=$(CONFIG_RELOADER_IMAGE)
         - --config-reloader-cpu-request=$(CONFIG_RELOADER_CPU_REQUEST)
         - --config-reloader-cpu-limit=$(CONFIG_RELOADER_CPU_LIMIT)
@@ -41,14 +41,20 @@ spec:
         - --alertmanager-instance-namespaces=$(POD_NAMESPACE)
         - --thanos-ruler-instance-namespaces=$(POD_NAMESPACE)
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: GOGC
+          value: "30"
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: CONTROLLER_PORT
+          value: PORT
         - name: CONFIG_RELOADER_IMAGE
           value: quay.io/prometheus-operator/prometheus-config-reloader:latest
-        - name: CONTROLLER_PORT
-          value: "0"
         - name: CONFIG_RELOADER_CPU_REQUEST
           value: 10m
         - name: CONFIG_RELOADER_CPU_LIMIT

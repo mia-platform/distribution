@@ -7,10 +7,6 @@ patches:
     - op: replace
       path: /spec/type
       value: LoadBalancer
-  target:
-    kind: Service
-    labelSelector: distribution.mia-platform.eu/service-type=ingress
-- patch: |-
     - op: add
       path: /metadata/annotations/service.beta.kubernetes.io~1aws-load-balancer-type
       value: nlb

@@ -27,14 +27,20 @@ spec:
         image: ghcr.io/kube-logging/logging-operator:latest
         resources: {}
         args:
-        - "--metrics-addr=:$(METRICS_PORT)"
         - "--enable-leader-election=true"
-        - "--verbose=false"
+        - "--klogLevel=$(LOG_LEVEL)"
+        - "--metrics-addr=$(POD_IP):$(METRICS_PORT)"
         - "--output-format=json"
-        - "--klogLevel=0"
+        - "--verbose=false"
         env:
-        - name: METRICS_PORT
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: LOG_LEVEL
           value: "0"
+        - name: METRICS_PORT
+          value: PORT
         ports:
         - name: metrics
           containerPort: 11250

@@ -14,11 +14,11 @@ patches:
       path: /data/enable-endpoint-routes
       value: "true"
     - op: add
-      path: /data/enable-local-node-route
-      value: "false"
-    - op: add
       path: /data/ipv4-native-routing-cidr
       value: "CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR"
+    - op: replace
+      path: /data/enable-health-check-loadbalancer-ip
+      value: "true"
     - op: replace
       path: /data/ipam
       value: kubernetes

@@ -19,6 +19,7 @@ These modules and addons are built on a vanilla Kubernetes and are tested agains
 - [kind]
 - [GKE]
 - [EKS]
+- [AKS]
 
 The module versioning will follow the kubernetes one for clearly indicating on what version you can use them,
 so for example a module with version of 1.24.x will be safe to use on a kubernetes cluster on the 1.24 release.  
@@ -100,10 +101,11 @@ as possible.
 
 [License]: https://img.shields.io/github/license/mia-platform/distribution?color=informational&style=for-the-badge
 	"Magellano License"
-[Kubernetes]: https://img.shields.io/badge/kubernetes-1.27-success?style=for-the-badge&logo=kubernetes "Supported
+[Kubernetes]: https://img.shields.io/badge/kubernetes-1.28-success?style=for-the-badge&logo=kubernetes "Supported
 	Kubernetes version"
 [`vab`]: https://github.com/mia-platform/vab "cli for handling installation and upgrade of Mia-Platform
 	unofficial distribution"
 [kind]: https://kind.sigs.k8s.io "Kubernetes IN Docker site"
 [GKE]: https://cloud.google.com/kubernetes-engine/docs/ "Google Kubernetes Engine documentation site"
 [EKS]: https://docs.aws.amazon.com/eks/index.html "Amazon Elastic Kubernetes Service documentation site"
+[AKS]: https://learn.microsoft.com/en-us/azure/aks/ "Azure Kubernetes Service documentation site"

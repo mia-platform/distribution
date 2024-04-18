@@ -35,6 +35,7 @@ default **ports**:
   - **none**
 - cert-manager controller
   - **11200** for exposing the metrics endpoint
+  - **9403** expose the health probe endpoint for kubernetes
 - cert-manager webhook
   - **11201** for exposing the webhook endpoint, the api-server must reach this port for avoiding timeout errors on
 		CRDs creation
@@ -58,6 +59,7 @@ This module use the following user, gid and fsGroup:
 | 1.27.0         | 1.13.3         |
 | 1.27.1         | 1.13.3         |
 | 1.27.2         | 1.13.5         |
+| 1.28.x         | 1.14.4         |
 
 ## User customization
 

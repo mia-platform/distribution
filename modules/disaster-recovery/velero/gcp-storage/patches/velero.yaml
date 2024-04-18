@@ -21,15 +21,3 @@ spec:
         volumeMounts:
         - name: plugins
           mountPath: /target
-      containers:
-      - name: velero
-        env:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /credentials/cloud-credentials
-        volumeMounts:
-        - name: cloud-credentials
-          mountPath: /credentials
-      volumes:
-      - name: cloud-credentials
-        secret:
-          secretName: cloud-credentials

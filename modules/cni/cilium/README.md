@@ -41,6 +41,13 @@ documentation for all the system requirements needed at this [link].
 
 ## Flavors
 
+### AKS
+
+- deploys the `node-init` DaemonSet
+
+The AKS flavor is indicated for setting up cilium to work inside an AKS cluster in BYOCNI plugin. You can follow
+the [official guide from Microsoft] for setting the cluster correctly.
+
 ### EKS
 
 - Adds `egress-masquerad-interfaces: eth0` in the Cilium config
@@ -64,7 +71,7 @@ kubectl -n kube-system patch daemonset aws-node --type='strategic' -p='{"spec":{
 - changes to the `cilium-config` configmap:
   - tunnel: `disabled`
   - enable-endpoint-routes: `true`
-  - enable-local-route: `false`
+  - enable-health-check-loadbalancer-ip: `true`
   - ipam: `kubernetes`
   - remove `cluster-pool-ipv4-cidr`
   - remove `cluster-pool-ipv4-mask-size`
@@ -86,10 +93,11 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.27.0         | 1.14.5           | v0.12.1     |
 | 1.27.1         | 1.14.7           | v0.13.0     |
 | 1.27.2         | 1.14.9           | v0.13.0     |
+| 1.28.x         | 1.15.3           | v0.13.0     |
 
 ## User customization
 
-### Base, EKS
+### Base, AKS, EKS
 
 By default these flavor will set the `cluster-pool-ipv4-cidr` property inside the `cilium-config` ConfigMap to
 `10.10.0.0/16` and the `cluster-pool-ipv4-mask-size` to `24`. If you don’t want to use these values you can change them
@@ -104,3 +112,4 @@ value that will trigger an error inside Cilium workload and will not start.
 
 [Here is the link to the official repository]: https://github.com/cilium/cilium "Cilium GitHub Repository"
 [link]: https://docs.cilium.io/en/v1.14/operations/system_requirements/ "Cilium System Requirements"
+[official guide from Microsoft]: https://learn.microsoft.com/en-us/azure/aks/use-byo-cni "Bring your own Container Network Interface plugin with Azure Kubernetes Service"

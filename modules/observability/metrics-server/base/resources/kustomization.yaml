@@ -8,7 +8,8 @@ labels:
 namespace: kube-system
 images:
 - name: registry.k8s.io/metrics-server/metrics-server
-  newTag: v0.6.4@sha256:ee4304963fb035239bb5c5e8c10f2f38ee80efc16ecbdb9feb7213c17ae2e86e
+  newTag: v0.7.1
+  digest: sha256:db3800085a0957083930c3932b17580eec652cfb6156a05c0f79c7543e80d17a
 resources:
 - configs
 - rbac

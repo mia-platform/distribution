@@ -30,13 +30,17 @@ spec:
         - --v=2
         - --logging-format=json
         - --leader-elect
-        - --metrics-listen-address=0.0.0.0:$(METRICS_PORT)
+        - --metrics-listen-address=$(POD_IP):$(METRICS_PORT)
         - --leader-election-namespace=$(POD_NAMESPACE)
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --enable-certificate-owner-ref=$(ENABLE_CERTIFICATE_REF)
         - --acme-http01-solver-image=$(ACMERESOLVER_IMAGE)
         - --max-concurrent-challenges=$(MAX_CONCURRENT_CHALLENGES)
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
@@ -53,6 +57,14 @@ spec:
         - name: metrics
           containerPort: 11200
           protocol: TCP
+        - name: healthz
+          containerPort: 9403
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            port: healthz
+            path: /livez
+            scheme: HTTP
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

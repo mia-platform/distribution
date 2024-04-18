@@ -28,16 +28,21 @@ spec:
         resources: {}
         args:
         - --cert-dir=/tmp
+        - --bind-address=$(POD_IP)
         - --secure-port=$(METRICS_SERVER_PORT)
         - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
         - --kubelet-use-node-status-port
         - --metric-resolution=15s
         - --kubelet-insecure-tls=$(INSECURE_TLS)
         env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: INSECURE_TLS
           value: "true"
         - name: METRICS_SERVER_PORT
-          value: "0"
+          value: PORT
         ports:
         - containerPort: 11290
           name: metrics-server

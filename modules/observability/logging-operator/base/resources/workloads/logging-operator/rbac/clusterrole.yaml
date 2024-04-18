@@ -284,6 +284,12 @@ rules:
 - apiGroups:
   - logging.banzaicloud.io
   resources:
+  - loggings/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - logging.banzaicloud.io
+  resources:
   - syslogngclusterflows
   - syslogngclusteroutputs
   - syslogngflows
@@ -312,6 +318,18 @@ rules:
   resources:
   - prometheusrules
   - servicemonitors
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
   verbs:
   - create
   - delete
