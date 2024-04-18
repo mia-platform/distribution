@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.28.0
+
 ### Changed
 
 - rbac-manager server now bind the pod ip and not all network interfaces
