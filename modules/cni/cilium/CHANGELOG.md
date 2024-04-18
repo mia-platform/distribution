@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.28.0
+
 ### Added
 
 - new AKS flavour for installing the module in a BYOCNI AKS cluster on Microsoft Azure
