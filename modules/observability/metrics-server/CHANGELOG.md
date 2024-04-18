@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.27.2
+
 ### Fixed
 
 - missing label and documentation for using the module on EKS with a custom CNI
