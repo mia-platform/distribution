@@ -4,25 +4,25 @@ name: eks-installation
 spec:
   modules:
     cni/cilium/eks:
-      version: v1.27.2
+      version: v1.28.0
     disaster-recovery/velero/base:
-      version: v1.27.2
+      version: v1.28.0
     ingress/traefik/eks:
-      version: v1.27.2
+      version: v1.28.0
     observability/logging-operator/base:
-      version: v1.27.1
+      version: v1.28.0
     observability/metrics-server/base:
-      version: v1.27.2
+      version: v1.28.0
     observability/prometheus-operator/base:
-      version: v1.27.2
+      version: v1.28.0
     scheduling/kube-green/base:
-      version: v1.27.2
+      version: v1.28.0
     security/cert-manager/base:
-      version: v1.27.2
+      version: v1.28.0
     security/kyverno/base:
-      version: v1.27.1
+      version: v1.28.0
     security/rbac-manager/base:
-      version: v1.27.1
+      version: v1.28.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
       version: v1.0.0
@@ -41,7 +41,7 @@ spec:
     prometheus-operator/logging-stack:
       version: v2.0.1
     prometheus-operator/monitoring-stack:
-      version: v2.0.0
+      version: v2.1.0
     prometheus-operator/rbac-manager:
       version: v1.0.2
     prometheus-operator/traefik:
