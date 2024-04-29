@@ -38,6 +38,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PodDistruptionBudget for prometheus-operator, no support for multiple replicas
 	the budget will only impact on node drainage during mantainance
 
+## v1.26.2
+
+### Changed
+
+- update node-exporter to 1.7.0
+- update kube-state-metrics to 2.10.1
+
 ## v1.26.1
 
 ### Changed

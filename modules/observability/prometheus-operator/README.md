@@ -10,8 +10,6 @@ The module will install the Prometheus Operator workloads with its CRDs, Cluster
 `view` defautl ClsuterRoles the ability to interact with them, and will also install the [`kube-state-metrics`] and
 [Node Exporter] workloads for getting metrics for the actual cluster state, and for the node status.
 
-## What the base module contains
-
 ## Module Contents
 
 - **[crds](./base/crds)**: Prometheus Operator custom resource definitions
@@ -54,7 +52,9 @@ This module use the following user, gid and fsGroup:
 |----------------|---------------------|---------------|--------------------|
 | 1.24.x         | 0.63.0              | 1.5.0         | 2.7.0              |
 | 1.25.x         | 0.64.1              | 1.5.0         | 2.7.0              |
-| 1.26.x         | 0.67.1              | 1.6.1         | 2.9.2              |
+| 1.26.0         | 0.67.1              | 1.6.1         | 2.9.2              |
+| 1.26.1         | 0.67.1              | 1.6.1         | 2.9.2              |
+| 1.26.2         | 0.67.1              | 1.7.0         | 2.10.1             |
 | 1.27.x         | 0.70.0              | 1.7.0         | 2.10.1             |
 
 ## User customization

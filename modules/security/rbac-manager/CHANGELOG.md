@@ -30,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PodDistruptionBudget, no intention on supporting multiple replicas from maintainers because HA is not needed
 	the budget will only impact on node drainage during mantainance
 
+## v1.26.2
+
+### Changed
+
+- update rbac-manager to v1.8.0
+
 ## v1.26.1
 
 ### Changed

@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update alertmanager to v0.26.0
 - update service monitors
 
+## v1.0.5
+
+### Changed
+
+- add `create: true` to all replacements, for increasing compatibility with older versions of kustomize
+
 ## v1.0.4
 
 ### Changed

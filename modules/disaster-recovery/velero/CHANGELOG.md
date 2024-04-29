@@ -40,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PodDistruptionBudget, no support for multiple replicas from maintainers the budget will only
 	impact on node drainage during mantainance
 
+## v1.26.2
+
+### Changed
+
+- update minio and minio config version to latest releases
+
 ## v1.26.1
 
 ### Changed

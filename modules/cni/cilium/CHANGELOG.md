@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	server upgrades to not block the drain
 - removed not useful pod affinity for hubble relay workload
 
+## v1.26.2
+
+### Changed
+
+- update cilium to v1.14.9
+
 ## v1.26.1
 
 ### Changed
