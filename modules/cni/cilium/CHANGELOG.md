@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - update cilium to v1.15.3
 
+## v1.27.3
+
+### Changed
+
+- update cilium to v1.14.10
+
 ## v1.27.2
 
 ### Changed
@@ -40,6 +46,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - move PodDistruptionBudget for hubble from minAvailable to maxUnavailable to allow single replicas during
 	server upgrades to not block the drain
 - removed not useful pod affinity for hubble relay workload
+
+## v1.26.2
+
+### Changed
+
+- update cilium to v1.14.9
 
 ## v1.26.1
 

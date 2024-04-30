@@ -39,6 +39,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - unused secret inside the operator service account
 
+## v1.26.1
+
+### Changed
+
+- update logging-operator to v4.5.6
+
+### Removed
+
+- unused secret inside the operator service account
+
 ## v1.26.0
 
 ### Changed

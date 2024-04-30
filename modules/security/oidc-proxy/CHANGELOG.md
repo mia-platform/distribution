@@ -15,6 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update dex to 2.39.1
 - kube-oidc-proxy server now bind the pod ip and not all network interfaces
 
+## v1.27.3
+
+### Changed
+
+- update oidc-proxy to 1.0.6-4c7812
+- update dex to 2.39.1
+
 ## v1.27.2
 
 ### Changed
@@ -37,6 +44,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update oidc-proxy to latest digest
 - add nodeSelector for all workloads to ensure that they will run only on linux nodes
 - add pod anti affinity for all workloads to improve pod spreading in case of multiple replicas
+
+## v1.26.2
+
+### Changed
+
+- update oidc-proxy 1.0.6-21733e
+- update dex to 2.39.0
 
 ## v1.26.1
 
