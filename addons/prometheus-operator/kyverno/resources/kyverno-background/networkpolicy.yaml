@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-kyverno-background-monitoring
+  namespace: NAMESPACE_BACKGROUND
 spec:
   podSelector: {}
   policyTypes:
