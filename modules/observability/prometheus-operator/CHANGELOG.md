@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update prometheus-operator to v0.73.2
+- update node-exporter to 1.8.0
+
 ## v1.28.0
 
 ### Changed
