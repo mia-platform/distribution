@@ -7,7 +7,7 @@ images:
 - name: quay.io/prometheus/alertmanager
   newTag: v0.27.0
   digest: sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
-components:
+resources:
 - resources
 replacements:
 - source:

@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.1.2
+
+### Fixed
+
+- wrong kustomization directive in the principal kustomization file
+
 ## v2.1.1
+
+WARNING: Do not use this version, because it will not build correctly
 
 ### Changed
 
