@@ -75,29 +75,7 @@ replacements:
     options:
       create: true
     select:
-      kind: NetworkPolicy
-      name: allow-fluentbit-monitoring
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-fluentd-monitoring
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: ServiceMonitor
-      name: fluentbit
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: ServiceMonitor
-      name: fluentd
+      namespace: NAMESPACE
 - source:
     fieldPath: metadata.namespace
     kind: Deployment
