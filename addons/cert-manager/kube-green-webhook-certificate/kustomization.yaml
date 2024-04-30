@@ -21,26 +21,18 @@ replacements:
     name: kube-green
   targets:
   - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
+      namespace: NAMESPACE
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
     select:
       kind: ValidatingWebhookConfiguration
-      name: kube-green
-  - fieldPaths:
-    - .metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Certificate
-      name: kube-green
-  - fieldPaths:
-    - .metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Issuer
       name: kube-green
 - source:
     fieldPath: .metadata.name
