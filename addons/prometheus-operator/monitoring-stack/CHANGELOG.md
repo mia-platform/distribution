@@ -7,12 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.1.1
+
+### Changed
+
+- more robust namespace replacement
+- update label substitution for kustomize deprecation
+
 ## v2.1.0
 
 ### Changed
 
 - update prometheus to v2.51.1
 - update alertmanager to v0.27.0
+
+## v2.0.1
+
+### Changed
+
+- more robust namespace replacement
+- update label substitution for kustomize deprecation
 
 ## v2.0.0
 

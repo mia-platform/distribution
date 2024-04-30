@@ -7,5 +7,6 @@ roleRef:
   kind: ClusterRole
   name: mia-platform:prometheus
 subjects:
-  - kind: ServiceAccount
-    name: prometheus
+- kind: ServiceAccount
+  name: prometheus
+  namespace: NAMESPACE

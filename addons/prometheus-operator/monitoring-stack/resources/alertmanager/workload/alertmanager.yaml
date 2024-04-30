@@ -2,6 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
   name: alertmanager
+  namespace: NAMESPACE
 spec:
   serviceAccountName: alertmanager
   image: quay.io/prometheus/alertmanager:latest

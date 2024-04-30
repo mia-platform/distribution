@@ -20,56 +20,14 @@ replacements:
     options:
       create: true
     select:
-      labelSelector: app.kubernetes.io/name=alertmanager
+      namespace: NAMESPACE
   - fieldPaths:
-    - metadata.namespace
+    - subjects.0.namespace
     options:
       create: true
     select:
-      labelSelector: app.kubernetes.io/name=prometheus
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: app.kubernetes.io/name=prometheus-operator
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: app.kubernetes.io/name=prometheus-operator-webhook
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: app.kubernetes.io/name=kube-state-metrics
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: app.kubernetes.io/name=node-exporter
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: k8s-app=kube-dns
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      labelSelector: app.kubernetes.io/name=kubelet
-  - fieldPaths:
-    - spec.alerting.alertmanagers.0.namespace
-    options:
-      create: true
-    select:
-      kind: Prometheus
-      name: prometheus
+      kind: RoleBinding
+      name: mia-platform:prometheus-config
   - fieldPaths:
     - subjects.0.namespace
     options:
@@ -77,6 +35,13 @@ replacements:
     select:
       kind: ClusterRoleBinding
       name: mia-platform:prometheus
+  - fieldPaths:
+    - spec.alerting.alertmanagers.0.namespace
+    options:
+      create: true
+    select:
+      kind: Prometheus
+      name: prometheus
 - source:
     fieldPath: spec.podMetadata.labels
     kind: Prometheus
@@ -171,3 +136,42 @@ replacements:
     select:
       kind: NetworkPolicy
       name: allow-kube-state-metrics-monitoring
+- source:
+    fieldPath: metadata.annotations.distribution\.mia-platform\.eu/certificate-ca-key
+    kind: Deployment
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.ca.secret.key
+    options:
+      create: true
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook
+- source:
+    fieldPath: metadata.namespace
+    kind: Service
+    name: prometheus-operator-webhook
+  targets:
+  - fieldPaths:
+    - spec.endpoints.[port=webhook].tlsConfig.serverName
+    options:
+      create: true
+      delimiter: .
+      index: 1
+    select:
+      kind: ServiceMonitor
+      name: prometheus-operator-webhook
