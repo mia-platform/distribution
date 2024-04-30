@@ -7,6 +7,6 @@ labels:
     app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/startup-script
-  newTag: 62093c5c233ea914bfa26a10ba41f8780d9b737f
+  newTag: 62093c5c233ea914bfa26a10ba41f8780d9b737f@sha256:e1d442546e868db1a3289166c14011e0dbd32115b338b963e56f830972bc22a2
 resources:
 - node-init
