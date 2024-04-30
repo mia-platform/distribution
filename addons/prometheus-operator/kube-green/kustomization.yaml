@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: ServiceMonitor
-      name: kube-green
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kube-green-monitoring
+      namespace: NAMESPACE
 - source:
     fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=metrics].containerPort
     kind: Deployment
