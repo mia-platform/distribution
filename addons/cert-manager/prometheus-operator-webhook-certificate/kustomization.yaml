@@ -21,6 +21,12 @@ replacements:
     name: prometheus-operator-webhook
   targets:
   - fieldPaths:
+    - .metadata.namespace
+    options:
+      create: true
+    select:
+      namespace: NAMESPACE
+  - fieldPaths:
     - .metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
@@ -35,20 +41,6 @@ replacements:
       delimiter: /
     select:
       kind: MutatingWebhookConfiguration
-      name: prometheus-operator
-  - fieldPaths:
-    - .metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Certificate
-      name: prometheus-operator
-  - fieldPaths:
-    - .metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Issuer
       name: prometheus-operator
 - source:
     fieldPath: .metadata.name
