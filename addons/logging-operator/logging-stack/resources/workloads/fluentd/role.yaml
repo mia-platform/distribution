@@ -2,6 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: mia-platform:logging-operator:fluentd
+  namespace: NAMESPACE
 rules:
 - apiGroups:
   - ""

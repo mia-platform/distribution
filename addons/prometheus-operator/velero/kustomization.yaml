@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: PodMonitor
-      name: velero
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-velero-monitoring
+      namespace: NAMESPACE
 - source:
     fieldPath: .spec.template.spec.containers.[name=velero].ports.[name=metrics].containerPort
     kind: Deployment

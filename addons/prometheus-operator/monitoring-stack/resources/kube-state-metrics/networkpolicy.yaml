@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-kube-state-metrics-monitoring
+  namespace: NAMESPACE
 spec:
   podSelector:
     matchLabels: {}

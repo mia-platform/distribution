@@ -18,15 +18,7 @@ replacements:
     options:
       create: true
     select:
-      kind: Certificate
-      name: oidc-proxy
-  - fieldPaths:
-    - .metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Issuer
-      name: oidc-proxy
+      namespace: NAMESPACE
 - source:
     fieldPath: .metadata.name
     kind: Certificate

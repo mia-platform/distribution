@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: ServiceMonitor
-      name: kyverno
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kyverno-monitoring
+      namespace: NAMESPACE_KYVERNO
 - source:
     fieldPath: .spec.template.spec.containers.[name=kyverno].ports.[name=metrics].containerPort
     kind: Deployment
@@ -82,15 +74,7 @@ replacements:
     options:
       create: true
     select:
-      kind: ServiceMonitor
-      name: kyverno-cleanup
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kyverno-cleanup-monitoring
+      namespace: NAMESPACE_CLEANUP
 - source:
     fieldPath: .spec.template.spec.containers.[name=kyverno-cleanup].ports.[name=metrics].containerPort
     kind: Deployment
@@ -132,15 +116,7 @@ replacements:
     options:
       create: true
     select:
-      kind: PodMonitor
-      name: kyverno-background
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kyverno-background-monitoring
+      namespace: NAMESPACE_BACKGROUND
 - source:
     fieldPath: .spec.template.spec.containers.[name=kyverno-background].ports.[name=metrics].containerPort
     kind: Deployment
@@ -182,15 +158,7 @@ replacements:
     options:
       create: true
     select:
-      kind: PodMonitor
-      name: kyverno-reports
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-kyverno-reports-monitoring
+      namespace: NAMESPACE_REPORTS
 - source:
     fieldPath: .spec.template.spec.containers.[name=kyverno-reports].ports.[name=metrics].containerPort
     kind: Deployment

@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: ServiceMonitor
-      name: traefik
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-traefik-monitoring
+      namespace: NAMESPACE
 - source:
     fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
     kind: Deployment

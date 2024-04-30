@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: PodMonitor
-      name: cert-manager
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-cert-manger-monitoring
+      namespace: NAMESPACE
 - source:
     fieldPath: .spec.template.spec.containers.[name=cert-manager].ports.[name=metrics].containerPort
     kind: Deployment

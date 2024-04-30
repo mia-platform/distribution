@@ -17,7 +17,7 @@ nameReference:
 - kind: Service
   fieldSpecs:
   - kind: Prometheus
-    path: spec/alerting/alertmanagers/name
+    path: spec/alerting/alertmanagers
 - kind: ServiceAccount
   fieldSpecs:
   - kind: Prometheus
