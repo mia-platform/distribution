@@ -7,5 +7,6 @@ roleRef:
   kind: ClusterRole
   name: mia-platform:logging-operator:fluentd
 subjects:
-  - kind: ServiceAccount
-    name: fluentd
+- kind: ServiceAccount
+  name: fluentd
+  namespace: NAMESPACE

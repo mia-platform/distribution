@@ -20,29 +20,7 @@ replacements:
     options:
       create: true
     select:
-      kind: NetworkPolicy
-      name: allow-fluentbit-traffic
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-fluentd-traffic
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: ServiceAccount
-      name: fluentd
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: ServiceAccount
-      name: fluentbit
+      namespace: NAMESPACE
   - fieldPaths:
     - subjects.0.namespace
     options:
@@ -58,16 +36,9 @@ replacements:
       kind: ClusterRoleBinding
       name: mia-platform:logging-operator:fluentd
   - fieldPaths:
-    - metadata.namespace
+    - subjects.0.namespace
     options:
       create: true
     select:
       kind: RoleBinding
-      name: mia-platform:logging-operator:fluentd
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: Role
       name: mia-platform:logging-operator:fluentd
