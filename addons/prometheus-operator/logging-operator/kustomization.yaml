@@ -32,15 +32,7 @@ replacements:
     options:
       create: true
     select:
-      kind: PodMonitor
-      name: logging-operator
-  - fieldPaths:
-    - metadata.namespace
-    options:
-      create: true
-    select:
-      kind: NetworkPolicy
-      name: allow-logging-operator-monitoring
+      namespace: NAMESPACE
 - source:
     fieldPath: .spec.template.spec.containers.[name=logging-operator].ports.[name=metrics].containerPort
     kind: Deployment
