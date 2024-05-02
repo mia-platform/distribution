@@ -1,0 +1,24 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+  hooks:
+  - id: check-case-conflict
+    name: Check filename case conflicts
+  - id: check-merge-conflict
+    name: Check that no merge conflict marker exists
+  - id: check-executables-have-shebangs
+    name: Check that executable files have shebangs
+  - id: check-shebang-scripts-are-executable
+    name: Check that files with shebangs are executable
+  - id: end-of-file-fixer
+    name: Makes sure files end in a newline and only a newline
+  - id: trailing-whitespace
+    name: Trims trailing whitespace
+    args: [--markdown-linebreak-ext=md] # add exception for markdown linebreaks
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.18.2
+  hooks:
+  - id: gitleaks
+    name: Protect and discover secrets using Gitleaks

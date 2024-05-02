@@ -6,9 +6,22 @@ updates:
   directory: /
   schedule:
     interval: monthly
+    timezone: Europe/Rome
+  groups:
+    minor-actions-dependencies:
+      update-types:
+      - minor
+      - patch
+  commit-message:
+    include: scope
+    prefix: ci
 
 # keep up to date devcontainers
 - package-ecosystem: devcontainers
   directory: "/"
   schedule:
     interval: monthly
+    timezone: Europe/Rome
+  commit-message:
+    include: scope
+    prefix: build
