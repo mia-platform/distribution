@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.0.2
+
+### Fixed
+
+- missing namespace in fluentd RoleBinding
+
 ## v2.0.1
 
 ### Changed
