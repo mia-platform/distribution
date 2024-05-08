@@ -23,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - update cilium to v1.15.3
 
+## v1.27.4
+
+### Fixed
+
+- wrong digests for some cilium workloads
+
 ## v1.27.3
 
 ### Changed
