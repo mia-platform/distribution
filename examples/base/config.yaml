@@ -4,7 +4,7 @@ name: base-installation
 spec:
   modules:
     cni/cilium/base:
-      version: v1.27.3
+      version: v1.27.4
     disaster-recovery/velero/base:
       version: v1.27.2
     ingress/traefik/base:
