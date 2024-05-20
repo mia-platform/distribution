@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- wrong name in SERVICE_NAME env variable for the initContainer that generate the certificate for the webhook
+
 ## v1.27.2
 
 ### Changed
