@@ -37,7 +37,7 @@ spec:
         - --key-name=tls.key
         env:
         - name: SERVICE_NAME
-          value: prometheus-operator
+          value: kube-green
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
