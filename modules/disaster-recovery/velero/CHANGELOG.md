@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update minio and minio config version to latest releases
+
+### Fixed
+
+- missing secret permission on minio serviceaccount
+
 ## v1.27.2
 
 ### Changed
