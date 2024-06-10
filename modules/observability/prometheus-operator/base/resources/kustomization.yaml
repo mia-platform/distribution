@@ -15,7 +15,7 @@ images:
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v20231226-1a7112e06@sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084
 - name: quay.io/prometheus/node-exporter
-  newTag: v1.8.0@sha256:8a57af80a4c77ffb97749b44895248563616fcfd405b5370d5db35fe6c15e4ec
+  newTag: v1.8.1@sha256:fa7fa12a57eff607176d5c363d8bb08dfbf636b36ac3cb5613a202f3c61a6631
 - name: registry.k8s.io/kube-state-metrics/kube-state-metrics
   newTag: v2.10.1@sha256:af8220f534938de121a694cb7314313a6195c9d494fc30bfa6885b08a276bb82
 resources:

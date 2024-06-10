@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update node-exporter to 1.8.1
+
 ## v1.27.3
 
 ### Changed
