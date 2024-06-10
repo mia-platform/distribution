@@ -68,6 +68,7 @@ specify the external one you would like to use for authenticating in your cluste
 | 1.27.4         | 1.0.6-0dce34                           | 2.40.0      |
 | 1.28.0         | 1.0.6-1896b9                           | 2.39.1      |
 | 1.28.1         | 1.0.6-4c7812                           | 2.39.1      |
+| 1.28.2         | 1.0.6-0dce34                           | 2.40.0      |
 
 ## User customization
 
