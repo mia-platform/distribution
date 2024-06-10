@@ -7,14 +7,14 @@ labels:
     app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/cilium
-  newTag: v1.15.4
-  digest: sha256:b760a4831f5aab71c711f7537a107b751d0d0ce90dd32d8b358df3c5da385426
+  newTag: v1.15.5
+  digest: sha256:4ce1666a73815101ec9a4d360af6c5b7f1193ab00d89b7124f8505dee147ca40
 - name: quay.io/cilium/operator-generic
-  newTag: v1.15.4
-  digest: sha256:404890a83cca3f28829eb7e54c1564bb6904708cdb7be04ebe69c2b60f164e9a
+  newTag: v1.15.5
+  digest: sha256:f5d3d19754074ca052be6aac5d1ffb1de1eb5f2d947222b5f10f6d97ad4383e8
 - name: quay.io/cilium/hubble-relay
-  newTag: v1.15.4
-  digest: sha256:03ad857feaf52f1b4774c29614f42a50b370680eb7d0bfbc1ae065df84b1070a
+  newTag: v1.15.5
+  digest: sha256:1d24b24e3477ccf9b5ad081827db635419c136a2bd84a3e60f37b26a38dd0781
 - name: quay.io/cilium/hubble-ui
   newTag: v0.13.0
   digest: sha256:7d663dc16538dd6e29061abd1047013a645e6e69c115e008bee9ea9fef9a6666
@@ -22,8 +22,8 @@ images:
   newTag: v0.13.0
   digest: sha256:1e7657d997c5a48253bb8dc91ecee75b63018d16ff5e5797e5af367336bc8803
 - name: quay.io/cilium/certgen
-  newTag: v0.1.11
-  digest: sha256:5586de5019abc104637a9818a626956cd9b1e827327b958186ec412ae3d5dea6
+  newTag: v0.1.12
+  digest: sha256:bbc5e65e9dc65bc6b58967fe536b7f3b54e12332908aeb0a96a36866b4372b4e
 resources:
 - configs
 - rbac
