@@ -8,7 +8,7 @@ spec:
     disaster-recovery/velero/base:
       version: v1.27.2
     ingress/traefik/eks:
-      version: v1.27.3
+      version: v1.27.4
     observability/logging-operator/base:
       version: v1.27.1
     observability/metrics-server/base:
