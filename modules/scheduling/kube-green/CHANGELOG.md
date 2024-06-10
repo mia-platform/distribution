@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - kube-green now bind the pod ip and not all network interfaces for their metrics and probes endpoints
 
+## v1.27.3
+
+### Fixed
+
+- wrong name in SERVICE_NAME env variable for the initContainer that generate the certificate for the webhook
+
 ## v1.27.2
 
 ### Changed

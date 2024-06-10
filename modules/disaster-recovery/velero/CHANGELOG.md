@@ -39,6 +39,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	promote its use by default
 - velero server now bind the pod ip and not all network interfaces
 
+## v1.27.3
+
+### Changed
+
+- update minio and minio config version to latest releases
+
+### Fixed
+
+- missing secret permission on minio serviceaccount
+
 ## v1.27.2
 
 ### Changed
@@ -55,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.27.0
 
-### Added
+## Added
 
 - bindings for Openshift cluster-view cluster role
 
