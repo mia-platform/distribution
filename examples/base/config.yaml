@@ -6,7 +6,7 @@ spec:
     cni/cilium/base:
       version: v1.27.5
     disaster-recovery/velero/base:
-      version: v1.27.2
+      version: v1.27.3
     ingress/traefik/base:
       version: v1.27.4
     observability/logging-operator/base:
