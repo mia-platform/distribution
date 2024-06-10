@@ -12,7 +12,7 @@ spec:
     observability/logging-operator/base:
       version: v1.27.1
     observability/prometheus-operator/base:
-      version: v1.27.3
+      version: v1.27.4
     scheduling/kube-green/base:
       version: v1.27.2
     security/cert-manager/base:
