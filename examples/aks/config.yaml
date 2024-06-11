@@ -4,48 +4,48 @@ name: gke-installation
 spec:
   modules:
     cni/cilium/aks:
-      version: v1.28.1
+      version: v1.28.2
     disaster-recovery/velero/base:
-      version: v1.28.1
+      version: v1.28.2
     ingress/traefik/aks:
-      version: v1.28.0
+      version: v1.28.1
     observability/logging-operator/base:
-      version: v1.28.0
+      version: v1.28.1
     observability/prometheus-operator/base:
-      version: v1.28.1
+      version: v1.28.2
     scheduling/kube-green/base:
-      version: v1.28.0
-    security/cert-manager/base:
       version: v1.28.1
+    security/cert-manager/base:
+      version: v1.28.2
     security/kyverno/base:
-      version: v1.28.0
+      version: v1.28.1
     security/rbac-manager/base:
       version: v1.28.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
-      version: v1.0.0
+      version: v1.0.1
     cert-manager/prometheus-operator-webhook-certificate:
-      version: v2.0.0
+      version: v2.0.1
     logging-operator/logging-stack:
-      version: v2.0.0
+      version: v2.0.2
     prometheus-operator/cert-manager:
-      version: v1.0.2
+      version: v1.0.3
     prometheus-operator/kube-green:
-      version: v1.0.2
+      version: v1.0.3
     prometheus-operator/kyverno:
-      version: v2.0.1
+      version: v2.0.2
     prometheus-operator/logging-operator:
-      version: v1.0.1
-    prometheus-operator/logging-stack:
-      version: v2.0.1
-    prometheus-operator/monitoring-stack:
-      version: v2.1.0
-    prometheus-operator/rbac-manager:
       version: v1.0.2
+    prometheus-operator/logging-stack:
+      version: v2.0.2
+    prometheus-operator/monitoring-stack:
+      version: v2.1.2
+    prometheus-operator/rbac-manager:
+      version: v1.0.3
     prometheus-operator/traefik:
-      version: v1.0.1
+      version: v1.0.2
     prometheus-operator/velero:
-      version: v1.0.1
+      version: v1.0.2
   groups:
   - name: gke-installation
     clusters:
