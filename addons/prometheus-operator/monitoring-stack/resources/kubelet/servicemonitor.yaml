@@ -98,4 +98,5 @@ spec:
     matchNames:
     - kube-system
   selector:
-    matchLabels: {}
+    matchLabels:
+      k8s-app: kubelet
