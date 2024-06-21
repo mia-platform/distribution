@@ -7,6 +7,19 @@ images:
   newTag: v0.26.0@sha256:361db356b33041437517f1cd298462055580585f26555c317df1a3caf2868552
 resources:
 - resources
+patches:
+- patch: |-
+    - op: remove
+      path: /spec/selector/matchLabels/app.kubernetes.io~1component
+  target:
+    kind: ServiceMonitor
+    name: kubelet
+- patch: |-
+    - op: remove
+      path: /spec/selector/matchLabels/app.kubernetes.io~1component
+  target:
+    kind: PodMonitor
+    name: kube-dns
 replacements:
 - source:
     fieldPath: metadata.namespace
