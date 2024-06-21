@@ -4,5 +4,7 @@ labels:
 - includeSelectors: true
   pairs:
     k8s-app: kube-dns
+configurations:
+- kustomizeconfig.yaml
 resources:
 - podmonitor.yaml

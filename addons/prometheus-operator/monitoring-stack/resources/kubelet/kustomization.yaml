@@ -4,5 +4,7 @@ labels:
 - includeSelectors: true
   pairs:
     app.kubernetes.io/name: kubelet
+configurations:
+- kustomizeconfig.yaml
 resources:
 - servicemonitor.yaml

@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## v2.1.3
+### Fixed
+
+- actually fix the wrong labels selector for kubelet and dns-service monitor
+
+## v2.1.3 \[YANKED]
 
 ### Fixed
 
