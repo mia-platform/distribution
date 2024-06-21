@@ -39,7 +39,7 @@ spec:
     prometheus-operator/logging-stack:
       version: v2.0.2
     prometheus-operator/monitoring-stack:
-      version: v2.0.1
+      version: v2.0.2
     prometheus-operator/rbac-manager:
       version: v1.0.3
     prometheus-operator/traefik:
