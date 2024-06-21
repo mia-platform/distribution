@@ -35,6 +35,12 @@ WARNING: Do not use this version, because it will not build correctly
 - update prometheus to v2.51.1
 - update alertmanager to v0.27.0
 
+## v2.0.2
+
+### Fixed
+
+- wrong labels selector for kubelet and dns-service monitor
+
 ## v2.0.1
 
 ### Changed
@@ -54,6 +60,12 @@ WARNING: Do not use this version, because it will not build correctly
 - update prometheus to v2.47.2
 - update alertmanager to v0.26.0
 - update service monitors
+
+## v1.0.5
+
+### Changed
+
+- add `create: true` to all replacements, for increasing compatibility with older versions of kustomize
 
 ## v1.0.4
 
