@@ -7,42 +7,42 @@ configurations:
 - kustomizeconfig.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=webhook].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-green].ports.[name=webhook].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kube-green].env.[name=HTTPS_PORT].value
+    - spec.template.spec.containers.[name=kube-green].env.[name=HTTPS_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=probes].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-green].ports.[name=probes].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kube-green].env.[name=PROBES_PORT].value
+    - spec.template.spec.containers.[name=kube-green].env.[name=PROBES_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-green].ports.[name=metrics].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kube-green].env.[name=METRICS_PORT].value
+    - spec.template.spec.containers.[name=kube-green].env.[name=METRICS_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.volumes.[name=webhook-tls].secret.secretName
+    fieldPath: spec.template.spec.volumes.[name=webhook-tls].secret.secretName
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
-    - .spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
+    - spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
+    - spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
     options:
       create: true
     select:

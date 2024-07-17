@@ -6,11 +6,11 @@ resources:
 - deployment.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
+    fieldPath: spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=prometheus-operator].env.[name=CONTROLLER_PORT].value
+    - spec.template.spec.containers.[name=prometheus-operator].env.[name=CONTROLLER_PORT].value
     options:
       create: true
     select:

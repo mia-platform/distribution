@@ -4,41 +4,41 @@ resources:
 - deployment.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kyverno-background].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kyverno-background].ports.[name=metrics].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kyverno-background].env.[name=METRICS_PORT].value
+    - spec.template.spec.containers.[name=kyverno-background].env.[name=METRICS_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kyverno-background].ports.[name=profile].containerPort
+    fieldPath: spec.template.spec.containers.[name=kyverno-background].ports.[name=profile].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kyverno-background].env.[name=PROFILE_PORT].value
+    - spec.template.spec.containers.[name=kyverno-background].env.[name=PROFILE_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kyverno-background].env.[name=KYVERNO_DEPLOYMENT].value
+    - spec.template.spec.containers.[name=kyverno-background].env.[name=KYVERNO_DEPLOYMENT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.serviceAccountName
+    fieldPath: spec.template.spec.serviceAccountName
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kyverno-background].env.[name=KYVERNO_SERVICEACCOUNT_NAME].value
+    - spec.template.spec.containers.[name=kyverno-background].env.[name=KYVERNO_SERVICEACCOUNT_NAME].value
     options:
       create: true
     select:

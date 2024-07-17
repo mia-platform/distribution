@@ -24,31 +24,31 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: cert-manager-webhook
   targets:
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    - metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
       create: true
       delimiter: /
     select:
       kind: ValidatingWebhookConfiguration
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    - metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
       create: true
       delimiter: /
     select:
       kind: MutatingWebhookConfiguration
 - source:
-    fieldPath: .spec.template.spec.containers.[name=webhook].env.[name=SECRET_NAME].value
+    fieldPath: spec.template.spec.containers.[name=webhook].env.[name=SECRET_NAME].value
     kind: Deployment
     name: cert-manager-webhook
   targets:
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    - metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
       create: true
       delimiter: /
@@ -56,7 +56,7 @@ replacements:
     select:
       kind: ValidatingWebhookConfiguration
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from-secret]
+    - metadata.annotations.[cert-manager.io/inject-ca-from-secret]
     options:
       create: true
       delimiter: /

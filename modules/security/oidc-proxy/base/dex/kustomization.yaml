@@ -21,19 +21,19 @@ patches:
 - path: patches/oidc-proxy.yaml
 replacements:
 - source:
-    fieldPath: .spec.selector
+    fieldPath: spec.selector
     kind: Deployment
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .spec.ingress.0.from.0.podSelector
+    - spec.ingress.0.from.0.podSelector
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-dex
   - fieldPaths:
-    - .spec.podSelector
+    - spec.podSelector
     options:
       create: true
     select:

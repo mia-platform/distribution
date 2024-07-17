@@ -22,18 +22,18 @@ secretGenerator:
   type: Opaque
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: velero
   targets:
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
       labelSelector: app.kubernetes.io/name=minio
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:

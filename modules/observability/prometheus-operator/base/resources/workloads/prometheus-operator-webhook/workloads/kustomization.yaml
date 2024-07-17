@@ -7,22 +7,22 @@ resources:
 - service.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.volumes.[name=webhook-tls].secret.secretName
+    fieldPath: spec.template.spec.volumes.[name=webhook-tls].secret.secretName
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
-    - .spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
+    - spec.template.spec.initContainers.[name=kube-webhook-certpatch].env.[name=SECRET_NAME].value
+    - spec.template.spec.initContainers.[name=kube-webhook-certgen].env.[name=SECRET_NAME].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=prometheus-operator-webhook].ports.[name=webhook].containerPort
+    fieldPath: spec.template.spec.containers.[name=prometheus-operator-webhook].ports.[name=webhook].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=prometheus-operator-webhook].env.[name=WEBHOOK_PORT].value
+    - spec.template.spec.containers.[name=prometheus-operator-webhook].env.[name=WEBHOOK_PORT].value
     options:
       create: true
     select:

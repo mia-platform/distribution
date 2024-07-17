@@ -4,11 +4,11 @@ resources:
 - daemonset.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=node-exporter].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=node-exporter].ports.[name=metrics].containerPort
     kind: DaemonSet
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=node-exporter].env.[name=METRICS_PORT].value
+    - spec.template.spec.containers.[name=node-exporter].env.[name=METRICS_PORT].value
     options:
       create: true
     select:

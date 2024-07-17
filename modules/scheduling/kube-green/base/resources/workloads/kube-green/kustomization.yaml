@@ -6,12 +6,12 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=webhook].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-green].ports.[name=webhook].containerPort
     kind: Deployment
     name: kube-green
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:

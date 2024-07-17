@@ -11,12 +11,12 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
+    fieldPath: spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
     kind: Deployment
     name: cert-manager-webhook
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:

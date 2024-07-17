@@ -4,21 +4,21 @@ resources:
 - deployment.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=k8s-metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-state-metrics].ports.[name=k8s-metrics].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kube-state-metrics].env.[name=K8S_METRICS_PORT].value
+    - spec.template.spec.containers.[name=kube-state-metrics].env.[name=K8S_METRICS_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=self-metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-state-metrics].ports.[name=self-metrics].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=kube-state-metrics].env.[name=SELF_METRICS_PORT].value
+    - spec.template.spec.containers.[name=kube-state-metrics].env.[name=SELF_METRICS_PORT].value
     options:
       create: true
     select:

@@ -5,11 +5,11 @@ resources:
 - service.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=metrics-server].ports.[name=metrics-server].containerPort
+    fieldPath: spec.template.spec.containers.[name=metrics-server].ports.[name=metrics-server].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=metrics-server].env.[name=METRICS_SERVER_PORT].value
+    - spec.template.spec.containers.[name=metrics-server].env.[name=METRICS_SERVER_PORT].value
     options:
       create: true
     select:

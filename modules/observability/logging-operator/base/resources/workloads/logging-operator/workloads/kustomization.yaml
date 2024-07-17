@@ -4,11 +4,11 @@ resources:
 - deployment.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=logging-operator].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=logging-operator].ports.[name=metrics].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=logging-operator].env.[name=METRICS_PORT].value
+    - spec.template.spec.containers.[name=logging-operator].env.[name=METRICS_PORT].value
     options:
       create: true
     select:

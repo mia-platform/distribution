@@ -7,21 +7,21 @@ configurations:
 - kustomizeconfig.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
+    fieldPath: spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=webhook].env.[name=HTTP_PORT].value
+    - spec.template.spec.containers.[name=webhook].env.[name=HTTP_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=webhook].ports.[name=healthz].containerPort
+    fieldPath: spec.template.spec.containers.[name=webhook].ports.[name=healthz].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=webhook].env.[name=HEALTHZ_PORT].value
+    - spec.template.spec.containers.[name=webhook].env.[name=HEALTHZ_PORT].value
     options:
       create: true
     select:
