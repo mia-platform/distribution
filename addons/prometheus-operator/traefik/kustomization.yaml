@@ -32,14 +32,14 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: TRAEFIK_NAMESPACE
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
     kind: Deployment
     name: traefik
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:

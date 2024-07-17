@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: kyverno-background
-  namespace: NAMESPACE_BACKGROUND
+  namespace: KYVERNO_BACKGROUND_NAMESPACE
 spec:
   podMetricsEndpoints:
   - path: /metrics

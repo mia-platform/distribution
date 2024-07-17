@@ -16,18 +16,18 @@ patches:
     name: prometheus-operator-webhook
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: prometheus-operator-webhook
   targets:
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: PROMETHEUS_OPERATOR_NAMESPACE
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -35,7 +35,7 @@ replacements:
       kind: ValidatingWebhookConfiguration
       name: prometheus-operator
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -43,12 +43,12 @@ replacements:
       kind: MutatingWebhookConfiguration
       name: prometheus-operator
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Certificate
     name: prometheus-operator
   targets:
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -57,7 +57,7 @@ replacements:
       kind: ValidatingWebhookConfiguration
       name: prometheus-operator
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -66,15 +66,15 @@ replacements:
       kind: MutatingWebhookConfiguration
       name: prometheus-operator
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Service
     name: prometheus-operator-webhook
   targets:
   - fieldPaths:
-    - .spec.dnsNames.0
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.0
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .
@@ -82,14 +82,14 @@ replacements:
       kind: Certificate
       name: prometheus-operator
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Service
     name: prometheus-operator-webhook
   targets:
   - fieldPaths:
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .

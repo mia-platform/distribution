@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: prometheus-operator
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   selfSigned: {}
 ---
@@ -10,7 +10,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: prometheus-operator
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   dnsNames:
   - SERVICE_NAME

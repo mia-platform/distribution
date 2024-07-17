@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   name: prometheus
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   serviceAccountName: prometheus
   image: quay.io/prometheus/prometheus:latest
@@ -52,7 +52,7 @@ spec:
   alerting:
     alertmanagers:
     - name: alertmanager
-      namespace: NAMESPACE
+      namespace: PROMETHEUS_OPERATOR_NAMESPACE
       port: web
       pathPrefix: /
       apiVersion: v2

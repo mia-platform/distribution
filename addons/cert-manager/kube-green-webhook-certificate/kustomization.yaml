@@ -16,18 +16,18 @@ patches:
     name: kube-green
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: kube-green
   targets:
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: KUBE_GREEN_NAMESPACE
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -35,12 +35,12 @@ replacements:
       kind: ValidatingWebhookConfiguration
       name: kube-green
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Certificate
     name: kube-green
   targets:
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -49,15 +49,15 @@ replacements:
       kind: ValidatingWebhookConfiguration
       name: kube-green
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Service
     name: kube-green
   targets:
   - fieldPaths:
-    - .spec.dnsNames.0
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.0
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .
@@ -65,14 +65,14 @@ replacements:
       kind: Certificate
       name: kube-green
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Service
     name: kube-green
   targets:
   - fieldPaths:
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .

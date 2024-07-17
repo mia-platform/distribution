@@ -31,7 +31,7 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: PROMETHEUS_OPERATOR_NAMESPACE
   - fieldPaths:
     - subjects.0.namespace
     options:
@@ -88,60 +88,60 @@ replacements:
     select:
       name: allow-node-exporter-monitoring
 - source:
-    fieldPath: .spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
+    fieldPath: spec.template.spec.containers.[name=prometheus-operator].ports.[name=operator].containerPort
     kind: Deployment
     name: prometheus-operator
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-prometheus-operator-monitoring
 - source:
-    fieldPath: .spec.template.spec.containers.[name=prometheus-operator-webhook].ports.[name=webhook].containerPort
+    fieldPath: spec.template.spec.containers.[name=prometheus-operator-webhook].ports.[name=webhook].containerPort
     kind: Deployment
     name: prometheus-operator-webhook
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-prometheus-operator-webhook-monitoring
 - source:
-    fieldPath: .spec.template.spec.containers.[name=node-exporter].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=node-exporter].ports.[name=metrics].containerPort
     kind: DaemonSet
     name: node-exporter
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-node-exporter-monitoring
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=k8s-metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-state-metrics].ports.[name=k8s-metrics].containerPort
     kind: Deployment
     name: kube-state-metrics
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-kube-state-metrics-monitoring
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-state-metrics].ports.[name=self-metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-state-metrics].ports.[name=self-metrics].containerPort
     kind: Deployment
     name: kube-state-metrics
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.1.port
+    - spec.ingress.0.ports.1.port
     options:
       create: true
     select:

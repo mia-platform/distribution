@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-kyverno-monitoring
-  namespace: NAMESPACE_KYVERNO
+  namespace: KYVERNO_NAMESPACE
 spec:
   podSelector: {}
   policyTypes:

@@ -9,23 +9,23 @@ patches:
     name: oidc-proxy
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: OIDC_PROXY_NAMESPACE
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Certificate
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .metadata.annotations.[cert-manager.io/inject-ca-from]
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
     options:
       create: true
       delimiter: /
@@ -34,15 +34,15 @@ replacements:
       kind: ValidatingWebhookConfiguration
       name: oidc-proxy
 - source:
-    fieldPath: .metadata.name
+    fieldPath: metadata.name
     kind: Service
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .spec.dnsNames.0
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.0
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .
@@ -50,14 +50,14 @@ replacements:
       kind: Certificate
       name: oidc-proxy
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Service
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .spec.dnsNames.1
-    - .spec.dnsNames.2
-    - .spec.dnsNames.3
+    - spec.dnsNames.1
+    - spec.dnsNames.2
+    - spec.dnsNames.3
     options:
       create: true
       delimiter: .

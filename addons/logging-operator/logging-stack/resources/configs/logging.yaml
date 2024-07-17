@@ -6,7 +6,7 @@ spec:
   flowConfigCheckDisabled: false
   skipInvalidResources: false
   flowConfigOverride: ""
-  controlNamespace: NAMESPACE
+  controlNamespace: LOGGIN_OPERATOR_NAMESPACE
   enableRecreateWorkloadOnImmutableFieldChange: true
   fluentd:
     labels:

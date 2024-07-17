@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-rbac-manager-monitoring
-  namespace: NAMESPACE
+  namespace: RBAC_MANAGER_NAMESPACE
 spec:
   podSelector: {}
   policyTypes:

@@ -75,7 +75,7 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: LOGGING_OPERATOR_NAMESPACE
 - source:
     fieldPath: metadata.namespace
     kind: Deployment
