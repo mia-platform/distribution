@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: alertmanager
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   type: ClusterIP
   ports:

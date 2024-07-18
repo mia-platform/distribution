@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: rbac-manager
-  namespace: NAMESPACE
+  namespace: RBAC_MANAGER_NAMESPACE
 spec:
   podMetricsEndpoints:
   - path: /metrics

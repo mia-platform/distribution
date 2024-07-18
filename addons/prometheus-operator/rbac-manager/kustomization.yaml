@@ -32,14 +32,14 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: RBAC_MANAGER_NAMESPACE
 - source:
-    fieldPath: .spec.template.spec.containers.[name=rbac-manager].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=rbac-manager].ports.[name=metrics].containerPort
     kind: Deployment
     name: rbac-manager
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:

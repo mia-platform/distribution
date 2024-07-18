@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: cert-manager
-  namespace: NAMESPACE
+  namespace: CERT_MANAGER_NAMESPACE
 spec:
   podMetricsEndpoints:
   - path: /metrics

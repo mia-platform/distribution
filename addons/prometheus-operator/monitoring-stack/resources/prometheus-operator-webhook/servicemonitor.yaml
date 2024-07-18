@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: prometheus-operator-webhook
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   endpoints:
   - port: webhook

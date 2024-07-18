@@ -20,7 +20,7 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: LOGGIN_OPERATOR_NAMESPACE
   - fieldPaths:
     - subjects.0.namespace
     options:

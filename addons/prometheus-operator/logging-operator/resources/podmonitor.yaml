@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: logging-operator
-  namespace: NAMESPACE
+  namespace: LOGGING_OPERATOR_NAMESPACE
 spec:
   podMetricsEndpoints:
   - path: /metrics

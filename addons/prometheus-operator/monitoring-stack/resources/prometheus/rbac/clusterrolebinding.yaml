@@ -9,4 +9,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: prometheus
-  namespace: NAMESPACE
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE

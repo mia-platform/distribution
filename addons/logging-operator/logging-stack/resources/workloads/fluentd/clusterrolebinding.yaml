@@ -9,4 +9,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: fluentd
-  namespace: NAMESPACE
+  namespace: LOGGIN_OPERATOR_NAMESPACE

@@ -32,14 +32,14 @@ replacements:
     options:
       create: true
     select:
-      namespace: NAMESPACE
+      namespace: KUBE_GREEN_NAMESPACE
 - source:
-    fieldPath: .spec.template.spec.containers.[name=kube-green].ports.[name=metrics].containerPort
+    fieldPath: spec.template.spec.containers.[name=kube-green].ports.[name=metrics].containerPort
     kind: Deployment
     name: kube-green
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:

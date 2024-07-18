@@ -9,4 +9,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: fluentbit
-  namespace: NAMESPACE
+  namespace: LOGGIN_OPERATOR_NAMESPACE

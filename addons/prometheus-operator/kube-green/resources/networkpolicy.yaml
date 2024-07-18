@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-kube-green-monitoring
-  namespace: NAMESPACE
+  namespace: KUBE_GREEN_NAMESPACE
 spec:
   podSelector: {}
   policyTypes:
