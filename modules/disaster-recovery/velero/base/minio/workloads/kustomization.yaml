@@ -18,27 +18,27 @@ secretGenerator:
   type: Opaque
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=minio].ports.[name=server].containerPort
+    fieldPath: spec.template.spec.containers.[name=minio].ports.[name=server].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.egress.0.ports.0.port
-    - .spec.ingress.0.ports.0.port
-    - .spec.ingress.1.ports.0.port
+    - spec.egress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
+    - spec.ingress.1.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-minio
   - fieldPaths:
-    - .spec.egress.0.ports.0.port
+    - spec.egress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-velero-minio-egress
   - fieldPaths:
-    - .spec.config.s3Url
+    - spec.config.s3Url
     options:
       create: true
       delimiter: ':'

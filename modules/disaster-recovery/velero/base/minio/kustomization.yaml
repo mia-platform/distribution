@@ -2,9 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 images:
 - name: docker.io/minio/minio
-  newTag: RELEASE.2024-06-06T09-36-42Z@sha256:c97dbb0238dbd650ebe3f57dda68984993f466abad70d36c6e3ca306ceec3f58
+  newTag: RELEASE.2024-07-15T19-02-30Z@sha256:235d4bd2a97e87c76d404d44661a2ebe210455a77f90483c08af11eca869c0c7
 - name: docker.io/minio/mc
-  newTag: RELEASE.2024-06-05T18-13-30Z@sha256:cd77c896735aab95fe58aa0963798c7c230476f713b92b5b59d0599d8ab4aa3d
+  newTag: RELEASE.2024-07-15T17-46-06Z@sha256:44a1f0cc79ebd05e002b2849962bbd285f6ed8fe1fe1a24450472e0c7d55c0e9
 - name: docker.io/velero/velero-plugin-for-aws
   newTag: v1.8.2@sha256:edfb14403fc4ee45ac99f34930125869a06465c44ffacaf57e351e477e2c6b53
 resources:
@@ -18,18 +18,18 @@ secretGenerator:
   type: Opaque
 replacements:
 - source:
-    fieldPath: .metadata.namespace
+    fieldPath: metadata.namespace
     kind: Deployment
     name: velero
   targets:
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
       labelSelector: app.kubernetes.io/name=minio
   - fieldPaths:
-    - .metadata.namespace
+    - metadata.namespace
     options:
       create: true
     select:
