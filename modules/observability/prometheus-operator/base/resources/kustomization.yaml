@@ -13,9 +13,9 @@ images:
 - name: quay.io/prometheus-operator/admission-webhook
   newTag: v0.70.0@sha256:cf308bb8a33689c5b0eda47f592e2b550050e3efb3c47e23f2e6c03c6351c28f
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v20231226-1a7112e06@sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084
+  newTag: v1.4.1@sha256:36d05b4077fb8e3d13663702fa337f124675ba8667cbd949c03a8e8ea6fa4366
 - name: quay.io/prometheus/node-exporter
-  newTag: v1.8.1@sha256:fa7fa12a57eff607176d5c363d8bb08dfbf636b36ac3cb5613a202f3c61a6631
+  newTag: v1.8.2@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
 - name: registry.k8s.io/kube-state-metrics/kube-state-metrics
   newTag: v2.10.1@sha256:af8220f534938de121a694cb7314313a6195c9d494fc30bfa6885b08a276bb82
 resources:
