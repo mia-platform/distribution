@@ -5,31 +5,31 @@ resources:
 - services.yaml
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=web].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=web].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=traefik].env.[name=HTTP_PORT].value
+    - spec.template.spec.containers.[name=traefik].env.[name=HTTP_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=websecure].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=websecure].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=traefik].env.[name=HTTPS_PORT].value
+    - spec.template.spec.containers.[name=traefik].env.[name=HTTPS_PORT].value
     options:
       create: true
     select:
       kind: Deployment
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=traefik].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.template.spec.containers.[name=traefik].env.[name=METRICS_PORT].value
+    - spec.template.spec.containers.[name=traefik].env.[name=METRICS_PORT].value
     options:
       create: true
     select:

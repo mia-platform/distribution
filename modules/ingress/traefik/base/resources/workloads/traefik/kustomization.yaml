@@ -11,24 +11,24 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=web].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=web].containerPort
     kind: Deployment
     name: traefik
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
+    - spec.ingress.0.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-traefik
 - source:
-    fieldPath: .spec.template.spec.containers.[name=traefik].ports.[name=websecure].containerPort
+    fieldPath: spec.template.spec.containers.[name=traefik].ports.[name=websecure].containerPort
     kind: Deployment
     name: traefik
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.1.port
+    - spec.ingress.0.ports.1.port
     options:
       create: true
     select:
