@@ -4,19 +4,19 @@ name: eks-installation
 spec:
   modules:
     cni/cilium/eks:
-      version: v1.27.5
+      version: v1.27.6
     disaster-recovery/velero/base:
-      version: v1.27.3
-    ingress/traefik/eks:
       version: v1.27.4
+    ingress/traefik/eks:
+      version: v1.27.5
     observability/logging-operator/base:
       version: v1.27.1
     observability/metrics-server/base:
       version: v1.27.2
     observability/prometheus-operator/base:
-      version: v1.27.4
+      version: v1.27.5
     scheduling/kube-green/base:
-      version: v1.27.3
+      version: v1.27.4
     security/cert-manager/base:
       version: v1.27.3
     security/kyverno/base:
