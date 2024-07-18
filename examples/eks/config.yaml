@@ -25,29 +25,29 @@ spec:
       version: v1.28.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
-      version: v1.0.1
+      version: v1.0.2
     cert-manager/prometheus-operator-webhook-certificate:
-      version: v2.0.1
+      version: v2.0.2
     logging-operator/logging-stack:
-      version: v2.0.2
+      version: v2.0.3
     prometheus-operator/cert-manager:
-      version: v1.0.3
+      version: v1.0.4
     prometheus-operator/kube-green:
-      version: v1.0.3
+      version: v1.0.4
     prometheus-operator/kyverno:
-      version: v2.0.2
+      version: v2.0.3
     prometheus-operator/logging-operator:
-      version: v1.0.2
-    prometheus-operator/logging-stack:
-      version: v2.0.2
-    prometheus-operator/monitoring-stack:
-      version: v2.1.4
-    prometheus-operator/rbac-manager:
       version: v1.0.3
+    prometheus-operator/logging-stack:
+      version: v2.0.3
+    prometheus-operator/monitoring-stack:
+      version: v2.1.5
+    prometheus-operator/rbac-manager:
+      version: v1.0.4
     prometheus-operator/traefik:
-      version: v1.0.2
+      version: v1.0.3
     prometheus-operator/velero:
-      version: v1.0.2
+      version: v1.0.3
   groups:
   - name: eks-installation
     clusters:
