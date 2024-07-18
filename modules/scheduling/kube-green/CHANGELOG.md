@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - kube-green now bind the pod ip and not all network interfaces for their metrics and probes endpoints
 
+## v1.27.4
+
+### Changed
+
+- update kube-webhook-certgen to v1.4.1
+
 ## v1.27.3
 
 ### Fixed

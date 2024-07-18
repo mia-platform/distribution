@@ -47,6 +47,12 @@ WARNING: Do not use this version, because it will not build correctly
 - update prometheus to v2.51.1
 - update alertmanager to v0.27.0
 
+## v2.0.3
+
+### Fixed
+
+- namespace replacement failed in some edge cases
+
 ## v2.0.2
 
 ### Fixed

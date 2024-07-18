@@ -35,6 +35,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update dex to 2.39.1
 - kube-oidc-proxy server now bind the pod ip and not all network interfaces
 
+## v1.27.5
+
+### Changed
+
+- update oidc-proxy to 1.0.6-89eb8d
+- update kube-webhook-certgen to 1.4.1
+
 ## v1.27.4
 
 ### Changed

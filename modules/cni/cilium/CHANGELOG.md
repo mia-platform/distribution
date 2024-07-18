@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - update cilium to v1.15.3
 
+## v1.27.6
+
+### Changed
+
+- update cilium to v1.14.13
+
 ## v1.27.5
 
 ### Changed

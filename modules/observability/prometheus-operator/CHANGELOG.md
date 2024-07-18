@@ -38,6 +38,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - prometheus-operator-webhook now bind the pod ip and not all network interfaces
 - kube-state-metrcis now bind the pod ip and not all network interfaces
 
+## v1.27.5
+
+### Changed
+
+- update node-exporter to 1.8.2
+- update kube-webhook-certgen to v1.4.1
+
 ## v1.27.4
 
 ### Changed

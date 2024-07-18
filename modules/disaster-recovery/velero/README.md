@@ -73,6 +73,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.27.1         | 1.12.3 | RELEASE.2024-02-14T21-36-02Z | RELEASE.2023-12-14T00-37-41Z | 1.8.2      |
 | 1.27.2         | 1.12.4 | RELEASE.2024-04-06T05-26-02Z | RELEASE.2024-03-30T15-29-52Z | 1.8.2      |
 | 1.27.3         | 1.12.4 | RELEASE.2024-06-06T09-36-42Z | RELEASE.2024-06-05T18-13-30Z | 1.8.2      |
+| 1.27.4         | 1.12.4 | RELEASE.2024-07-15T19-02-30Z | RELEASE.2024-07-15T17-46-06Z | 1.8.2      |
 | 1.28.0         | 1.13.2 | RELEASE.2024-04-06T05-26-02Z | RELEASE.2024-03-30T15-29-52Z | 1.9.2      |
 | 1.28.1         | 1.13.2 | RELEASE.2024-04-28T17-53-50Z | RELEASE.2024-04-29T09-56-05Z | 1.9.2      |
 | 1.28.2         | 1.13.2 | RELEASE.2024-06-04T19-20-08Z | RELEASE.2024-06-05T18-13-30Z | 1.9.2      |
@@ -101,6 +102,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.27.1         | 1.12.3 | 1.8.2      |
 | 1.27.2         | 1.12.4 | 1.8.2      |
 | 1.27.3         | 1.12.4 | 1.8.2      |
+| 1.27.4         | 1.12.4 | 1.8.2      |
 | 1.28.x         | 1.13.2 | 1.9.1      |
 
 ## User Customization

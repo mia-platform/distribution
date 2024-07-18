@@ -45,6 +45,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	promote its use by default
 - velero server now bind the pod ip and not all network interfaces
 
+## v1.27.4
+
+### Changed
+
+- update minio and minio config version to latest releases
+
 ## v1.27.3
 
 ### Changed
