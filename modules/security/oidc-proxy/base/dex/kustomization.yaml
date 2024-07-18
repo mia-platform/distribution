@@ -5,7 +5,7 @@ images:
 - name: ghcr.io/dexidp/dex
   newTag: v2.40.0@sha256:3e35d5d0f7dbd33fbadc36a71ff58cf4097ab98d73d22f6cb9a6471a32e028af
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v20231226-1a7112e06@sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084
+  newTag: v1.4.1@sha256:36d05b4077fb8e3d13663702fa337f124675ba8667cbd949c03a8e8ea6fa4366
 resources:
 - workloads
 secretGenerator:
@@ -19,19 +19,19 @@ patches:
 - path: patches/oidc-proxy.yaml
 replacements:
 - source:
-    fieldPath: .spec.selector
+    fieldPath: spec.selector
     kind: Deployment
     name: oidc-proxy
   targets:
   - fieldPaths:
-    - .spec.ingress.0.from.0.podSelector
+    - spec.ingress.0.from.0.podSelector
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-dex
   - fieldPaths:
-    - .spec.podSelector
+    - spec.podSelector
     options:
       create: true
     select:

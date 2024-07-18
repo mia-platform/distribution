@@ -12,19 +12,19 @@ resources:
 - workloads
 replacements:
 - source:
-    fieldPath: .spec.template.spec.containers.[name=dex].ports.[name=controller].containerPort
+    fieldPath: spec.template.spec.containers.[name=dex].ports.[name=controller].containerPort
     kind: Deployment
   targets:
   - fieldPaths:
-    - .spec.ingress.0.ports.0.port
-    - .spec.ingress.1.ports.0.port
+    - spec.ingress.0.ports.0.port
+    - spec.ingress.1.ports.0.port
     options:
       create: true
     select:
       kind: NetworkPolicy
       name: allow-dex
   - fieldPaths:
-    - .spec.egress.0.ports.0.port
+    - spec.egress.0.ports.0.port
     options:
       create: true
     select:
