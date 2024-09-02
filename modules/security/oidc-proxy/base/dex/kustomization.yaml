@@ -3,11 +3,11 @@ kind: Component
 namespace: oidc-proxy-system
 images:
 - name: ghcr.io/dexidp/dex
-  newTag: v2.40.0
-  digest: sha256:3e35d5d0f7dbd33fbadc36a71ff58cf4097ab98d73d22f6cb9a6471a32e028af
+  newTag: v2.41.1
+  digest: sha256:bc7cfce7c17f52864e2bb2a4dc1d2f86a41e3019f6d42e81d92a301fad0c8a1d
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v1.4.1
-  digest: sha256:36d05b4077fb8e3d13663702fa337f124675ba8667cbd949c03a8e8ea6fa4366
+  newTag: v1.4.3
+  digest: sha256:a320a50cc91bd15fd2d6fa6de58bd98c1bd64b9a6f926ce23a600d87043455a3
 resources:
 - workloads
 secretGenerator:
