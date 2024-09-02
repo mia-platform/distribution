@@ -78,6 +78,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.28.1         | 1.13.2 | RELEASE.2024-04-28T17-53-50Z | RELEASE.2024-04-29T09-56-05Z | 1.9.2      |
 | 1.28.2         | 1.13.2 | RELEASE.2024-06-04T19-20-08Z | RELEASE.2024-06-05T18-13-30Z | 1.9.2      |
 | 1.28.3         | 1.13.2 | RELEASE.2024-07-15T19-02-30Z | RELEASE.2024-07-15T17-46-06Z | 1.9.2      |
+| 1.28.4         | 1.13.2 | RELEASE.2024-08-29T01-40-52Z | RELEASE.2024-08-26T10-49-58Z | 1.9.2      |
 
 ### AWS Storage Flavor
 
