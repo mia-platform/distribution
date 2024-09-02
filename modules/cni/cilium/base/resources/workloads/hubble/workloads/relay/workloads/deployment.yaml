@@ -37,7 +37,10 @@ spec:
         readinessProbe:
           grpc:
             port: 4222
-          timeoutSeconds: 3
+          timeoutSeconds: 10
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 12
         livenessProbe:
           grpc:
             port: 4222
@@ -46,7 +49,7 @@ spec:
           # give the relay one minute to start up
           grpc:
             port: 4222
-          timeoutSeconds: 3
+          initialDelaySeconds: 10
           failureThreshold: 20
           periodSeconds: 3
         volumeMounts:
