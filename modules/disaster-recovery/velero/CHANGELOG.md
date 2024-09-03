@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update velero to 1.14.1
+- update velero plugins for Azure and AWS to 1.10.1
+- update velero plugin for GCP to 1.10.1
+- update velero plugin for Microsoft Azure Storage to 1.10.1
+
 ## v1.28.4
 
 ### Changed

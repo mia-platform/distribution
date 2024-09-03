@@ -79,18 +79,21 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.28.2         | 1.13.2 | RELEASE.2024-06-04T19-20-08Z | RELEASE.2024-06-05T18-13-30Z | 1.9.2      |
 | 1.28.3         | 1.13.2 | RELEASE.2024-07-15T19-02-30Z | RELEASE.2024-07-15T17-46-06Z | 1.9.2      |
 | 1.28.4         | 1.13.2 | RELEASE.2024-08-29T01-40-52Z | RELEASE.2024-08-26T10-49-58Z | 1.9.2      |
+| 1.29.x         | 1.14.1 | RELEASE.2024-08-29T01-40-52Z | RELEASE.2024-08-26T10-49-58Z | 1.10.1     |
 
 ### AWS Storage Flavor
 
 | Module Version | Velero | AWS Plugin |
 |----------------|--------|------------|
 | 1.28.x         | 1.13.2 | 1.9.2      |
+| 1.29.x         | 1.14.1 | 1.10.1     |
 
 ### Azure Storage Flavor
 
 | Module Version | Velero | Azure Plugin |
 |----------------|--------|--------------|
 | 1.28.x         | 1.13.2 | 1.9.2        |
+| 1.29.x         | 1.14.1 | 1.10.1       |
 
 ### GCP Storage Flavor
 
@@ -105,6 +108,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.27.3         | 1.12.4 | 1.8.2      |
 | 1.27.4         | 1.12.4 | 1.8.2      |
 | 1.28.x         | 1.13.2 | 1.9.1      |
+| 1.29.x         | 1.14.1 | 1.10.1     |
 
 ## User Customization
 
@@ -123,9 +127,13 @@ The AWS storage flavor will not create any resource for setting up backups with 
 configuration to the end user, and it will also need further configurations for setting up the authorization between
 velero and the AWS APIs.
 
-By default the flavor will setup velero to work with [IAM Roles for Service Accounts], and we suggest you to
-setup your GKE cluster to work with it if possible. You then will have to add the `eks.amazonaws.com/role-arn`
-annotation to the `velero` `ServiceAccount` with the arn of the role that you have created folling the AWS guide.
+By default the flavor will setup velero to work with [IAM Roles for Service Accounts] or [EKS Pod Identity],
+and we suggest you to setup your AWS cluster to work with one of these methods if possible.
+
+For IAM Roles for Service Accounts you will have to add the `eks.amazonaws.com/role-arn` annotation to the
+`velero` `ServiceAccount` with the arn of the role that you have created folling the AWS guide.  
+If you use the EKS Pod Identity instead you don't have to set anything on the resources and you need to follow
+the instructions for adding permisions to the `velero` `ServiceAccount` for the `dr-system` namespace.
 
 The minimal IAM Policy to assign the to service account is the following:
 
@@ -248,5 +256,6 @@ iam.serviceAccounts.signBlob
 
 [Here is the link to the official repository]: https://github.com/vmware-tanzu/velero "Velero GitHub Repository"
 [IAM Roles for Service Accounts]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html "EKS IAM Roles for Service Accounts official documentation"
+[EKS Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html "EKS Pod Identity official documentation"
 [Microsoft Entra Workload ID]: https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview "Microsoft Entra Workload ID with Azure Kubernetes Service official documentation"
 [Workload Identity Federation for GKE]: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity "Authenticate to Google Cloud APIs from GKE workloads"

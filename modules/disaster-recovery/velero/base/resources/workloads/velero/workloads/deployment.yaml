@@ -7,10 +7,7 @@ spec:
   selector:
     matchLabels: {}
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 50%
-      maxUnavailable: 0
+    type: Recreate
   minReadySeconds: 0
   template:
     spec:
@@ -33,6 +30,7 @@ spec:
         - --uploader-type=kopia
         - --metrics-address=$(POD_IP):$(METRICS_PORT)
         - --profiler-address=localhost:$(PROFILER_PORT)
+        - --keep-latest-maintenance-jobs=$(MAINTENANCE_JOBS_NUMBER)
         env:
         - name: VELERO_SCRATCH_DIR
           value: /scratch
@@ -51,6 +49,8 @@ spec:
           value: PORT
         - name: PROFILER_PORT
           value: PORT
+        - name: MAINTENANCE_JOBS_NUMBER
+          value: "3"
         ports:
         - name: metrics
           containerPort: 11270
