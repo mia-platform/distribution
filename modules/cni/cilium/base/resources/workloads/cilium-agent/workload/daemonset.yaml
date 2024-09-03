@@ -337,6 +337,10 @@ spec:
           containerPort: 9964
           hostPort: 9964
           protocol: TCP
+        - name: envoy-admin
+          containerPort: 9901
+          hostPort: 9901
+          protocol: TCP
         - name: hubble-metrics
           containerPort: 9965
           hostPort: 9965
@@ -497,6 +501,16 @@ spec:
                 path: common-etcd-client.crt
               - key: ca.crt
                 path: common-etcd-client-ca.crt
+          - secret:
+            name: clustermesh-apiserver-local-cert
+            optional: true
+            items:
+            - key: tls.key
+              path: local-etcd-client.key
+            - key: tls.crt
+              path: local-etcd-client.crt
+            - key: ca.crt
+              path: local-etcd-client-ca.crt
       - name: lib-modules
         hostPath:
           path: /lib/modules
