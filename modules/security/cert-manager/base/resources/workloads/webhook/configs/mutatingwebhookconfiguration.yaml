@@ -7,18 +7,16 @@ webhooks:
   rules:
   - apiGroups:
     - cert-manager.io
-    - acme.cert-manager.io
     apiVersions:
     - v1
     operations:
     - CREATE
-    - UPDATE
     resources:
-    - "*/*"
+    - certificaterequests
   admissionReviewVersions:
   - v1
   matchPolicy: Equivalent
-  timeoutSeconds: 10
+  timeoutSeconds: 30
   failurePolicy: Fail
   sideEffects: None
   clientConfig:

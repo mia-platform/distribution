@@ -30,6 +30,7 @@ spec:
         - --v=2
         - --logging-format=json
         - --leader-elect
+        - --enable-gateway-api
         - --metrics-listen-address=$(POD_IP):$(METRICS_PORT)
         - --leader-election-namespace=$(POD_NAMESPACE)
         - --cluster-resource-namespace=$(POD_NAMESPACE)
