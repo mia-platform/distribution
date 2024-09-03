@@ -71,24 +71,29 @@ spec:
         - --v=2
         - --caSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-ca
         - --tlsSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-pair
-        - --backgroundServiceAccountName=system:serviceaccount:kyverno-system:kyverno-background
+        - --backgroundServiceAccountName=system:serviceaccount:$(KYVERNO_NAMESPACE):kyverno-background
         - --exceptionNamespace=$(KYVERNO_NAMESPACE)
         - --admissionReports=true
+        - --maxAdmissionReports=1000
         - --autoUpdateWebhooks=true
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
         - --dumpPayload=false
         - --forceFailurePolicyIgnore=false
         - --generateValidatingAdmissionPolicy=false
+        - --maxAPICallResponseLength=2000000
         - --enablePolicyException=true
         - --protectManagedResources=false
         - --allowInsecureRegistry=false
         - --registryCredentialHelpers=default,google,amazon,azure,github
+        - --webhookServerPort=$(CONTROLLER_PORT)
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
         env:
+        - name: CONTROLLER_PORT
+          value: PORT
         - name: METRICS_PORT
           value: PORT
         - name: PROFILE_ENABLED
@@ -116,7 +121,7 @@ spec:
         - name: TUF_ROOT
           value: /.sigstore
         ports:
-        - containerPort: 9443
+        - containerPort: 11218
           name: controller
           protocol: TCP
         - containerPort: 11210

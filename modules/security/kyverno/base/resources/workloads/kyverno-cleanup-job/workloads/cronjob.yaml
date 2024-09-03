@@ -29,6 +29,7 @@ spec:
             - /bin/sh
             - -c
             - |
+              set -euo pipefail
               COUNT=$(kubectl get admissionreports.kyverno.io -A | wc -l)
               if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
                 echo "too many reports found ($COUNT), cleaning up..."
@@ -42,6 +43,27 @@ spec:
                 kubectl delete clusteradmissionreports.kyverno.io -A -l='!audit.kyverno.io/report.aggregate'
               else
                 echo "($COUNT) cluster reports found, no clean up needed"
+              fi
+              COUNT=$(kubectl get clusterephemeralreports.reports.kyverno.io -A | wc -l)
+              if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
+                echo "too many clusterephemeralreports found ($COUNT), cleaning up..."
+                kubectl delete clusterephemeralreports.reports.kyverno.io -A --all
+              else
+                echo "($COUNT) reports found, no clean up needed"
+              fi
+              COUNT=$(kubectl get ephemeralreports.reports.kyverno.io -A | wc -l)
+              if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
+                echo "too many ephemeralreports found ($COUNT), cleaning up..."
+                kubectl delete ephemeralreports.reports.kyverno.io -A --all
+              else
+                echo "($COUNT) reports found, no clean up needed"
+              fi
+              COUNT=$(kubectl get updaterequests.kyverno.io -A | wc -l)
+              if [ "$COUNT" -gt $(MAX_REPORTS_COUNT) ]; then
+                echo "too many updaterequests found ($COUNT), cleaning up..."
+                kubectl delete updaterequests.kyverno.io --all -n kyverno
+              else
+                echo "($COUNT) reports found, no clean up needed"
               fi
             env:
             - name: MAX_REPORTS_COUNT

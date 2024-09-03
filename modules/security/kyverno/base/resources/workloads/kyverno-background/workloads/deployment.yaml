@@ -31,7 +31,10 @@ spec:
         - --v=2
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
+        - --maxAPICallResponseLength=2000000
+        - --omitEvents=PolicyApplied,PolicySkipped
         - --enablePolicyException=true
+        - --otelConfig=prometheus
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)

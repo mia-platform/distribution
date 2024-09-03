@@ -48,3 +48,13 @@ rules:
   - delete
   - patch
   - update
+- apiGroups:
+  - reports.kyverno.io
+  resources:
+  - ephemeralreports
+  - clusterephemeralreports
+  verbs:
+  - create
+  - delete
+  - patch
+  - update

@@ -7,8 +7,11 @@ resources:
 - clusteradmissionreports.kyverno.io.yaml
 - clusterbackgroundscanreports.kyverno.io.yaml
 - clustercleanuppolicies.kyverno.io.yaml
+- clusterephemeralreports.reports.kyverno.io.yaml
 - clusterpolicies.kyverno.io.yaml
 - clusterpolicyreports.wgpolicyk8s.io.yaml
+- ephemeralreports.reports.kyverno.io.yaml
+- globalcontextentries.kyverno.io.yaml
 - policies.kyverno.io.yaml
 - policyexceptions.kyverno.io.yaml
 - policyreports.wgpolicyk8s.io.yaml

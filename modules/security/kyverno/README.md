@@ -67,14 +67,14 @@ The module will install all its component inside the `kyverno-system` namespace 
 default **ports**:
 
 - kyverno-admission:
-  - **9443** it cannot be changed for now and is the port that expose the webhook functionality
+  - **11218** expose the webhook functionality
   - **11210** expose the metrics for the service
   - **11211** expose the profile information for the service
 - kyverno-background:
   - **11214** expose the metrics for the service
   - **11215** expose the profile information for the service
 - kyverno-cleanup:
-  - **9443** it cannot be changed for now and is the port that expose the webhook functionality
+  - **11219**expose the webhook functionality
   - **11212** expose the metrics for the service
   - **11213** expose the profile information for the service
 - kyverno-reports:
@@ -103,6 +103,7 @@ This module use the following user, gid and fsGroup:
 | 1.27.2         | 1.11.5         |
 | 1.28.0         | 1.11.4         |
 | 1.28.1         | 1.11.5         |
+| 1.29.x         | 1.12.5         |
 
 ## User customization
 
