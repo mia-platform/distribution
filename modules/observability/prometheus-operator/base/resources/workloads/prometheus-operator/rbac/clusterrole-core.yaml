@@ -25,20 +25,20 @@ rules:
   - probes
   - prometheusrules
   verbs:
-  - "*"
+  - '*'
 - apiGroups:
   - apps
   resources:
   - statefulsets
   verbs:
-  - "*"
+  - '*'
 - apiGroups:
   - ""
   resources:
   - configmaps
   - secrets
   verbs:
-  - "*"
+  - '*'
 - apiGroups:
   - ""
   resources:
@@ -93,15 +93,3 @@ rules:
   - storageclasses
   verbs:
   - get
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
