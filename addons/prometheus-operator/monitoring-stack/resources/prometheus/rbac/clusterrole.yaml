@@ -6,12 +6,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - nodes/metrics
-  verbs:
-  - get
-- apiGroups:
-  - ""
-  resources:
   - services
   - endpoints
   - pods
@@ -21,6 +15,13 @@ rules:
   - watch
 - apiGroups:
   - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - networking.k8s.io
   resources:
   - ingresses
@@ -28,8 +29,15 @@ rules:
   - get
   - list
   - watch
+- apiGroups:
+  - ""
+  resources:
+  - nodes/metrics
+  verbs:
+  - get
 - nonResourceURLs:
   - /metrics
   - /metrics/cadvisor
+  - /metrics/slis
   verbs:
   - get
