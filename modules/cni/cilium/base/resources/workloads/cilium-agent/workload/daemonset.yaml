@@ -502,15 +502,15 @@ spec:
               - key: ca.crt
                 path: common-etcd-client-ca.crt
           - secret:
-            name: clustermesh-apiserver-local-cert
-            optional: true
-            items:
-            - key: tls.key
-              path: local-etcd-client.key
-            - key: tls.crt
-              path: local-etcd-client.crt
-            - key: ca.crt
-              path: local-etcd-client-ca.crt
+              name: clustermesh-apiserver-local-cert
+              optional: true
+              items:
+              - key: tls.key
+                path: local-etcd-client.key
+              - key: tls.crt
+                path: local-etcd-client.crt
+              - key: ca.crt
+                path: local-etcd-client-ca.crt
       - name: lib-modules
         hostPath:
           path: /lib/modules

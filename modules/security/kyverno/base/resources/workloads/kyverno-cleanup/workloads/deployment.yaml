@@ -47,6 +47,8 @@ spec:
         env:
         - name: METRICS_PORT
           value: PORT
+        - name: CONTROLLER_PORT
+          value: PORT
         - name: PROFILE_ENABLED
           value: "false"
         - name: PROFILE_PORT

@@ -33,7 +33,7 @@ spec:
             - --ca-reuse-secret
             - --ca-secret-namespace=$(CILIUM_K8S_NAMESPACE)
             - --ca-secret-name=cilium-ca
-            - --ca-common.name=Cilium CA
+            - --ca-common-name=Cilium CA
             env:
             - name: CILIUM_K8S_NAMESPACE
               valueFrom:
