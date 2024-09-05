@@ -108,6 +108,8 @@ spec:
               fieldPath: metadata.namespace
         - name: WEBHOOK_PORT
           value: PORT
+        - name: GOGC
+          value: "30"
         ports:
         - name: webhook
           containerPort: 11264

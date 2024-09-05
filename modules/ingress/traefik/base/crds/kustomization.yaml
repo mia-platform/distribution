@@ -1,21 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ingressroutes.traefik.containo.us.yaml
+- gatewayclasses.gateway.networking.k8s.io.yaml
+- gateways.gateway.networking.k8s.io.yaml
+- grpcroutes.gateway.networking.k8s.io.yaml
+- httproutes.gateway.networking.k8s.io.yaml
 - ingressroutes.traefik.io.yaml
-- ingressroutetcps.traefik.containo.us.yaml
 - ingressroutetcps.traefik.io.yaml
-- ingressrouteudps.traefik.containo.us.yaml
 - ingressrouteudps.traefik.io.yaml
-- middlewares.traefik.containo.us.yaml
 - middlewares.traefik.io.yaml
-- middlewaretcps.traefik.containo.us.yaml
 - middlewaretcps.traefik.io.yaml
-- serverstransports.traefik.containo.us.yaml
+- referencegrants.gateway.networking.k8s.io.yaml
 - serverstransports.traefik.io.yaml
-- tlsoptions.traefik.containo.us.yaml
+- serverstransporttcps.traefik.io.yaml
 - tlsoptions.traefik.io.yaml
-- tlsstores.traefik.containo.us.yaml
 - tlsstores.traefik.io.yaml
-- traefikservices.traefik.containo.us.yaml
 - traefikservices.traefik.io.yaml

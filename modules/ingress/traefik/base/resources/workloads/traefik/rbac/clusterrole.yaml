@@ -4,7 +4,37 @@ metadata:
   name: mia-platform:traefik
 rules:
 - apiGroups:
-  - extensions
+  - ""
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - networking.k8s.io
   resources:
   - ingressclasses
@@ -14,17 +44,6 @@ rules:
   - list
   - watch
 - apiGroups:
-  - ""
-  resources:
-  - services
-  - endpoints
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - extensions
   - networking.k8s.io
   resources:
   - ingresses/status
@@ -32,17 +51,17 @@ rules:
   - update
 - apiGroups:
   - traefik.io
-  - traefik.containo.us
   resources:
   - ingressroutes
   - ingressroutetcps
   - ingressrouteudps
   - middlewares
   - middlewaretcps
+  - serverstransports
+  - serverstransporttcps
   - tlsoptions
   - tlsstores
   - traefikservices
-  - serverstransports
   verbs:
   - get
   - list
@@ -51,6 +70,16 @@ rules:
   - ""
   resources:
   - namespaces
+  - secrets
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
   verbs:
   - list
   - watch
@@ -59,7 +88,9 @@ rules:
   resources:
   - gatewayclasses
   - gateways
+  - grpcroutes
   - httproutes
+  - referencegrants
   - tcproutes
   - tlsroutes
   verbs:
@@ -71,6 +102,7 @@ rules:
   resources:
   - gatewayclasses/status
   - gateways/status
+  - grpcroutes/status
   - httproutes/status
   - tcproutes/status
   - tlsroutes/status

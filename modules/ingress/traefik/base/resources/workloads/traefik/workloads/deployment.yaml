@@ -36,10 +36,15 @@ spec:
         - --providers.providersthrottleduration=60s
         - --providers.kubernetescrd
         - --providers.kubernetescrd.allowcrossnamespace=true
+        - --providers.kubernetescrd.allowemptyservices=true
         - --providers.kubernetescrd.allowexternalnameservices=false
+        - --providers.kubernetescrd.nativelbbydefault=true
+        - --providers.kubernetesgateway
         - --providers.kubernetesingress
         - --providers.kubernetesingress.ingressclass=traefik
+        - --providers.kubernetesingress.allowemptyservices=true
         - --providers.kubernetesingress.allowexternalnameservices=false
+        - --providers.kubernetesingress.nativelbbydefault=true
         - --entryPoints.traefik.address=$(POD_IP):$(METRICS_PORT)/tcp
         - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
@@ -53,6 +58,7 @@ spec:
         - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
+        - --entryPoints.websecure.http3
         - --metrics.prometheus
         - --metrics.prometheus.entrypoint=traefik
         env:
@@ -60,6 +66,14 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: LOG_LEVEL
           value: WARN
         - name: HTTP_PORT
@@ -75,6 +89,9 @@ spec:
         - name: websecure
           containerPort: 11241
           protocol: TCP
+        - name: websecure-http3
+          containerPort: 11241
+          protocol: UDP
         - name: traefik
           containerPort: 11242
           protocol: TCP

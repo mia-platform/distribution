@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - dashboard.yaml
 - ingressclass.yaml
+- gatewayclass.yaml
 - networkpolicy.yaml
 - poddistruptionbudget.yaml

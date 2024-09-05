@@ -5,6 +5,16 @@ resources:
 - service.yaml
 replacements:
 - source:
+    fieldPath: spec.template.spec.containers.[name=kyverno].ports.[name=controller].containerPort
+    kind: Deployment
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.[name=kyverno].env.[name=CONTROLLER_PORT].value
+    options:
+      create: true
+    select:
+      kind: Deployment
+- source:
     fieldPath: spec.template.spec.containers.[name=kyverno].ports.[name=metrics].containerPort
     kind: Deployment
   targets:

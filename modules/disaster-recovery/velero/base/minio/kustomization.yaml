@@ -8,8 +8,8 @@ images:
   newTag: RELEASE.2024-08-26T10-49-58Z
   digest: sha256:6db9bca7071f35d90a40e08fdd83c02ad087febf69e5fbc68d16e654ddae07e6
 - name: docker.io/velero/velero-plugin-for-aws
-  newTag: v1.9.2
-  digest: sha256:c7f801bda8c89c1277377b8d07394da71de949246edf7b57988772c569d6f50d
+  newTag: v1.10.1
+  digest: sha256:fdf710a65c6ead48b1018cda19360943abe17ca8c3e9ef5ab7be73a63b99a6d3
 resources:
 - workloads
 patches:

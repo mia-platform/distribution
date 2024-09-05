@@ -35,13 +35,19 @@ spec:
         - --enableDeferredLoading=true
         - --dumpPayload=false
         - --enableConfigMapCaching=true
+        - --maxAPICallResponseLength=2000000
+        - --protectManagedResources=false
         - --ttlReconciliationInterval=1m
+        - --cleanupServerPort=$(CONTROLLER_PORT)
+        - --webhookServerPort=$(CONTROLLER_PORT)
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
         env:
         - name: METRICS_PORT
+          value: PORT
+        - name: CONTROLLER_PORT
           value: PORT
         - name: PROFILE_ENABLED
           value: "false"
@@ -66,7 +72,7 @@ spec:
         - name: KYVERNO_SVC
           value: default
         ports:
-        - containerPort: 9443
+        - containerPort: 11219
           name: controller
           protocol: TCP
         - containerPort: 11212

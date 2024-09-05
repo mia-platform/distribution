@@ -5,4 +5,4 @@ metadata:
     ingressclass.kubernetes.io/is-default-class: "false"
   name: traefik
 spec:
-  controller: traefik.io/traefik
+  controller: traefik.io/ingress-controller

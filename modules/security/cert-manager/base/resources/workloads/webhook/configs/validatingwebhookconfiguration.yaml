@@ -2,8 +2,6 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
-  annotations:
-    cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
 webhooks:
 - name: webhook.cert-manager.io
   namespaceSelector:
@@ -26,7 +24,7 @@ webhooks:
   admissionReviewVersions:
   - v1
   matchPolicy: Equivalent
-  timeoutSeconds: 10
+  timeoutSeconds: 30
   failurePolicy: Fail
   sideEffects: None
   clientConfig:

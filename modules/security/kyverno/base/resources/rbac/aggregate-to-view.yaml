@@ -37,6 +37,15 @@ rules:
   - list
   - watch
 - apiGroups:
+  - reports.kyverno.io
+  resources:
+  - ephemeralreports
+  - clusterephemeralreports
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - kyverno.io
   resources:
   - updaterequests

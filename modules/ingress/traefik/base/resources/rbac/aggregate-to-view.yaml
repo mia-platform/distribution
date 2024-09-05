@@ -6,7 +6,6 @@ metadata:
     rbac.authorization.k8s.io/aggregate-to-view: "true"
 rules:
 - apiGroups:
-  - traefik.containo.us
   - traefik.io
   resources:
   - ingressroutes
@@ -15,9 +14,21 @@ rules:
   - middlewares
   - middlewaretcps
   - serverstransports
+  - serverstransporttcps
   - tlsoptions
   - tlsstores
   - traefikservices
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - gateway.networking.k8s.io
+  resources:
+  - gateways
+  - grpcroutes
+  - httproutes
+  - referencegrants
   verbs:
   - get
   - list

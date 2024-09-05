@@ -39,9 +39,11 @@ spec:
         - --skipResourceFilters=true
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
+        - --maxAPICallResponseLength=2000000
         - --allowInsecureRegistry=false
         - --enablePolicyException=true
-        - --reportsChunkSize=1000
+        - --omitEvents=PolicyApplied,PolicySkipped
+        - --reportsChunkSize=0
         - --registryCredentialHelpers=default,google,amazon,azure,github
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus

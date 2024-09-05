@@ -29,22 +29,40 @@ spec:
             command:
             - /usr/bin/cilium-certgen
             args:
-            - --cilium-namespace=$(CILIUM_K8S_NAMESPACE)
             - --ca-generate
             - --ca-reuse-secret
-            - --hubble-server-cert-generate
-            - --hubble-server-cert-common-name=*.default.hubble-grpc.cilium.io
-            - --hubble-server-cert-validity-duration=$(CERTIFICATE_VALIDITY)
-            - --hubble-relay-client-cert-generate
-            - --hubble-relay-client-cert-validity-duration=$(CERTIFICATE_VALIDITY)
+            - --ca-secret-namespace=$(CILIUM_K8S_NAMESPACE)
+            - --ca-secret-name=cilium-ca
+            - --ca-common-name=Cilium CA
             env:
-              - name: CILIUM_K8S_NAMESPACE
-                valueFrom:
-                  fieldRef:
-                    apiVersion: v1
-                    fieldPath: metadata.namespace
-              - name: CERTIFICATE_VALIDITY
-                value: 94608000s
+            - name: CILIUM_K8S_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: CILIUM_CERTGEN_CONFIG
+              value: |
+                certs:
+                - name: hubble-server-certs
+                  namespace: kube-system
+                  commonName: "*.default.hubble-grpc.cilium.io"
+                  hosts:
+                  - "*.default.hubble-grpc.cilium.io"
+                  usage:
+                  - signing
+                  - key encipherment
+                  - server auth
+                  validity: 26280h
+                - name: hubble-relay-client-certs
+                  namespace: kube-system
+                  commonName: "*.hubble-relay.cilium.io"
+                  hosts:
+                  - "*.hubble-relay.cilium.io"
+                  usage:
+                  - signing
+                  - key encipherment
+                  - client auth
+                  validity: 26280h
             volumeMounts:
             - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
               name: serviceaccount-token

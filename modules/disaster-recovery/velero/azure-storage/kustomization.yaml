@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: docker.io/velero/velero-plugin-for-microsoft-azure
-  newTag: v1.9.2
-  digest: sha256:8cd145b5740a5c6a07b699d41cc03645ff0435994293149e586cfdd2f35cde55
+  newTag: v1.10.1
+  digest: sha256:7e3661a0c3037c1a07ff4b17ee81fad5948f37bb6472b6ad0aa60985318b1e6f
 resources:
 - ../base/crds
 - ../base/resources

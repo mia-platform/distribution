@@ -1,3 +1,4 @@
+upgradeCompatibility: "1.14"
 cni:
   chainingMode: portmap
 sessionAffinity: true
