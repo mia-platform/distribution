@@ -26,7 +26,7 @@ spec:
           - name: cleanup
             image: docker.io/bitnami/kubectl:latest
             command:
-            - /bin/sh
+            - /bin/bash
             - -c
             - |
               set -euo pipefail
