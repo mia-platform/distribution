@@ -45,20 +45,20 @@ spec:
         - --providers.kubernetesingress.allowemptyservices=true
         - --providers.kubernetesingress.allowexternalnameservices=false
         - --providers.kubernetesingress.nativelbbydefault=true
-        - --entryPoints.traefik.address=$(POD_IP):$(METRICS_PORT)/tcp
-        - --entryPoints.traefik.transport.lifecycle.gracetimeout=1
+        - --entrypoints.traefik.address=:$(METRICS_PORT)/tcp
+        - --entrypoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
-        - --entryPoints.web.address=$(POD_IP):$(HTTP_PORT)/tcp
-        - --entryPoints.web.transport.lifecycle.gracetimeout=30
+        - --entrypoints.web.address=$(POD_IP):$(HTTP_PORT)/tcp
+        - --entrypoints.web.transport.lifecycle.gracetimeout=30
         - --entrypoints.web.transport.lifecycle.requestacceptgracetimeout=29
-        - --entrypoints.web.http.redirections.entryPoint.to=$(POD_IP):443
+        - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --entrypoints.web.http.redirections.entrypoint.priority=0
-        - --entryPoints.websecure.address=$(POD_IP):$(HTTPS_PORT)/tcp
-        - --entryPoints.websecure.transport.lifecycle.gracetimeout=30
+        - --entrypoints.websecure.address=$(POD_IP):$(HTTPS_PORT)/tcp
+        - --entrypoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
-        - --entryPoints.websecure.http3
+        - --entrypoints.websecure.http3
         - --metrics.prometheus
         - --metrics.prometheus.entrypoint=traefik
         env:
