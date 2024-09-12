@@ -58,7 +58,6 @@ spec:
         - --entrypoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.websecure.http.tls=true
-        - --entrypoints.websecure.http3
         - --metrics.prometheus
         - --metrics.prometheus.entrypoint=traefik
         env:
@@ -89,9 +88,6 @@ spec:
         - name: websecure
           containerPort: 11241
           protocol: TCP
-        - name: websecure-http3
-          containerPort: 11241
-          protocol: UDP
         - name: traefik
           containerPort: 11242
           protocol: TCP
