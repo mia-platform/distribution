@@ -7,14 +7,14 @@ labels:
     app.kubernetes.io/component: cni
 images:
 - name: quay.io/cilium/cilium
-  newTag: v1.16.1
-  digest: sha256:0b4a3ab41a4760d86b7fc945b8783747ba27f29dac30dd434d94f2c9e3679f39
+  newTag: v1.16.2
+  digest: sha256:4386a8580d8d86934908eea022b0523f812e6a542f30a86a47edd8bed90d51ea
 - name: quay.io/cilium/operator-generic
-  newTag: v1.16.1
-  digest: sha256:3bc7e7a43bc4a4d8989cb7936c5d96675dd2d02c306adf925ce0a7c35aa27dc4
+  newTag: v1.16.2
+  digest: sha256:cccfd3b886d52cb132c06acca8ca559f0fce91a6bd99016219b1a81fdbc4813a
 - name: quay.io/cilium/hubble-relay
-  newTag: v1.16.1
-  digest: sha256:2e1b4c739a676ae187d4c2bfc45c3e865bda2567cc0320a90cb666657fcfcc35
+  newTag: v1.16.2
+  digest: sha256:4b559907b378ac18af82541dafab430a857d94f1057f2598645624e6e7ea286c
 - name: quay.io/cilium/hubble-ui
   newTag: v0.13.1
   digest: sha256:e2e9313eb7caf64b0061d9da0efbdad59c6c461f6ca1752768942bfeda0796c6
