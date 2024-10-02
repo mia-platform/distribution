@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- update oidc-proxy to 1.0.6-e24311
+
 ## v1.29.0
 
 - no changes
