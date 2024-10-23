@@ -8,6 +8,7 @@ spec:
   - port: operator
     path: /metrics
     scheme: http
+    honorLabels: true
     metricRelabelings:
     - action: keep
       regex: prometheus_operator.*

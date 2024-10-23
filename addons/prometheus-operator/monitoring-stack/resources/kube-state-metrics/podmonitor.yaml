@@ -7,7 +7,6 @@ spec:
   podMetricsEndpoints:
   - path: /metrics
     port: self-metrics
-    honorLabels: true
     interval: 30s
     metricRelabelings:
     - action: keep
@@ -16,6 +15,7 @@ spec:
       - __name__
   - path: /metrics
     port: k8s-metrics
+    honorLabels: true
     interval: 30s
     relabelings:
     - action: labeldrop
