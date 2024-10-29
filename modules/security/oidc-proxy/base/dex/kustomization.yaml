@@ -6,8 +6,8 @@ images:
   newTag: v2.41.1
   digest: sha256:bc7cfce7c17f52864e2bb2a4dc1d2f86a41e3019f6d42e81d92a301fad0c8a1d
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v1.4.3
-  digest: sha256:a320a50cc91bd15fd2d6fa6de58bd98c1bd64b9a6f926ce23a600d87043455a3
+  newTag: v1.4.4
+  digest: sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f
 resources:
 - workloads
 secretGenerator:
