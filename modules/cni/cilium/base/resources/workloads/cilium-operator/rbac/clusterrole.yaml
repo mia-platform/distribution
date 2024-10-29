@@ -15,6 +15,14 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - configmaps
+  resourceNames:
+  - cilium-config
+  verbs:
+  - patch
+- apiGroups:
+  - ""
+  resources:
   - nodes
   verbs:
   - list
