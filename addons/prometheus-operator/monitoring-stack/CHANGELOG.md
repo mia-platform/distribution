@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.2.1
+
 ### Fixed
 
 - missign honorLabel property for kube-state-metrics and prometheus-operator monitors
