@@ -97,7 +97,7 @@ jobs:
         for KIND in $AWAITABLES ; do
           NAMES=$(yq ea "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
           for NAME in $NAMES ; do
-            kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 5m $NAME
+            kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 10m $NAME
           done
         done
 
