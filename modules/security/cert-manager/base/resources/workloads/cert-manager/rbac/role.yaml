@@ -19,3 +19,11 @@ rules:
   - leases
   verbs:
   - create
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts/token
+  resourceNames:
+  - cert-manager
+  verbs:
+  - create

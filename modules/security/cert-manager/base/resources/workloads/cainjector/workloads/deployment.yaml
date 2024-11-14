@@ -29,11 +29,22 @@ spec:
         - --logging-format=json
         - --leader-elect
         - --leader-election-namespace=$(POD_NAMESPACE)
+        - --metrics-listen-address=$(POD_IP):$(METRICS_PORT)
         env:
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: METRICS_PORT
+          value: PORT
+        ports:
+        - name: metrics
+          containerPort: 11204
+          protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
