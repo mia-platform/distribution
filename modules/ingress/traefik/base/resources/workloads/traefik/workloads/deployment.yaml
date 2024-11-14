@@ -40,11 +40,14 @@ spec:
         - --providers.kubernetescrd.allowexternalnameservices=false
         - --providers.kubernetescrd.nativelbbydefault=true
         - --providers.kubernetesgateway
+        - --providers.kubernetesgateway.statusaddress.service.name=$(POD_SERVICE)
+        - --providers.kubernetesgateway.statusaddress.service.namespace=$(POD_NAMESPACE)
         - --providers.kubernetesingress
         - --providers.kubernetesingress.ingressclass=traefik
         - --providers.kubernetesingress.allowemptyservices=true
         - --providers.kubernetesingress.allowexternalnameservices=false
         - --providers.kubernetesingress.nativelbbydefault=true
+        - --providers.kubernetesingress.ingressendpoint.publishedservice=$(POD_NAMESPACE)/$(POD_SERVICE)
         - --entrypoints.traefik.address=:$(METRICS_PORT)/tcp
         - --entrypoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
@@ -73,6 +76,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: POD_SERVICE
+          value: DEFAULT
         - name: LOG_LEVEL
           value: WARN
         - name: HTTP_PORT
