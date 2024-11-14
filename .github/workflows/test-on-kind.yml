@@ -10,6 +10,8 @@ on:
     - "test/**"
   pull_request:
 
+permissions: {}
+
 concurrency:
   group: ci-tests-${{ github.ref }}
   cancel-in-progress: true # cancels obsolete running jobs
@@ -18,6 +20,9 @@ jobs:
   get-changed-modules:
     name: "Build Changed Modules List"
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     outputs:
       any_changed: ${{ steps.changed-files.outputs.any_changed }}
@@ -44,14 +49,18 @@ jobs:
     needs:
     - get-changed-modules
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
-        kind_version:
-        - kindest/node:v1.30.6@sha256:b6d08db72079ba5ae1f4a88a09025c0a904af3b52387643c285442afb05ab994
-        - kindest/node:v1.29.10@sha256:3b2d8c31753e6c8069d4fc4517264cd20e86fd36220671fb7d0a5855103aa84b
-        - kindest/node:v1.28.15@sha256:a7c05c7ae043a0b8c818f5a06188bc2c4098f6cb59ca7d1856df00375d839251
+        versions:
+        - kind: kindest/node:v1.31.2@sha256:18fbefc20a7113353c7b75b5c869d7145a6abd6269154825872dc59c1329912e
+          kubectl: v1.31.2
+        - kind: kindest/node:v1.30.6@sha256:b6d08db72079ba5ae1f4a88a09025c0a904af3b52387643c285442afb05ab994
+          kubectl: v1.30.6
+        - kind: kindest/node:v1.29.10@sha256:3b2d8c31753e6c8069d4fc4517264cd20e86fd36220671fb7d0a5855103aa84b
+          kubectl: v1.29.10
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
-
     steps:
     - name: Checkout
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -66,8 +75,8 @@ jobs:
       uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
       with:
         version: v0.25.0
-        kubectl_version: v1.29.10
-        node_image: "${{ matrix.kind_version }}"
+        kubectl_version: "${{ matrix.versions.kubectl }}"
+        node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
 
@@ -76,8 +85,8 @@ jobs:
       uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
       with:
         version: v0.25.0
-        kubectl_version: v1.29.10
-        node_image: "${{ matrix.kind_version }}"
+        kubectl_version: "${{ matrix.versions.kubectl }}"
+        node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
         wait: 60s
 
