@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update prometheus-operator to v0.78.1
+- update kube-state-metrics to 2.13.0
+
 ## v1.29.2
 
 ### Changed
