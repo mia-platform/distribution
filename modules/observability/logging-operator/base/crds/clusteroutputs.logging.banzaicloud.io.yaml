@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.15.0
+    controller-gen.kubebuilder.io/version: v0.16.3
   name: clusteroutputs.logging.banzaicloud.io
 spec:
   group: logging.banzaicloud.io
@@ -2685,6 +2685,8 @@ spec:
                     type: object
                   host:
                     type: string
+                  max_bytes:
+                    type: integer
                   port:
                     type: integer
                   protocol:
@@ -3213,6 +3215,8 @@ spec:
                             x-kubernetes-map-type: atomic
                         type: object
                     type: object
+                  max_send_limit_bytes:
+                    type: integer
                   max_send_retries:
                     type: integer
                   message_key_key:
@@ -4724,6 +4728,9 @@ spec:
                     type: object
                 type: object
               nullout:
+                properties:
+                  never_flush:
+                    type: boolean
                 type: object
               opensearch:
                 properties:
@@ -5339,6 +5346,8 @@ spec:
                     type: boolean
                   reload_on_failure:
                     type: boolean
+                  remove_keys:
+                    type: string
                   remove_keys_on_update:
                     type: string
                   remove_keys_on_update_key:
@@ -10084,6 +10093,8 @@ spec:
                     type: object
                   host:
                     type: string
+                  max_bytes:
+                    type: integer
                   port:
                     type: integer
                   protocol:
@@ -10612,6 +10623,8 @@ spec:
                             x-kubernetes-map-type: atomic
                         type: object
                     type: object
+                  max_send_limit_bytes:
+                    type: integer
                   max_send_retries:
                     type: integer
                   message_key_key:
@@ -12123,6 +12136,9 @@ spec:
                     type: object
                 type: object
               nullout:
+                properties:
+                  never_flush:
+                    type: boolean
                 type: object
               opensearch:
                 properties:
@@ -12738,6 +12754,8 @@ spec:
                     type: boolean
                   reload_on_failure:
                     type: boolean
+                  remove_keys:
+                    type: string
                   remove_keys_on_update:
                     type: string
                   remove_keys_on_update_key:
