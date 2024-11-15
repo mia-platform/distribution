@@ -3,6 +3,6 @@ kind: PodDisruptionBudget
 metadata:
   name: cert-manager-webhook
 spec:
-  minAvailable: 50%
   selector:
     matchLabels: {}
+  maxUnavailable: 50%

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update traefik to v3.2.0
+- update PodDisruptionBudget from minAvailable to maxUnavailable
 
 ## v1.29.2
 

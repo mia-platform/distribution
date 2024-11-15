@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update oidc-proxy to 1.0.7-7c38af
+- update PodDisruptionBudget from minAvailable to maxUnavailable
 
 ## v1.29.2
 
