@@ -3,8 +3,8 @@ kind: Kustomization
 labels:
 - includeSelectors: true
   pairs:
-    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: webhook
+    app.kubernetes.io/name: webhook
 resources:
-- cainjector
-- cert-manager
-- webhook
+- networkpolicy.yaml
+- podmonitor.yaml
