@@ -33,7 +33,6 @@ spec:
         - --secret-name=$(SECRET_NAME)
         - --cert-name=tls.crt
         - --key-name=tls.key
-        - --extra-user-header-client-ip
         env:
         - name: SERVICE_NAME
           value: oidc-proxy
@@ -68,6 +67,7 @@ spec:
         - --readiness-probe-port=$(READINESS_PORT)
         - --tls-cert-file=/etc/oidc-proxy/tls/tls.crt
         - --tls-private-key-file=/etc/oidc-proxy/tls/tls.key
+        - --extra-user-header-client-ip
         - --oidc-client-id=$(OIDC_CLIENT_ID)
         - --oidc-issuer-url=$(OIDC_ISSUER_URL)
         - --oidc-username-claim=$(OIDC_USERNAME_CLAIM)
