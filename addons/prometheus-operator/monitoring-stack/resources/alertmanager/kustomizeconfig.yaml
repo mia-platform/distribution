@@ -7,7 +7,7 @@ commonLabels:
   kind: Alertmanager
 - path: spec/selector/matchLabels
   create: true
-  kind: PodMonitor
+  kind: ServiceMonitor
 
 images:
 - path: spec/image
