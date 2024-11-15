@@ -197,6 +197,9 @@ spec:
             - SYS_ADMIN
             - SYS_CHROOT
             - SYS_PTRACE
+      securityContext:
+        appArmorProfile:
+          type: Unconfined
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-node-critical
