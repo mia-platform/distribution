@@ -55,11 +55,11 @@ jobs:
       matrix:
         versions:
         - kind: kindest/node:v1.31.2@sha256:18fbefc20a7113353c7b75b5c869d7145a6abd6269154825872dc59c1329912e
-          kubectl: "1.31.2"
+          kubectl: "v1.31.2"
         - kind: kindest/node:v1.30.6@sha256:b6d08db72079ba5ae1f4a88a09025c0a904af3b52387643c285442afb05ab994
-          kubectl: "1.30.6"
+          kubectl: "v1.30.6"
         - kind: kindest/node:v1.29.10@sha256:3b2d8c31753e6c8069d4fc4517264cd20e86fd36220671fb7d0a5855103aa84b
-          kubectl: "1.29.10"
+          kubectl: "v1.29.10"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout
