@@ -24,17 +24,12 @@ data:
     [Pod/binding,*,*]
     [ReplicaSet,*,*]
     [ReplicaSet/*,*,*]
-    [AdmissionReport,*,*]
-    [AdmissionReport/*,*,*]
-    [ClusterAdmissionReport,*,*]
-    [ClusterAdmissionReport/*,*,*]
-    [BackgroundScanReport,*,*]
-    [BackgroundScanReport/*,*,*]
-    [ClusterBackgroundScanReport,*,*]
-    [ClusterBackgroundScanReport/*,*,*]
+    [EphemeralReport,*,*]
+    [ClusterEphemeralReport,*,*]
     [ClusterRole,*,mia-platform:kyverno]
     [ClusterRole,*,mia-platform:kyverno:*]
     [ClusterRoleBinding,*,mia-platform:kyverno]
     [ClusterRoleBinding,*,mia-platform:kyverno:*]
-  webhooks: '[{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kyverno-system"]}],"matchLabels":null}}]'
+  updateRequestThreshold: "1000"
+  webhooks: '{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kyverno-system","kube-node-lease"]},{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kyverno-system","kyverno-system","kube-node-lease"]}],"matchLabels":null}}'
   webhookAnnotations: '{"admissions.enforcer/disabled":"true"}'

@@ -7,10 +7,12 @@ rules:
   - ""
   resources:
   - secrets
+  - serviceaccounts
   verbs:
   - get
   - list
   - watch
+  - patch
   - create
   - update
   - delete
@@ -31,6 +33,15 @@ rules:
   - leases
   verbs:
   - create
+  - list
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - list
+  - watch
 - apiGroups:
   - coordination.k8s.io
   resources:
@@ -38,7 +49,6 @@ rules:
   verbs:
   - delete
   - get
-  - list
   - patch
   - update
   resourceNames:

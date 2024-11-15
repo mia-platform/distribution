@@ -50,3 +50,11 @@ rules:
   - update
   resourceNames:
   - kyverno-cleanup-controller
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch

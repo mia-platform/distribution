@@ -28,7 +28,8 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        - --v=2
+        - --v=0
+        - --resyncPeriod=15m
         - --admissionReports=true
         - --aggregateReports=true
         - --policyReports=true
@@ -40,11 +41,12 @@ spec:
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
         - --maxAPICallResponseLength=2000000
-        - --allowInsecureRegistry=false
-        - --enablePolicyException=true
         - --omitEvents=PolicyApplied,PolicySkipped
-        - --reportsChunkSize=0
+        - --enablePolicyException=true
+        - --exceptionNamespace=$(KYVERNO_NAMESPACE)
+        - --allowInsecureRegistry=false
         - --registryCredentialHelpers=default,google,amazon,azure,github
+        - --enableReporting=validate,mutate,mutateExisting,imageVerify,generate
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
@@ -58,20 +60,20 @@ spec:
           value: PORT
         - name: KYVERNO_SERVICEACCOUNT_NAME
           value: default
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
           value: kyverno-metrics
-        - name: KYVERNO_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         - name: KYVERNO_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_DEPLOYMENT
-          value: default
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: TUF_ROOT
           value: /.sigstore
         ports:

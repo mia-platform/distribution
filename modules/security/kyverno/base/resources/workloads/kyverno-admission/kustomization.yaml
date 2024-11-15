@@ -24,3 +24,14 @@ replacements:
     select:
       kind: NetworkPolicy
       name: allow-kyverno
+- source:
+    fieldPath: metadata.name
+    kind: Role
+  targets:
+  - fieldPaths:
+    - spec.template.spec.initContainers.[name=kyverno-pre].env.[name=KYVERNO_ROLE_NAME].value
+    - spec.template.spec.containers.[name=kyverno].env.[name=KYVERNO_ROLE_NAME].value
+    options:
+      create: true
+    select:
+      kind: Deployment

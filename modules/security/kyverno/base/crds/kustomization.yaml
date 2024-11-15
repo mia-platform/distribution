@@ -1,11 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- admissionreports.kyverno.io.yaml
-- backgroundscanreports.kyverno.io.yaml
 - cleanuppolicies.kyverno.io.yaml
-- clusteradmissionreports.kyverno.io.yaml
-- clusterbackgroundscanreports.kyverno.io.yaml
 - clustercleanuppolicies.kyverno.io.yaml
 - clusterephemeralreports.reports.kyverno.io.yaml
 - clusterpolicies.kyverno.io.yaml
