@@ -50,13 +50,13 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /
-            port: k8s-metrics
+            path: /readyz
+            port: self-metrics
           initialDelaySeconds: 5
           timeoutSeconds: 5
         livenessProbe:
           httpGet:
-            path: /healthz
+            path: /livez
             port: k8s-metrics
           initialDelaySeconds: 5
           timeoutSeconds: 5

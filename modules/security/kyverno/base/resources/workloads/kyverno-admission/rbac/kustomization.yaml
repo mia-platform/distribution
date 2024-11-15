@@ -5,6 +5,7 @@ configurations:
 resources:
 - clusterrole-defaults.yaml
 - clusterrole.yaml
+- clusterrolebinding-view.yaml
 - clusterrolebinding.yaml
 - role.yaml
 - rolebinding.yaml

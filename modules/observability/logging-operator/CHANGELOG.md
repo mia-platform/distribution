@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update logging-operator to v4.11.0
+- update PodDisruptionBudget from minAvailable to maxUnavailable
+
 ## v1.29.0
 
 ### Changed

@@ -3,6 +3,6 @@ kind: PodDisruptionBudget
 metadata:
   name: kyverno
 spec:
-  minAvailable: 50%
   selector:
     matchLabels: {}
+  maxUnavailable: 33%

@@ -10,3 +10,7 @@ spec:
     port: 9093
     targetPort: web
     protocol: TCP
+  - name: reloader-web
+    port: 8080
+    protocol: TCP
+    targetPort: reloader-web

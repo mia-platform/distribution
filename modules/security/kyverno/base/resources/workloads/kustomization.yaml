@@ -4,5 +4,4 @@ resources:
 - kyverno-admission
 - kyverno-background
 - kyverno-cleanup
-- kyverno-cleanup-job
 - kyverno-reports

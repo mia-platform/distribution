@@ -5,8 +5,7 @@ metadata:
   namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
   podMetricsEndpoints:
-  - path: /metrics
-    port: self-metrics
+  - port: self-metrics
     interval: 30s
     metricRelabelings:
     - action: keep
@@ -17,18 +16,19 @@ spec:
     port: k8s-metrics
     honorLabels: true
     interval: 30s
-    relabelings:
-    - action: labeldrop
-      regex: (pod|service|endpoint|namespace)
     metricRelabelings:
     - action: drop
-      regex: (kube_endpoint_address_not_ready|kube_endpoint_address_available)
+      regex: kube_(endpoint_(address_not_ready|address_available))
       sourceLabels:
       - __name__
     - action: keep
       regex: kube.*
       sourceLabels:
       - __name__
+    relabelings:
+    - action: labeldrop
+      regex: (pod|service|endpoint|namespace)
+    scrapeTimeout: 30s
   jobLabel: app.kubernetes.io/name
   selector:
     matchLabels: {}

@@ -72,6 +72,7 @@ rules:
   - namespaces
   - secrets
   - services
+  - configmaps
   verbs:
   - get
   - list
@@ -86,6 +87,7 @@ rules:
 - apiGroups:
   - gateway.networking.k8s.io
   resources:
+  - backendtlspolicies
   - gatewayclasses
   - gateways
   - grpcroutes
@@ -100,6 +102,7 @@ rules:
 - apiGroups:
   - gateway.networking.k8s.io
   resources:
+  - backendtlspolicies/status
   - gatewayclasses/status
   - gateways/status
   - grpcroutes/status

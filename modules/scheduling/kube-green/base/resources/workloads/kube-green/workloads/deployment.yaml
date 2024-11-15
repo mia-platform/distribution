@@ -95,6 +95,7 @@ spec:
         - --webhook-server-port=$(HTTPS_PORT)
         - --metrics-bind-address=$(POD_IP):$(METRICS_PORT)
         - --health-probe-bind-address=$(POD_IP):$(PROBES_PORT)
+        - --sleep-delta=$(SLEEP_DELTA)
         - --zap-encoder=json
         - --zap-log-level=$(LOG_LEVEL)
         env:
@@ -110,6 +111,8 @@ spec:
           value: PORT
         - name: METRICS_PORT
           value: PORT
+        - name: SLEEP_DELTA
+          value: "60"
         ports:
         - containerPort: 11230
           name: webhook

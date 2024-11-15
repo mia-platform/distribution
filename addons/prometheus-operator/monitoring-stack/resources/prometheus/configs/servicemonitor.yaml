@@ -1,15 +1,15 @@
 apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
+kind: ServiceMonitor
 metadata:
-  name: alertmanager
+  name: prometheus
   namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
-  podMetricsEndpoints:
+  endpoints:
   - path: /metrics
     port: web
     metricRelabelings:
     - action: keep
-      regex: alertmanager.*
+      regex: prometheus.*
       sourceLabels:
       - __name__
   - path: /metrics

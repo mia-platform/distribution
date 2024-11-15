@@ -29,13 +29,14 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        - --v=2
+        - --v=0
         - --caSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-ca
         - --tlsSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-pair
+        - --resyncPeriod=15m
         - --enableDeferredLoading=true
         - --dumpPayload=false
-        - --enableConfigMapCaching=true
         - --maxAPICallResponseLength=2000000
+        - --enableConfigMapCaching=true
         - --protectManagedResources=false
         - --ttlReconciliationInterval=1m
         - --cleanupServerPort=$(CONTROLLER_PORT)
@@ -53,22 +54,24 @@ spec:
           value: "false"
         - name: PROFILE_PORT
           value: PORT
-        - name: KYVERNO_SERVICEACCOUNT_NAME
+        - name: KYVERNO_DEPLOYMENT
           value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
           value: kyverno-metrics
-        - name: KYVERNO_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         - name: KYVERNO_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_DEPLOYMENT
+        - name: KYVERNO_SERVICEACCOUNT_NAME
           value: default
+        - name: KYVERNO_ROLE_NAME
+          value: default
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KYVERNO_SVC
           value: default
         ports:

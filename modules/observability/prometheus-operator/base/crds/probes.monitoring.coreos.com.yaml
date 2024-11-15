@@ -3,8 +3,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.16.1
-    operator.prometheus.io/version: 0.76.2
+    controller-gen.kubebuilder.io/version: v0.16.5
+    operator.prometheus.io/version: 0.78.1
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -290,6 +290,23 @@ spec:
                   Example module configuring in the blackbox exporter:
                   https://github.com/prometheus/blackbox_exporter/blob/master/example.yml
                 type: string
+              nativeHistogramBucketLimit:
+                description: |-
+                  If there are more than this many buckets in a native histogram,
+                  buckets will be merged to stay within the limit.
+                  It requires Prometheus >= v2.45.0.
+                format: int64
+                type: integer
+              nativeHistogramMinBucketFactor:
+                anyOf:
+                - type: integer
+                - type: string
+                description: |-
+                  If the growth factor of one bucket to the next is smaller than this,
+                  buckets will be merged to increase the factor sufficiently.
+                  It requires Prometheus >= v2.50.0.
+                pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                x-kubernetes-int-or-string: true
               oauth2:
                 description: OAuth2 for the URL. Only valid in Prometheus versions 2.27.0 and newer.
                 properties:
@@ -380,7 +397,7 @@ spec:
                       that should be excluded from proxying. IP and domain names can
                       contain port numbers.
 
-                      It requires Prometheus >= v2.43.0.
+                      It requires Prometheus >= v2.43.0 or Alertmanager >= 0.25.0.
                     type: string
                   proxyConnectHeader:
                     additionalProperties:
@@ -411,15 +428,14 @@ spec:
                       ProxyConnectHeader optionally specifies headers to send to
                       proxies during CONNECT requests.
 
-                      It requires Prometheus >= v2.43.0.
+                      It requires Prometheus >= v2.43.0 or Alertmanager >= 0.25.0.
                     type: object
                     x-kubernetes-map-type: atomic
                   proxyFromEnvironment:
                     description: |-
                       Whether to use the proxy configuration defined by environment variables (HTTP_PROXY, HTTPS_PROXY, and NO_PROXY).
-                      If unset, Prometheus uses its default value.
 
-                      It requires Prometheus >= v2.43.0.
+                      It requires Prometheus >= v2.43.0 or Alertmanager >= 0.25.0.
                     type: boolean
                   proxyUrl:
                     description: '`proxyURL` defines the HTTP proxy server to use.'
@@ -628,6 +644,11 @@ spec:
                 description: The scrape class to apply.
                 minLength: 1
                 type: string
+              scrapeClassicHistograms:
+                description: |-
+                  Whether to scrape a classic histogram that is also exposed as a native histogram.
+                  It requires Prometheus >= v2.45.0.
+                type: boolean
               scrapeProtocols:
                 description: |-
                   `scrapeProtocols` defines the protocols to negotiate during a scrape. It tells clients the
@@ -644,11 +665,13 @@ spec:
                     * `OpenMetricsText1.0.0`
                     * `PrometheusProto`
                     * `PrometheusText0.0.4`
+                    * `PrometheusText1.0.0`
                   enum:
                   - PrometheusProto
                   - OpenMetricsText0.0.1
                   - OpenMetricsText1.0.0
                   - PrometheusText0.0.4
+                  - PrometheusText1.0.0
                   type: string
                 type: array
                 x-kubernetes-list-type: set

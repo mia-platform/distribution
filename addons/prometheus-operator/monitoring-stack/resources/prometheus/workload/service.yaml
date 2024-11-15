@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-metrics
+  namespace: PROMETHEUS_OPERATOR_NAMESPACE
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - port: 9090
+    name: web
+    targetPort: web
+    protocol: TCP
+  - port: 8080
+    name: reloader-web
+    targetPort: reloader-web
+    protocol: TCP

@@ -13,7 +13,9 @@ rules:
   - kyverno.io
   resources:
   - policies
+  - policies/status
   - clusterpolicies
+  - clusterpolicies/status
   - policyexceptions
   - updaterequests
   - updaterequests/status
@@ -50,13 +52,19 @@ rules:
   - update
   - watch
 - apiGroups:
-  - "*"
+  - reports.kyverno.io
   resources:
-  - "*"
+  - ephemeralreports
+  - clusterephemeralreports
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
+  - deletecollection
 - apiGroups:
   - networking.k8s.io
   resources:
@@ -82,7 +90,6 @@ rules:
   - ""
   resources:
   - configmaps
-  - secrets
   - resourcequotas
   - limitranges
   verbs:

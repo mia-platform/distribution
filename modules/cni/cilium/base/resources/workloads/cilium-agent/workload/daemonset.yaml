@@ -13,12 +13,6 @@ spec:
       maxUnavailable: 25%
   minReadySeconds: 0
   template:
-    metadata:
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/cilium-agent: unconfined
-        container.apparmor.security.beta.kubernetes.io/clean-cilium-state: unconfined
-        container.apparmor.security.beta.kubernetes.io/mount-cgroup: unconfined
-        container.apparmor.security.beta.kubernetes.io/apply-sysctl-overwrites: unconfined
     spec:
       serviceAccountName: cilium
       automountServiceAccountToken: false
@@ -388,8 +382,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: false
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -444,6 +436,9 @@ spec:
           readOnly: true
         - name: tmp
           mountPath: /tmp
+      securityContext:
+        appArmorProfile:
+          type: Unconfined
       volumes:
       - name: tmp
         emptyDir:

@@ -5,4 +5,4 @@ metadata:
 spec:
   selector:
     matchLabels: {}
-  minAvailable: 33%
+  maxUnavailable: 33%

@@ -34,3 +34,14 @@ replacements:
       create: true
     select:
       kind: Deployment
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: traefik
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.[name=traefik].env.[name=POD_SERVICE].value
+    options:
+      create: true
+    select:
+      kind: Deployment

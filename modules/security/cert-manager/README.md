@@ -32,7 +32,7 @@ The module will install all its component inside the `cert-manager-system` names
 default **ports**:
 
 - cert-manager cainjector
-  - **none**
+  - **11204** for exposing the metrics endpoint
 - cert-manager controller
   - **11200** for exposing the metrics endpoint
   - **9403** expose the health probe endpoint for kubernetes
@@ -40,6 +40,7 @@ default **ports**:
   - **11201** for exposing the webhook endpoint, the api-server must reach this port for avoiding timeout errors on
 		CRDs creation
   - **11202** expose the health probe endpoint for kubernetes
+  - **11203** for exposing the metrics endpoint
 
 This module use the following user, gid and fsGroup:
 
@@ -67,6 +68,7 @@ This module use the following user, gid and fsGroup:
 | 1.28.2         | 1.14.6         |
 | 1.28.2         | 1.14.7         |
 | 1.29.x         | 1.15.3         |
+| 1.30.x         | 1.16.1         |
 
 ## User customization
 

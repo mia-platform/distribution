@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cert-manager
+  namespace: CERT_MANAGER_NAMESPACE
+spec:
+  podMetricsEndpoints:
+  - path: /metrics
+    port: metrics
+    honorLabels: false
+    interval: 60s
+    scrapeTimeout: 30s
+    metricRelabelings:
+    - action: drop
+      # deprecated metrics, don't count on them
+      regex: (certmanager_clock_time_seconds|go_.*|)
+      sourceLabels:
+      - __name__
+    - action: keep
+      regex: (controller_runtime|certmanager_).*
+      sourceLabels:
+      - __name__
+  jobLabel: app.kubernetes.io/name
+  selector: {}

@@ -30,18 +30,6 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
-  - admissionreports
-  - clusteradmissionreports
-  - backgroundscanreports
-  - clusterbackgroundscanreports
-  verbs:
-  - create
-  - delete
-  - patch
-  - update
-- apiGroups:
-  - kyverno.io
-  resources:
   - updaterequests
   verbs:
   - create

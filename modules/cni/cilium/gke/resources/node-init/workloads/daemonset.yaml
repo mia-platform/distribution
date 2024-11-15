@@ -13,9 +13,6 @@ spec:
       maxUnavailable: 25%
   minReadySeconds: 0
   template:
-    metadata:
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/node-init: unconfined
     spec:
       serviceAccountName: cilium-node-init
       automountServiceAccountToken: false
@@ -197,6 +194,9 @@ spec:
             - SYS_ADMIN
             - SYS_CHROOT
             - SYS_PTRACE
+      securityContext:
+        appArmorProfile:
+          type: Unconfined
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-node-critical

@@ -29,9 +29,11 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        - --v=2
+        - --v=0
         env:
         - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
+        - name: KYVERNO_ROLE_NAME
           value: default
         - name: INIT_CONFIG
           value: kyverno
@@ -68,10 +70,12 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        - --v=2
+        - --v=0
         - --caSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-ca
         - --tlsSecretName=$(KYVERNO_SVC).$(KYVERNO_NAMESPACE).svc.kyverno-tls-pair
         - --backgroundServiceAccountName=system:serviceaccount:$(KYVERNO_NAMESPACE):kyverno-background
+        - --reportsServiceAccountName=system:serviceaccount:$(KYVERNO_NAMESPACE):kyverno-reports
+        - --resyncPeriod=15m
         - --exceptionNamespace=$(KYVERNO_NAMESPACE)
         - --admissionReports=true
         - --maxAdmissionReports=1000
@@ -81,11 +85,13 @@ spec:
         - --dumpPayload=false
         - --forceFailurePolicyIgnore=false
         - --generateValidatingAdmissionPolicy=false
+        - --dumpPatches=false
         - --maxAPICallResponseLength=2000000
         - --enablePolicyException=true
         - --protectManagedResources=false
         - --allowInsecureRegistry=false
         - --registryCredentialHelpers=default,google,amazon,azure,github
+        - --enableReporting=validate,mutate,mutateExisting,imageVerify,generate
         - --webhookServerPort=$(CONTROLLER_PORT)
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus
@@ -100,8 +106,6 @@ spec:
           value: "false"
         - name: PROFILE_PORT
           value: PORT
-        - name: KYVERNO_SERVICEACCOUNT_NAME
-          value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
@@ -114,12 +118,16 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_DEPLOYMENT
+        - name: KYVERNO_SERVICEACCOUNT_NAME
+          value: default
+        - name: KYVERNO_ROLE_NAME
           value: default
         - name: KYVERNO_SVC
           value: default
         - name: TUF_ROOT
           value: /.sigstore
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         ports:
         - containerPort: 11218
           name: controller

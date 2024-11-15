@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update prometheus to v2.55.1
+- move alertmanager and prometheus PodMonitor to a ServiceMonitor
+
 ## v2.2.1
 
 ### Fixed

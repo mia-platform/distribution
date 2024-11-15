@@ -13,7 +13,6 @@ replacements:
 - source:
     fieldPath: spec.template.spec.containers.[name=webhook].ports.[name=https].containerPort
     kind: Deployment
-    name: cert-manager-webhook
   targets:
   - fieldPaths:
     - spec.ingress.0.ports.0.port
@@ -21,4 +20,3 @@ replacements:
       create: true
     select:
       kind: NetworkPolicy
-      name: allow-cert-manager-webhook

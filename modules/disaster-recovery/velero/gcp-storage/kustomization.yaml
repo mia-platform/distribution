@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: docker.io/velero/velero-plugin-for-gcp
-  newTag: v1.10.1
-  digest: sha256:3a5ea6c599656c3410c7b66c698907a3c576625e28a2a2b9c859be2402909d2b
+  newTag: v1.11.0
+  digest: sha256:568ef5d55bc414f4d025981edf16350ac8e77f1fd584ffafb3ede4c0e29f16db
 resources:
 - ../base/crds
 - ../base/resources

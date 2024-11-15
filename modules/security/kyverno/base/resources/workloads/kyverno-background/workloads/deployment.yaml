@@ -28,12 +28,15 @@ spec:
         resources: {}
         args:
         - --loggingFormat=text
-        - --v=2
+        - --v=0
+        - --resyncPeriod=15m
         - --enableConfigMapCaching=true
         - --enableDeferredLoading=true
         - --maxAPICallResponseLength=2000000
         - --omitEvents=PolicyApplied,PolicySkipped
         - --enablePolicyException=true
+        - --exceptionNamespace=$(KYVERNO_NAMESPACE)
+        - --enableReporting=validate,mutate,mutateExisting,imageVerify,generate
         - --otelConfig=prometheus
         - --metricsPort=$(METRICS_PORT)
         - --profile=$(PROFILE_ENABLED)
@@ -47,20 +50,20 @@ spec:
           value: PORT
         - name: KYVERNO_SERVICEACCOUNT_NAME
           value: default
+        - name: KYVERNO_DEPLOYMENT
+          value: default
         - name: INIT_CONFIG
           value: kyverno
         - name: METRICS_CONFIG
           value: kyverno-metrics
-        - name: KYVERNO_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         - name: KYVERNO_POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: KYVERNO_DEPLOYMENT
-          value: default
+        - name: KYVERNO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         ports:
         - containerPort: 11214
           name: metrics

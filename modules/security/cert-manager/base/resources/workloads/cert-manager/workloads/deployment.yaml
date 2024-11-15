@@ -30,7 +30,7 @@ spec:
         - --v=2
         - --logging-format=json
         - --leader-elect
-        - --enable-gateway-api
+        - --enable-gateway-api=$(ENABLE_GATEWAY_API)
         - --metrics-listen-address=$(POD_IP):$(METRICS_PORT)
         - --leader-election-namespace=$(POD_NAMESPACE)
         - --cluster-resource-namespace=$(POD_NAMESPACE)
@@ -54,6 +54,8 @@ spec:
           value: quay.io/jetstack/cert-manager-acmesolver:latest
         - name: MAX_CONCURRENT_CHALLENGES
           value: "60"
+        - name: ENABLE_GATEWAY_API
+          value: "false"
         ports:
         - name: metrics
           containerPort: 11200
