@@ -93,13 +93,13 @@ jobs:
     - name: Install module
       run: |
         kubectl cluster-info
-        CRDS=$(yq -e 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
-        NON_CRDS=$(yq -e 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
+        CRDS=$(yq ae 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
+        NON_CRDS=$(yq ae 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
         if [ -n "$CRDS" ] ; then
           echo "Apply CRDs.."
           kubectl create -f - <<< $CRDS
           echo "Wait until all CRDs are available.."
-          kubectl wait --for condition=established crd $(yq -e 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
+          kubectl wait --for condition=established crd $(yq ae 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
         fi
         echo "Apply other resources.."
         kubectl create -f - <<< $NON_CRDS
@@ -108,9 +108,9 @@ jobs:
       run: |
         AWAITABLES="Deployment StatefulSet DaemonSet"
         for KIND in $AWAITABLES ; do
-          NAMES=$(yq -e "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
+          NAMES=$(yq ae "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
           for NAME in $NAMES ; do
-            kubectl -n $(yq -e "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 10m $NAME
+            kubectl -n $(yq ae "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 10m $NAME
           done
         done
 
