@@ -10,6 +10,8 @@ on:
     - "test/**"
   pull_request:
 
+permissions: {}
+
 concurrency:
   group: ci-tests-${{ github.ref }}
   cancel-in-progress: true # cancels obsolete running jobs
@@ -19,16 +21,19 @@ jobs:
     name: "Build Changed Modules List"
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     outputs:
       any_changed: ${{ steps.changed-files.outputs.any_changed }}
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     - name: Calculate file differences
       id: changed-files
-      uses: tj-actions/changed-files@40853de9f8ce2d6cfdc73c1b96f14e22ba44aec4 # v45.0.0
+      uses: tj-actions/changed-files@4edd678ac3f81e2dc578756871e4d00c19191daf # v45.0.4
       with:
         dir_names: true
         json: true
@@ -44,17 +49,19 @@ jobs:
     needs:
     - get-changed-modules
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
-        kind_version:
-        - kindest/node:v1.29.8@sha256:d46b7aa29567e93b27f7531d258c372e829d7224b25e3fc6ffdefed12476d3aa
-        - kindest/node:v1.28.13@sha256:45d319897776e11167e4698f6b14938eb4d52eb381d9e3d7a9086c16c69a8110
-        - kindest/node:v1.27.17@sha256:3fd82731af34efe19cd54ea5c25e882985bafa2c9baefe14f8deab1737d9fabe
+        versions:
+        - kind: kindest/node:v1.29.10@sha256:3b2d8c31753e6c8069d4fc4517264cd20e86fd36220671fb7d0a5855103aa84b
+          kubectl: "v1.29.10"
+        - kind: kindest/node:v1.28.15@sha256:a7c05c7ae043a0b8c818f5a06188bc2c4098f6cb59ca7d1856df00375d839251
+          kubectl: "v1.28.15"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
-
     steps:
     - name: Checkout
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Kustomize Build
       run: |
@@ -65,7 +72,9 @@ jobs:
       if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
       with:
-        node_image: "${{ matrix.kind_version }}"
+        version: v0.25.0
+        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
 
@@ -73,31 +82,33 @@ jobs:
       if: matrix.module != 'modules/cni/cilium/base'
       uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
       with:
-        node_image: "${{ matrix.kind_version }}"
+        version: v0.25.0
+        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
         wait: 60s
 
     - name: Install module
       run: |
         kubectl cluster-info
-        CRDS=$(yq ea 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
-        NON_CRDS=$(yq ea 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
-        if [ -n "$CRDS" ] ; then
+        CRDS=$(yq eval-all 'select(.kind == "CustomResourceDefinition")' ci/rendered.yaml)
+        NON_CRDS=$(yq eval-all 'select(.kind != "CustomResourceDefinition")' ci/rendered.yaml)
+        if [ -n "${CRDS}" ] ; then
           echo "Apply CRDs.."
-          kubectl create -f - <<< $CRDS
+          kubectl create -f - <<< ${CRDS}
           echo "Wait until all CRDs are available.."
-          kubectl wait --for condition=established crd $(yq ea 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
+          kubectl wait --for condition=established crd $(yq eval-all 'select(.kind == "CustomResourceDefinition") | [ .metadata.name ] | join(" ")' ci/rendered.yaml )
         fi
         echo "Apply other resources.."
-        kubectl create -f - <<< $NON_CRDS
+        kubectl create -f - <<< ${NON_CRDS}
 
     - name: Test - Rollout success
       run: |
         AWAITABLES="Deployment StatefulSet DaemonSet"
-        for KIND in $AWAITABLES ; do
-          NAMES=$(yq ea "select(.kind == \"$KIND\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
+        for KIND in ${AWAITABLES} ; do
+          NAMES=$(yq eval-all "select(.kind == \"${KIND}\") | [ .metadata.name ] | join(\" \")" ci/rendered.yaml)
           for NAME in $NAMES ; do
-            kubectl -n $(yq ea "select(.kind == \"$KIND\" and .metadata.name == \"$NAME\") | .metadata.namespace" ci/rendered.yaml ) rollout status $KIND --timeout 5m $NAME
+            kubectl -n $(yq eval-all "select(.kind == \"${KIND}\" and .metadata.name == \"${NAME}\") | .metadata.namespace" ci/rendered.yaml ) rollout status "${KIND}" --timeout 10m "${NAME}"
           done
         done
 
