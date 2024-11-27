@@ -114,7 +114,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 ## User Customization
 
 After the installation of the module a `cluster-admin` may want to add one or more `BackupStorageLocation` in addition
-of the `defualt` location installed with the **base** flavor, and then create one or more `Schedule` for setting up
+of the `default` location installed with the **base** flavor, and then create one or more `Schedule` for setting up
 the backup of the cluster resources.
 
 ### Base
