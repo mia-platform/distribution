@@ -40,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - support for the new Kubernetes Gateway API v1.1 resources
 
+## v1.28.4
+
+### Changed
+
+- update traefik to v2.11.14
+
 ## v1.28.3
 
 ### Changed

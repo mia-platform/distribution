@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update PodDisruptionBudget from minAvailable to maxUnavailable
 - change appArmorProfile from annotation to securityContext
 
+## v1.29.3
+
+### Changed
+
+- update cilium to v1.16.4
+
 ## v1.29.2
 
 ### Changed
@@ -35,6 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update cilium to v1.16.1
+
+## v1.28.5
+
+### Changed
+
+- update cilium to v1.15.11
 
 ## v1.28.4
 
