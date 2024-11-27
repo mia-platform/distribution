@@ -46,7 +46,7 @@ spec:
               - key encipherment
               - server auth
               - client auth
-              validity: 26280h
+              validity: 8760h
             - name: hubble-relay-client-certs
               namespace: kube-system
               commonName: "*.hubble-relay.cilium.io"
@@ -56,7 +56,7 @@ spec:
               - signing
               - key encipherment
               - client auth
-              validity: 26280h
+              validity: 8760h
         volumeMounts:
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token
