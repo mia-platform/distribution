@@ -4,7 +4,7 @@ name: base-installation
 spec:
   modules:
     cni/cilium/base:
-      version: v1.29.2
+      version: v1.29.3
     disaster-recovery/velero/base:
       version: v1.29.1
     ingress/traefik/base:
@@ -18,7 +18,7 @@ spec:
     scheduling/kube-green/base:
       version: v1.29.1
     security/cert-manager/base:
-      version: v1.29.0
+      version: v1.29.1
     security/kyverno/base:
       version: v1.29.1
     security/rbac-manager/base:
