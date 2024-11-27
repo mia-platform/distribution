@@ -4,11 +4,11 @@ name: gke-installation
 spec:
   modules:
     cni/cilium/aks:
-      version: v1.28.4
+      version: v1.28.5
     disaster-recovery/velero/base:
       version: v1.28.4
     ingress/traefik/aks:
-      version: v1.28.3
+      version: v1.28.4
     observability/logging-operator/base:
       version: v1.28.1
     observability/prometheus-operator/base:
