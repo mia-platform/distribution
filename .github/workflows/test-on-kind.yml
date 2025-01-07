@@ -33,7 +33,7 @@ jobs:
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     - name: Calculate file differences
       id: changed-files
-      uses: tj-actions/changed-files@4edd678ac3f81e2dc578756871e4d00c19191daf # v45.0.4
+      uses: tj-actions/changed-files@bab30c2299617f6615ec02a68b9a40d10bd21366 # v45.0.5
       with:
         dir_names: true
         json: true
@@ -54,10 +54,10 @@ jobs:
     strategy:
       matrix:
         versions:
-        - kind: kindest/node:v1.30.6@sha256:b6d08db72079ba5ae1f4a88a09025c0a904af3b52387643c285442afb05ab994
-          kubectl: "v1.30.6"
-        - kind: kindest/node:v1.29.10@sha256:3b2d8c31753e6c8069d4fc4517264cd20e86fd36220671fb7d0a5855103aa84b
-          kubectl: "v1.29.1"
+        - kind: kindest/node:v1.30.8@sha256:17cd608b3971338d9180b00776cb766c50d0a0b6b904ab4ff52fd3fc5c6369bf
+          kubectl: "v1.30.8"
+        - kind: kindest/node:v1.29.12@sha256:62c0672ba99a4afd7396512848d6fc382906b8f33349ae68fb1dbfe549f70dec
+          kubectl: "v1.29.12"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout
@@ -70,20 +70,20 @@ jobs:
 
     - name: Create k8s Kind Cluster for Cilium
       if: matrix.module == 'modules/cni/cilium/base'
-      uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
+      uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.25.0
-        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        version: v0.26.0
+        kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
 
     - name: Create k8s Kind Cluster
       if: matrix.module != 'modules/cni/cilium/base'
-      uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
+      uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.25.0
-        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        version: v0.26.0
+        kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
         wait: 60s
