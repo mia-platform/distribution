@@ -54,10 +54,10 @@ jobs:
     strategy:
       matrix:
         versions:
-        - kind: kindest/node:v1.31.2@sha256:18fbefc20a7113353c7b75b5c869d7145a6abd6269154825872dc59c1329912e
-          kubectl: "v1.31.2"
-        - kind: kindest/node:v1.30.6@sha256:b6d08db72079ba5ae1f4a88a09025c0a904af3b52387643c285442afb05ab994
-          kubectl: "v1.30.6"
+        - kind: kindest/node:v1.31.4@sha256:2cb39f7295fe7eafee0842b1052a599a4fb0f8bcf3f83d96c7f4864c357c6c30
+          kubectl: "v1.31.4"
+        - kind: kindest/node:v1.30.8@sha256:17cd608b3971338d9180b00776cb766c50d0a0b6b904ab4ff52fd3fc5c6369bf
+          kubectl: "v1.30.8"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout
@@ -72,8 +72,8 @@ jobs:
       if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.25.0
-        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        version: v0.26.0
+        kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
         wait: 10s
@@ -82,8 +82,8 @@ jobs:
       if: matrix.module != 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.25.0
-        # kubectl_version: "${{ matrix.versions.kubectl }}" uncomment whent new helm/kind-action version is available
+        version: v0.26.0
+        kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
         wait: 60s
