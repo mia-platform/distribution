@@ -10,9 +10,11 @@ resources:
 - ../../../modules/scheduling/kube-green/base
 - ../../../modules/security/cert-manager/base
 - ../../../modules/security/kyverno/base
+- ../../../modules/security/oidc-proxy/base
 - ../../../modules/security/rbac-manager/base
 components:
 - ../../../addons/cert-manager/kube-green-webhook-certificate
+- ../../../addons/cert-manager/oidc-proxy-certificate
 - ../../../addons/cert-manager/prometheus-operator-webhook-certificate
 - ../../../addons/logging-operator/logging-stack
 - ../../../addons/prometheus-operator/cert-manager
