@@ -2522,6 +2522,8 @@ spec:
                   flush:
                     format: int32
                     type: integer
+                  forceHotReloadAfterGrace:
+                    type: boolean
                   forwardOptions:
                     properties:
                       Require_ack_response:
@@ -2629,6 +2631,8 @@ spec:
                         items:
                           type: string
                         type: array
+                      storage.pause_on_chunks_overlimit:
+                        type: string
                       storage.type:
                         type: string
                     type: object
@@ -3513,6 +3517,8 @@ spec:
                     type: object
                   security:
                     properties:
+                      createOpenShiftSCC:
+                        type: boolean
                       podSecurityContext:
                         properties:
                           appArmorProfile:
@@ -6181,6 +6187,8 @@ spec:
                     type: object
                   security:
                     properties:
+                      createOpenShiftSCC:
+                        type: boolean
                       podSecurityContext:
                         properties:
                           appArmorProfile:
@@ -12178,6 +12186,8 @@ spec:
                               items:
                                 type: string
                               type: array
+                            storage.pause_on_chunks_overlimit:
+                              type: string
                             storage.type:
                               type: string
                           type: object
@@ -12766,6 +12776,8 @@ spec:
                           type: object
                         security:
                           properties:
+                            createOpenShiftSCC:
+                              type: boolean
                             podSecurityContext:
                               properties:
                                 appArmorProfile:
