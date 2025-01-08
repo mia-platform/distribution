@@ -10,7 +10,7 @@ labels:
 images:
 - name: docker.io/library/traefik
   newTag: v3.2.1
-  digest: sha256:1a3e33f976d10f45efd613aa64814867068bf51c782599a70ef370447686291b
+  digest: sha256:c16ffd9085033fab5092d7052b000c64f98c8af846a1fb4047fdd05780229cd6
 resources:
 - configs
 - rbac
