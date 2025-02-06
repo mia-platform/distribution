@@ -4,9 +4,9 @@ name: eks-installation
 spec:
   modules:
     cni/cilium/eks:
-      version: v1.29.3
+      version: v1.29.4
     disaster-recovery/velero/base:
-      version: v1.29.1
+      version: v1.29.2
     ingress/traefik/eks:
       version: v1.29.2
     observability/logging-operator/base:
@@ -18,9 +18,9 @@ spec:
     scheduling/kube-green/base:
       version: v1.29.1
     security/cert-manager/base:
-      version: v1.29.1
+      version: v1.29.2
     security/kyverno/base:
-      version: v1.29.1
+      version: v1.29.2
     security/rbac-manager/base:
       version: v1.29.0
   addOns:
