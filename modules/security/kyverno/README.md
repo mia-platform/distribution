@@ -108,6 +108,7 @@ This module use the following user, gid and fsGroup:
 | 1.29.2         | 1.12.7         |
 | 1.30.0         | 1.13.1         |
 | 1.30.1         | 1.13.2         |
+| 1.30.2         | 1.13.3         |
 
 ## User customization
 
