@@ -414,6 +414,9 @@ spec:
         - name: cilium-run
           mountPath: /var/run/cilium
           readOnly: false
+        - name: cilium-netns
+          mountPath: /var/run/cilium/netns
+          mountPropagation: HostToContainer
         - name: bpf-maps
           mountPath: /sys/fs/bpf
           mountPropagation: HostToContainer
@@ -455,6 +458,10 @@ spec:
       - name: cilium-run
         hostPath:
           path: /var/run/cilium
+          type: DirectoryOrCreate
+      - name: cilium-netns
+        hostPath:
+          path: /var/run/netns
           type: DirectoryOrCreate
       - name: bpf-maps
         hostPath:
