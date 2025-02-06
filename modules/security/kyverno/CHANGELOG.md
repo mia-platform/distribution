@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update kyverno to v1.13.1
 - update PodDisruptionBudget from minAvailable to maxUnavailable
 
+## v1.29.2
+
+### Changed
+
+- update kyverno to v1.12.7
+
 ## v1.29.1
 
 ### Changed

@@ -27,6 +27,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update velero plugin for Microsoft Azure Storage to 1.11.0
 - update minio and minio config version to latest releases
 
+## v1.29.2
+
+### Changed
+
+- update minio and minio config version to latest releases
+
 ## v1.29.1
 
 ### Changed
