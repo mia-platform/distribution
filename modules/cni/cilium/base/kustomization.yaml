@@ -7,7 +7,7 @@ patches:
     - op: remove
       path: /spec/template/spec/initContainers/4
     - op: remove
-      path: /spec/template/spec/volumes/4
+      path: /spec/template/spec/volumes/5
   target:
     kind: DaemonSet
     name: cilium
