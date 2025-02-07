@@ -54,10 +54,10 @@ jobs:
     strategy:
       matrix:
         versions:
+        - kind: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+          kubectl: "v1.32.2"
         - kind: kindest/node:v1.31.6@sha256:28b7cbb993dfe093c76641a0c95807637213c9109b761f1d422c2400e22b8e87
           kubectl: "v1.31.6"
-        - kind: kindest/node:v1.30.10@sha256:4de75d0e82481ea846c0ed1de86328d821c1e6a6a91ac37bf804e5313670e507
-          kubectl: "v1.30.10"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout

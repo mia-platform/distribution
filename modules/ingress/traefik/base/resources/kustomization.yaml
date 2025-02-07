@@ -9,8 +9,8 @@ labels:
     app.kubernetes.io/component: ingress-controller
 images:
 - name: docker.io/library/traefik
-  newTag: v3.2.1
-  digest: sha256:c16ffd9085033fab5092d7052b000c64f98c8af846a1fb4047fdd05780229cd6
+  newTag: v3.3.3
+  digest: sha256:f1fdee7fda041872cff24e36a08f45ca53f006ded88f743a8e30e3d87ca52b48
 resources:
 - configs
 - rbac
