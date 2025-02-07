@@ -1,7 +1,9 @@
 upgradeCompatibility: "1.14"
+iptablesRandomFully: false
+
 cni:
   chainingMode: portmap
-sessionAffinity: true
+
 hubble:
   metrics:
     enabled:
@@ -9,27 +11,50 @@ hubble:
     - drop
     - tcp
     - flow
+    - port-distribution
     - icmp
-    - http
+    - httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
     serviceMonitor:
-      enabled: false
+      enabled: true
   tls:
     auto:
       method: cronJob
   relay:
     enabled: true
+    podDisruptionBudget:
+      enabled: true
     prometheus:
       enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
   ui:
     enabled: true
+    podDisruptionBudget:
+      enabled: true
+
 prometheus:
   enabled: true
   serviceMonitor:
-    enabled: false
+    enabled: true
+    trustCRDsExist: true
+
+sessionAffinity: true
+tls:
+  readSecretsOnlyFromSecretsNamespace: true
+  secretsNamespace:
+    create: false
+    name: kube-system
+
+loadBalancer:
+  protocolDifferentiation:
+    enabled: true
+
 operator:
   prometheus:
     enabled: true
     serviceMonitor:
-      enabled: false
+      enabled: true
+  podDisruptionBudget:
+    enabled: true
+
+agentNotReadyTaintKey: "ignore-taint.cluster-autoscaler.kubernetes.io/cilium-agent-not-ready"

@@ -1,10 +1,9 @@
 cluster-name: default
-peer-service: hubble-peer.kube-system.svc.cluster.local.:443
+peer-service: hubble-peer.kube-system.svc:443
 listen-address: :4245
 gops: true
 gops-port: "9893"
 metrics-listen-address: ":9966"
-dial-timeout:
 retry-timeout:
 sort-buffer-len-max:
 sort-buffer-drain-timeout:

@@ -29,7 +29,7 @@ spec:
             command:
             - /usr/bin/cilium-certgen
             args:
-            - --ca-generate
+            - --ca-generate=true
             - --ca-reuse-secret
             - --ca-secret-namespace=$(CILIUM_K8S_NAMESPACE)
             - --ca-secret-name=cilium-ca

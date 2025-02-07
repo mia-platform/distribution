@@ -8,8 +8,6 @@ patches:
     - op: replace
       path: /data/routing-mode
       value: native
-    - op: remove
-      path: /data/tunnel-protocol
     - op: add
       path: /data/enable-endpoint-routes
       value: "true"

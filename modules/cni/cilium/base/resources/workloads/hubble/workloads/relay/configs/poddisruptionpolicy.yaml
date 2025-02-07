@@ -3,6 +3,6 @@ kind: PodDisruptionBudget
 metadata:
   name: hubble-relay
 spec:
+  maxUnavailable: 50%
   selector:
     matchLabels: {}
-  maxUnavailable: 50%

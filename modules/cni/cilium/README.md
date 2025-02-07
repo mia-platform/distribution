@@ -115,14 +115,22 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.30.2         | 1.16.5           | v0.13.1     |
 | 1.30.3         | 1.16.6           | v0.13.1     |
 | 1.30.4         | 1.16.7           | v0.13.1     |
+| 1.31.x         | 1.17.0           | v0.13.1     |
 
 ## User customization
 
-### Base, AKS, EKS
+### Base, EKS
 
 By default these flavor will set the `cluster-pool-ipv4-cidr` property inside the `cilium-config` ConfigMap to
 `10.10.0.0/16` and the `cluster-pool-ipv4-mask-size` to `24`. If you don’t want to use these values you can change them
 via a patch setting them to your desired values.
+
+### AKS
+
+For this flavor you **must** change the value of the `cluster-pool-ipv4-cidr`  property inside the `cilium-config`
+ConfigMap with a patch and setting it to a value that does not overlap with the default service CIDR of AKS. For
+avoiding the setup with a wrong value, the module will set the property to `CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR`
+value that will trigger an error inside Cilium workload and will not start.
 
 ### GKE
 
@@ -132,5 +140,5 @@ avoiding the setup with a wrong value, the module will set the property to `CHAN
 value that will trigger an error inside Cilium workload and will not start.
 
 [Here is the link to the official repository]: https://github.com/cilium/cilium "Cilium GitHub Repository"
-[link]: https://docs.cilium.io/en/v1.14/operations/system_requirements/ "Cilium System Requirements"
+[link]: https://docs.cilium.io/en/stable/operations/system_requirements/ "Cilium System Requirements"
 [official guide from Microsoft]: https://learn.microsoft.com/en-us/azure/aks/use-byo-cni "Bring your own Container Network Interface plugin with Azure Kubernetes Service"
