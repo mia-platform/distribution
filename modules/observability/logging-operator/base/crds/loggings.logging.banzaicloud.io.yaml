@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.16.3
+    controller-gen.kubebuilder.io/version: v0.17.1
   name: loggings.logging.banzaicloud.io
 spec:
   group: logging.banzaicloud.io
@@ -66,6 +66,9 @@ spec:
             properties:
               allowClusterResourcesFromAllNamespaces:
                 type: boolean
+                x-kubernetes-validations:
+                - message: Value is immutable, please recreate the resource
+                  rule: self == oldSelf
               clusterDomain:
                 type: string
               configCheck:
@@ -81,6 +84,9 @@ spec:
                 type: object
               controlNamespace:
                 type: string
+                x-kubernetes-validations:
+                - message: Value is immutable, please recreate the resource
+                  rule: self == oldSelf
               defaultFlow:
                 properties:
                   filters:
@@ -174,156 +180,6 @@ spec:
                             use_entire_record:
                               type: boolean
                             use_record_as_seed:
-                              type: boolean
-                          type: object
-                        enhanceK8s:
-                          properties:
-                            api_groups:
-                              items:
-                                type: string
-                              type: array
-                            bearer_token_file:
-                              type: string
-                            ca_file:
-                              properties:
-                                mountFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                                value:
-                                  type: string
-                                valueFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                              type: object
-                            cache_refresh:
-                              type: integer
-                            cache_refresh_variation:
-                              type: integer
-                            cache_size:
-                              type: integer
-                            cache_ttl:
-                              type: integer
-                            client_cert:
-                              properties:
-                                mountFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                                value:
-                                  type: string
-                                valueFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                              type: object
-                            client_key:
-                              properties:
-                                mountFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                                value:
-                                  type: string
-                                valueFrom:
-                                  properties:
-                                    secretKeyRef:
-                                      properties:
-                                        key:
-                                          type: string
-                                        name:
-                                          default: ""
-                                          type: string
-                                        optional:
-                                          type: boolean
-                                      required:
-                                      - key
-                                      type: object
-                                      x-kubernetes-map-type: atomic
-                                  type: object
-                              type: object
-                            core_api_versions:
-                              items:
-                                type: string
-                              type: array
-                            data_type:
-                              type: string
-                            in_namespace_path:
-                              items:
-                                type: string
-                              type: array
-                            in_pod_path:
-                              items:
-                                type: string
-                              type: array
-                            kubernetes_url:
-                              type: string
-                            secret_dir:
-                              type: string
-                            ssl_partial_chain:
-                              type: boolean
-                            verify_ssl:
                               type: boolean
                           type: object
                         geoip:
@@ -958,61 +814,6 @@ spec:
                         stdout:
                           properties:
                             output_type:
-                              type: string
-                          type: object
-                        sumologic:
-                          properties:
-                            collector_key_name:
-                              type: string
-                            collector_value:
-                              type: string
-                            exclude_container_regex:
-                              type: string
-                            exclude_facility_regex:
-                              type: string
-                            exclude_host_regex:
-                              type: string
-                            exclude_namespace_regex:
-                              type: string
-                            exclude_pod_regex:
-                              type: string
-                            exclude_priority_regex:
-                              type: string
-                            exclude_unit_regex:
-                              type: string
-                            log_format:
-                              type: string
-                            source_category:
-                              type: string
-                            source_category_key_name:
-                              type: string
-                            source_category_prefix:
-                              type: string
-                            source_category_replace_dash:
-                              type: string
-                            source_host:
-                              type: string
-                            source_host_key_name:
-                              type: string
-                            source_name:
-                              type: string
-                            source_name_key_name:
-                              type: string
-                            tracing_annotation_prefix:
-                              type: string
-                            tracing_container_name:
-                              type: string
-                            tracing_format:
-                              type: boolean
-                            tracing_host:
-                              type: string
-                            tracing_label_prefix:
-                              type: string
-                            tracing_namespace:
-                              type: string
-                            tracing_pod:
-                              type: string
-                            tracing_pod_id:
                               type: string
                           type: object
                         tag_normaliser:
@@ -2210,6 +2011,8 @@ spec:
                   dnsPolicy:
                     type: string
                   enableUpstream:
+                    type: boolean
+                  enabledIPv6:
                     type: boolean
                   envVars:
                     items:
@@ -3543,6 +3346,8 @@ spec:
                           runAsUser:
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            type: string
                           seLinuxOptions:
                             properties:
                               level:
@@ -4908,6 +4713,8 @@ spec:
                           x-kubernetes-int-or-string: true
                         type: object
                     type: object
+                  configReloaderUseGracefulReloadWebhook:
+                    type: boolean
                   disablePvc:
                     type: boolean
                   dnsConfig:
@@ -4936,6 +4743,8 @@ spec:
                   dnsPolicy:
                     type: string
                   enableMsgpackTimeSupport:
+                    type: boolean
+                  enabledIPv6:
                     type: boolean
                   envVars:
                     items:
@@ -6213,6 +6022,8 @@ spec:
                           runAsUser:
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            type: string
                           seLinuxOptions:
                             properties:
                               level:
@@ -7272,156 +7083,6 @@ spec:
                         use_record_as_seed:
                           type: boolean
                       type: object
-                    enhanceK8s:
-                      properties:
-                        api_groups:
-                          items:
-                            type: string
-                          type: array
-                        bearer_token_file:
-                          type: string
-                        ca_file:
-                          properties:
-                            mountFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                            value:
-                              type: string
-                            valueFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                          type: object
-                        cache_refresh:
-                          type: integer
-                        cache_refresh_variation:
-                          type: integer
-                        cache_size:
-                          type: integer
-                        cache_ttl:
-                          type: integer
-                        client_cert:
-                          properties:
-                            mountFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                            value:
-                              type: string
-                            valueFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                          type: object
-                        client_key:
-                          properties:
-                            mountFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                            value:
-                              type: string
-                            valueFrom:
-                              properties:
-                                secretKeyRef:
-                                  properties:
-                                    key:
-                                      type: string
-                                    name:
-                                      default: ""
-                                      type: string
-                                    optional:
-                                      type: boolean
-                                  required:
-                                  - key
-                                  type: object
-                                  x-kubernetes-map-type: atomic
-                              type: object
-                          type: object
-                        core_api_versions:
-                          items:
-                            type: string
-                          type: array
-                        data_type:
-                          type: string
-                        in_namespace_path:
-                          items:
-                            type: string
-                          type: array
-                        in_pod_path:
-                          items:
-                            type: string
-                          type: array
-                        kubernetes_url:
-                          type: string
-                        secret_dir:
-                          type: string
-                        ssl_partial_chain:
-                          type: boolean
-                        verify_ssl:
-                          type: boolean
-                      type: object
                     geoip:
                       properties:
                         backend_library:
@@ -8054,61 +7715,6 @@ spec:
                     stdout:
                       properties:
                         output_type:
-                          type: string
-                      type: object
-                    sumologic:
-                      properties:
-                        collector_key_name:
-                          type: string
-                        collector_value:
-                          type: string
-                        exclude_container_regex:
-                          type: string
-                        exclude_facility_regex:
-                          type: string
-                        exclude_host_regex:
-                          type: string
-                        exclude_namespace_regex:
-                          type: string
-                        exclude_pod_regex:
-                          type: string
-                        exclude_priority_regex:
-                          type: string
-                        exclude_unit_regex:
-                          type: string
-                        log_format:
-                          type: string
-                        source_category:
-                          type: string
-                        source_category_key_name:
-                          type: string
-                        source_category_prefix:
-                          type: string
-                        source_category_replace_dash:
-                          type: string
-                        source_host:
-                          type: string
-                        source_host_key_name:
-                          type: string
-                        source_name:
-                          type: string
-                        source_name_key_name:
-                          type: string
-                        tracing_annotation_prefix:
-                          type: string
-                        tracing_container_name:
-                          type: string
-                        tracing_format:
-                          type: boolean
-                        tracing_host:
-                          type: string
-                        tracing_label_prefix:
-                          type: string
-                        tracing_namespace:
-                          type: string
-                        tracing_pod:
-                          type: string
-                        tracing_pod_id:
                           type: string
                       type: object
                     tag_normaliser:
@@ -11050,6 +10656,8 @@ spec:
                                             runAsUser:
                                               format: int64
                                               type: integer
+                                            seLinuxChangePolicy:
+                                              type: string
                                             seLinuxOptions:
                                               properties:
                                                 level:
@@ -12802,6 +12410,8 @@ spec:
                                 runAsUser:
                                   format: int64
                                   type: integer
+                                seLinuxChangePolicy:
+                                  type: string
                                 seLinuxOptions:
                                   properties:
                                     level:
@@ -13002,6 +12612,17 @@ spec:
                       type: string
                   type: object
                 type: array
+              routeConfig:
+                properties:
+                  disableLoggingRoute:
+                    type: boolean
+                  enableTelemetryControllerRoute:
+                    type: boolean
+                  tenantLabels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
               skipInvalidResources:
                 type: boolean
               syslogNG:
@@ -16103,6 +15724,8 @@ spec:
                           runAsUser:
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            type: string
                           seLinuxOptions:
                             properties:
                               level:
@@ -20290,6 +19913,8 @@ spec:
                                       runAsUser:
                                         format: int64
                                         type: integer
+                                      seLinuxChangePolicy:
+                                        type: string
                                       seLinuxOptions:
                                         properties:
                                           level:
