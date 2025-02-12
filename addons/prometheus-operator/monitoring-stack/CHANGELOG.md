@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update prometheus to v3.0.1
 - update alertmanager to v0.28.0
 
+### Fixed
+
+- change prometheus-metrics service type to ClusterIP from NodePort
+
 ## v2.3.0
 
 ### Changed
