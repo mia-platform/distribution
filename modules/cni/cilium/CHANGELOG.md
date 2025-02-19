@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update cilium to v1.17.0
+- update cilium to v1.17.1
 - cilium secrets are read only from kube-system namespace
 - support for multiple protocol on the same port
 - aks flavour now need the customization of the `cluster-pool-ipv4-cidr` value in the cilium configmap and doesn't use
