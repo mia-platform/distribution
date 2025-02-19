@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update cilium to v1.16.6
+- update cilium to v1.16.7
 
 ## v1.29.4
 
