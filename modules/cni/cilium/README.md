@@ -114,6 +114,7 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.30.1         | 1.16.4           | v0.13.1     |
 | 1.30.2         | 1.16.5           | v0.13.1     |
 | 1.30.3         | 1.16.6           | v0.13.1     |
+| 1.30.4         | 1.16.7           | v0.13.1     |
 
 ## User customization
 
