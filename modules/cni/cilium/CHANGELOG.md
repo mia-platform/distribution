@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.31.0
+
 ### Changed
 
 - update cilium to v1.17.1
@@ -14,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - support for multiple protocol on the same port
 - aks flavour now need the customization of the `cluster-pool-ipv4-cidr` value in the cilium configmap and doesn't use
 	the `10.0.0.0/8` value as default anymore.
-
 
 ## v1.30.4
 
