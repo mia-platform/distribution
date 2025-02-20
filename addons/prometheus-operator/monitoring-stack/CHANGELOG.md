@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.4.0
+
 ### Changed
 
 - update prometheus to v3.0.1
