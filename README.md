@@ -101,7 +101,7 @@ as possible.
 
 [License]: https://img.shields.io/github/license/mia-platform/distribution?color=informational&style=for-the-badge
 	"Magellano License"
-[Kubernetes]: https://img.shields.io/badge/kubernetes-1.30-success?style=for-the-badge&logo=kubernetes "Supported
+[Kubernetes]: https://img.shields.io/badge/kubernetes-1.31-success?style=for-the-badge&logo=kubernetes "Supported
 	Kubernetes version"
 [`vab`]: https://github.com/mia-platform/vab "cli for handling installation and upgrade of Mia-Platform
 	unofficial distribution"
