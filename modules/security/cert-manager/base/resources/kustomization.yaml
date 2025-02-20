@@ -7,17 +7,17 @@ labels:
     app.kubernetes.io/component: cert-manager
 images:
 - name: quay.io/jetstack/cert-manager-cainjector
-  newTag: v1.16.4
-  digest: sha256:430aa11fd5f84f06f7722843278703d8688d212260b0caff112b54b16ca52e6b
+  newTag: v1.17.1
+  digest: sha256:a8319ee78e94abb11c4fe0b35197a57848ae7eec6c526e369187dc57b2961116
 - name: quay.io/jetstack/cert-manager-controller
-  newTag: v1.16.4
-  digest: sha256:33beefe07c1a7658f7fcef86092d6999d84644e66ebc21f2c762b84fa721571e
+  newTag: v1.17.1
+  digest: sha256:9339837eaaa7852509fa4c89c12543721d79d7facf57f29adec7c96fffe408d6
 - name: quay.io/jetstack/cert-manager-webhook
-  newTag: v1.16.4
-  digest: sha256:7e6236cd20d1c85e3eb12a5a369cb66da30e0256ce9078d49964e654e94c05bf
+  newTag: v1.17.1
+  digest: sha256:2933ec670a99524a6860f641ef3720289d784b0bef35bd0b74fc3eb093e71596
 - name: quay.io/jetstack/cert-manager-acmesolver
-  newTag: v1.16.4
-  digest: sha256:47130b1c2d049925504434a8e6a82a333f54fe3e911ec05dc12f0af23935e693
+  newTag: v1.17.1
+  digest: sha256:a076f72f33a22dfd3a23727f1e1a069817819406b39e5b0fd9cb97d3338cb8d8
 resources:
 - configs
 - rbac

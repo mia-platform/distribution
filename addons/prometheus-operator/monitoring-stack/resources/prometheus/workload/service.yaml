@@ -4,8 +4,7 @@ metadata:
   name: prometheus-metrics
   namespace: PROMETHEUS_OPERATOR_NAMESPACE
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
+  type: ClusterIP
   ports:
   - port: 9090
     name: web

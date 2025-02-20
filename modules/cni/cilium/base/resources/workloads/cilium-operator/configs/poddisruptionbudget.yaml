@@ -3,6 +3,6 @@ kind: PodDisruptionBudget
 metadata:
   name: cilium-operator
 spec:
+  maxUnavailable: 33%
   selector:
     matchLabels: {}
-  maxUnavailable: 33%

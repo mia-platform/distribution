@@ -17416,6 +17416,11 @@
 					{
 						"group": "coordination.k8s.io",
 						"kind": "DeleteOptions",
+						"version": "v1alpha1"
+					},
+					{
+						"group": "coordination.k8s.io",
+						"kind": "DeleteOptions",
 						"version": "v1beta1"
 					},
 					{
@@ -17526,7 +17531,7 @@
 					{
 						"group": "resource.k8s.io",
 						"kind": "DeleteOptions",
-						"version": "v1alpha2"
+						"version": "v1alpha3"
 					},
 					{
 						"group": "scheduling.k8s.io",
@@ -17859,11 +17864,6 @@
 						"group": "",
 						"kind": "Status",
 						"version": "v1"
-					},
-					{
-						"group": "resource.k8s.io",
-						"kind": "Status",
-						"version": "v1alpha2"
 					}
 				]
 			},
@@ -18666,7 +18666,8 @@
 						"kind": "Gateway",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.GatewayClass": {
 				"description": "GatewayClass describes a class of Gateways available to the user for creating\nGateway resources.\n\nIt is recommended that this resource be used as a template for Gateways. This\nmeans that a Gateway is based on the state of the GatewayClass at the time it\nwas created and changes to the GatewayClass or associated parameters are not\npropagated down to existing Gateways. This recommendation is intended to\nlimit the blast radius of changes to GatewayClass or associated parameters.\nIf implementations choose to propagate GatewayClass changes to existing\nGateways, that MUST be clearly documented by the implementation.\n\nWhenever one or more Gateways are using a GatewayClass, implementations SHOULD\nadd the `gateway-exists-finalizer.gateway.networking.k8s.io` finalizer on the\nassociated GatewayClass. This ensures that a GatewayClass associated with a\nGateway is not deleted while in use.\n\nGatewayClass is a Cluster level resource.",
@@ -18848,7 +18849,8 @@
 						"kind": "GatewayClass",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.GatewayClassList": {
 				"description": "GatewayClassList is a list of GatewayClass",
@@ -18887,7 +18889,8 @@
 						"kind": "GatewayClassList",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.GatewayList": {
 				"description": "GatewayList is a list of Gateway",
@@ -18926,7 +18929,8 @@
 						"kind": "GatewayList",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.HTTPRoute": {
 				"description": "HTTPRoute provides a way to route HTTP requests. This includes the capability\nto match requests by hostname, path, header, or query param. Filters can be\nused to specify additional processing steps. Backends specify where matching\nrequests should be routed.",
@@ -20483,7 +20487,8 @@
 						"kind": "HTTPRoute",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.HTTPRouteList": {
 				"description": "HTTPRouteList is a list of HTTPRoute",
@@ -20522,7 +20527,8 @@
 						"kind": "HTTPRouteList",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.ReferenceGrant": {
 				"description": "ReferenceGrant identifies kinds of resources in other namespaces that are\ntrusted to reference the specified kinds of resources in the same namespace\nas the policy.\n\nEach ReferenceGrant can be used to represent a unique trust relationship.\nAdditional Reference Grants can be used to add to the set of trusted\nsources of inbound references for the namespace they are defined within.\n\nAll cross-namespace references in Gateway API (with the exception of cross-namespace\nGateway-route attachment) require a ReferenceGrant.\n\nReferenceGrant is a form of runtime verification allowing users to assert\nwhich cross-namespace object references are permitted. Implementations that\nsupport ReferenceGrant MUST NOT permit cross-namespace references which have\nno grant, and MUST respond to the removal of a grant by revoking the access\nthat the grant allowed.",
@@ -20633,7 +20639,8 @@
 						"kind": "ReferenceGrant",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1beta1.ReferenceGrantList": {
 				"description": "ReferenceGrantList is a list of ReferenceGrant",
@@ -20672,7 +20679,8 @@
 						"kind": "ReferenceGrantList",
 						"version": "v1beta1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.GRPCRoute": {
 				"description": "GRPCRoute provides a way to route gRPC requests. This includes the capability\nto match requests by hostname, gRPC service, gRPC method, or HTTP/2 header.\nFilters can be used to specify additional processing steps. Backends specify\nwhere matching requests will be routed.\n\nGRPCRoute falls under extended support within the Gateway API. Within the\nfollowing specification, the word \"MUST\" indicates that an implementation\nsupporting GRPCRoute must conform to the indicated requirement, but an\nimplementation not supporting this route type need not follow the requirement\nunless explicitly indicated.\n\nImplementations supporting `GRPCRoute` with the `HTTPS` `ProtocolType` MUST\naccept HTTP/2 connections without an initial upgrade from HTTP/1.1, i.e. via\nALPN. If the implementation does not support this, then it MUST set the\n\"Accepted\" condition to \"False\" for the affected listener with a reason of\n\"UnsupportedProtocol\".  Implementations MAY also accept HTTP/2 connections\nwith an upgrade from HTTP/1.\n\nImplementations supporting `GRPCRoute` with the `HTTP` `ProtocolType` MUST\nsupport HTTP/2 over cleartext TCP (h2c,\nhttps://www.rfc-editor.org/rfc/rfc7540#section-3.1) without an initial\nupgrade from HTTP/1.1, i.e. with prior knowledge\n(https://www.rfc-editor.org/rfc/rfc7540#section-3.4). If the implementation\ndoes not support this, then it MUST set the \"Accepted\" condition to \"False\"\nfor the affected listener with a reason of \"UnsupportedProtocol\".\nImplementations MAY also accept HTTP/2 connections with an upgrade from\nHTTP/1, i.e. without prior knowledge.",
@@ -21729,7 +21737,8 @@
 						"kind": "GRPCRoute",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.GRPCRouteList": {
 				"description": "GRPCRouteList is a list of GRPCRoute",
@@ -21768,7 +21777,8 @@
 						"kind": "GRPCRouteList",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.Gateway": {
 				"description": "Gateway represents an instance of a service-traffic handling infrastructure\nby binding Listeners to a set of IP addresses.",
@@ -22506,7 +22516,8 @@
 						"kind": "Gateway",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.GatewayClass": {
 				"description": "GatewayClass describes a class of Gateways available to the user for creating\nGateway resources.\n\nIt is recommended that this resource be used as a template for Gateways. This\nmeans that a Gateway is based on the state of the GatewayClass at the time it\nwas created and changes to the GatewayClass or associated parameters are not\npropagated down to existing Gateways. This recommendation is intended to\nlimit the blast radius of changes to GatewayClass or associated parameters.\nIf implementations choose to propagate GatewayClass changes to existing\nGateways, that MUST be clearly documented by the implementation.\n\nWhenever one or more Gateways are using a GatewayClass, implementations SHOULD\nadd the `gateway-exists-finalizer.gateway.networking.k8s.io` finalizer on the\nassociated GatewayClass. This ensures that a GatewayClass associated with a\nGateway is not deleted while in use.\n\nGatewayClass is a Cluster level resource.",
@@ -22688,7 +22699,8 @@
 						"kind": "GatewayClass",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.GatewayClassList": {
 				"description": "GatewayClassList is a list of GatewayClass",
@@ -22727,7 +22739,8 @@
 						"kind": "GatewayClassList",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.GatewayList": {
 				"description": "GatewayList is a list of Gateway",
@@ -22766,7 +22779,8 @@
 						"kind": "GatewayList",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.HTTPRoute": {
 				"description": "HTTPRoute provides a way to route HTTP requests. This includes the capability\nto match requests by hostname, path, header, or query param. Filters can be\nused to specify additional processing steps. Backends specify where matching\nrequests should be routed.",
@@ -24323,7 +24337,8 @@
 						"kind": "HTTPRoute",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.k8s.networking.gateway.v1.HTTPRouteList": {
 				"description": "HTTPRouteList is a list of HTTPRoute",
@@ -24362,7 +24377,8 @@
 						"kind": "HTTPRouteList",
 						"version": "v1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRoute": {
 				"description": "IngressRoute is the CRD implementation of a Traefik HTTP Router.",
@@ -24396,7 +24412,7 @@
 						],
 						"properties": {
 							"entryPoints": {
-								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/entrypoints/\nDefault: all.",
+								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/entrypoints/\nDefault: all.",
 								"type": "array",
 								"items": {
 									"type": "string"
@@ -24409,23 +24425,22 @@
 									"description": "Route holds the HTTP route configuration.",
 									"type": "object",
 									"required": [
-										"kind",
 										"match"
 									],
 									"properties": {
 										"kind": {
-											"description": "Kind defines the kind of the route.\nRule is the only supported kind.",
+											"description": "Kind defines the kind of the route.\nRule is the only supported kind.\nIf not defined, defaults to Rule.",
 											"type": "string",
 											"enum": [
 												"Rule"
 											]
 										},
 										"match": {
-											"description": "Match defines the router's rule.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#rule",
+											"description": "Match defines the router's rule.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#rule",
 											"type": "string"
 										},
 										"middlewares": {
-											"description": "Middlewares defines the list of references to Middleware resources.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-middleware",
+											"description": "Middlewares defines the list of references to Middleware resources.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-middleware",
 											"type": "array",
 											"items": {
 												"description": "MiddlewareRef is a reference to a Middleware resource.",
@@ -24445,8 +24460,23 @@
 												}
 											}
 										},
+										"observability": {
+											"description": "Observability defines the observability configuration for a router.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#observability",
+											"type": "object",
+											"properties": {
+												"accessLogs": {
+													"type": "boolean"
+												},
+												"metrics": {
+													"type": "boolean"
+												},
+												"tracing": {
+													"type": "boolean"
+												}
+											}
+										},
 										"priority": {
-											"description": "Priority defines the router's priority.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#priority",
+											"description": "Priority defines the router's priority.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#priority",
 											"type": "integer"
 										},
 										"services": {
@@ -24587,7 +24617,7 @@
 														"type": "string"
 													},
 													"sticky": {
-														"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#sticky-sessions",
+														"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#sticky-sessions",
 														"type": "object",
 														"properties": {
 															"cookie": {
@@ -24599,11 +24629,15 @@
 																		"type": "boolean"
 																	},
 																	"maxAge": {
-																		"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+																		"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 																		"type": "integer"
 																	},
 																	"name": {
 																		"description": "Name defines the Cookie name.",
+																		"type": "string"
+																	},
+																	"path": {
+																		"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 																		"type": "string"
 																	},
 																	"sameSite": {
@@ -24630,22 +24664,22 @@
 											}
 										},
 										"syntax": {
-											"description": "Syntax defines the router's rule syntax.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#rulesyntax",
+											"description": "Syntax defines the router's rule syntax.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#rulesyntax",
 											"type": "string"
 										}
 									}
 								}
 							},
 							"tls": {
-								"description": "TLS defines the TLS configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#tls",
+								"description": "TLS defines the TLS configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#tls",
 								"type": "object",
 								"properties": {
 									"certResolver": {
-										"description": "CertResolver defines the name of the certificate resolver to use.\nCert resolvers have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/https/acme/#certificate-resolvers",
+										"description": "CertResolver defines the name of the certificate resolver to use.\nCert resolvers have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/https/acme/#certificate-resolvers",
 										"type": "string"
 									},
 									"domains": {
-										"description": "Domains defines the list of domains that will be used to issue certificates.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#domains",
+										"description": "Domains defines the list of domains that will be used to issue certificates.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#domains",
 										"type": "array",
 										"items": {
 											"description": "Domain holds a domain name with SANs.",
@@ -24666,18 +24700,18 @@
 										}
 									},
 									"options": {
-										"description": "Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.\nIf not defined, the `default` TLSOption is used.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#tls-options",
+										"description": "Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.\nIf not defined, the `default` TLSOption is used.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#tls-options",
 										"type": "object",
 										"required": [
 											"name"
 										],
 										"properties": {
 											"name": {
-												"description": "Name defines the name of the referenced TLSOption.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-tlsoption",
+												"description": "Name defines the name of the referenced TLSOption.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-tlsoption",
 												"type": "string"
 											},
 											"namespace": {
-												"description": "Namespace defines the namespace of the referenced TLSOption.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-tlsoption",
+												"description": "Namespace defines the namespace of the referenced TLSOption.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-tlsoption",
 												"type": "string"
 											}
 										}
@@ -24694,11 +24728,11 @@
 										],
 										"properties": {
 											"name": {
-												"description": "Name defines the name of the referenced TLSStore.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-tlsstore",
+												"description": "Name defines the name of the referenced TLSStore.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-tlsstore",
 												"type": "string"
 											},
 											"namespace": {
-												"description": "Namespace defines the namespace of the referenced TLSStore.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-tlsstore",
+												"description": "Namespace defines the namespace of the referenced TLSStore.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-tlsstore",
 												"type": "string"
 											}
 										}
@@ -24714,7 +24748,8 @@
 						"kind": "IngressRoute",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRouteList": {
 				"description": "IngressRouteList is a list of IngressRoute",
@@ -24753,7 +24788,8 @@
 						"kind": "IngressRouteList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRouteTCP": {
 				"description": "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.",
@@ -24787,7 +24823,7 @@
 						],
 						"properties": {
 							"entryPoints": {
-								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/entrypoints/\nDefault: all.",
+								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/entrypoints/\nDefault: all.",
 								"type": "array",
 								"items": {
 									"type": "string"
@@ -24804,7 +24840,7 @@
 									],
 									"properties": {
 										"match": {
-											"description": "Match defines the router's rule.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#rule_1",
+											"description": "Match defines the router's rule.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#rule_1",
 											"type": "string"
 										},
 										"middlewares": {
@@ -24829,7 +24865,7 @@
 											}
 										},
 										"priority": {
-											"description": "Priority defines the router's priority.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#priority_1",
+											"description": "Priority defines the router's priority.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#priority_1",
 											"type": "integer"
 										},
 										"services": {
@@ -24872,7 +24908,7 @@
 														"x-kubernetes-int-or-string": true
 													},
 													"proxyProtocol": {
-														"description": "ProxyProtocol defines the PROXY protocol configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#proxy-protocol",
+														"description": "ProxyProtocol defines the PROXY protocol configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#proxy-protocol",
 														"type": "object",
 														"properties": {
 															"version": {
@@ -24901,22 +24937,22 @@
 											}
 										},
 										"syntax": {
-											"description": "Syntax defines the router's rule syntax.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#rulesyntax_1",
+											"description": "Syntax defines the router's rule syntax.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#rulesyntax_1",
 											"type": "string"
 										}
 									}
 								}
 							},
 							"tls": {
-								"description": "TLS defines the TLS configuration on a layer 4 / TCP Route.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#tls_1",
+								"description": "TLS defines the TLS configuration on a layer 4 / TCP Route.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#tls_1",
 								"type": "object",
 								"properties": {
 									"certResolver": {
-										"description": "CertResolver defines the name of the certificate resolver to use.\nCert resolvers have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/https/acme/#certificate-resolvers",
+										"description": "CertResolver defines the name of the certificate resolver to use.\nCert resolvers have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/https/acme/#certificate-resolvers",
 										"type": "string"
 									},
 									"domains": {
-										"description": "Domains defines the list of domains that will be used to issue certificates.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/routers/#domains",
+										"description": "Domains defines the list of domains that will be used to issue certificates.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/routers/#domains",
 										"type": "array",
 										"items": {
 											"description": "Domain holds a domain name with SANs.",
@@ -24937,7 +24973,7 @@
 										}
 									},
 									"options": {
-										"description": "Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.\nIf not defined, the `default` TLSOption is used.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#tls-options",
+										"description": "Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.\nIf not defined, the `default` TLSOption is used.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#tls-options",
 										"type": "object",
 										"required": [
 											"name"
@@ -24989,7 +25025,8 @@
 						"kind": "IngressRouteTCP",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRouteTCPList": {
 				"description": "IngressRouteTCPList is a list of IngressRouteTCP",
@@ -25028,7 +25065,8 @@
 						"kind": "IngressRouteTCPList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRouteUDP": {
 				"description": "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.",
@@ -25062,7 +25100,7 @@
 						],
 						"properties": {
 							"entryPoints": {
-								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/entrypoints/\nDefault: all.",
+								"description": "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/entrypoints/\nDefault: all.",
 								"type": "array",
 								"items": {
 									"type": "string"
@@ -25133,7 +25171,8 @@
 						"kind": "IngressRouteUDP",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.IngressRouteUDPList": {
 				"description": "IngressRouteUDPList is a list of IngressRouteUDP",
@@ -25172,10 +25211,11 @@
 						"kind": "IngressRouteUDPList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.Middleware": {
-				"description": "Middleware is the CRD implementation of a Traefik Middleware.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/overview/",
+				"description": "Middleware is the CRD implementation of a Traefik Middleware.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/overview/",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -25203,7 +25243,7 @@
 						"type": "object",
 						"properties": {
 							"addPrefix": {
-								"description": "AddPrefix holds the add prefix middleware configuration.\nThis middleware updates the path of a request before forwarding it.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/addprefix/",
+								"description": "AddPrefix holds the add prefix middleware configuration.\nThis middleware updates the path of a request before forwarding it.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/addprefix/",
 								"type": "object",
 								"properties": {
 									"prefix": {
@@ -25213,11 +25253,11 @@
 								}
 							},
 							"basicAuth": {
-								"description": "BasicAuth holds the basic auth middleware configuration.\nThis middleware restricts access to your services to known users.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/basicauth/",
+								"description": "BasicAuth holds the basic auth middleware configuration.\nThis middleware restricts access to your services to known users.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/basicauth/",
 								"type": "object",
 								"properties": {
 									"headerField": {
-										"description": "HeaderField defines a header field to store the authenticated user.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/basicauth/#headerfield",
+										"description": "HeaderField defines a header field to store the authenticated user.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/basicauth/#headerfield",
 										"type": "string"
 									},
 									"realm": {
@@ -25235,7 +25275,7 @@
 								}
 							},
 							"buffering": {
-								"description": "Buffering holds the buffering middleware configuration.\nThis middleware retries or limits the size of requests that can be forwarded to backends.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/buffering/#maxrequestbodybytes",
+								"description": "Buffering holds the buffering middleware configuration.\nThis middleware retries or limits the size of requests that can be forwarded to backends.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/buffering/#maxrequestbodybytes",
 								"type": "object",
 								"properties": {
 									"maxRequestBodyBytes": {
@@ -25259,13 +25299,13 @@
 										"format": "int64"
 									},
 									"retryExpression": {
-										"description": "RetryExpression defines the retry conditions.\nIt is a logical combination of functions with operators AND (&&) and OR (||).\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/buffering/#retryexpression",
+										"description": "RetryExpression defines the retry conditions.\nIt is a logical combination of functions with operators AND (&&) and OR (||).\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/buffering/#retryexpression",
 										"type": "string"
 									}
 								}
 							},
 							"chain": {
-								"description": "Chain holds the configuration of the chain middleware.\nThis middleware enables to define reusable combinations of other pieces of middleware.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/chain/",
+								"description": "Chain holds the configuration of the chain middleware.\nThis middleware enables to define reusable combinations of other pieces of middleware.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/chain/",
 								"type": "object",
 								"properties": {
 									"middlewares": {
@@ -25342,7 +25382,7 @@
 								}
 							},
 							"compress": {
-								"description": "Compress holds the compress middleware configuration.\nThis middleware compresses responses before sending them to the client, using gzip, brotli, or zstd compression.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/compress/",
+								"description": "Compress holds the compress middleware configuration.\nThis middleware compresses responses before sending them to the client, using gzip, brotli, or zstd compression.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/compress/",
 								"type": "object",
 								"properties": {
 									"defaultEncoding": {
@@ -25387,11 +25427,11 @@
 								}
 							},
 							"digestAuth": {
-								"description": "DigestAuth holds the digest auth middleware configuration.\nThis middleware restricts access to your services to known users.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/digestauth/",
+								"description": "DigestAuth holds the digest auth middleware configuration.\nThis middleware restricts access to your services to known users.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/digestauth/",
 								"type": "object",
 								"properties": {
 									"headerField": {
-										"description": "HeaderField defines a header field to store the authenticated user.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/basicauth/#headerfield",
+										"description": "HeaderField defines a header field to store the authenticated user.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/basicauth/#headerfield",
 										"type": "string"
 									},
 									"realm": {
@@ -25409,7 +25449,7 @@
 								}
 							},
 							"errors": {
-								"description": "ErrorPage holds the custom error middleware configuration.\nThis middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/errorpages/",
+								"description": "ErrorPage holds the custom error middleware configuration.\nThis middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/errorpages/",
 								"type": "object",
 								"properties": {
 									"query": {
@@ -25417,7 +25457,7 @@
 										"type": "string"
 									},
 									"service": {
-										"description": "Service defines the reference to a Kubernetes Service that will serve the error page.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/errorpages/#service",
+										"description": "Service defines the reference to a Kubernetes Service that will serve the error page.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/errorpages/#service",
 										"type": "object",
 										"required": [
 											"name"
@@ -25551,7 +25591,7 @@
 												"type": "string"
 											},
 											"sticky": {
-												"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#sticky-sessions",
+												"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#sticky-sessions",
 												"type": "object",
 												"properties": {
 													"cookie": {
@@ -25563,11 +25603,15 @@
 																"type": "boolean"
 															},
 															"maxAge": {
-																"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+																"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 																"type": "integer"
 															},
 															"name": {
 																"description": "Name defines the Cookie name.",
+																"type": "string"
+															},
+															"path": {
+																"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 																"type": "string"
 															},
 															"sameSite": {
@@ -25602,7 +25646,7 @@
 								}
 							},
 							"forwardAuth": {
-								"description": "ForwardAuth holds the forward auth middleware configuration.\nThis middleware delegates the request authentication to a Service.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/forwardauth/",
+								"description": "ForwardAuth holds the forward auth middleware configuration.\nThis middleware delegates the request authentication to a Service.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/forwardauth/",
 								"type": "object",
 								"properties": {
 									"addAuthCookiesToResponse": {
@@ -25631,8 +25675,25 @@
 										}
 									},
 									"authResponseHeadersRegex": {
-										"description": "AuthResponseHeadersRegex defines the regex to match headers to copy from the authentication server response and set on forwarded request, after stripping all headers that match the regex.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/forwardauth/#authresponseheadersregex",
+										"description": "AuthResponseHeadersRegex defines the regex to match headers to copy from the authentication server response and set on forwarded request, after stripping all headers that match the regex.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/forwardauth/#authresponseheadersregex",
 										"type": "string"
+									},
+									"forwardBody": {
+										"description": "ForwardBody defines whether to send the request body to the authentication server.",
+										"type": "boolean"
+									},
+									"headerField": {
+										"description": "HeaderField defines a header field to store the authenticated user.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/forwardauth/#headerfield",
+										"type": "string"
+									},
+									"maxBodySize": {
+										"description": "MaxBodySize defines the maximum body size in bytes allowed to be forwarded to the authentication server.",
+										"type": "integer",
+										"format": "int64"
+									},
+									"preserveLocationHeader": {
+										"description": "PreserveLocationHeader defines whether to forward the Location header to the client as is or prefix it with the domain name of the authentication server.",
+										"type": "boolean"
 									},
 									"tls": {
 										"description": "TLS defines the configuration used to secure the connection to the authentication server.",
@@ -25676,7 +25737,7 @@
 								}
 							},
 							"headers": {
-								"description": "Headers holds the headers middleware configuration.\nThis middleware manages the requests and responses headers.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/headers/#customrequestheaders",
+								"description": "Headers holds the headers middleware configuration.\nThis middleware manages the requests and responses headers.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/headers/#customrequestheaders",
 								"type": "object",
 								"properties": {
 									"accessControlAllowCredentials": {
@@ -25846,7 +25907,7 @@
 								}
 							},
 							"inFlightReq": {
-								"description": "InFlightReq holds the in-flight request middleware configuration.\nThis middleware limits the number of requests being processed and served concurrently.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/inflightreq/",
+								"description": "InFlightReq holds the in-flight request middleware configuration.\nThis middleware limits the number of requests being processed and served concurrently.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/inflightreq/",
 								"type": "object",
 								"properties": {
 									"amount": {
@@ -25855,11 +25916,11 @@
 										"format": "int64"
 									},
 									"sourceCriterion": {
-										"description": "SourceCriterion defines what criterion is used to group requests as originating from a common source.\nIf several strategies are defined at the same time, an error will be raised.\nIf none are set, the default is to use the requestHost.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/inflightreq/#sourcecriterion",
+										"description": "SourceCriterion defines what criterion is used to group requests as originating from a common source.\nIf several strategies are defined at the same time, an error will be raised.\nIf none are set, the default is to use the requestHost.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/inflightreq/#sourcecriterion",
 										"type": "object",
 										"properties": {
 											"ipStrategy": {
-												"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ipallowlist/#ipstrategy",
+												"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ipallowlist/#ipstrategy",
 												"type": "object",
 												"properties": {
 													"depth": {
@@ -25892,11 +25953,11 @@
 								}
 							},
 							"ipAllowList": {
-								"description": "IPAllowList holds the IP allowlist middleware configuration.\nThis middleware limits allowed requests based on the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ipallowlist/",
+								"description": "IPAllowList holds the IP allowlist middleware configuration.\nThis middleware limits allowed requests based on the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ipallowlist/",
 								"type": "object",
 								"properties": {
 									"ipStrategy": {
-										"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ipallowlist/#ipstrategy",
+										"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ipallowlist/#ipstrategy",
 										"type": "object",
 										"properties": {
 											"depth": {
@@ -25934,7 +25995,7 @@
 								"type": "object",
 								"properties": {
 									"ipStrategy": {
-										"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ipallowlist/#ipstrategy",
+										"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ipallowlist/#ipstrategy",
 										"type": "object",
 										"properties": {
 											"depth": {
@@ -25964,7 +26025,7 @@
 								}
 							},
 							"passTLSClientCert": {
-								"description": "PassTLSClientCert holds the pass TLS client cert middleware configuration.\nThis middleware adds the selected data from the passed client TLS certificate to a header.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/passtlsclientcert/",
+								"description": "PassTLSClientCert holds the pass TLS client cert middleware configuration.\nThis middleware adds the selected data from the passed client TLS certificate to a header.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/passtlsclientcert/",
 								"type": "object",
 								"properties": {
 									"info": {
@@ -26075,7 +26136,7 @@
 								}
 							},
 							"rateLimit": {
-								"description": "RateLimit holds the rate limit configuration.\nThis middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ratelimit/",
+								"description": "RateLimit holds the rate limit configuration.\nThis middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ratelimit/",
 								"type": "object",
 								"properties": {
 									"average": {
@@ -26105,7 +26166,7 @@
 										"type": "object",
 										"properties": {
 											"ipStrategy": {
-												"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/ipallowlist/#ipstrategy",
+												"description": "IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/ipallowlist/#ipstrategy",
 												"type": "object",
 												"properties": {
 													"depth": {
@@ -26138,7 +26199,7 @@
 								}
 							},
 							"redirectRegex": {
-								"description": "RedirectRegex holds the redirect regex middleware configuration.\nThis middleware redirects a request using regex matching and replacement.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/redirectregex/#regex",
+								"description": "RedirectRegex holds the redirect regex middleware configuration.\nThis middleware redirects a request using regex matching and replacement.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/redirectregex/#regex",
 								"type": "object",
 								"properties": {
 									"permanent": {
@@ -26156,7 +26217,7 @@
 								}
 							},
 							"redirectScheme": {
-								"description": "RedirectScheme holds the redirect scheme middleware configuration.\nThis middleware redirects requests from a scheme/port to another.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/redirectscheme/",
+								"description": "RedirectScheme holds the redirect scheme middleware configuration.\nThis middleware redirects requests from a scheme/port to another.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/redirectscheme/",
 								"type": "object",
 								"properties": {
 									"permanent": {
@@ -26174,7 +26235,7 @@
 								}
 							},
 							"replacePath": {
-								"description": "ReplacePath holds the replace path middleware configuration.\nThis middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/replacepath/",
+								"description": "ReplacePath holds the replace path middleware configuration.\nThis middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/replacepath/",
 								"type": "object",
 								"properties": {
 									"path": {
@@ -26184,7 +26245,7 @@
 								}
 							},
 							"replacePathRegex": {
-								"description": "ReplacePathRegex holds the replace path regex middleware configuration.\nThis middleware replaces the path of a URL using regex matching and replacement.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/replacepathregex/",
+								"description": "ReplacePathRegex holds the replace path regex middleware configuration.\nThis middleware replaces the path of a URL using regex matching and replacement.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/replacepathregex/",
 								"type": "object",
 								"properties": {
 									"regex": {
@@ -26198,7 +26259,7 @@
 								}
 							},
 							"retry": {
-								"description": "Retry holds the retry middleware configuration.\nThis middleware reissues requests a given number of times to a backend server if that server does not reply.\nAs soon as the server answers, the middleware stops retrying, regardless of the response status.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/retry/",
+								"description": "Retry holds the retry middleware configuration.\nThis middleware reissues requests a given number of times to a backend server if that server does not reply.\nAs soon as the server answers, the middleware stops retrying, regardless of the response status.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/retry/",
 								"type": "object",
 								"properties": {
 									"attempts": {
@@ -26220,7 +26281,7 @@
 								}
 							},
 							"stripPrefix": {
-								"description": "StripPrefix holds the strip prefix middleware configuration.\nThis middleware removes the specified prefixes from the URL path.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/stripprefix/",
+								"description": "StripPrefix holds the strip prefix middleware configuration.\nThis middleware removes the specified prefixes from the URL path.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/stripprefix/",
 								"type": "object",
 								"properties": {
 									"forceSlash": {
@@ -26237,7 +26298,7 @@
 								}
 							},
 							"stripPrefixRegex": {
-								"description": "StripPrefixRegex holds the strip prefix regex middleware configuration.\nThis middleware removes the matching prefixes from the URL path.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/http/stripprefixregex/",
+								"description": "StripPrefixRegex holds the strip prefix regex middleware configuration.\nThis middleware removes the matching prefixes from the URL path.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/http/stripprefixregex/",
 								"type": "object",
 								"properties": {
 									"regex": {
@@ -26258,7 +26319,8 @@
 						"kind": "Middleware",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.MiddlewareList": {
 				"description": "MiddlewareList is a list of Middleware",
@@ -26297,10 +26359,11 @@
 						"kind": "MiddlewareList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.MiddlewareTCP": {
-				"description": "MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/overview/",
+				"description": "MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/overview/",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -26339,7 +26402,7 @@
 								}
 							},
 							"ipAllowList": {
-								"description": "IPAllowList defines the IPAllowList middleware configuration.\nThis middleware accepts/refuses connections based on the client IP.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/tcp/ipallowlist/",
+								"description": "IPAllowList defines the IPAllowList middleware configuration.\nThis middleware accepts/refuses connections based on the client IP.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/tcp/ipallowlist/",
 								"type": "object",
 								"properties": {
 									"sourceRange": {
@@ -26352,7 +26415,7 @@
 								}
 							},
 							"ipWhiteList": {
-								"description": "IPWhiteList defines the IPWhiteList middleware configuration.\nThis middleware accepts/refuses connections based on the client IP.\nDeprecated: please use IPAllowList instead.\nMore info: https://doc.traefik.io/traefik/v3.2/middlewares/tcp/ipwhitelist/",
+								"description": "IPWhiteList defines the IPWhiteList middleware configuration.\nThis middleware accepts/refuses connections based on the client IP.\nDeprecated: please use IPAllowList instead.\nMore info: https://doc.traefik.io/traefik/v3.3/middlewares/tcp/ipwhitelist/",
 								"type": "object",
 								"properties": {
 									"sourceRange": {
@@ -26373,7 +26436,8 @@
 						"kind": "MiddlewareTCP",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.MiddlewareTCPList": {
 				"description": "MiddlewareTCPList is a list of MiddlewareTCP",
@@ -26412,10 +26476,11 @@
 						"kind": "MiddlewareTCPList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.ServersTransport": {
-				"description": "ServersTransport is the CRD implementation of a ServersTransport.\nIf no serversTransport is specified, the default@internal will be used.\nThe default@internal serversTransport is created from the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#serverstransport_1",
+				"description": "ServersTransport is the CRD implementation of a ServersTransport.\nIf no serversTransport is specified, the default@internal will be used.\nThe default@internal serversTransport is created from the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#serverstransport_1",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -26568,7 +26633,8 @@
 						"kind": "ServersTransport",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.ServersTransportList": {
 				"description": "ServersTransportList is a list of ServersTransport",
@@ -26607,10 +26673,11 @@
 						"kind": "ServersTransportList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.ServersTransportTCP": {
-				"description": "ServersTransportTCP is the CRD implementation of a TCPServersTransport.\nIf no tcpServersTransport is specified, a default one named default@internal will be used.\nThe default@internal tcpServersTransport can be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#serverstransport_3",
+				"description": "ServersTransportTCP is the CRD implementation of a TCPServersTransport.\nIf no tcpServersTransport is specified, a default one named default@internal will be used.\nThe default@internal tcpServersTransport can be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#serverstransport_3",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -26731,7 +26798,8 @@
 						"kind": "ServersTransportTCP",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.ServersTransportTCPList": {
 				"description": "ServersTransportTCPList is a list of ServersTransportTCP",
@@ -26770,10 +26838,11 @@
 						"kind": "ServersTransportTCPList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TLSOption": {
-				"description": "TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#tls-options",
+				"description": "TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#tls-options",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -26801,14 +26870,14 @@
 						"type": "object",
 						"properties": {
 							"alpnProtocols": {
-								"description": "ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#alpn-protocols",
+								"description": "ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#alpn-protocols",
 								"type": "array",
 								"items": {
 									"type": "string"
 								}
 							},
 							"cipherSuites": {
-								"description": "CipherSuites defines the list of supported cipher suites for TLS versions up to TLS 1.2.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#cipher-suites",
+								"description": "CipherSuites defines the list of supported cipher suites for TLS versions up to TLS 1.2.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#cipher-suites",
 								"type": "array",
 								"items": {
 									"type": "string"
@@ -26839,7 +26908,7 @@
 								}
 							},
 							"curvePreferences": {
-								"description": "CurvePreferences defines the preferred elliptic curves in a specific order.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#curve-preferences",
+								"description": "CurvePreferences defines the preferred elliptic curves in a specific order.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#curve-preferences",
 								"type": "array",
 								"items": {
 									"type": "string"
@@ -26870,7 +26939,8 @@
 						"kind": "TLSOption",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TLSOptionList": {
 				"description": "TLSOptionList is a list of TLSOption",
@@ -26909,10 +26979,11 @@
 						"kind": "TLSOptionList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TLSStore": {
-				"description": "TLSStore is the CRD implementation of a Traefik TLS Store.\nFor the time being, only the TLSStore named default is supported.\nThis means that you cannot have two stores that are named default in different Kubernetes namespaces.\nMore info: https://doc.traefik.io/traefik/v3.2/https/tls/#certificates-stores",
+				"description": "TLSStore is the CRD implementation of a Traefik TLS Store.\nFor the time being, only the TLSStore named default is supported.\nThis means that you cannot have two stores that are named default in different Kubernetes namespaces.\nMore info: https://doc.traefik.io/traefik/v3.3/https/tls/#certificates-stores",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -27005,7 +27076,8 @@
 						"kind": "TLSStore",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TLSStoreList": {
 				"description": "TLSStoreList is a list of TLSStore",
@@ -27044,10 +27116,11 @@
 						"kind": "TLSStoreList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TraefikService": {
-				"description": "TraefikService is the CRD implementation of a Traefik Service.\nTraefikService object allows to:\n- Apply weight to Services on load-balancing\n- Mirror traffic on services\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#kind-traefikservice",
+				"description": "TraefikService is the CRD implementation of a Traefik Service.\nTraefikService object allows to:\n- Apply weight to Services on load-balancing\n- Mirror traffic on services\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#kind-traefikservice",
 				"type": "object",
 				"required": [
 					"metadata",
@@ -27309,7 +27382,7 @@
 													"type": "string"
 												},
 												"sticky": {
-													"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#sticky-sessions",
+													"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#sticky-sessions",
 													"type": "object",
 													"properties": {
 														"cookie": {
@@ -27321,11 +27394,15 @@
 																	"type": "boolean"
 																},
 																"maxAge": {
-																	"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+																	"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 																	"type": "integer"
 																},
 																"name": {
 																	"description": "Name defines the Cookie name.",
+																	"type": "string"
+																},
+																"path": {
+																	"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 																	"type": "string"
 																},
 																"sameSite": {
@@ -27402,7 +27479,7 @@
 										"type": "string"
 									},
 									"sticky": {
-										"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#sticky-sessions",
+										"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#sticky-sessions",
 										"type": "object",
 										"properties": {
 											"cookie": {
@@ -27414,11 +27491,15 @@
 														"type": "boolean"
 													},
 													"maxAge": {
-														"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+														"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 														"type": "integer"
 													},
 													"name": {
 														"description": "Name defines the Cookie name.",
+														"type": "string"
+													},
+													"path": {
+														"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 														"type": "string"
 													},
 													"sameSite": {
@@ -27585,7 +27666,7 @@
 													"type": "string"
 												},
 												"sticky": {
-													"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/services/#sticky-sessions",
+													"description": "Sticky defines the sticky sessions configuration.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/services/#sticky-sessions",
 													"type": "object",
 													"properties": {
 														"cookie": {
@@ -27597,11 +27678,15 @@
 																	"type": "boolean"
 																},
 																"maxAge": {
-																	"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+																	"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 																	"type": "integer"
 																},
 																"name": {
 																	"description": "Name defines the Cookie name.",
+																	"type": "string"
+																},
+																"path": {
+																	"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 																	"type": "string"
 																},
 																"sameSite": {
@@ -27628,7 +27713,7 @@
 										}
 									},
 									"sticky": {
-										"description": "Sticky defines whether sticky sessions are enabled.\nMore info: https://doc.traefik.io/traefik/v3.2/routing/providers/kubernetes-crd/#stickiness-and-load-balancing",
+										"description": "Sticky defines whether sticky sessions are enabled.\nMore info: https://doc.traefik.io/traefik/v3.3/routing/providers/kubernetes-crd/#stickiness-and-load-balancing",
 										"type": "object",
 										"properties": {
 											"cookie": {
@@ -27640,11 +27725,15 @@
 														"type": "boolean"
 													},
 													"maxAge": {
-														"description": "MaxAge indicates the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
+														"description": "MaxAge defines the number of seconds until the cookie expires.\nWhen set to a negative number, the cookie expires immediately.\nWhen set to zero, the cookie never expires.",
 														"type": "integer"
 													},
 													"name": {
 														"description": "Name defines the Cookie name.",
+														"type": "string"
+													},
+													"path": {
+														"description": "Path defines the path that must exist in the requested URL for the browser to send the Cookie header.\nWhen not provided the cookie will be sent on every request to the domain.\nMore info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value",
 														"type": "string"
 													},
 													"sameSite": {
@@ -27670,7 +27759,8 @@
 						"kind": "TraefikService",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			},
 			"io.traefik.v1alpha1.TraefikServiceList": {
 				"description": "TraefikServiceList is a list of TraefikService",
@@ -27709,7 +27799,8 @@
 						"kind": "TraefikServiceList",
 						"version": "v1alpha1"
 					}
-				]
+				],
+				"x-kubernetes-selectable-fields": []
 			}
 		}
 	}

@@ -51,7 +51,6 @@ rules:
   resources:
   - services
   - services/finalizers
-  - endpoints
   verbs:
   - get
   - create
@@ -93,3 +92,12 @@ rules:
   - storageclasses
   verbs:
   - get
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - get
+  - create
+  - update
+  - delete

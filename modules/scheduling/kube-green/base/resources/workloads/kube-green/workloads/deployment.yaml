@@ -92,6 +92,7 @@ spec:
         resources: {}
         args:
         - --leader-elect
+        - --metrics-secure=false
         - --webhook-server-port=$(HTTPS_PORT)
         - --metrics-bind-address=$(POD_IP):$(METRICS_PORT)
         - --health-probe-bind-address=$(POD_IP):$(PROBES_PORT)

@@ -228,3 +228,28 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - security.openshift.io
+  resourceNames:
+  - anyuid
+  - privileged
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - use
+- apiGroups:
+  - telemetry.kube-logging.dev
+  resources:
+  - bridges
+  - collectors
+  - outputs
+  - subscriptions
+  - tenants
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch

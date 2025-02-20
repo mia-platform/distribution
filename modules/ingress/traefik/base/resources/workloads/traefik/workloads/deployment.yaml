@@ -33,6 +33,8 @@ spec:
         - --log.format=json
         - --log.level=$(LOG_LEVEL)
         - --accesslog.format=json
+        - --accesslog.fields.defaultmode=keep
+        - --accesslog.fields.headers.defaultmode=drop
         - --providers.providersthrottleduration=60s
         - --providers.kubernetescrd
         - --providers.kubernetescrd.allowcrossnamespace=true
@@ -42,21 +44,26 @@ spec:
         - --providers.kubernetesgateway
         - --providers.kubernetesgateway.statusaddress.service.name=$(POD_SERVICE)
         - --providers.kubernetesgateway.statusaddress.service.namespace=$(POD_NAMESPACE)
+        - --providers.kubernetesgateway.nativelbbydefault=true
         - --providers.kubernetesingress
         - --providers.kubernetesingress.ingressclass=traefik
         - --providers.kubernetesingress.allowemptyservices=true
         - --providers.kubernetesingress.allowexternalnameservices=false
         - --providers.kubernetesingress.nativelbbydefault=true
         - --providers.kubernetesingress.ingressendpoint.publishedservice=$(POD_NAMESPACE)/$(POD_SERVICE)
+
         - --entrypoints.traefik.address=:$(METRICS_PORT)/tcp
         - --entrypoints.traefik.transport.lifecycle.gracetimeout=1
         - --entrypoints.traefik.transport.lifecycle.requestacceptgracetimeout=0
+
         - --entrypoints.web.address=$(POD_IP):$(HTTP_PORT)/tcp
         - --entrypoints.web.transport.lifecycle.gracetimeout=30
         - --entrypoints.web.transport.lifecycle.requestacceptgracetimeout=29
         - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --entrypoints.web.http.redirections.entrypoint.priority=0
+
+        - --entrypoints.websecure.http3
         - --entrypoints.websecure.address=$(POD_IP):$(HTTPS_PORT)/tcp
         - --entrypoints.websecure.transport.lifecycle.gracetimeout=30
         - --entrypoints.websecure.transport.lifecycle.requestacceptgracetimeout=29
@@ -93,6 +100,9 @@ spec:
         - name: websecure
           containerPort: 11241
           protocol: TCP
+        - name: websecure-http3
+          containerPort: 11241
+          protocol: UDP
         - name: traefik
           containerPort: 11242
           protocol: TCP

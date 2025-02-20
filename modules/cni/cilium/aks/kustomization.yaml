@@ -1,5 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../base/resources
-- resources
+- ../base
+patches:
+- patch: |-
+    - op: replace
+      path: /data/cluster-pool-ipv4-cidr
+      value: CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR
+  target:
+    kind: ConfigMap
+    name: cilium-config
