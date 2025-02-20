@@ -7,14 +7,14 @@ labels:
     app.kubernetes.io/component: monitoring
 images:
 - name: quay.io/prometheus-operator/prometheus-operator
-  newTag: v0.80.0
-  digest: sha256:83b3705f139e7799c8fefef81ce96161bcd0a328187d829cf26836339d8802d7
+  newTag: v0.80.1
+  digest: sha256:4636654efb15f52de0f2f07a97673492bd06b6688b9fcbb10ba147fd596d7949
 - name: quay.io/prometheus-operator/prometheus-config-reloader
-  newTag: v0.80.0
-  digest: sha256:9f8ffd1eb787120225ab11e8a6b59d92b716fadf5f50924a0a1f9e9f5b71508d
+  newTag: v0.80.1
+  digest: sha256:125886af6555c1d9726bef0ebc845e922e0f227bba68e0c70fb661295da96bfe
 - name: quay.io/prometheus-operator/admission-webhook
-  newTag: v0.80.0
-  digest: sha256:c69727b357b1e76d5830197e6e11af470c07bcd7ca1fe23aa297f8e3b31e904f
+  newTag: v0.80.1
+  digest: sha256:e84e65a8951ba525c88188d5e0b1a7bf53dd2879fc6c3d55a9dd5dfc2fc7fef5
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v1.5.1
   digest: sha256:0de05718b59dc33b57ddfb4d8ad5f637cefd13eafdec0e1579d782b3483c27c3
