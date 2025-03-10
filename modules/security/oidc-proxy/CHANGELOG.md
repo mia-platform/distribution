@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update oidc-proxy to 1.0.9-b1a3a1
+
 ### Fixes
 
 - add missing binding for `userextras/authentication.kubernetes.io/credential-id` auth resource
