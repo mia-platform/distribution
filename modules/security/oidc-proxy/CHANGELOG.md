@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixes
+
+- add missing binding for `userextras/authentication.kubernetes.io/credential-id` auth resource
+
 ## v1.31.0
 
 ### Changed
