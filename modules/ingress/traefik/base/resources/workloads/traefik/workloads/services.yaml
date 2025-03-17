@@ -25,6 +25,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: traefik-udp
+  labels:
+    distribution.mia-platform.eu/service-type: ingress
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - port: 443
+    name: websecure-http3
+    targetPort: websecure-http3
+    protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: traefik-dashboard
 spec:
   type: ClusterIP

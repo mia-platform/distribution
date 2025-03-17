@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update traefik to v3.3.4
+- disable http3 by default on EKS flavor because the default load balancer cannot support it for now
+
+### Fixed
+
+- http3 exposed port
+- separate service between protocols for GKE and AKS flavors
+
 ## v1.31.0
 
 ### Changed

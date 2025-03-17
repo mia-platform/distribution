@@ -13,3 +13,15 @@ patches:
   target:
     kind: Service
     labelSelector: distribution.mia-platform.eu/service-type=ingress
+- patch: |-
+    - op: remove
+      path: /spec/ports/2
+  target:
+    kind: Service
+    name: traefik
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --entrypoints.websecure.http3=false
+  target:
+    kind: Deployment

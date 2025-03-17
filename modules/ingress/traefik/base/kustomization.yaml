@@ -3,3 +3,10 @@ kind: Kustomization
 resources:
 - crds
 - resources
+patches:
+  - patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: traefik-udp
