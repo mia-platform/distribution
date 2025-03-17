@@ -115,6 +115,7 @@ update the nodes correctly to use Cilium as CNI plugin.
 | 1.30.2         | 1.16.5           | v0.13.1     |
 | 1.30.3         | 1.16.6           | v0.13.1     |
 | 1.30.4         | 1.16.7           | v0.13.1     |
+| 1.30.5         | 1.16.8           | v0.13.2     |
 | 1.31.0         | 1.17.1           | v0.13.1     |
 | 1.31.1         | 1.17.2           | v0.13.2     |
 
@@ -141,5 +142,5 @@ avoiding the setup with a wrong value, the module will set the property to `CHAN
 value that will trigger an error inside Cilium workload and will not start.
 
 [Here is the link to the official repository]: https://github.com/cilium/cilium "Cilium GitHub Repository"
-[link]: https://docs.cilium.io/en/stable/operations/system_requirements/ "Cilium System Requirements"
+[link]: https://docs.cilium.io/en/v1.17/operations/system_requirements/ "Cilium System Requirements"
 [official guide from Microsoft]: https://learn.microsoft.com/en-us/azure/aks/use-byo-cni "Bring your own Container Network Interface plugin with Azure Kubernetes Service"
