@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.30.4
+
 ### Changed
 
 - update cert-manager to 1.16.5
