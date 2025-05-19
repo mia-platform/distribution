@@ -7,11 +7,11 @@ labels:
     app.kubernetes.io/component: oidc-proxy
 images:
 - name: docker.io/tremolosecurity/kube-oidc-proxy
-  newTag: 1.0.7-7c38af
+  newTag: "1.0.7"
   digest: sha256:3d9ae19942a7650d13da562529af322cb9f074c08ce714cd4de0de2225f8afcc
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
-  newTag: v1.5.1
-  digest: sha256:0de05718b59dc33b57ddfb4d8ad5f637cefd13eafdec0e1579d782b3483c27c3
+  newTag: v1.5.3
+  digest: sha256:2cf4ebfa82a37c357455458f6dfc334aea1392d508270b2517795a9933a02524
 resources:
 - configs
 - rbac
