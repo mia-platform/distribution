@@ -4,7 +4,7 @@ name: base-installation
 spec:
   modules:
     cni/cilium/base:
-      version: v1.30.3
+      version: v1.30.6
     disaster-recovery/velero/base:
       version: v1.30.2
     ingress/traefik/base:
@@ -14,13 +14,13 @@ spec:
     observability/metrics-server/base:
       version: v1.30.0
     observability/prometheus-operator/base:
-      version: v1.30.3
+      version: v1.30.4
     scheduling/kube-green/base:
-      version: v1.30.2
+      version: v1.30.3
     security/cert-manager/base:
-      version: v1.30.2
+      version: v1.30.4
     security/kyverno/base:
-      version: v1.30.2
+      version: v1.30.4
     security/rbac-manager/base:
       version: v1.30.0
   addOns:
