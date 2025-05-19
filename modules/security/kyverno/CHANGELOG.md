@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - no changes
 
+## v1.30.4
+
+### Changed
+
+- update kyverno to v1.13.6
+
 ## v1.30.3
 
 ### Changed
