@@ -37,6 +37,8 @@ spec:
         - --config-reloader-memory-request=$(CONFIG_RELOADER_MEMORY_REQUEST)
         - --config-reloader-memory-limit=$(CONFIG_RELOADER_MEMORY_LIMIT)
         - --kubelet-service=kube-system/kubelet
+        - --kubelet-endpoints=true
+        - --kubelet-endpointslice=false
         - --prometheus-instance-namespaces=$(POD_NAMESPACE)
         - --alertmanager-instance-namespaces=$(POD_NAMESPACE)
         - --thanos-ruler-instance-namespaces=$(POD_NAMESPACE)
