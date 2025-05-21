@@ -46,3 +46,14 @@ rules:
   - delete
   - patch
   - update
+- apiGroups:
+  - policies.kyverno.io
+  resources:
+  - imagevalidationgpolicies
+  - policyexceptions
+  - validatingpolicies
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
