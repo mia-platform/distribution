@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- removed deprecated enforce-mountable-secrets annotation
 - update prometheus-operator to v0.82.2
 - update kube-state-metrics to 2.15.0
 

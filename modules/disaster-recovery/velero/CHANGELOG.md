@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- removed deprecated enforce-mountable-secrets annotation
 - update velero to 1.16.1
 - update velero plugins for Azure and AWS to 1.12.1
 - update velero plugin for GCP to 1.12.1
