@@ -32,8 +32,7 @@ supported ones.
 By default we strive to give the user of Magellano the most secure feature enabled by default for every modules
 and addons where possibile. These features are:
 
-- all pods run with dedicated ServiceAccounts with `automountServiceAccountToken` set to false and the
-	`kubernetes.io/enforce-mountable-secrets` annotation set to `true` and an empty array of mountable secrets
+- all pods run with dedicated ServiceAccounts with `automountServiceAccountToken` set to false
 - every namespace will have a deny-all NetworkPolicy and a set of other NetworkPolicies to allow only the needed
 	connections inside and outside the cluster
 - only pods that actually needs to be reached inside the cluster will have an associated Service

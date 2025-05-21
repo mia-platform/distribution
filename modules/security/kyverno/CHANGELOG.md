@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- removed deprecated enforce-mountable-secrets annotation
 - update kyverno to v1.14.1
 
 ## v1.31.1
