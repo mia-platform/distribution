@@ -7,8 +7,8 @@ labels:
     app.kubernetes.io/component: logging
 images:
 - name: ghcr.io/kube-logging/logging-operator
-  newTag: 5.1.1
-  digest: sha256:ec1446a49146e56125263a490ee2ca509c2678f4575006bc84c22d40c829d741
+  newTag: 5.3.0
+  digest: sha256:e0b93f5f7f1e237b77d476991065a32bacdcc1f1e508e738aa969c7e0759ab38
 resources:
 - configs
 - rbac
