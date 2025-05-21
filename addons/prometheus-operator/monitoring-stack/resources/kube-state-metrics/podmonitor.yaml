@@ -18,7 +18,7 @@ spec:
     interval: 30s
     metricRelabelings:
     - action: drop
-      regex: kube_(endpoint_(address_not_ready|address_available))
+      regex: kube_(endpoint_(address_not_ready|address_available|ports))
       sourceLabels:
       - __name__
     - action: keep
