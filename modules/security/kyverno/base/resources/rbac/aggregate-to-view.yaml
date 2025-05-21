@@ -9,9 +9,7 @@ rules:
   - kyverno.io
   resources:
   - cleanuppolicies
-  - clustercleanuppolicies
   - policies
-  - clusterpolicies
   verbs:
   - get
   - list
@@ -20,7 +18,6 @@ rules:
   - wgpolicyk8s.io
   resources:
   - policyreports
-  - clusterpolicyreports
   verbs:
   - get
   - list
@@ -29,7 +26,6 @@ rules:
   - reports.kyverno.io
   resources:
   - ephemeralreports
-  - clusterephemeralreports
   verbs:
   - get
   - list

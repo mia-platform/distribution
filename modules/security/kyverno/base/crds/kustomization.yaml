@@ -8,7 +8,10 @@ resources:
 - clusterpolicyreports.wgpolicyk8s.io.yaml
 - ephemeralreports.reports.kyverno.io.yaml
 - globalcontextentries.kyverno.io.yaml
+- imagevalidatingpolicies.policies.kyverno.io.yaml
 - policies.kyverno.io.yaml
 - policyexceptions.kyverno.io.yaml
+- policyexceptions.policies.kyverno.io.yaml
 - policyreports.wgpolicyk8s.io.yaml
 - updaterequests.kyverno.io.yaml
+- validatingpolicies.policies.kyverno.io.yaml
