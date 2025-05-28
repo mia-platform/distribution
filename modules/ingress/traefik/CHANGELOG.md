@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - removed deprecated enforce-mountable-secrets annotation
-- update traefik to v3.4.0
+- update traefik to v3.4.1
 
 ## v1.31.4
 
