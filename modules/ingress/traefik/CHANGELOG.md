@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- network policy for UDP incoming traffic
+
 ## v1.31.3
 
 ### Changed

@@ -29,6 +29,7 @@ replacements:
   targets:
   - fieldPaths:
     - spec.ingress.0.ports.1.port
+    - spec.ingress.0.ports.2.port
     options:
       create: true
     select:

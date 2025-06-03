@@ -18,6 +18,8 @@ spec:
       protocol: TCP
     - port: 0
       protocol: TCP
+    - port: 0
+      protocol: UDP
   egress:
   # Connect to the DNS service inside the kube-system namespace
   - ports:
