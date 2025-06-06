@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - removed deprecated enforce-mountable-secrets annotation
-- update logging-operator to v5.3.0
+- update logging-operator to v5.4.0
 
 ## v1.31.0
 
