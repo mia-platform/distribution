@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: mia-platform:cert-manager:challenges
+  name: mia-platform:cert-manager:dns01-challenges
 rules:
 - apiGroups:
   - acme.cert-manager.io
@@ -43,45 +43,6 @@ rules:
   verbs:
   - create
   - patch
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-- apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-- apiGroups:
-  - gateway.networking.k8s.io
-  resources:
-  - httproutes
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-- apiGroups:
-  - route.openshift.io
-  resources:
-  - routes/custom-host
-  verbs:
-  - create
 - apiGroups:
   - acme.cert-manager.io
   resources:

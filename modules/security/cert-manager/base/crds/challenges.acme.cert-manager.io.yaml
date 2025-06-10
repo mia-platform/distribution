@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Source: https://github.com/cert-manager/cert-manager/releases/download/v1.17.1/cert-manager.crds.yaml
+# Source: https://github.com/cert-manager/cert-manager/releases/download/v1.18.0/cert-manager.crds.yaml
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -90,9 +90,9 @@ spec:
                   type: string
                 dnsName:
                   description: |-
-                    dnsName is the identifier that this challenge is for, e.g. example.com.
+                    dnsName is the identifier that this challenge is for, e.g., example.com.
                     If the requested DNSName is a 'wildcard', this field MUST be set to the
-                    non-wildcard domain, e.g. for `*.example.com`, it must be `example.com`.
+                    non-wildcard domain, e.g., for `*.example.com`, it must be `example.com`.
                   type: string
                 issuerRef:
                   description: |-
@@ -286,15 +286,15 @@ spec:
                               type: object
                               properties:
                                 clientID:
-                                  description: client ID of the managed identity, can not be used at the same time as resourceID
+                                  description: client ID of the managed identity, cannot be used at the same time as resourceID
                                   type: string
                                 resourceID:
                                   description: |-
-                                    resource ID of the managed identity, can not be used at the same time as clientID
+                                    resource ID of the managed identity, cannot be used at the same time as clientID
                                     Cannot be used for Azure Managed Service Identity
                                   type: string
                                 tenantID:
-                                  description: tenant ID of the managed identity, can not be used at the same time as resourceID
+                                  description: tenant ID of the managed identity, cannot be used at the same time as resourceID
                                   type: string
                             resourceGroupName:
                               description: resource group the DNS zone is located in
@@ -603,7 +603,7 @@ spec:
                                 when challenges are processed.
                                 This can contain arbitrary JSON data.
                                 Secret values should not be specified in this stanza.
-                                If secret values are needed (e.g. credentials for a DNS service), you
+                                If secret values are needed (e.g., credentials for a DNS service), you
                                 should use a SecretKeySelector to reference a Secret resource.
                                 For details on the schema of this field, consult the webhook provider
                                 implementation's documentation.
@@ -619,14 +619,14 @@ spec:
                               description: |-
                                 The name of the solver to use, as defined in the webhook provider
                                 implementation.
-                                This will typically be the name of the provider, e.g. 'cloudflare'.
+                                This will typically be the name of the provider, e.g., 'cloudflare'.
                               type: string
                     http01:
                       description: |-
                         Configures cert-manager to attempt to complete authorizations by
                         performing the HTTP01 challenge flow.
                         It is not possible to obtain certificates for wildcard domain names
-                        (e.g. `*.example.com`) using the HTTP01 challenge mechanism.
+                        (e.g., `*.example.com`) using the HTTP01 challenge mechanism.
                       type: object
                       properties:
                         gatewayHTTPRoute:
