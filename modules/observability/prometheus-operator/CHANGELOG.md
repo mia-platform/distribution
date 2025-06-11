@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - removed deprecated enforce-mountable-secrets annotation
 - update prometheus-operator to 0.83.0
 - update kube-state-metrics to 2.15.0
+- update kube-webhook-certgen to 1.5.4
 
 ## v1.31.1
 

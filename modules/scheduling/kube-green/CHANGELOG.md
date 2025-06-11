@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- update kube-webhook-certgen to 1.5.4
 - removed deprecated enforce-mountable-secrets annotation
 
 ## v1.31.0

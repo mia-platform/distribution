@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update oidc-proxy to 1.0.9-0c5583
+- update oidc-proxy to 1.0.9-9c4cae
+- update kube-webhook-certgen to 1.5.4
+- update dexidp to v2.43.1
 - removed deprecated enforce-mountable-secrets annotation
 
 ## v1.31.2
