@@ -4,25 +4,25 @@ name: base-installation
 spec:
   modules:
     cni/cilium/base:
-      version: v1.31.3
+      version: v1.32.0
     disaster-recovery/velero/base:
-      version: v1.31.0
+      version: v1.32.0
     ingress/traefik/base:
-      version: v1.31.4
+      version: v1.32.0
     observability/logging-operator/base:
-      version: v1.31.0
+      version: v1.32.0
     observability/metrics-server/base:
-      version: v1.31.0
+      version: v1.32.0
     observability/prometheus-operator/base:
-      version: v1.31.1
+      version: v1.32.0
     scheduling/kube-green/base:
-      version: v1.31.0
+      version: v1.32.0
     security/cert-manager/base:
-      version: v1.31.1
+      version: v1.32.0
     security/kyverno/base:
-      version: v1.31.1
+      version: v1.32.0
     security/rbac-manager/base:
-      version: v1.31.0
+      version: v1.32.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
       version: v1.0.2
@@ -41,7 +41,7 @@ spec:
     prometheus-operator/logging-stack:
       version: v2.0.3
     prometheus-operator/monitoring-stack:
-      version: v2.4.0
+      version: v2.5.0
     prometheus-operator/rbac-manager:
       version: v1.0.4
     prometheus-operator/traefik:
