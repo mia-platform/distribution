@@ -4,7 +4,8 @@ resources:
 - clusterrole-approve.yaml
 - clusterrole-certificates.yaml
 - clusterrole-certificatesigningrequests.yaml
-- clusterrole-challenges.yaml
+- clusterrole-dns01-challenges.yaml
+- clusterrole-http01-challenges.yaml
 - clusterrole-clusterissuers.yaml
 - clusterrole-ingress-shim.yaml
 - clusterrole-issuers.yaml

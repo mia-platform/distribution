@@ -8,7 +8,34 @@ rules:
 - apiGroups:
   - kyverno.io
   resources:
+  - clustercleanuppolicies
+  - clusterpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - wgpolicyk8s.io
+  resources:
+  - clusterpolicyreports
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - reports.kyverno.io
+  resources:
+  - clusterephemeralreports
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policies.kyverno.io
+  resources:
+  - imagevalidationgpolicies
   - policyexceptions
+  - validatingpolicies
   verbs:
   - get
   - list

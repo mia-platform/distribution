@@ -56,31 +56,12 @@ specify the external one you would like to use for authenticating in your cluste
 
 | Module Version | kube-oidc-proxy Version                | Dex Version |
 |----------------|----------------------------------------|-------------|
-| 1.24.x         | latest@22c421886 (no semver available) | 2.36.0      |
-| 1.25.x         | latest@169cccafa (no semver available) | 2.36.0      |
-| 1.26.0         | latest@51bda58e2 (no semver available) | 2.36.0      |
-| 1.26.1         | latest@5f75e4377 (no semver available) | 2.37.0      |
-| 1.26.2         | 1.0.6-21733e                           | 2.39.0      |
-| 1.27.0         | latest@b0aedbe3e (no semver available) | 2.37.0      |
-| 1.27.1         | latest@0e0ffbcc9 (no semver available) | 2.37.0      |
-| 1.27.2         | 1.0.6-21733e                           | 2.39.0      |
-| 1.27.3         | 1.0.6-4c7812                           | 2.39.1      |
-| 1.27.4         | 1.0.6-0dce34                           | 2.40.0      |
-| 1.27.5         | 1.0.6-89eb8d                           | 2.40.0      |
-| 1.28.0         | 1.0.6-1896b9                           | 2.39.1      |
-| 1.28.1         | 1.0.6-4c7812                           | 2.39.1      |
-| 1.28.2         | 1.0.6-0dce34                           | 2.40.0      |
-| 1.28.3         | 1.0.6-89eb8d                           | 2.40.0      |
-| 1.28.4         | 1.0.6-f1a6c3                           | 2.41.1      |
-| 1.29.0         | 1.0.6-f1a6c3                           | 2.41.1      |
-| 1.29.1         | 1.0.6-e24311                           | 2.41.1      |
-| 1.29.2         | 1.0.6-e24311                           | 2.41.1      |
-| 1.29.3         | 1.0.6                                  | 2.41.1      |
 | 1.30.0         | 1.0.7-7c38af                           | 2.41.1      |
 | 1.30.1         | 1.0.7                                  | 2.42.1      |
 | 1.31.0         | 1.0.9-9c57a7                           | 2.41.1      |
 | 1.31.1         | 1.0.9-b1a3a1                           | 2.41.1      |
 | 1.31.1         | 1.0.9-1e6d39                           | 2.42.1      |
+| 1.32.x         | 1.0.9-9c4cae                           | 2.43.1      |
 
 ## User customization
 

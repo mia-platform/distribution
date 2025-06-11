@@ -6,15 +6,10 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - nodes
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
   - services
+  - secrets
+  - nodes
+  - configmaps
   verbs:
   - get
   - list
@@ -27,18 +22,9 @@ rules:
   - list
   - watch
 - apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
   - networking.k8s.io
   resources:
   - ingressclasses
-  - ingresses
   verbs:
   - get
   - list
@@ -52,16 +38,16 @@ rules:
 - apiGroups:
   - traefik.io
   resources:
-  - ingressroutes
-  - ingressroutetcps
-  - ingressrouteudps
   - middlewares
   - middlewaretcps
-  - serverstransports
-  - serverstransporttcps
+  - ingressroutes
+  - traefikservices
+  - ingressroutetcps
+  - ingressrouteudps
   - tlsoptions
   - tlsstores
-  - traefikservices
+  - serverstransports
+  - serverstransporttcps
   verbs:
   - get
   - list
@@ -70,24 +56,20 @@ rules:
   - ""
   resources:
   - namespaces
-  - secrets
-  - services
-  - configmaps
   verbs:
-  - get
   - list
   - watch
 - apiGroups:
   - gateway.networking.k8s.io
   resources:
-  - backendtlspolicies
   - gatewayclasses
   - gateways
-  - grpcroutes
   - httproutes
-  - referencegrants
+  - grpcroutes
   - tcproutes
   - tlsroutes
+  - referencegrants
+  - backendtlspolicies
   verbs:
   - get
   - list
@@ -95,12 +77,13 @@ rules:
 - apiGroups:
   - gateway.networking.k8s.io
   resources:
-  - backendtlspolicies/status
   - gatewayclasses/status
   - gateways/status
-  - grpcroutes/status
   - httproutes/status
+  - grpcroutes/status
   - tcproutes/status
   - tlsroutes/status
+  - referencegrants/status
+  - backendtlspolicies/status
   verbs:
   - update
