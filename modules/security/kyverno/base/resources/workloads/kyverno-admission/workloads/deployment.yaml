@@ -94,6 +94,7 @@ spec:
         - --enableReporting=validate,mutate,mutateExisting,imageVerify,generate
         - --webhookServerPort=$(CONTROLLER_PORT)
         - --metricsPort=$(METRICS_PORT)
+        - --controllerRuntimeMetricsAddress=0
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
