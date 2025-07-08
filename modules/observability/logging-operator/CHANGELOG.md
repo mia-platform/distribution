@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- add missing axosyslog CRD
+
 ## v1.32.0
 
 ### Changed
