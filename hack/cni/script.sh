@@ -3,7 +3,7 @@
 set -o nounset
 set -o errexit
 
-CILIUM_VERSION="${1:-1.17.4}"
+CILIUM_VERSION="${1:-1.17.5}"
 FOLDER_PATH=$(dirname -- "${0}")
 
 helm repo add cilium https://helm.cilium.io/
