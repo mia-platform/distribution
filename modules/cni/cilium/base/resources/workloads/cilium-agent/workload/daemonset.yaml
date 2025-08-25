@@ -49,8 +49,6 @@ spec:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
           privileged: false
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -84,8 +82,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -121,8 +117,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -147,8 +141,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           capabilities:
             drop:
             - ALL
@@ -175,8 +167,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -216,8 +206,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: false
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -251,8 +239,6 @@ spec:
           allowPrivilegeEscalation: true
           readOnlyRootFilesystem: false
           privileged: true
-          seccompProfile:
-            type: RuntimeDefault
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -443,6 +429,8 @@ spec:
           mountPath: /tmp
       securityContext:
         appArmorProfile:
+          type: Unconfined
+        seccompProfile:
           type: Unconfined
       volumes:
       - name: tmp

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update cilium to v1.17.7
+- changed cilium-agent SeccompProfile to Unconfined
+
 ## v1.32.2
 
 ### Changed
