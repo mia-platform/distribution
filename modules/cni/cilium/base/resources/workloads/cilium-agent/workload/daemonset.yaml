@@ -13,6 +13,9 @@ spec:
       maxUnavailable: 25%
   minReadySeconds: 0
   template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: cilium-agent
     spec:
       serviceAccountName: cilium
       automountServiceAccountToken: false
@@ -22,7 +25,7 @@ spec:
       hostIPC: false
       initContainers:
       - name: config
-        image: "quay.io/cilium/cilium:v1.13.2@sha256:85708b11d45647c35b9288e0de0706d24a5ce8a378166cadc700f756cc1a38d6"
+        image: quay.io/cilium/cilium:latest
         imagePullPolicy: IfNotPresent
         command:
         - cilium-dbg
@@ -230,7 +233,7 @@ spec:
           readOnly: false
       # Install the CNI binaries in an InitContainer so we don't have a writable host mount in the agent
       - name: install-cni-binaries
-        image: "quay.io/cilium/cilium:v1.12.8@sha256:b6c3c48b380334b8f08dba6e0c28d906c0d722b8c2beb0d506b3cea27f66f78d"
+        image: quay.io/cilium/cilium:latest
         imagePullPolicy: IfNotPresent
         command:
           - "/install-plugin.sh"
@@ -274,6 +277,10 @@ spec:
             resourceFieldRef:
               resource: limits.memory
               divisor: '1'
+        - name: KUBE_CLIENT_BACKOFF_BASE
+          value: "1"
+        - name: KUBE_CLIENT_BACKOFF_DURATION
+          value: "120"
         lifecycle:
           postStart:
             exec:
@@ -317,10 +324,6 @@ spec:
           containerPort: 9964
           hostPort: 9964
           protocol: TCP
-        - name: envoy-admin
-          containerPort: 9901
-          hostPort: 9901
-          protocol: TCP
         - name: hubble-metrics
           containerPort: 9965
           hostPort: 9965
@@ -334,7 +337,7 @@ spec:
             httpHeaders:
             - name: brief
               value: "true"
-          failureThreshold: 105
+          failureThreshold: 300
           periodSeconds: 2
           successThreshold: 1
           initialDelaySeconds: 5

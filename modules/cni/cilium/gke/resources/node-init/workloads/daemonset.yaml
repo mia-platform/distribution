@@ -13,9 +13,6 @@ spec:
       maxUnavailable: 25%
   minReadySeconds: 0
   template:
-    metadata:
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/node-init: unconfined
     spec:
       serviceAccountName: cilium-node-init
       automountServiceAccountToken: false
@@ -167,16 +164,6 @@ spec:
                 systemctl restart kubelet
               fi
             fi
-            # If Cilium is configured to manage masquerading of traffic leaving the node,
-            # we need to disable the IP-MASQ chain because even if ip-masq-agent
-            # is not installed, the node init script installs some default rules into
-            # the IP-MASQ chain.
-            # If we remove the jump to that ip-masq chain, then we ensure the ip masquerade
-            # configuration is solely managed by Cilium.
-            # Also, if Cilium is installed, it may be expected that it would be solely responsible
-            # for the networking configuration on that node. So provide the same functionality
-            # as the --disable-snat-flag for existing GKE clusters.
-            iptables -w -t nat -D POSTROUTING -m comment --comment "ip-masq: ensure nat POSTROUTING directs all non-LOCAL destination traffic to our custom IP-MASQ chain" -m addrtype ! --dst-type LOCAL -j IP-MASQ || true
             mkdir -p "/tmp/cilium-bootstrap.d"
             date > "/tmp/cilium-bootstrap.d/cilium-bootstrap-time"
             echo "Node initialization complete"
@@ -188,6 +175,8 @@ spec:
           privileged: false
           seccompProfile:
             type: RuntimeDefault
+          appArmorProfile:
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
