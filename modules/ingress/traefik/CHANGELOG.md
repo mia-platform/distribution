@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.0
+
+### Changed
+
+- update traefik to v3.5.1
+
 ## v1.32.4
 
 ### Changed
@@ -81,22 +87,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - support for http3
-
-## v1.30.2
-
-### Changed
-
-- update traefik to v3.2.5
-
-## v1.30.1
-
-### Changed
-
-- update traefik to v3.2.1
-
-## v1.30.0
-
-### Changed
-
-- update traefik to v3.2.0
-- update PodDisruptionBudget from minAvailable to maxUnavailable
