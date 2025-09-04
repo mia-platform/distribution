@@ -72,4 +72,3 @@ spec:
       drain:
         enabled: true
     logLevel: warn
-  nodeAgents: []
