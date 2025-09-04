@@ -50,11 +50,10 @@ This module use the following user, gid and fsGroup:
 
 | Module Version | Prometheus Operator | Node Exporter | Kube State Metrics |
 |----------------|---------------------|---------------|--------------------|
-| 1.30.0         | 0.78.1              | 1.8.2         | 2.13.0             |
-| 1.30.x         | 0.78.2              | 1.8.2         | 2.13.0             |
 | 1.31.0         | 0.80.1              | 1.9.0         | 2.14.0             |
 | 1.31.1         | 0.80.1              | 1.9.1         | 2.14.0             |
 | 1.32.x         | 0.83.0              | 1.9.1         | 2.15.0             |
+| 1.33.x         | 0.85.0              | 1.9.1         | 2.17.0             |
 
 ## User customization
 
