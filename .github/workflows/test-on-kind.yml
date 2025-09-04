@@ -54,10 +54,10 @@ jobs:
     strategy:
       matrix:
         versions:
-        - kind: kindest/node:v1.33.1@sha256:050072256b9a903bd914c0b2866828150cb229cea0efe5892e2b644d5dd3b34f
-          kubectl: "v1.33.1"
-        - kind: kindest/node:v1.32.5@sha256:e3b2327e3a5ab8c76f5ece68936e4cafaa82edf58486b769727ab0b3b97a5b0d
-          kubectl: "v1.32.5"
+        - kind: kindest/node:v1.33.4@sha256:25a6018e48dfcaee478f4a59af81157a437f15e6e140bf103f85a2e7cd0cbbf2
+          kubectl: "v1.33.4"
+        - kind: kindest/node:v1.32.8@sha256:abd489f042d2b644e2d033f5c2d900bc707798d075e8186cb65e3f1367a9d5a1
+          kubectl: "v1.32.8"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout
@@ -72,7 +72,7 @@ jobs:
       if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.29.0
+        version: v0.30.0
         kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
@@ -82,7 +82,7 @@ jobs:
       if: matrix.module != 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.29.0
+        version: v0.30.0
         kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
