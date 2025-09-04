@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.0
+
+### Changed
+
+- update kube-webhook-certgen to 1.6.2
+- update dexidp to v2.44.0
+
 ## v1.32.1
 
 ### Changed
@@ -44,29 +51,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - update oidc-proxy to 1.0.9-9c57a7
-
-## v1.30.3
-
-### Changed
-
-- update oidc-proxy to 1.0.7
-- update kube-webhook-certgen to 1.5.3
-
-## v1.30.2
-
-### Changed
-
-- update kube-webhook-certgen to 1.5.1
-
-## v1.30.1
-
-### Changed
-
-- update kube-webhook-certgen to 1.5.0
-
-## v1.30.0
-
-### Changed
-
-- update oidc-proxy to 1.0.7-7c38af
-- update PodDisruptionBudget from minAvailable to maxUnavailable
