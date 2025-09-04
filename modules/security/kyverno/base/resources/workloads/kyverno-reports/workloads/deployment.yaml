@@ -33,7 +33,8 @@ spec:
         - --admissionReports=true
         - --aggregateReports=true
         - --policyReports=true
-        - --validatingAdmissionPolicyReports=false
+        - --validatingAdmissionPolicyReports=true
+        - --mutatingAdmissionPolicyReports=false
         - --backgroundScan=true
         - --backgroundScanWorkers=2
         - --backgroundScanInterval=1h
@@ -51,6 +52,7 @@ spec:
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)
         - --profilePort=$(PROFILE_PORT)
+        - --openreportsEnabled=$(OPENREPORTS_ENABLED)
         env:
         - name: METRICS_PORT
           value: PORT
@@ -76,6 +78,8 @@ spec:
               fieldPath: metadata.namespace
         - name: TUF_ROOT
           value: /.sigstore
+        - name: OPENREPORTS_ENABLED
+          value: "false"
         ports:
         - containerPort: 11216
           name: metrics
