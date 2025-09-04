@@ -67,7 +67,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.31.x         | 1.15.2 | RELEASE.2025-02-03T21-03-04Z | RELEASE.2025-02-04T04-57-50Z | 1.11.1     |
 | 1.32.0         | 1.16.1 | RELEASE.2025-05-24T17-08-30Z | RELEASE.2025-05-21T01-59-54Z | 1.12.1     |
 | 1.32.1         | 1.16.2 | RELEASE.2025-07-23T15-54-02Z | RELEASE.2025-07-21T05-28-08Z | 1.12.2     |
-| 1.33.0         | 1.16.2 | RELEASE.2025-07-23T15-54-02Z | RELEASE.2025-07-21T05-28-08Z | 1.12.2     |
+| 1.33.x         | 1.16.2 | RELEASE.2025-07-23T15-54-02Z | RELEASE.2025-07-21T05-28-08Z | 1.12.2     |
 
 ### AWS Storage Flavor
 
@@ -77,7 +77,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.32.x         | 1.16.1 | 1.12.1     |
 | 1.32.0         | 1.16.1 | 1.12.1     |
 | 1.32.1         | 1.16.2 | 1.12.2     |
-| 1.33.0         | 1.16.2 | 1.12.2     |
+| 1.33.x         | 1.16.2 | 1.12.2     |
 
 ### Azure Storage Flavor
 
@@ -86,7 +86,7 @@ Follow the [instructions below](#gcp-storage) for a correct configuration.
 | 1.31.x         | 1.15.2 | 1.11.1       |
 | 1.32.0         | 1.16.1 | 1.12.1       |
 | 1.32.1         | 1.16.2 | 1.12.2       |
-| 1.33.0         | 1.16.2 | 1.12.2       |
+| 1.33.x         | 1.16.2 | 1.12.2       |
 
 ### GCP Storage Flavor
 
