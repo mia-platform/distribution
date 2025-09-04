@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.0
+
+### Changed
+
+- update metrics-server to v0.8.0
+
 ## v1.32.0
 
 ### Changed
@@ -14,9 +20,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - removed deprecated enforce-mountable-secrets annotation
 
 ## v1.31.0
-
-- no changes
-
-## v1.30.0
 
 - no changes
