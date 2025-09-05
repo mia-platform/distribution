@@ -14,6 +14,8 @@ rules:
   resources:
   - mutatingwebhookconfigurations
   - validatingwebhookconfigurations
+  - validatingadmissionpolicies
+  - validatingadmissionpolicybindings
   verbs:
   - create
   - delete
@@ -63,6 +65,10 @@ rules:
   - policyexceptions
   - imagevalidatingpolicies
   - imagevalidatingpolicies/status
+  - generatingpolicies
+  - generatingpolicies/status
+  - mutatingpolicies
+  - mutatingpolicies/status
   verbs:
   - create
   - delete

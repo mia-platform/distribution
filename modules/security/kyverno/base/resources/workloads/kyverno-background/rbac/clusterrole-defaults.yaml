@@ -31,6 +31,21 @@ rules:
   - watch
   - deletecollection
 - apiGroups:
+  - policies.kyverno.io
+  resources:
+  - generatingpolicies
+  - mutatingpolicies
+  - policyexceptions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+  - deletecollection
+- apiGroups:
   - ""
   resources:
   - namespaces

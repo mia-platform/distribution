@@ -42,6 +42,8 @@ rules:
   - validatingpolicies/status
   - imagevalidatingpolicies
   - imagevalidatingpolicies/status
+  - generatingpolicies
+  - mutatingpolicies
   verbs:
   - create
   - delete
@@ -56,6 +58,15 @@ rules:
   resources:
   - policyexceptions
   - policyexceptions/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - validatingadmissionpolicies
+  - validatingadmissionpolicybindings
   verbs:
   - get
   - list
@@ -81,6 +92,22 @@ rules:
   - policyreports/status
   - clusterpolicyreports
   - clusterpolicyreports/status
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+  - deletecollection
+- apiGroups:
+  - openreports.io
+  resources:
+  - reports
+  - reports/status
+  - clusterreports
+  - clusterreports/status
   verbs:
   - create
   - delete

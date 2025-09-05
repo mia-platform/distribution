@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.0
+
+### Changed
+
+- update kyverno to v1.15.1
+
 ## v1.32.1
 
 ### Changed
@@ -31,34 +37,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - no changes
-
-## v1.30.4
-
-### Changed
-
-- update kyverno to v1.13.6
-
-## v1.30.3
-
-### Changed
-
-- update kyverno to v1.13.4
-
-## v1.30.2
-
-### Changed
-
-- update kyverno to v1.13.3
-
-## v1.30.1
-
-### Changed
-
-- update kyverno to v1.13.2
-
-## v1.30.0
-
-### Changed
-
-- update kyverno to v1.13.1
-- update PodDisruptionBudget from minAvailable to maxUnavailable

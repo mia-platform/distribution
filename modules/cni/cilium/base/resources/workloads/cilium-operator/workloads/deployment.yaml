@@ -122,4 +122,11 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       tolerations:
-      - operator: Exists
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+        - key: ignore-taint.cluster-autoscaler.kubernetes.io/cilium-agent-not-ready
+          operator: Exists

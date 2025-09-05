@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.0
+
+### Changed
+
+- update logging-operator to v6.0.3
+
 ## v1.32.1
 
 ### Fixed

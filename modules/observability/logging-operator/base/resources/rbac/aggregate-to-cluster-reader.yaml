@@ -15,7 +15,6 @@ rules:
   - fluentdconfigs
   - loggingroutes
   - loggings
-  - nodeagents
   - syslogngconfigs
   - syslogngclusterflows
   - syslogngclusteroutputs

@@ -30,6 +30,7 @@ spec:
         args:
         - --loggingFormat=text
         - --v=0
+        - --openreportsEnabled=$(OPENREPORTS_ENABLED)
         env:
         - name: KYVERNO_SERVICEACCOUNT_NAME
           value: default
@@ -51,6 +52,8 @@ spec:
           value: default
         - name: KYVERNO_SVC
           value: default
+        - name: OPENREPORTS_ENABLED
+          value: "false"
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -84,7 +87,8 @@ spec:
         - --enableDeferredLoading=true
         - --dumpPayload=false
         - --forceFailurePolicyIgnore=false
-        - --generateValidatingAdmissionPolicy=false
+        - --generateValidatingAdmissionPolicy=true
+        - --generateMutatingAdmissionPolicy=false
         - --dumpPatches=false
         - --maxAPICallResponseLength=2000000
         - --enablePolicyException=true
