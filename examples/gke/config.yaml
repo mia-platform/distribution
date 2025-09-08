@@ -4,30 +4,30 @@ name: gke-installation
 spec:
   modules:
     cni/cilium/gke:
-      version: v1.32.3
+      version: v1.33.0
     disaster-recovery/velero/base:
-      version: v1.32.1
+      version: v1.33.0
     ingress/traefik/gke:
-      version: v1.32.4
+      version: v1.33.0
     observability/logging-operator/base:
-      version: v1.32.1
+      version: v1.33.0
     observability/prometheus-operator/base:
-      version: v1.32.0
+      version: v1.33.0
     scheduling/kube-green/base:
-      version: v1.32.0
+      version: v1.33.0
     security/cert-manager/base:
-      version: v1.32.1
+      version: v1.33.0
     security/kyverno/base:
-      version: v1.32.1
+      version: v1.33.0
     security/rbac-manager/base:
-      version: v1.32.1
+      version: v1.33.0
   addOns:
     cert-manager/kube-green-webhook-certificate:
       version: v1.0.2
     cert-manager/prometheus-operator-webhook-certificate:
       version: v2.0.2
     logging-operator/logging-stack:
-      version: v2.0.3
+      version: v2.1.0
     prometheus-operator/cert-manager:
       version: v2.0.0
     prometheus-operator/kube-green:
@@ -39,7 +39,7 @@ spec:
     prometheus-operator/logging-stack:
       version: v2.0.3
     prometheus-operator/monitoring-stack:
-      version: v2.5.0
+      version: v2.6.0
     prometheus-operator/rbac-manager:
       version: v1.0.4
     prometheus-operator/traefik:
