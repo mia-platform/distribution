@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update cert-manager to 1.18.0
 - removed deprecated enforce-mountable-secrets annotation
 
+## v1.31.2
+
+### Changed
+
+- update cert-manager to 1.17.4
+
 ## v1.31.1
 
 ### Changed

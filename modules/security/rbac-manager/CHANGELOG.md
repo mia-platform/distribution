@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - removed deprecated enforce-mountable-secrets annotation
 
+## v1.31.1
+
+### Changed
+
+- update rbac-manager to v1.9.2
+
 ## v1.31.0
 
 - no changes
