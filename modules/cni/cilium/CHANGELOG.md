@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update cilium to v1.18.2
+- update hubble UI to v0.13.3
+
 ## v1.33.0
 
 ### Changed
