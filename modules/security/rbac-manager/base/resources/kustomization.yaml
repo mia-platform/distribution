@@ -7,8 +7,8 @@ labels:
 namespace: rbac-manager-system
 images:
 - name: quay.io/reactiveops/rbac-manager
-  newTag: v1.9.2
-  digest: sha256:76e90012bfd0b339c69c64bdb5f5785c47fcf7a4b53d24aec272f1ea176056c1
+  newTag: v1.9.3
+  digest: sha256:94603ad6eb7667b3d41e588598e75aa6266b48a0d90b1912841e3552c1a54d86
 resources:
 - configs
 - rbac
