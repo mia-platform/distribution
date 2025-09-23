@@ -50,7 +50,7 @@ spec:
           readOnlyRootFilesystem: true
           privileged: false
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -85,7 +85,7 @@ spec:
           readOnlyRootFilesystem: true
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -122,7 +122,7 @@ spec:
           readOnlyRootFilesystem: true
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -148,7 +148,7 @@ spec:
           readOnlyRootFilesystem: true
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           capabilities:
             drop:
             - ALL
@@ -176,7 +176,7 @@ spec:
           readOnlyRootFilesystem: true
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -217,7 +217,7 @@ spec:
           readOnlyRootFilesystem: false
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
@@ -252,7 +252,7 @@ spec:
           readOnlyRootFilesystem: false
           privileged: true
           seccompProfile:
-            type: RuntimeDefault
+            type: Unconfined
           seLinuxOptions:
             level: s0
             type: spc_t
