@@ -93,7 +93,8 @@ This module use the following user, gid and fsGroup:
 
 | Module Version | Tool Version   |
 |----------------|----------------|
-| 1.33.x         | 1.15.1         |
+| 1.33.0         | 1.15.1         |
+| 1.33.1         | 1.15.2         |
 
 ## User customization
 
