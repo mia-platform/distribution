@@ -7,8 +7,8 @@ labels:
     app.kubernetes.io/component: kube-green
 images:
 - name: ghcr.io/kube-green/kube-green
-  newTag: 0.7.0
-  digest: sha256:014e20d23abf389d635973a0fbb9f3dba42fcb087008ef52ceebe63f860321cd
+  newTag: 0.7.1
+  digest: sha256:2dc0f0a6034cfb32bd442ad5d28cc7ead80fb16e5b0387cac9f9dc8509bfcc09
 - name: registry.k8s.io/ingress-nginx/kube-webhook-certgen
   newTag: v1.5.4
   digest: sha256:7a38cf0f8480775baaee71ab519c7465fd1dfeac66c421f28f087786e631456e
