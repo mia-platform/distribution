@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-case-conflict
     name: Check filename case conflicts
@@ -18,7 +18,7 @@ repos:
     name: Trims trailing whitespace
     args: [--markdown-linebreak-ext=md] # add exception for markdown linebreaks
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.26.0
+  rev: v8.28.0
   hooks:
   - id: gitleaks
     name: Protect and discover secrets using Gitleaks
