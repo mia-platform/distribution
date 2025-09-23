@@ -4,7 +4,7 @@ name: gke-installation
 spec:
   modules:
     cni/cilium/aks:
-      version: v1.30.6
+      version: v1.30.7
     disaster-recovery/velero/base:
       version: v1.30.2
     ingress/traefik/aks:

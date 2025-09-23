@@ -4,7 +4,7 @@ name: eks-installation
 spec:
   modules:
     cni/cilium/eks:
-      version: v1.30.6
+      version: v1.30.7
     disaster-recovery/velero/base:
       version: v1.30.2
     ingress/traefik/eks:
