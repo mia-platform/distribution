@@ -30,10 +30,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
     - name: Calculate file differences
       id: changed-files
-      uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+      uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47.0.0
       with:
         dir_names: true
         json: true
@@ -54,14 +54,14 @@ jobs:
     strategy:
       matrix:
         versions:
-        - kind: kindest/node:v1.32.5@sha256:e3b2327e3a5ab8c76f5ece68936e4cafaa82edf58486b769727ab0b3b97a5b0d
-          kubectl: "v1.32.5"
-        - kind: kindest/node:v1.31.9@sha256:b94a3a6c06198d17f59cca8c6f486236fa05e2fb359cbd75dabbfc348a10b211
-          kubectl: "v1.31.9"
+        - kind: kindest/node:v1.31.12@sha256:0f5cc49c5e73c0c2bb6e2df56e7df189240d83cf94edfa30946482eb08ec57d2
+          kubectl: "v1.31.12"
+        - kind: kindest/node:v1.32.8@sha256:abd489f042d2b644e2d033f5c2d900bc707798d075e8186cb65e3f1367a9d5a1
+          kubectl: "v1.32.8"
         module: ${{ fromJSON(needs.get-changed-modules.outputs.matrix) }}
     steps:
     - name: Checkout
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Kustomize Build
       run: |
@@ -72,7 +72,7 @@ jobs:
       if: matrix.module == 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.29.0
+        version: v0.30.0
         kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/no-cni.yaml
@@ -82,7 +82,7 @@ jobs:
       if: matrix.module != 'modules/cni/cilium/base'
       uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
-        version: v0.29.0
+        version: v0.30.0
         kubectl_version: "${{ matrix.versions.kubectl }}"
         node_image: "${{ matrix.versions.kind }}"
         config: .github/workflows/kind-configs/default.yaml
