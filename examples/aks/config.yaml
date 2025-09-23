@@ -4,7 +4,7 @@ name: gke-installation
 spec:
   modules:
     cni/cilium/aks:
-      version: v1.31.3
+      version: v1.31.4
     disaster-recovery/velero/base:
       version: v1.31.0
     ingress/traefik/aks:
@@ -14,13 +14,13 @@ spec:
     observability/prometheus-operator/base:
       version: v1.31.1
     scheduling/kube-green/base:
-      version: v1.31.0
-    security/cert-manager/base:
       version: v1.31.1
+    security/cert-manager/base:
+      version: v1.31.2
     security/kyverno/base:
       version: v1.31.1
     security/rbac-manager/base:
-      version: v1.31.0
+      version: v1.31.3
   addOns:
     cert-manager/kube-green-webhook-certificate:
       version: v1.0.2
