@@ -56,11 +56,6 @@ specify the external one you would like to use for authenticating in your cluste
 
 | Module Version | kube-oidc-proxy Version                | Dex Version |
 |----------------|----------------------------------------|-------------|
-| 1.31.0         | 1.0.9-9c57a7                           | 2.41.1      |
-| 1.31.1         | 1.0.9-b1a3a1                           | 2.41.1      |
-| 1.31.1         | 1.0.9-1e6d39                           | 2.42.1      |
-| 1.32.0         | 1.0.9-9c4cae                           | 2.43.1      |
-| 1.32.1         | 1.0.9-1ccb97                           | 2.43.1      |
 | 1.33.x         | 1.0.9-1ccb97                           | 2.44.0      |
 
 ## User customization
