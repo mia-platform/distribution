@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v1.33.1
+
+### Changed
+
+- update kube-oidc-proxy to 1.0.9-3da0ae
+
 ## v1.33.0
 
 ### Changed
