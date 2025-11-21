@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update traefik to v3.5.6
+
 ## v1.33.2
 
 ### Changed
