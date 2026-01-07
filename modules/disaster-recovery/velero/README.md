@@ -108,7 +108,7 @@ and we suggest you to setup your AWS cluster to work with one of these methods i
 For IAM Roles for Service Accounts you will have to add the `eks.amazonaws.com/role-arn` annotation to the
 `velero` `ServiceAccount` with the arn of the role that you have created folling the AWS guide.  
 If you use the EKS Pod Identity instead you don't have to set anything on the resources and you need to follow
-the instructions for adding permisions to the `velero` `ServiceAccount` for the `dr-system` namespace.
+the instructions for adding permissions to the `velero` `ServiceAccount` for the `dr-system` namespace.
 
 The minimal IAM Policy to assign the to service account is the following:
 

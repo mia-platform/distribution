@@ -9,7 +9,7 @@ encryption and other features.
 The module will install the deployment, ingress class, and will add the correct permissions to operate
 on the installed CRDs for the builtin `admin`, `edit` and `view` ClusterRoles.
 
-The NetworkPolicy applied to the traefik workload will explicity deny exposing services that will run in the following
+The NetworkPolicy applied to the traefik workload will explicitly deny exposing services that will run in the following
 namespaces for added security:
 
 - `default`

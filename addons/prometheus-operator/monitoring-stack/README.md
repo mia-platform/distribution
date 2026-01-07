@@ -1,6 +1,6 @@
 # Monitoring Stack for Prometheus Operator
 
-This add-on defines a defautl monitoring stack needed to export the metrics of the cluster.
+This add-on defines a default monitoring stack needed to export the metrics of the cluster.
 It configures `Prometheus` and `Alertmanager` custom resources, `NetworkPolicy` for reaching the new stack and for
 monitoring all the workloads present in the Prometheus Operator namespace.
 
@@ -23,7 +23,7 @@ monitoring all the workloads present in the Prometheus Operator namespace.
 
 ## Add-on Configurations
 
-The add-on will install all its component inside the namespace where the `prometheus-operator` deployement is
+The add-on will install all its component inside the namespace where the `prometheus-operator` deployment is
 and will use the following default **ports**:
 
 - alertmanager:

@@ -9,7 +9,7 @@ initContainers that are responsible for autogenerate it.
 
 ## What the Add-On Contains
 
-- **[resources](./resources):** containst the `Issuer` and `Certificate` resources
+- **[resources](./resources):** contains the `Issuer` and `Certificate` resources
 
 ## Compatibility Matrix
 

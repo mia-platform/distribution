@@ -36,7 +36,7 @@ mutatingwebhookconfigurations.admissionregistration.k8s.io -l webhook.kyverno.io
 		step
 	1. Add the new field `spec.generateExisting: true` to those resources for allowing the update of the already existing
 		resources
-	1. Update the resources to the new schemas if applcable, you can read the [relase notes] to check what is changed
+	1. Update the resources to the new schemas if applicable, you can read the [release notes] to check what is changed
 	1. Be mindful that `spec.generateExisting` can lead to the creation of additional resources, be sure to check and
 		adjust your match/exclude blocks to account for this
 
@@ -45,7 +45,7 @@ mutatingwebhookconfigurations.admissionregistration.k8s.io -l webhook.kyverno.io
 - **[crds](./base/crds)**: `kyverno` custom resource definitions
 - **[resources](./base/resources)**: `ClusterRole`s to aggregate to `view`, `edit`, `cluster-view` and `admin`
   - **[configs](./base/resources/configs):** contains the configurations for the service, including the `Namespace`,
-		`NetworkPolicy` and `PodDistruptionBudget` resources
+		`NetworkPolicy` and `PodDisruptionBudget` resources
   - **[RBAC](./base/resources/rbac):**
   - **[workloads](./base/resources/workloads):**
     - **[kyverno-admission](./base/resources/workloads/kyverno-admission):** resources for the kyverno main controller.
@@ -57,7 +57,7 @@ mutatingwebhookconfigurations.admissionregistration.k8s.io -l webhook.kyverno.io
 				This component will be responsible for processing of Cleanup Policies
     - **[kyverno-cleanup-job](./base/resources/workloads/kyverno-cleanup-job):** resources for the kyverno cleanup cronjob.
 				This component will be responsible for removing cluseradmissionreports and admissionreport if they are
-				a sizeble amounts
+				a sizeable amounts
     - **[kyverno-reports](./base/resources/workloads/kyverno-reports):** resources for the kyverno reports controller.
 				This component will be responsible for handling of Policy Reports
 
@@ -116,6 +116,6 @@ option of deployment to `true` for allowing the api-server to reach its endpoint
 workload with the labelSelector `distribution.mia-platform.eu/expose-webhook=true`.
 
 [Here is the link to the official repository]: https://github.com/kyverno/kyverno "Kyverno GitHub Repository"
-[relase notes]: https://github.com/kyverno/kyverno/releases
+[release notes]: https://github.com/kyverno/kyverno/releases
 [kyverno policies repository]: https://github.com/kyverno/policies "Kyverno Policies GitHub Repository"
 [documentation]: https://kyverno.io/policies/ "Kyverno Policies Site"

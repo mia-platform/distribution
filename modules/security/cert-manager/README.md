@@ -7,7 +7,7 @@ renew them.
 [Here is the link to the official repository].
 
 The module will install the three deployments that compose the operator and will add to the admin, editor and view
-ClusterRoles the appropiate permissions to handle the CRDs that the operator will install.
+ClusterRoles the appropriate permissions to handle the CRDs that the operator will install.
 
 ## Module Contents
 
@@ -59,7 +59,7 @@ This module use the following user, gid and fsGroup:
 
 After the installation a cluster operator may want to setup one or more ClusterIssuer if needed or leave the setup
 of Issuers and Certificates to the admin and/or editor of the cluster for their namespaces. The modules will add
-the necessary additon to the default roles, but if you are using custom ones you must update them for adding
+the necessary addition to the default roles, but if you are using custom ones you must update them for adding
 the relevant permissions on the new CRDs that the module will install.
 
 ## GKE User

@@ -23,14 +23,14 @@ These modules and addons are built on a vanilla Kubernetes and are tested agains
 
 The module versioning will follow the kubernetes one for clearly indicating on what version you can use them,
 so for example a module with version of 1.24.x will be safe to use on a kubernetes cluster on the 1.24 release.  
-Everytime we will certificate the distribution against a new kubernetes version we will cut another release and we will
+every time we will certificate the distribution against a new kubernetes version we will cut another release and we will
 keep the older one on a separate branch; we pledge to support older releases until the kubernetes version is among the
 supported ones.
 
 ### Security Features
 
 By default we strive to give the user of Magellano the most secure feature enabled by default for every modules
-and addons where possibile. These features are:
+and addons where possible. These features are:
 
 - all pods run with dedicated ServiceAccounts with `automountServiceAccountToken` set to false
 - every namespace will have a deny-all NetworkPolicy and a set of other NetworkPolicies to allow only the needed
@@ -38,19 +38,19 @@ and addons where possibile. These features are:
 - only pods that actually needs to be reached inside the cluster will have an associated Service
 - pods run with `automountServiceAccountToken` set to false and will have a manual mount of the token,
 	CA, and namespace volumes if needed
-- `hostNetwork`, `hostPID` and `hostIPC` are explicity set to `false` if the pod don’t need the privilege
+- `hostNetwork`, `hostPID` and `hostIPC` are explicitly set to `false` if the pod don’t need the privilege
 - all pods specify the `securityContext` block with this default values:
   - `runAsNonRoot` set to `true` for disallowing the pod to run as root user
   - `runAsUser`, `runAsGroup` and `fsGroup` set to a fixed id as described in the [pod users section](#pod-users-uids-and-gids)
 - all containers specify the `securityContext` block with this default values:
   - `allowPrivilegeEscalation` and `privileged` set to `false` if the user inside the pod don’t need to escalate to root
-  - `readOnlyRootFilesystem` set to `true` where possibile and appropriates storage mount set on locations that are
+  - `readOnlyRootFilesystem` set to `true` where possible and appropriates storage mount set on locations that are
 		needed
-  - `seccompProfile` explicity set to `RuntimeDefault`
-  - the `capabilities` block has alwasy the `drop ALL` directive and then in the `add` section will be added only the
+  - `seccompProfile` explicitly set to `RuntimeDefault`
+  - the `capabilities` block has always the `drop ALL` directive and then in the `add` section will be added only the
 		capabilities needed by the program if any
 - all pods that expose one or more ports for their functionality will done that in the range between port **11200-11300**
-	where possibile. In some cases we cannot change ports or is not advisible (like with cni module). Every module or
+	where possible. In some cases we cannot change ports or is not advisable (like with cni module). Every module or
 	addon will have a dedicated section with the port used in their README file.  
 	Avoiding using the default ports and manually selecting different ports that will not overlap with other services will
 	ensure that if the end user will have to set the `hostNetwork` property to `true` there will be little to no overlap
@@ -59,11 +59,11 @@ and addons where possibile. These features are:
 ### Pod Users UIDs and GIDs
 
 As best practice we will force a random UID and GID for all users of a pod that are chosen inside the **48000-49000**
-range. Every pods will have a different id chosen so no overlap will occour inside and between diffrent modules and
+range. Every pods will have a different id chosen so no overlap will occur inside and between different modules and
 addons. Every module and addon will have a section inside its readme that will explain what id is used on what pod for
 transparency.
 
-For working on OpenShift we encourage to setup pathches to remove these selections and leave the automatic assignment
+For working on OpenShift we encourage to setup patches to remove these selections and leave the automatic assignment
 that the cluster will make.
 
 ## The Distribution
@@ -85,9 +85,9 @@ needed for setting up a kubernetes operator for managing different function insi
 An addon of Magellano is a kustomize Component that will add resources and patches to the connected modules
 for adding functionality that will need the presence of two different modules inside the cluster.
 
-You can manually donwload and compose the various modules and addons but we also have developed a cli named [`vab`]
+You can manually download and compose the various modules and addons but we also have developed a cli named [`vab`]
 that can aid you in the management of them, and the connection and deploy to multiple clusters, and to aid the
-operator for a clean installation without retry becasue some resource is not applied in order or becasue a CRD endpoint
+operator for a clean installation without retry because some resource is not applied in order or because a CRD endpoint
 is not ready before applying a resource.
 
 ## How To Contribute

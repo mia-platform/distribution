@@ -4,7 +4,7 @@ This add-on adds support for Prometheus Operator resource for the Logging Stack 
 To work properly it needs both the Prometheus Operator and Logging Stack add-on.
 
 The add-on will add the appropriate NetworkPolicy for allowing the comunication between Prometheus and the
-Logging stack fluentd and fluentbit resources, and the SerciceMonitor resources for letting the Prometheus Operator
+Logging stack fluentd and fluentbit resources, and the ServiceMonitor resources for letting the Prometheus Operator
 to generate the correct configuration for scraping the data.
 
 ## What the Add-On Contains

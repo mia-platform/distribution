@@ -7,7 +7,7 @@ maximize the chances of your PR being merged.
 
 - If you want to work on some open issue, please reach out to us via a comment on it before starting your work to
 	check if someone else is already working on it.
-- Before working on a new feature please open an issue for the feature request and partecipate in the discussion for
+- Before working on a new feature please open an issue for the feature request and participate in the discussion for
 	reaching an agreement on its design and utility for the project.
 - Small patches, bug fixes and documentation typos fixing don’t need prior communication.
 

@@ -3,8 +3,8 @@
 Cilium is an open source, cloud native solution for providing, securing, and observing network connectivity
 between workloads powered by eBPF.  
 The Cilium module configures the *Container Network Interface* (CNI) necessary to implement the
-*Kuberentes network model* of your cluster. It also install Hubble for visualizing the network topology of your
-namespace and see what traeffic is allowed or dropped by the NetworkPolicy applied to the cluster.
+*Kubernetes network model* of your cluster. It also install Hubble for visualizing the network topology of your
+namespace and see what traffic is allowed or dropped by the NetworkPolicy applied to the cluster.
 
 [Here is the link to the official repository].
 

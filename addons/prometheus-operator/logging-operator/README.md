@@ -9,7 +9,7 @@ the correct configuration for scraping the data.
 
 ## What the Add-On Contains
 
-- **[resources](./resources):** containst the `PodMonitor` and `NetworkPolicy` resources
+- **[resources](./resources):** contains the `PodMonitor` and `NetworkPolicy` resources
 
 ## Compatibility Matrix
 

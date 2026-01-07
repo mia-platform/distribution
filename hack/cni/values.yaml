@@ -46,6 +46,8 @@ tls:
     name: kube-system
 
 loadBalancer:
+  # l7:
+  #   backend: envoy
   protocolDifferentiation:
     enabled: true
 

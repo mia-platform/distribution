@@ -1,0 +1,22 @@
+version: "0.2"
+language: en,en-GB,en-US
+useGitignore: true
+allowCompoundWords: true
+words:
+- crds
+- dexidp
+- kubelet
+- kustomization
+- kyverno
+- traefik
+- velero
+ignoreWords:
+- byocni
+- cainjector
+- ccleanpol
+- cluseradmissionreports
+- kyvernobackup
+- polex
+- snat
+files:
+- '**/*.md'

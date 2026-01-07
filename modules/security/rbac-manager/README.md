@@ -1,6 +1,6 @@
 # RBAC Manager Module
 
-RBAC Manager is a kuberentes controller that simplify the configurations of RBAC resources and even
+RBAC Manager is a kubernetes controller that simplify the configurations of RBAC resources and even
 aid in the automatization by constantly keeping in sync its resources with the cluster state.
 
 [Here is the link to the official repository].

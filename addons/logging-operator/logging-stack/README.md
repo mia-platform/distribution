@@ -1,6 +1,6 @@
 # Logging system for Logging operator
 
-This add-on defines default `Logging` and `FluentbitAgent` resources for the Logging Opeartor that will
+This add-on defines default `Logging` and `FluentbitAgent` resources for the Logging Operator that will
 create a `fluent-bit` and `fluentd` stack with the appropriate NetworkPolicy for communicating between them
 and an eventual external system for the LTS storage of the logs. To work properly it needs the Logging Operator module.
 
@@ -9,7 +9,7 @@ resources are created manually.
 
 ## What the Add-On Contains
 
-- **[resources](./resources):** containst the `Logging`, `FluentbitAgent` and `NetworkPolicy` resources
+- **[resources](./resources):** contains the `Logging`, `FluentbitAgent` and `NetworkPolicy` resources
 
 ## Add-on Configurations
 

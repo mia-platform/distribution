@@ -7,7 +7,7 @@ an easy way to monitor and alert on your cluster resources and custom applicatio
 [Here is the link to the official repository].
 
 The module will install the Prometheus Operator workloads with its CRDs, ClusterRoles that will add to the `edit` and
-`view` defautl ClsuterRoles the ability to interact with them, and will also install the [`kube-state-metrics`] and
+`view` default ClusterRoles the ability to interact with them, and will also install the [`kube-state-metrics`] and
 [Node Exporter] workloads for getting metrics for the actual cluster state, and for the node status.
 
 ## Module Contents
@@ -54,7 +54,7 @@ This module use the following user, gid and fsGroup:
 
 ## User customization
 
-After the installation a cluster admin may want to create `Prometheus` and `AlertManager` resouces for setting up a
+After the installation a cluster admin may want to create `Prometheus` and `AlertManager` resources for setting up a
 monitoring stack for collecting the metrics exposed inside the cluster, and then an `admin` or `edit` role may want
 to create `ServiceMonitor`, `PodMonitor` or `Probe` resources for exposing to the stack one or more metrics endpoint
 for their application.

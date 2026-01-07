@@ -1,7 +1,7 @@
 # Metrics server Module
 
 Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes built-in autoscaling pipelines.
-Metrics Server collects resource metrics from Kubelets and exposes them in Kubernetes apiserver through [Metrics API]
+Metrics Server collects resource metrics from Kubelet and exposes them in Kubernetes apiserver through [Metrics API]
 for use by [Horizontal Pod Autoscaler] and [Vertical Pod Autoscaler]. Metrics API can also be accessed by `kubectl top`,
 making it easier to debug autoscaling pipelines.
 
@@ -18,7 +18,7 @@ ClusterRole for operate on them.
 			cluster roles
   - **[workloads](./base/resources/workloads):**
     - **[metrics-server](./base/resources/workloads/metrics-server):** resources for the metrics-server controller. This
-			component will collects resource metrics from Kubelets and exposes them in Kubernetes apiserver through Metrics
+			component will collects resource metrics from Kubelet and exposes them in Kubernetes apiserver through Metrics
 			API.
 
 ## Module Configurations

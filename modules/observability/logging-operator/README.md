@@ -40,7 +40,7 @@ This module use the following user, gid and fsGroup:
 ## User customization
 
 After the installation a cluster admin may want to setup Logging, ClusterOutput, and ClusterFlow for automatically get
-logs in the cluster or leave the `admin` and `edit` users to set up Flow and Output for their namespaces indipendently.
+logs in the cluster or leave the `admin` and `edit` users to set up Flow and Output for their namespaces independently.
 
 [Here is the link to Logging Operator official repository]: https://github.com/kube-logging/logging-operator
 	"Logging Operator GitHub Repository"
