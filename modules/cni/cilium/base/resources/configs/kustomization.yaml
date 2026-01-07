@@ -11,3 +11,8 @@ configMapGenerator:
   name: cilium-config
   options:
     disableNameSuffixHash: true
+- files:
+  - ./bootstrap-config.json
+  name: cilium-envoy-config
+  options:
+    disableNameSuffixHash: true

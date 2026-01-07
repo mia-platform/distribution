@@ -7,27 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## v1.33.3
-
 ### Changed
 
-- update cilium to v1.18.4
+- update cilium to v1.18.5
 
-## v1.33.2
+### Added
 
-### Changed
-
-- update cilium to v1.18.3
-
-## v1.33.1
-
-### Changed
-
-- update cilium to v1.18.2
-- update hubble UI to v0.13.3
-
-## v1.33.0
-
-### Changed
-
-- update cilium to v1.18.1
+- add external envoy daemonset and enable l7 loadbalancer for grpc
