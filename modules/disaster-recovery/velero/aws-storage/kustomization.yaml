@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: docker.io/velero/velero-plugin-for-aws
-  newTag: v1.12.2
-  digest: sha256:bef271808e0547bb70f69f0430cc73f7a2fa938949c50f7b31171018be967335
+  newTag: v1.13.1
+  digest: sha256:472d0e486d5d5c23c782b1b123530c7df8645784523ec36ca661a326d47885ff
 resources:
 - ../base/crds
 - ../base/resources

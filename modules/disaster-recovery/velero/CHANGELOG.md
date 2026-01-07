@@ -7,12 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## v1.33.1
-
 ### Changed
 
-- update minio images to latest tags
-
-## v1.33.0
-
-- no changes
+- update velero to v1.17.1
+- update velero-plugin-for-aws to v1.13.1
+- update velero-plugin-for-microsoft-azure to v1.13.1
+- update velero-plugin-for-gcp to v1.13.1
