@@ -94,6 +94,8 @@ spec:
           value: PORT
         - name: METRICS_PORT
           value: PORT
+        - name: USER
+          value: traefik
         ports:
         - name: web
           containerPort: 11240
@@ -137,11 +139,16 @@ spec:
         volumeMounts:
         - name: tmp
           mountPath: /tmp
+        - name: data
+          mountPath: /data
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token
           readOnly: true
       volumes:
       - name: tmp
+        emptyDir:
+          medium: Memory
+      - name: data
         emptyDir:
           medium: Memory
       - name: serviceaccount-token

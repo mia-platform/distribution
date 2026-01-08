@@ -7,26 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## v1.33.3
-
 ### Changed
 
-- update traefik to v3.5.6
-
-## v1.33.2
-
-### Changed
-
-- update traefik to v3.5.4
-
-## v1.33.1
-
-### Changed
-
-- update traefik to v3.5.2
-
-## v1.33.0
-
-### Changed
-
-- update traefik to v3.5.1
+- update traefik to v3.6.6
