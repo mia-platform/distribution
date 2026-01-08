@@ -15,6 +15,24 @@
       "policy_namespace"
     ]
   },
+  "kyverno_generating_policy_execution_duration_seconds": {
+    "disabledLabelDimensions": [
+      "resource_namespace",
+      "resource_request_operation"
+    ]
+  },
+  "kyverno_image_validating_policy_execution_duration_seconds": {
+    "disabledLabelDimensions": [
+      "resource_namespace",
+      "resource_request_operation"
+    ]
+  },
+  "kyverno_mutating_policy_execution_duration_seconds": {
+    "disabledLabelDimensions": [
+      "resource_namespace",
+      "resource_request_operation"
+    ]
+  },
   "kyverno_policy_execution_duration_seconds": {
     "disabledLabelDimensions": [
       "resource_namespace",
@@ -31,6 +49,12 @@
     "disabledLabelDimensions": [
       "resource_namespace",
       "policy_namespace"
+    ]
+  },
+  "kyverno_validating_policy_execution_duration_seconds": {
+    "disabledLabelDimensions": [
+      "resource_namespace",
+      "resource_request_operation"
     ]
   }
 }

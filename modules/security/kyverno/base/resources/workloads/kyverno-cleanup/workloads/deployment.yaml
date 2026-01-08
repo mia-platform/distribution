@@ -40,7 +40,6 @@ spec:
         - --protectManagedResources=false
         - --ttlReconciliationInterval=1m
         - --cleanupServerPort=$(CONTROLLER_PORT)
-        - --webhookServerPort=$(CONTROLLER_PORT)
         - --metricsPort=$(METRICS_PORT)
         - --otelConfig=prometheus
         - --profile=$(PROFILE_ENABLED)

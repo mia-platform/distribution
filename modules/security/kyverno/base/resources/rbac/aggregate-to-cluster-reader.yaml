@@ -34,6 +34,9 @@ rules:
   - policies.kyverno.io
   resources:
   - imagevalidationgpolicies
+  - namespaceddeletingpolicies
+  - namespacedimagevalidatingpolicies
+  - namespacedvalidatingpolicies
   - policyexceptions
   - validatingpolicies
   verbs:
