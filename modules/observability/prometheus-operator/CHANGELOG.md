@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### v1.33.0
+### v1.34.0
 
-- update prometheus-operator to 0.85.0
-- update kube-state-metrics to 2.17.0
-- update kube-webhook-certgen to 1.6.2
+- update prometheus-operator to 0.87.1
+- update node-exporter to 1.10.2
+- update kube-webhook-certgen to 1.6.5
