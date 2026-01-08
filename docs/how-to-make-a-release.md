@@ -13,7 +13,7 @@ or addon a link to the new CHANGELOG file must be added to the root one.
 
 ## Tags
 
-After the changelogs are updated the relevant tag can be created, the name of the tag dependes on what are you tagging:
+After the changelogs are updated the relevant tag can be created, the name of the tag depends on what are you tagging:
 
 - if the tag pertain to a module the tag must be `module-<category>-<name>-v<semver>`
 - if the tag pertain to an addon the tag must be `addon-<category>-<name>-v<semver>`
