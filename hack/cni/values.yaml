@@ -1,8 +1,12 @@
-upgradeCompatibility: "1.14"
+upgradeCompatibility: "1.17"
 iptablesRandomFully: false
 
 cni:
   chainingMode: portmap
+
+envoyConfig:
+  secretsNamespace:
+    name: kube-system
 
 hubble:
   metrics:
@@ -32,24 +36,40 @@ hubble:
     podDisruptionBudget:
       enabled: true
 
+loadBalancer:
+  l7:
+    backend: envoy
+  protocolDifferentiation:
+    enabled: true
+
 prometheus:
   enabled: true
   serviceMonitor:
     enabled: true
     trustCRDsExist: true
 
+envoy:
+  enabled: true
+  log:
+    format: null
+    format_json:
+      time: "%Y-%m-%dT%T.%e"
+      level: "%l"
+      scope: "%n"
+      message: "%j"
+    defaultLevel: info
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
 sessionAffinity: true
+
 tls:
   readSecretsOnlyFromSecretsNamespace: true
   secretsNamespace:
     create: false
     name: kube-system
-
-loadBalancer:
-  # l7:
-  #   backend: envoy
-  protocolDifferentiation:
-    enabled: true
 
 operator:
   prometheus:

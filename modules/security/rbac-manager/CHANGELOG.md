@@ -7,18 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## v1.33.2
-
 ### Changed
 
-- update rbac-manger to v1.9.4
-
-## v1.33.1
-
-### Changed
-
-- update rbac-manger to v1.9.3
-
-## v1.33.0
-
-- no changes
+- update rbac-manger to v1.9.5

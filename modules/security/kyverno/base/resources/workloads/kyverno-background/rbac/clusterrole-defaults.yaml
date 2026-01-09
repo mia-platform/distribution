@@ -46,6 +46,17 @@ rules:
   - watch
   - deletecollection
 - apiGroups:
+  - policies.kyverno.io
+  resources:
+  - policyexceptions
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - ""
   resources:
   - namespaces
@@ -112,3 +123,14 @@ rules:
   - update
   - patch
   - delete
+- apiGroups:
+  - resource.k8s.io
+  resources:
+  - resourceclaims
+  - resourceclaimtemplates
+  verbs:
+  - create
+  - delete
+  - update
+  - patch
+  - deletecollection

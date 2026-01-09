@@ -11,9 +11,10 @@
 				"files.trimTrailingWhitespace": false
 			},
 			"extensions": [
-				"editorconfig.editorconfig",
 				"davidanson.vscode-markdownlint",
-				"ms-kubernetes-tools.vscode-kubernetes-tools"
+				"editorconfig.editorconfig",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"streetsidesoftware.code-spell-checker"
 			]
 		},
 		"codespaces": {

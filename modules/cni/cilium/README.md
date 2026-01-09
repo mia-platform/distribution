@@ -26,6 +26,7 @@ the Cilium DaemonSet to run on them before everything else and setup the node pr
   - **[workloads](./base/resources/workloads):**
     - **[cilium-agent](./base/resources/workloads/cilium-agent):** resources for the DaemonSet agent that will handle the
 				eBPF module on the nodes
+    - **[cilium-envoy](./base/resources/workloads/cilium-envoy):** resources for the envoy L7 proxy DaemonSet
     - **[cilium-operator](./base/resources/workloads/cilium-operator):** resources for the operator that will handle the
 				correct configuration for cilium
     - **[hubble](./base/resources/workloads/hubble):** workloads for the Hubble observability platform
@@ -42,8 +43,6 @@ documentation for all the [system requirements].
 ## Flavors
 
 ### AKS
-
-- deploys the `node-init` DaemonSet
 
 The AKS flavor is indicated for setting up cilium to work inside an AKS cluster in BYOCNI plugin. You can follow
 the [official guide from Microsoft] for setting the cluster correctly.
@@ -84,18 +83,22 @@ update the nodes correctly to use Cilium as CNI plugin.
 
 | Module Version | Cilium           | Hubble UI   |
 |----------------|------------------|-------------|
-| 1.33.0         | 1.18.1           | v0.13.2     |
-| 1.33.1         | 1.18.2           | v0.13.3     |
-| 1.33.2         | 1.18.3           | v0.13.3     |
-| 1.33.3         | 1.18.4           | v0.13.3     |
+| 1.34.x         | 1.18.5           | v0.13.3     |
 
 ## User customization
 
-### Base, EKS
+### Base
 
-By default these flavor will set the `cluster-pool-ipv4-cidr` property inside the `cilium-config` ConfigMap to
+By default this flavor will set the `cluster-pool-ipv4-cidr` property inside the `cilium-config` ConfigMap to
 `10.10.0.0/16` and the `cluster-pool-ipv4-mask-size` to `24`. If you don’t want to use these values you can change them
 via a patch setting them to your desired values.
+
+### EKS
+
+For this flavor you **must** change the value of the `cluster-pool-ipv4-cidr` property inside the `cilium-config`
+ConfigMap with a patch and set it to a value that does not overlap with the default service CIDR of AKS. For
+avoiding the setup with a wrong value, the module will set the property to `CHANGE_TO_YOUR_CLUSTER_POD_IPV4_CIDR`
+value that will trigger an error inside Cilium workload and will not start.
 
 ### AKS
 

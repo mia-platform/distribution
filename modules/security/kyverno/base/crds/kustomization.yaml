@@ -12,6 +12,9 @@ resources:
 - globalcontextentries.kyverno.io.yaml
 - imagevalidatingpolicies.policies.kyverno.io.yaml
 - mutatingpolicies.policies.kyverno.io.yaml
+- namespaceddeletingpolicies.policies.kyverno.io.yaml
+- namespacedimagevalidatingpolicies.policies.kyverno.io.yaml
+- namespacedvalidatingpolicies.policies.kyverno.io.yaml
 - policies.kyverno.io.yaml
 - policyexceptions.kyverno.io.yaml
 - policyexceptions.policies.kyverno.io.yaml

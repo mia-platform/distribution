@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: mia-platform:cilium-operator
+  name: mia-platform:cilium-operator:leases
 rules:
 - apiGroups:
   - coordination.k8s.io
@@ -11,3 +11,18 @@ rules:
   - create
   - get
   - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mia-platform:cilium-operator:tlsinterception-secrets
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - update
+  - patch

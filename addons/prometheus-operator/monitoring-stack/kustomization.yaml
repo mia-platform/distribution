@@ -2,11 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 images:
 - name: quay.io/prometheus/prometheus
-  newTag: v3.5.0
-  digest: sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996
+  newTag: v3.8.1
+  digest: sha256:2b6f734e372c1b4717008f7d0a0152316aedd4d13ae17ef1e3268dbfaf68041b
 - name: quay.io/prometheus/alertmanager
-  newTag: v0.28.1
-  digest: sha256:27c475db5fb156cab31d5c18a4251ac7ed567746a2483ff264516437a39b15ba
+  newTag: v0.30.0
+  digest: sha256:abb750ac7b63116761c16dd481ae92496fbe04721686c0920f0fa4d0728cd4a6
 resources:
 - resources
 patches:
