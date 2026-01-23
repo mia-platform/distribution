@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update velero to v1.17.2
+- update velero-plugin-for-aws to v1.13.2
+- update velero-plugin-for-microsoft-azure to v1.13.2
+- update velero-plugin-for-gcp to v1.13.2
+
 ## v1.34.0
 
 ### Changed
