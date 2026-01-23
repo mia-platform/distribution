@@ -81,9 +81,10 @@ update the nodes correctly to use Cilium as CNI plugin.
 
 ## Compatibility Matrix
 
-| Module Version | Cilium           | Hubble UI   |
-|----------------|------------------|-------------|
-| 1.34.x         | 1.18.5           | v0.13.3     |
+| Module Version | Cilium | Cilium Envoy        | Hubble UI   |
+|----------------|--------|---------------------|-------------|
+| 1.34.0         | 1.18.5 | v1.34.12-1765374555 | v0.13.3     |
+| 1.34.1         | 1.18.6 | v1.35.9-1767794330  | v0.13.3     |
 
 ## User customization
 
