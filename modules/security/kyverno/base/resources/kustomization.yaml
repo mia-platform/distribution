@@ -7,20 +7,20 @@ labels:
 namespace: kyverno-system
 images:
 - name: ghcr.io/kyverno/kyverno
-  newTag: v1.16.1
-  digest: sha256:8d78ccacaf2f961e6be1fceec658f34b7f3410ac24822f0d12812bdb022b355f
+  newTag: v1.16.2
+  digest: sha256:b0c123d62a1b8e21da707450ef44c4616832434f919d1cd19cfdbe2836277699
 - name: ghcr.io/kyverno/kyvernopre
-  newTag: v1.16.1
-  digest: sha256:e9b3a40f8da712abeb1d3896dac7af6d81a96284036d73a214e15d2c5e0f0e09
+  newTag: v1.16.2
+  digest: sha256:ba3a31b25a9e1c6f993d7555158396d87790445ddc785426c249e8320b94b02a
 - name: ghcr.io/kyverno/background-controller
-  newTag: v1.16.1
-  digest: sha256:1243c89f8d0e1ac3194c380e31571236af49aec531251bc724f1e5c51de57feb
+  newTag: v1.16.2
+  digest: sha256:736c5da855863a3b15ee0e272f5b9e72c3c1b2f221f8345664354f57a5dc0f25
 - name: ghcr.io/kyverno/cleanup-controller
-  newTag: v1.16.1
-  digest: sha256:69e1e6abf5f8ab1f015a1f185b1016b189c7a1713791dd662ad2c7e610b6f359
+  newTag: v1.16.2
+  digest: sha256:1bf6d0501d7f16aa5d36821f907287d8653564c642866c4b597f2e6abc527390
 - name: ghcr.io/kyverno/reports-controller
-  newTag: v1.16.1
-  digest: sha256:84291952cc15b3968c29a8a91370d6e8a4b9749136427c1f1be6a03f42703c6a
+  newTag: v1.16.2
+  digest: sha256:88d0dfc245a689e9bf3e258159b539f3a1b1a5a89f82b6a07c12762527bb7793
 resources:
 - configs
 - rbac

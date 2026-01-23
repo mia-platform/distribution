@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- update kyverno to v1.16.2
+
 ## v1.34.0
 
 ### Changed
