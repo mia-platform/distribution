@@ -31,5 +31,5 @@ data:
     [ClusterRoleBinding,*,mia-platform:kyverno]
     [ClusterRoleBinding,*,mia-platform:kyverno:*]
   updateRequestThreshold: "1000"
-  webhooks: '{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kyverno-system","kube-node-lease"]},{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kyverno-system","kyverno-system","kube-node-lease"]}],"matchLabels":null}}'
+  webhooks: '{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kyverno-system","kube-node-lease"]}],"matchLabels":null}}'
   webhookAnnotations: '{"admissions.enforcer/disabled":"true"}'
